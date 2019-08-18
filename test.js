@@ -519,7 +519,7 @@ class UI {
     </div>
     <div class="cookieGardenHelperPanel" id="testPanel">
       <h2>Test panel</h2>
-      <h3>version:6</h3>
+      <h3>version:7</h3>
       <p>
         ${this.button('exportSaveButton', 'Export save',
         'This is test')}
@@ -539,13 +539,13 @@ class UI {
       </h2>
       <p>
         ${this.numberInput(
-          'autoReloadX', 'X','',
+          'autoReloadX', 'X','input X',
           config.autoReloadX
         )}
       </p>
       <p>
         ${this.numberInput(
-          'autoReloadY', 'Y','',
+          'autoReloadY', 'Y','input Y',
           config.autoReloadY
         )}
       </p>
