@@ -508,7 +508,7 @@ class UI {
     <div class="cookieGardenHelperPanel" id="testPanel">
       <h2>Test panel</h2>
       <p>
-        ${this.button('testButton', 'test',
+        ${this.button('exportSaveButton', 'Export save',
         'This is test')}
       </p>
     </div>
@@ -620,7 +620,7 @@ class Main {
     } else if (key == 'savePlot') {
       this.config['savedPlot'] = Garden.clonePlot();
       UI.labelToggleState('plotIsSaved', true);
-    } else if (key == 'testButton') {
+    } else if (key == 'exportSaveButton') {
       Game.ExportSave();
     }
     this.save();
