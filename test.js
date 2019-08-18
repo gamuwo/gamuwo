@@ -515,6 +515,7 @@ class UI {
     </div>
     <div class="cookieGardenHelperPanel" id="testPanel">
       <h2>Test panel</h2>
+      <h3>version:1</h3>
       <p>
         ${this.button('exportSaveButton', 'Export save',
         'This is test')}
