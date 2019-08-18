@@ -31,6 +31,9 @@ class Config {
       autoPlantMaxiCpSMult: { value: 0, min: 0 },
       savedPlot: [],
       playSound: false,
+      autoReload: false,
+      autoReloadX: 0,
+      autoReloadY: 0,
     };
   }
 
@@ -507,6 +510,24 @@ class UI {
           Boolean(config.savedPlot.length))}
       </p>
     </div>
+    <div class="cookieGardenHelperPanel" id="autoReload">
+      <h2>
+        Auto-reload
+        ${this.button('autoReload', '', '', true, config.autoReload)}
+      </h2>
+      <p>
+        ${this.numberInput(
+          'autoReloadX', 'X','',
+          config.autoReloadX
+        )}
+      </p>
+      <p>
+        ${this.numberInput(
+          'autoReloadY', 'Y','',
+          config.autoReloadY
+        )}
+      </p>
+    </div>
     <div class="cookieGardenHelperPanel" id="manualToolsPanel">
       <h2>Manual tools</h2>
       <p>
@@ -516,7 +537,7 @@ class UI {
     </div>
     <div class="cookieGardenHelperPanel" id="testPanel">
       <h2>Test panel</h2>
-      <h3>version:3</h3>
+      <h3>version:4</h3>
       <p>
         ${this.button('exportSaveButton', 'Export save',
         'This is test')}
