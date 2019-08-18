@@ -32,8 +32,8 @@ class Config {
       savedPlot: [],
       playSound: false,
       autoReload: false,
-      autoReloadX: 0,
-      autoReloadY: 0,
+      autoReloadX: { value: 0, min: 0 },
+      autoReloadY: { value: 0, min: 0 },
     };
   }
 
@@ -519,7 +519,7 @@ class UI {
     </div>
     <div class="cookieGardenHelperPanel" id="testPanel">
       <h2>Test panel</h2>
-      <h3>version:5</h3>
+      <h3>version:6</h3>
       <p>
         ${this.button('exportSaveButton', 'Export save',
         'This is test')}
