@@ -219,12 +219,17 @@ class Garden {
     }
     
     if(config.autoReload){
-      console.log("X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
+      try{
+        console.log("X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
       
-      let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
-      let plantAr = this.getPlant(tileAr.seedId);
+        let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
+        let plantAr = this.getPlant(tileAr.seedId);
       
-      console.log("name:" + plantAr.name + " age:" + tileAr.age);
+        console.log("name:" + plantAr.name + " age:" + tileAr.age);
+      } catch(e){
+        console.log("some error:" + e.message);
+      }
+
     }
   }
 }
@@ -528,7 +533,7 @@ class UI {
     </div>
     <div class="cookieGardenHelperPanel" id="testPanel">
       <h2>Test panel</h2>
-      <h3>version:10</h3>
+      <h3>version:11</h3>
       <p>
         ${this.button('exportSaveButton', 'Export save',
         'This is test')}
