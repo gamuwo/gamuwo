@@ -510,6 +510,28 @@ class UI {
           Boolean(config.savedPlot.length))}
       </p>
     </div>
+    <div class="cookieGardenHelperPanel" id="manualToolsPanel">
+      <h2>Manual tools</h2>
+      <p>
+        ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
+        'Plant the selected seed on all empty tiles')}
+      </p>
+    </div>
+    <div class="cookieGardenHelperPanel" id="testPanel">
+      <h2>Test panel</h2>
+      <h3>version:5</h3>
+      <p>
+        ${this.button('exportSaveButton', 'Export save',
+        'This is test')}
+      </p>
+      <p>
+        ${this.button(
+          'playSound', 'Play sound',
+          'This is test', true,
+          config.playSound
+        )}
+      </p>
+    </div>
     <div class="cookieGardenHelperPanel" id="autoReload">
       <h2>
         Auto-reload
@@ -525,28 +547,6 @@ class UI {
         ${this.numberInput(
           'autoReloadY', 'Y','',
           config.autoReloadY
-        )}
-      </p>
-    </div>
-    <div class="cookieGardenHelperPanel" id="manualToolsPanel">
-      <h2>Manual tools</h2>
-      <p>
-        ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
-        'Plant the selected seed on all empty tiles')}
-      </p>
-    </div>
-    <div class="cookieGardenHelperPanel" id="testPanel">
-      <h2>Test panel</h2>
-      <h3>version:4</h3>
-      <p>
-        ${this.button('exportSaveButton', 'Export save',
-        'This is test')}
-      </p>
-      <p>
-        ${this.button(
-          'playSound', 'Play sound',
-          'This is test', true,
-          config.playSound
         )}
       </p>
     </div>
