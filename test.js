@@ -217,6 +217,9 @@ class Garden {
   sound.volume = 0.3;
   sound.play();
     }
+    
+    console.log("X:" + config.autoReloadX);
+    console.log("Y:" + config.autoReloadY);
   }
 }
 
@@ -519,7 +522,7 @@ class UI {
     </div>
     <div class="cookieGardenHelperPanel" id="testPanel">
       <h2>Test panel</h2>
-      <h3>version:8</h3>
+      <h3>version:9</h3>
       <p>
         ${this.button('exportSaveButton', 'Export save',
         'This is test')}
