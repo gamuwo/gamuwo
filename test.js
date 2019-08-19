@@ -293,7 +293,7 @@ class Garden {
     if(config.autoReload2){
       try{
         //5sec before tick
-        if(this.secondsBeforeNextTick <= 5 && config.autoReload2SaveSecond == 9999){
+        if(this.secondsBeforeNextTick <= 500 && config.autoReload2SaveSecond == 9999){
           let targetPlants = [];
           this.forEachTile((x, y) => {
             let tileAr2 = this.getTile(x, y);
