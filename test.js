@@ -301,49 +301,60 @@ class Garden {
               targetPlants.push([x, y, tileAr2.age]);
             }
           });
-          //sort by age
-          targetPlants.sort(function(a,b){return(a[2] - b[2]);});
-          for(let i = 0; i < targetPlants.length; i++){
-            console.log("[" + i + "]:" + targetPlants[i]);
+          
+          if(targetPlants.length > 0){
+            //sort by age
+            targetPlants.sort(function(a,b){return(a[2] - b[2]);});
+            //save
+            config.autoReload2Save = Game.WriteSave(1);
+            config.autoReload2SaveSecond = this.secondsBeforeNextTick;
+            config.autoReload2Plants = targetPlants;
+            console.log("save:" + config.autoReload2Save);
+            console.log("second:" + config.autoReload2SaveSecond);
+            console.log("target plants:" + config.autoReload2Plants);
           }
-          //save
-          config.autoReload2Save = Game.WriteSave(1);
-          config.autoReload2SaveSecond = this.secondsBeforeNextTick;
-          config.autoReload2Plants = targetPlants;
-          console.log("save:" + config.autoReload2Save);
-          console.log("second:" + config.autoReload2SaveSecond);
-          console.log("target plants:" + config.autoReload2Plants);
         }
         
         //after tick
         if(this.secondsBeforeNextTick >= config.autoReload2SaveSecond + 10){
-          config.autoReload2Save = "";
-          config.autoReload2SaveSecond = 9999;
-          config.autoReload2Plants = [];
-          console.log("reset:" + config.autoReload2Save);
-          console.log("second:" + config.autoReload2SaveSecond);
-          console.log("target plants:" + config.autoReload2Plants);
+          let loops = 0;
+          if(parseInt(config.autoReload2Number.value) > config.autoReload2Plants.length){
+            loops = config.autoReload2Plants.length;
+          } else {
+            loops = parseInt(config.autoReload2Number.value);
+          }
+          
+          //check
+          let isReload = false;
+          for(let i = 0; i < loops; i++){
+            let targetPlant = config.autoReload2Plants[i];
+            if(this.tileIsEmpty(targetPlant[0], targetPlant[1])){
+              //target plant was harvested
+              break;
+            }
+            
+            let tileAr2 = this.getTile(targetPlant[0], targetPlant[1]);
+            if(parseInt(tileAr2.age) < (parseInt(targetPlant[2]) + parseInt(config.autoReload2Grow.value))){
+              isReload = true;
+              break;
+            }
+          }
+          
+          if(isReload){
+            //reload
+            console.log("reload!");
+            Game.LoadSave(config.autoReload2Save);
+          } else {
+            //grow
+            console.log("grow! or target plant was harvested");
+            config.autoReload2Save = "";
+            config.autoReload2SaveSecond = 9999;
+            config.autoReload2Plants = [];
+            console.log("reset:" + config.autoReload2Save);
+            console.log("second:" + config.autoReload2SaveSecond);
+            console.log("target plants:" + config.autoReload2Plants);
+          }
         }
-//         if(this.secondsBeforeNextTick >= config.autoReload2SaveSecond + 10){
-//           //get tile info
-//           let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
-//           //check
-//           if(parseInt(tileAr.age) >= (parseInt(config.autoReloadAge) + parseInt(config.autoReloadGrow.value))){
-//             //grow
-//             console.log("grow! age:" + tileAr.age);
-//             //reset save
-//             config.autoReloadSave = "";
-//             config.autoReloadSaveSecond = 9999;
-//             config.autoReloadAge = 0;
-//             console.log("reset:" + config.autoReloadSave);
-//             console.log("second:" + config.autoReloadSaveSecond);
-//             console.log("age:" + config.autoReloadAge);
-//           } else {
-//             //reload
-//             console.log("reload! age:" + tileAr.age);
-//             Game.LoadSave(config.autoReloadSave);
-//           }
-//         }
         
       } catch(e){
         console.log("some error:" + e.message);
