@@ -41,8 +41,10 @@ class Config {
       autoReload2ID: { value: 0, min: 0 },
       autoReload2Grow: { value: 0, min: 0 },
       autoReload2Number: { value: 0, min: 0 },
+      autoReload2Play: { value: 0, min: 0 },
       autoReload2Save: "",
       autoReload2SaveSecond: 9999,
+      autoReload2Reloads: 0,
       autoReload2Plants: [],
     };
   }
@@ -296,41 +298,58 @@ class Garden {
         
         //after tick
         if(this.secondsBeforeNextTick >= config.autoReload2SaveSecond + 10){
-          let loops = 0;
+          let upperAge = 0;
+          let targetNumber = 0;
           if(parseInt(config.autoReload2Number.value) > config.autoReload2Plants.length){
-            loops = config.autoReload2Plants.length;
+            upperAge = parseInt(config.autoReload2Plants[config.autoReload2Plants.length - 1][2]);
+            targetNumber = parseInt(config.autoReload2Plants.length);
           } else {
-            loops = parseInt(config.autoReload2Number.value);
+            upperAge = parseInt(config.autoReload2Plants[(parseInt(config.autoReload2Number.value) - 1)][2]) + parseInt(config.autoReload2Play.value);
+            targetNumber = parseInt(config.autoReload2Number.value);
           }
+          console.log("upperAge:" + upperAge);
+          console.log("targetNumber:" + targetNumber);
           
           //check
-          let isReload = false;
-          for(let i = 0; i < loops; i++){
+          let grows = 0;
+          let livingPlants = 0;
+          for(let i = 0; i < config.autoReload2Plants.length; i++){
             let targetPlant = config.autoReload2Plants[i];
-            if(this.tileIsEmpty(targetPlant[0], targetPlant[1])){
-              //target plant was harvested
+            if(parseInt(targetPlant[2]) > upperAge){
+              //above upper age
               break;
             }
             
+            if(this.tileIsEmpty(targetPlant[0], targetPlant[1])){
+              //target plant was harvested
+              continue;
+            }
+            
+            livingPlants += 1;
             let tileAr2 = this.getTile(targetPlant[0], targetPlant[1]);
-            if(parseInt(tileAr2.age) < (parseInt(targetPlant[2]) + parseInt(config.autoReload2Grow.value))){
-              isReload = true;
-              break;
+            if(parseInt(tileAr2.age) >= (parseInt(targetPlant[2]) + parseInt(config.autoReload2Grow.value))){
+              grows += 1;
             }
           }
+          console.log("grows:" + grows);
+          console.log("livingPlants:" + livingPlants);
           
-          if(isReload){
+          if(livingPlants >= targetNumber && grows < targetNumber){
             //reload
-            console.log("reload!");
+            config.autoReload2Reloads += 1;
+            console.log("reload! try:" + config.autoReload2Reloads);
             Game.LoadSave(config.autoReload2Save);
           } else {
             //grow
             console.log("grow! or target plant was harvested");
+            console.log("reloads:" + config.autoReload2Reloads);
             config.autoReload2Save = "";
             config.autoReload2SaveSecond = 9999;
+            config.autoReload2Reloads = 0;
             config.autoReload2Plants = [];
             console.log("reset:" + config.autoReload2Save);
             console.log("second:" + config.autoReload2SaveSecond);
+            console.log("reloads:" + config.autoReload2Reloads);
             console.log("target plants:" + config.autoReload2Plants);
           }
         }
@@ -696,6 +715,12 @@ class UI {
         ${this.numberInput(
           'autoReload2Number', 'Number', 'input Number',
           config.autoReload2Number
+        )}
+      </p>
+      <p>
+        ${this.numberInput(
+          'autoReload2Play', 'Play', 'input Play',
+          config.autoReload2Play
         )}
       </p>
     </div>
