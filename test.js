@@ -243,7 +243,7 @@ class Garden {
         }
         
         //after tick
-        if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond){
+        if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
           //try 50 times
           for (let i = 0;  i < 50;  i++) {
             let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
