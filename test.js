@@ -34,10 +34,9 @@ class Config {
       autoReload: false,
       autoReloadX: { value: 0, min: 0, max: 5 },
       autoReloadY: { value: 0, min: 0, max: 5 },
-      autoReloadGrow: { value: 0, min: 0 },
+      autoReloadID: { value: 0, min: 0 },
       autoReloadSave: "",
       autoReloadSaveSecond: 9999,
-      autoReloadAge: 0,
       autoReload2: false,
       autoReload2ID: { value: 0, min: 0 },
       autoReload2Grow: { value: 0, min: 0 },
@@ -233,55 +232,35 @@ class Garden {
     //auto reload
     if(config.autoReload){
       try{
-        if(!this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value)){
-          //5sec before tick
-          if(this.secondsBeforeNextTick <= 5 && config.autoReloadSaveSecond == 9999){
-            //get tile info
-            let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
-            let plantAr = this.getPlant(tileAr.seedId);
-          
+        //5sec before tick
+        if(this.secondsBeforeNextTick <= 5 && config.autoReloadSaveSecond == 9999){
+          if(this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value)){
             //save
             config.autoReloadSave = Game.WriteSave(1);
             config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-            config.autoReloadAge = tileAr.age;
             console.log("save:" + config.autoReloadSave);
             console.log("second:" + config.autoReloadSaveSecond);
-            console.log("age:" + config.autoReloadAge);
             console.log("X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
-            console.log("name:" + plantAr.name + " age:" + tileAr.age);
           }
-          
-          //after tick
-          if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
-            //get tile info
-            let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
-            //check
-            if(parseInt(tileAr.age) >= (parseInt(config.autoReloadAge) + parseInt(config.autoReloadGrow.value))){
-              //grow
-              console.log("grow! age:" + tileAr.age);
-              //reset save
-              config.autoReloadSave = "";
-              config.autoReloadSaveSecond = 9999;
-              config.autoReloadAge = 0;
-              console.log("reset:" + config.autoReloadSave);
-              console.log("second:" + config.autoReloadSaveSecond);
-              console.log("age:" + config.autoReloadAge);
-            } else {
-              //reload
-              console.log("reload! age:" + tileAr.age);
-              Game.LoadSave(config.autoReloadSave);
-            }
-          }
-        } else {
-          if(config.autoReloadSaveSecond != 9999){
+        }
+        
+        //after tick
+        if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
+          //get tile info
+          let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
+          //check
+          if(tileAr.seedId == config.autoReloadID.value){
+            //grow
+            console.log("grow!");
             //reset save
             config.autoReloadSave = "";
             config.autoReloadSaveSecond = 9999;
-            config.autoReloadAge = 0;
-            console.log("target plant was harvested");
             console.log("reset:" + config.autoReloadSave);
             console.log("second:" + config.autoReloadSaveSecond);
-            console.log("age:" + config.autoReloadAge);
+          } else {
+            //reload
+            console.log("reload!");
+            Game.LoadSave(config.autoReloadSave);
           }
         }
       } catch(e){
@@ -691,8 +670,8 @@ class UI {
       </p>
       <p>
         ${this.numberInput(
-          'autoReloadGrow', 'Grow', 'input Grow',
-          config.autoReloadGrow
+          'autoReloadID', 'ID', 'input ID',
+          config.autoReloadID
         )}
       </p>
     </div>
