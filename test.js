@@ -32,8 +32,8 @@ class Config {
       savedPlot: [],
       playSound: false,
       autoReload: false,
-      autoReloadX: { value: 0, min: 0 },
-      autoReloadY: { value: 0, min: 0 },
+      autoReloadX: { value: 0, min: 0, max: 5 },
+      autoReloadY: { value: 0, min: 0, max: 5 },
       autoReloadGrow: { value: 0, min: 0 },
       autoReloadSave: "",
       autoReloadSaveSecond: 9999,
@@ -401,7 +401,7 @@ class UI {
   static numberInput(name, text, title, options) {
     let id = this.makeId(name);
     return `
-<input type="number" name="${name}" id="${id}" value="${options.value}" step=0.5
+<input type="number" name="${name}" id="${id}" value="${options.value}" step=1
   ${options.min !== undefined ? `min="${options.min}"` : ''}
   ${options.max !== undefined ? `max="${options.max}"` : ''} />
 <label for="${id}" title="${title}">${text}</label>`;
@@ -582,21 +582,6 @@ class UI {
         'Plant the selected seed on all empty tiles')}
       </p>
     </div>
-    <div class="cookieGardenHelperPanel" id="testPanel">
-      <h2>Test panel</h2>
-      <h3>version:12</h3>
-      <p>
-        ${this.button('exportSaveButton', 'Export save',
-        'This is test')}
-      </p>
-      <p>
-        ${this.button(
-          'playSound', 'Play sound',
-          'This is test', true,
-          config.playSound
-        )}
-      </p>
-    </div>
     <div class="cookieGardenHelperPanel" id="autoReload">
       <h2>
         Auto-reload
@@ -618,6 +603,17 @@ class UI {
         ${this.numberInput(
           'autoReloadGrow', 'Grow', 'input Grow',
           config.autoReloadGrow
+        )}
+      </p>
+      <p>
+        ${this.button('exportSaveButton', 'Export save',
+        'This is test')}
+      </p>
+      <p>
+        ${this.button(
+          'playSound', 'Play sound',
+          'This is test', true,
+          config.playSound
         )}
       </p>
     </div>
