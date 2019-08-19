@@ -301,7 +301,11 @@ class Garden {
               targetPlants.push([x, y, tileAr2.age]);
             }
           });
-        console.log("targetPlants:" + targetPlants);
+          //sort by age
+          targetPlants.sort(function(a,b){return(a[2] - b[2]);});
+          for(let i = 0; i < targetPlants.length; i++){
+            console.log("[" + i + "]:" + targetPlants[i]);
+          }
         }
       } catch(e){
         console.log("some error:" + e.message);
