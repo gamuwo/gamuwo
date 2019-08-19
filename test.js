@@ -41,6 +41,7 @@ class Config {
       autoReload2: false,
       autoReload2ID: { value: 0, min: 0 },
       autoReload2Grow: { value: 0, min: 0 },
+      autoReload2Number: { value: 0, min: 0 },
       autoReload2Save: "",
       autoReload2SaveSecond: 9999,
       autoReload2Plants: [],
@@ -581,7 +582,7 @@ class UI {
           Boolean(config.savedPlot.length))}
       </p>
     </div>
-    <div class="cookieGardenHelperSubPanel" id="manualToolsPanel">
+    <div class="cookieGardenHelperPanel" id="manualToolsPanel">
       <h2>Manual tools</h2>
       <p>
         ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
@@ -638,6 +639,12 @@ class UI {
         ${this.numberInput(
           'autoReload2Grow', 'Grow', 'input Grow',
           config.autoReload2Grow
+        )}
+      </p>
+      <p>
+        ${this.numberInput(
+          'autoReload2Number', 'Number', 'input Number',
+          config.autoReload2Number
         )}
       </p>
     </div>
