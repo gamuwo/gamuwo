@@ -247,7 +247,7 @@ class Garden {
           //try 50 times
           for (let i = 0;  i < 50;  i++) {
             let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
-            if(tileAr.age >= config.autoReloadAge + config.autoReloadGrow){
+            if(tileAr.age >= config.autoReloadAge + config.autoReloadGrow.value){
               break;
             } else {
               //reload
