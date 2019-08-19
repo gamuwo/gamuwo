@@ -248,7 +248,12 @@ class Garden {
           //get tile info
           let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
           
-          if(tileAr.age >= config.autoReloadAge + config.autoReloadGrow.value){
+          console.log("tileAr.age:" + tileAr.age);
+          console.log("config.autoReloadAge:" + config.autoReloadAge);
+          console.log("config.autoReloadGrow.value:" + config.autoReloadGrow.value);
+          console.log("(config.autoReloadAge + config.autoReloadGrow.value):" + (config.autoReloadAge + config.autoReloadGrow.value));
+          
+          if(tileAr.age >= (config.autoReloadAge + config.autoReloadGrow.value)){
             //grow
             console.log("grow! age:" + tileAr.age);
             //reset save
