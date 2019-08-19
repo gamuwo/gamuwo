@@ -175,9 +175,24 @@ class Garden {
     }
   }
   
-  static sleep(milliseconds) {
-    return new Promise(resolve => setTimeout(resolve, milliseconds));
+function loopSleep(_loopLimit,_interval, _mainFunc){
+  var loopLimit = _loopLimit;
+  var interval = _interval;
+  var mainFunc = _mainFunc;
+  var i = 0;
+  var loopFunc = function () {
+    var result = mainFunc(i);
+    if (result === false) {
+      // break機能
+      return;
+    }
+    i = i + 1;
+    if (i < loopLimit) {
+      setTimeout(loopFunc, interval);
+    }
   }
+  loopFunc();
+}
 
   static run(config) {
     this.forEachTile((x, y) => {
@@ -252,6 +267,18 @@ class Garden {
           config.autoReloadSaveSecond = 9999;
           
           //try 50 times
+          loopSleep(50, 1000, function(i){
+            let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
+            if(tileAr.age >= config.autoReloadAge + config.autoReloadGrow.value){
+              console.log("grow! age:" + tileAr.age);
+              return false;
+            } else {
+              //reload
+              console.log("reload! age:" + tileAr.age);
+              Game.LoadSave(config.autoReloadSave);
+            }
+          });
+          /*
           for (let i = 0;  i < 50;  i++) {
             let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
             if(tileAr.age >= config.autoReloadAge + config.autoReloadGrow.value){
@@ -264,7 +291,7 @@ class Garden {
               await sleep(1000);
             }
           }
-
+*/
           //reset save
           config.autoReloadSave = "";
           config.autoReloadAge = 0;
