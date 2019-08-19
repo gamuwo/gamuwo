@@ -289,6 +289,24 @@ class Garden {
       }
     }
     
+    //auto reload2
+    if(config.autoReload2){
+      try{
+        //5sec before tick
+        if(this.secondsBeforeNextTick <= 5 && config.autoReload2SaveSecond == 9999){
+          let targetPlants = [];
+          this.forEachTile((x, y) => {
+            let tileAr2 = this.getTile(x, y);
+            if(tileAr2.seedId == config.autoReload2ID.value){
+              targetPlants.push([x, y, tileAr2.age]);
+            }
+        console.log("targetPlants:" + targetPlants);
+        }
+      } catch(e){
+        console.log("some error:" + e.message);
+      }
+    }
+    
   }
 }
 
