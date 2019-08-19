@@ -300,6 +300,7 @@ class Garden {
             if(tileAr2.seedId == config.autoReload2ID.value){
               targetPlants.push([x, y, tileAr2.age]);
             }
+          });
         console.log("targetPlants:" + targetPlants);
         }
       } catch(e){
