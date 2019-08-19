@@ -240,6 +240,7 @@ class Garden {
           config.autoReloadAge = tileAr.age;
           console.log("save:" + config.autoReloadSave);
           console.log("second:" + config.autoReloadSaveSecond);
+          console.log("age:" + config.autoReloadAge);
         }
         
         //after tick
@@ -248,9 +249,11 @@ class Garden {
           for (let i = 0;  i < 50;  i++) {
             let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
             if(tileAr.age >= config.autoReloadAge + config.autoReloadGrow.value){
+              console.log("grow! age:" + tileAr.age);
               break;
             } else {
               //reload
+              console.log("reload! try:" + i);
               Game.LoadSave(config.autoReloadSave);
             }
           }
@@ -258,8 +261,10 @@ class Garden {
           //reset save
           config.autoReloadSave = "";
           config.autoReloadSaveSecond = 9999;
+          config.autoReloadAge = 0;
           console.log("reset:" + config.autoReloadSave);
           console.log("second:" + config.autoReloadSaveSecond);
+          console.log("age:" + config.autoReloadAge);
         }
       } catch(e){
         console.log("some error:" + e.message);
