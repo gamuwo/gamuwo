@@ -265,6 +265,17 @@ class Garden {
               Game.LoadSave(config.autoReloadSave);
             }
           }
+        } else {
+          if(config.autoReloadSaveSecond != 9999){
+            //reset save
+            config.autoReloadSave = "";
+            config.autoReloadSaveSecond = 9999;
+            config.autoReloadAge = 0;
+            console.log("target plant was harvested");
+            console.log("reset:" + config.autoReloadSave);
+            console.log("second:" + config.autoReloadSaveSecond);
+            console.log("age:" + config.autoReloadAge);
+          }
         }
       } catch(e){
         console.log("some error:" + e.message);
