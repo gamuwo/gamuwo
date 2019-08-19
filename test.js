@@ -232,7 +232,7 @@ class Garden {
         if(this.secondsBeforeNextTick <= 5 && config.autoReloadSaveSecond.value == 9999){
           config.autoReloadSave.value = Game.WriteSave(1);
           config.autoReloadSaveSecond.value = this.secondsBeforeNextTick;
-          console.log("save:" + config.autoReloadSave.value;
+          console.log("save:" + config.autoReloadSave.value);
         }
         
         if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond.value){
