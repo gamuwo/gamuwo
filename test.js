@@ -175,7 +175,7 @@ class Garden {
     }
   }
   
-function loopSleep(_loopLimit,_interval, _mainFunc){
+static loopSleep(_loopLimit,_interval, _mainFunc){
   var loopLimit = _loopLimit;
   var interval = _interval;
   var mainFunc = _mainFunc;
