@@ -222,12 +222,19 @@ class Garden {
     
     if(config.autoReload){
       try{
-        console.log("X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
+        //console.log("X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
       
         let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
         let plantAr = this.getPlant(tileAr.seedId);
       
-        console.log("name:" + plantAr.name + " age:" + tileAr.age);
+        //console.log("name:" + plantAr.name + " age:" + tileAr.age);
+        
+        if(this.secondsBeforeNextTick <= 5){
+          console.log("this.secondsBeforeNextTick <= 5");
+        }
+        if(config.autoReloadSaveSecond.value == 9999){
+          console.log("config.autoReloadSaveSecond.value == 9999");
+        }
         
         if(this.secondsBeforeNextTick <= 5 && config.autoReloadSaveSecond.value == 9999){
           config.autoReloadSave.value = Game.WriteSave(1);
