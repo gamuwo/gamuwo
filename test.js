@@ -174,25 +174,6 @@ class Garden {
       this.harvest(x, y);
     }
   }
-  
-static loopSleep(_loopLimit,_interval, _mainFunc){
-  var loopLimit = _loopLimit;
-  var interval = _interval;
-  var mainFunc = _mainFunc;
-  var i = 0;
-  var loopFunc = function () {
-    var result = mainFunc(i);
-    if (result === false) {
-      // break機能
-      return;
-    }
-    i = i + 1;
-    if (i < loopLimit) {
-      setTimeout(loopFunc, interval);
-    }
-  }
-  loopFunc();
-}
 
   static run(config) {
     this.forEachTile((x, y) => {
@@ -264,40 +245,24 @@ static loopSleep(_loopLimit,_interval, _mainFunc){
         
         //after tick
         if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
-          config.autoReloadSaveSecond = 9999;
+          //get tile info
+          let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
           
-          //try 50 times
-          loopSleep(50, 1000, function(i){
-            let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
-            if(tileAr.age >= config.autoReloadAge + config.autoReloadGrow.value){
-              console.log("grow! age:" + tileAr.age);
-              return false;
-            } else {
-              //reload
-              console.log("reload! age:" + tileAr.age);
-              Game.LoadSave(config.autoReloadSave);
-            }
-          });
-          /*
-          for (let i = 0;  i < 50;  i++) {
-            let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
-            if(tileAr.age >= config.autoReloadAge + config.autoReloadGrow.value){
-              console.log("grow! age:" + tileAr.age);
-              break;
-            } else {
-              //reload
-              console.log("reload! age:" + tileAr.age + " try:" + i);
-              Game.LoadSave(config.autoReloadSave);
-              await sleep(1000);
-            }
+          if(tileAr.age >= config.autoReloadAge + config.autoReloadGrow.value){
+            //grow
+            console.log("grow! age:" + tileAr.age);
+            //reset save
+            config.autoReloadSave = "";
+            config.autoReloadSaveSecond = 9999;
+            config.autoReloadAge = 0;
+            console.log("reset:" + config.autoReloadSave);
+            console.log("second:" + config.autoReloadSaveSecond);
+            console.log("age:" + config.autoReloadAge);
+          } else {
+            //reload
+            console.log("reload! age:" + tileAr.age);
+            Game.LoadSave(config.autoReloadSave);
           }
-*/
-          //reset save
-          config.autoReloadSave = "";
-          config.autoReloadAge = 0;
-          console.log("reset:" + config.autoReloadSave);
-          console.log("second:" + config.autoReloadSaveSecond);
-          console.log("age:" + config.autoReloadAge);
         }
       } catch(e){
         console.log("some error:" + e.message);
