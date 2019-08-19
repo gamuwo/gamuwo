@@ -34,6 +34,8 @@ class Config {
       autoReload: false,
       autoReloadX: { value: 0, min: 0 },
       autoReloadY: { value: 0, min: 0 },
+      autoReloadSave: "",
+      autoReloadSaveSecond: 9999,
     };
   }
 
@@ -226,11 +228,23 @@ class Garden {
         let plantAr = this.getPlant(tileAr.seedId);
       
         console.log("name:" + plantAr.name + " age:" + tileAr.age);
+        
+        if(this.secondsBeforeNextTick <= 5 && config.autoReloadSaveSecond.value == 9999){
+          config.autoReloadSave.value = Game.WriteSave(1);
+          config.autoReloadSaveSecond.value = this.secondsBeforeNextTick;
+          console.log("save:" + config.autoReloadSave.value;
+        }
+        
+        if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond.value){
+          config.autoReloadSave.value = "";
+          config.autoReloadSaveSecond.value = 9999;
+          console.log("reset:" + config.autoReloadSave.value);
+        }
       } catch(e){
         console.log("some error:" + e.message);
       }
-
     }
+    
   }
 }
 
@@ -533,7 +547,7 @@ class UI {
     </div>
     <div class="cookieGardenHelperPanel" id="testPanel">
       <h2>Test panel</h2>
-      <h3>version:11</h3>
+      <h3>version:12</h3>
       <p>
         ${this.button('exportSaveButton', 'Export save',
         'This is test')}
