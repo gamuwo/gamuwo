@@ -253,8 +253,8 @@ class Garden {
               break;
             } else {
               //reload
-              console.log("reload! try:" + i);
-              Game.LoadSave(config.autoReloadSave);
+              console.log("reload! age:" + tileAr.age + " try:" + i);
+              setTimeout("Game.LoadSave(config.autoReloadSave);", 500);
             }
           }
 
