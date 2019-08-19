@@ -232,20 +232,22 @@ class Garden {
         if(this.secondsBeforeNextTick <= 5){
           console.log("this.secondsBeforeNextTick <= 5");
         }
-        if(config.autoReloadSaveSecond.value == 9999){
-          console.log("config.autoReloadSaveSecond.value == 9999");
+        if(config.autoReloadSaveSecond == 9999){
+          console.log("config.autoReloadSaveSecond == 9999");
         }
         
-        if(this.secondsBeforeNextTick <= 5 && config.autoReloadSaveSecond.value == 9999){
-          config.autoReloadSave.value = Game.WriteSave(1);
-          config.autoReloadSaveSecond.value = this.secondsBeforeNextTick;
-          console.log("save:" + config.autoReloadSave.value);
+        if(this.secondsBeforeNextTick <= 5 && config.autoReloadSaveSecond == 9999){
+          config.autoReloadSave = Game.WriteSave(1);
+          config.autoReloadSaveSecond = this.secondsBeforeNextTick;
+          console.log("save:" + config.autoReloadSave);
+          console.log("second:" + config.autoReloadSaveSecond);
         }
         
-        if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond.value){
-          config.autoReloadSave.value = "";
-          config.autoReloadSaveSecond.value = 9999;
-          console.log("reset:" + config.autoReloadSave.value);
+        if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond){
+          config.autoReloadSave = "";
+          config.autoReloadSaveSecond = 9999;
+          console.log("reset:" + config.autoReloadSave);
+          console.log("second:" + config.autoReloadSaveSecond);
         }
       } catch(e){
         console.log("some error:" + e.message);
