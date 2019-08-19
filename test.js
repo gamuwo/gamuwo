@@ -38,6 +38,12 @@ class Config {
       autoReloadSave: "",
       autoReloadSaveSecond: 9999,
       autoReloadAge: 0,
+      autoReload2: false,
+      autoReload2ID: { value: 0, min: 0 },
+      autoReload2Grow: { value: 0, min: 0 },
+      autoReload2Save: "",
+      autoReload2SaveSecond: 9999,
+      autoReload2Plants: [],
     };
   }
 
@@ -575,11 +581,22 @@ class UI {
           Boolean(config.savedPlot.length))}
       </p>
     </div>
-    <div class="cookieGardenHelperPanel" id="manualToolsPanel">
+    <div class="cookieGardenHelperSubPanel" id="manualToolsPanel">
       <h2>Manual tools</h2>
       <p>
         ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
         'Plant the selected seed on all empty tiles')}
+      </p>
+      <p>
+        ${this.button('exportSaveButton', 'Export save',
+        'This is test')}
+      </p>
+      <p>
+        ${this.button(
+          'playSound', 'Play sound',
+          'This is test', true,
+          config.playSound
+        )}
       </p>
     </div>
     <div class="cookieGardenHelperPanel" id="autoReload">
@@ -605,15 +622,22 @@ class UI {
           config.autoReloadGrow
         )}
       </p>
+    </div>
+    <div class="cookieGardenHelperPanel" id="autoReload2">
+      <h2>
+        Auto-reload2
+        ${this.button('autoReload2', '', '', true, config.autoReload2)}
+      </h2>
       <p>
-        ${this.button('exportSaveButton', 'Export save',
-        'This is test')}
+        ${this.numberInput(
+          'autoReload2ID', 'ID', 'input target ID',
+          config.autoReload2ID
+        )}
       </p>
       <p>
-        ${this.button(
-          'playSound', 'Play sound',
-          'This is test', true,
-          config.playSound
+        ${this.numberInput(
+          'autoReload2Grow', 'Grow', 'input Grow',
+          config.autoReload2Grow
         )}
       </p>
     </div>
