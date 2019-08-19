@@ -174,6 +174,10 @@ class Garden {
       this.harvest(x, y);
     }
   }
+  
+  function sleep(milliseconds) {
+    return new Promise(resolve => setTimeout(resolve, milliseconds));
+  }
 
   static run(config) {
     this.forEachTile((x, y) => {
@@ -245,6 +249,8 @@ class Garden {
         
         //after tick
         if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
+          config.autoReloadSaveSecond = 9999;
+          
           //try 50 times
           for (let i = 0;  i < 50;  i++) {
             let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
@@ -254,13 +260,13 @@ class Garden {
             } else {
               //reload
               console.log("reload! age:" + tileAr.age + " try:" + i);
-              setTimeout("Game.LoadSave(config.autoReloadSave);", 500);
+              Game.LoadSave(config.autoReloadSave);
+              await sleep(1000);
             }
           }
 
           //reset save
           config.autoReloadSave = "";
-          config.autoReloadSaveSecond = 9999;
           config.autoReloadAge = 0;
           console.log("reset:" + config.autoReloadSave);
           console.log("second:" + config.autoReloadSaveSecond);
