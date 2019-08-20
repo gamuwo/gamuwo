@@ -475,10 +475,10 @@ class Garden {
           if(config.autoReload){ Main.handleToggle('autoReload'); }
           //turn on auto-reload2 for QB
           if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
-//           config.autoReload2ID.value = 21;
-//           config.autoReload2Grow.value = 2;
-//           config.autoReload2Number.value = 3;
-//           config.autoReload2Play.value = 0;
+          config.autoReload2ID.value = 21;
+          config.autoReload2Grow.value = 2;
+          config.autoReload2Number.value = 3;
+          config.autoReload2Play.value = 0;
           document.getElementById(UI.makeId("autoReload2ID")).value = 21;
           document.getElementById(UI.makeId("autoReload2Grow")).value = 2;
           document.getElementById(UI.makeId("autoReload2Number")).value = 3;
