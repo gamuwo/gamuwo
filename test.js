@@ -424,13 +424,9 @@ class Garden {
     }
 
     //auto JQB
-    if(config.autoJQB && this.secondsBeforeNextTick <= 150 && this.secondsBeforeNextTick >= 10){
+    if(config.autoJQB && this.secondsBeforeNextTick <= 170 && this.secondsBeforeNextTick >= 10){
       try{
         //switch buttons
-//         config.autoHarvest = true;
-//         config.autoHarvestWeeds = true;
-//         config.autoHarvestCleanGarden = false;
-//         config.autoPlant = false;
         if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
         if(!config.autoHarvestWeeds){ Main.handleToggle('autoHarvestWeeds'); }
         if(config.autoHarvestCleanGarden){ Main.handleToggle('autoHarvestCleanGarden'); }
@@ -454,9 +450,9 @@ class Garden {
             numPlants += 1;
             let tile = this.getTile(x, y);
             let stage = this.getPlantStage(tile);
-            if(tile.seedId = 21 && stage == "mature"){
+            if(tile.seedId == 21 && stage == "mature"){
               numMatureQB += 1;
-            } else if(tile.seedId = 22) {
+            } else if(tile.seedId == 22) {
               numJQB += 1;
             }
           }
@@ -474,41 +470,51 @@ class Garden {
             }
           });
           //turn off autoHarvestCheckCpSMult
-          config.autoHarvestCheckCpSMult = false;
+          if(config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
           //turn off auto-reload
-          config.autoReload = false;
+          if(config.autoReload){ Main.handleToggle('autoReload'); }
           //turn on auto-reload2 for QB
-          config.autoReload2 = true;
-          config.autoReload2ID.value = 21;
-          config.autoReload2Grow.value = 2;
-          config.autoReload2Number.value = 3;
-          config.autoReload2Play.value = 0;
+          if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
+//           config.autoReload2ID.value = 21;
+//           config.autoReload2Grow.value = 2;
+//           config.autoReload2Number.value = 3;
+//           config.autoReload2Play.value = 0;
+          document.getElementById(UI.makeId("autoReload2ID")).value = 21;
+          document.getElementById(UI.makeId("autoReload2Grow")).value = 2;
+          document.getElementById(UI.makeId("autoReload2Number")).value = 3;
+          document.getElementById(UI.makeId("autoReload2Play")).value = 0;
+          //save config
+          Main.save();
           console.log("[auto JQB]no plants here, so planted QBs, turn on auto-reload2 for QB");
           
         } else if(numMatureQB >= 21 && numJQB < 4){
           //if 21QB mature, turn on auto-reload1 for JQB
           //turn off autoHarvestCheckCpSMult
-          config.autoHarvestCheckCpSMult = false;
+          if(config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
           //turn off auto-reload2
-          config.autoReload2 = false;
+          if(config.autoReload2){ Main.handleToggle('autoReload2'); }
           //turn on auto-reload for JQB
-          config.autoReload = true;
+          if(!config.autoReload){ Main.handleToggle('autoReload'); }
           config.autoReloadID = 22;
           config.autoReloadMax = 4;
+          //save config
+          Main.save();
           console.log("[auto JQB]all QB mature, so turn on auto-reload for JQB");
           
         } else if(numJQB >= 4){
           //if 4JQB is exist, harvest all QB and turn on auto-reload2 for JQB
           //turn on autoHarvestCheckCpSMult
-          config.autoHarvestCheckCpSMult = true;
+          if(!config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
           //turn off auto-reload
-          config.autoReload = false;
+          if(config.autoReload){ Main.handleToggle('autoReload'); }
           //turn on auto-reload2 for QB
-          config.autoReload2 = true;
+          if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
           config.autoReload2ID.value = 22;
           config.autoReload2Grow.value = 1;
           config.autoReload2Number.value = 2;
           config.autoReload2Play.value = 2;
+          //save config
+          Main.save();
           console.log("[auto JQB]4 JQB here, so harvest QBs and turn on auto-reload2 for JQB");
         }
       } catch(e){
