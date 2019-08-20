@@ -424,7 +424,7 @@ class Garden {
     }
 
     //auto JQB
-    if(config.autoJQB && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 10){
+    if(config.autoJQB && this.secondsBeforeNextTick <= 150 && this.secondsBeforeNextTick >= 10){
       try{
         //switch buttons
 //         config.autoHarvest = true;
