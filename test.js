@@ -35,8 +35,11 @@ class Config {
       autoReloadX: { value: 0, min: 0, max: 5 },
       autoReloadY: { value: 0, min: 0, max: 5 },
       autoReloadID: { value: 0, min: 0 },
+      autoReloadMax: { value: 0, min: 0 },
       autoReloadSave: "",
       autoReloadSaveSecond: 9999,
+      autoReloadReloads: 0,
+      autoReloadNumber: 0,
       autoReload2: false,
       autoReload2ID: { value: 0, min: 0 },
       autoReload2Grow: { value: 0, min: 0 },
@@ -236,33 +239,93 @@ class Garden {
       try{
         //5sec before tick
         if(this.secondsBeforeNextTick <= 5 && config.autoReloadSaveSecond == 9999){
-          if(this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value)){
-            //save
-            config.autoReloadSave = Game.WriteSave(1);
-            config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-            console.log("save:" + config.autoReloadSave);
-            console.log("second:" + config.autoReloadSaveSecond);
-            console.log("X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
+          if(parseInt(config.autoReloadMax.value) == 0){
+            //xy mode
+            if(this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value)){
+              //save
+              config.autoReloadSave = Game.WriteSave(1);
+              config.autoReloadSaveSecond = this.secondsBeforeNextTick;
+              console.log("save:" + config.autoReloadSave);
+              console.log("second:" + config.autoReloadSaveSecond);
+              console.log("X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
+            }
+          } else {
+            //max mode
+            let targetNumber = 0;
+            this.forEachTile((x, y) => {
+              let tileAr = this.getTile(x, y);
+              if(tileAr.seedId == config.autoReloadID.value){
+                targetNumber += 1;
+              }
+            });
+            
+            if(targetNumber < parseInt(config.autoReloadMax.value)){
+              //save
+              config.autoReloadSave = Game.WriteSave(1);
+              config.autoReloadSaveSecond = this.secondsBeforeNextTick;
+              config.autoReloadNumber = targetNumber;
+              console.log("save:" + config.autoReloadSave);
+              console.log("second:" + config.autoReloadSaveSecond);
+              console.log("number:" + config.autoReloadNumber);
+              console.log("max:" + config.autoReloadMax.value);
+            }
           }
         }
         
         //after tick
         if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
-          //get tile info
-          let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
-          //check
-          if(tileAr.seedId == config.autoReloadID.value){
-            //grow
-            console.log("grow!");
-            //reset save
-            config.autoReloadSave = "";
-            config.autoReloadSaveSecond = 9999;
-            console.log("reset:" + config.autoReloadSave);
-            console.log("second:" + config.autoReloadSaveSecond);
+          if(parseInt(config.autoReloadMax.value) == 0){
+            //xy mode
+            //get tile info
+            let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
+            //check
+            if(tileAr.seedId == config.autoReloadID.value){
+              //grow
+              console.log("grow!");
+              console.log("reloads:" + config.autoReloadReloads);
+              //reset save
+              config.autoReloadSave = "";
+              config.autoReloadSaveSecond = 9999;
+              config.autoReloadReloads = 0;
+              console.log("reset:" + config.autoReloadSave);
+              console.log("second:" + config.autoReloadSaveSecond);
+              console.log("reloads:" + config.autoReloadReloads);
+            } else {
+              //reload
+              config.autoReloadReloads += 1;
+              console.log("reload! try:" + config.autoReloadReloads);
+              Game.LoadSave(config.autoReloadSave);
+            }
           } else {
-            //reload
-            console.log("reload!");
-            Game.LoadSave(config.autoReloadSave);
+            //max mode
+            let targetNumber = 0;
+            this.forEachTile((x, y) => {
+              let tileAr = this.getTile(x, y);
+              if(tileAr.seedId == config.autoReloadID.value){
+                targetNumber += 1;
+              }
+            });
+            //check
+            if(targetNumber > parseInt(config.autoReloadNumber)){
+              //grow
+              console.log("grow!");
+              console.log("target:" + targetNumber);
+              console.log("reloads:" + config.autoReloadReloads);
+              //reset save
+              config.autoReloadSave = "";
+              config.autoReloadSaveSecond = 9999;
+              config.autoReloadReloads = 0;
+              config.autoReloadNumber = 0;
+              console.log("reset:" + config.autoReloadSave);
+              console.log("second:" + config.autoReloadSaveSecond);
+              console.log("reloads:" + config.autoReloadReloads);
+              console.log("number:" + config.autoReloadNumber);
+            } else {
+              //reload
+              config.autoReloadReloads += 1;
+              console.log("reload! try:" + config.autoReloadReloads);
+              Game.LoadSave(config.autoReloadSave);
+            }
           }
         }
       } catch(e){
@@ -677,13 +740,13 @@ class UI {
       </h2>
       <p>
         ${this.numberInput(
-          'autoReloadX', 'X', 'input X',
+          'autoReloadX', 'X', 'input x(only works when max = 0)',
           config.autoReloadX
         )}
       </p>
       <p>
         ${this.numberInput(
-          'autoReloadY', 'Y', 'input Y',
+          'autoReloadY', 'Y', 'input Y(only works when max = 0)',
           config.autoReloadY
         )}
       </p>
@@ -691,6 +754,12 @@ class UI {
         ${this.numberInput(
           'autoReloadID', 'ID', 'input ID',
           config.autoReloadID
+        )}
+      </p>
+      <p>
+        ${this.numberInput(
+          'autoReloadMax', 'Max', 'input max plants(if 0, use xy)',
+          config.autoReloadMax
         )}
       </p>
     </div>
