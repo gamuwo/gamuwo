@@ -377,7 +377,6 @@ class Garden {
           
           //check
           let grows = 0;
-          let livingPlants = 0;
           for(let i = 0; i < config.autoReload2Plants.length; i++){
             let targetPlant = config.autoReload2Plants[i];
             if(parseInt(targetPlant[2]) > upperAge){
@@ -387,19 +386,18 @@ class Garden {
             
             if(this.tileIsEmpty(targetPlant[0], targetPlant[1])){
               //target plant was harvested
+              grows += 1;
               continue;
             }
             
-            livingPlants += 1;
             let tileAr2 = this.getTile(targetPlant[0], targetPlant[1]);
             if(parseInt(tileAr2.age) >= (parseInt(targetPlant[2]) + parseInt(config.autoReload2Grow.value))){
               grows += 1;
             }
           }
           console.log("[auto reload2]grows:" + grows);
-          console.log("[auto reload2]livingPlants:" + livingPlants);
           
-          if(livingPlants >= targetNumber && grows < targetNumber){
+          if(grows < targetNumber){
             //reload
             config.autoReload2Reloads += 1;
             console.log("[auto reload2]reload! try:" + config.autoReload2Reloads);
