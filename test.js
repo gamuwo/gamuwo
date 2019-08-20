@@ -723,12 +723,12 @@ class UI {
       </p>
       <p>
         ${this.button('exportSaveButton', 'Export save',
-        'This is test')}
+        'open export save window')}
       </p>
       <p>
         ${this.button(
           'playSound', 'Play sound',
-          'This is test', true,
+          'play beep sound when 10-15sec before tick', true,
           config.playSound
         )}
       </p>
@@ -762,6 +762,10 @@ class UI {
           config.autoReloadMax
         )}
       </p>
+      <p>
+        ${this.button('autoReloadReset', 'Reset',
+        'reset data(use when it stucks)')}
+      </p>
     </div>
     <div class="cookieGardenHelperPanel" id="autoReload2">
       <h2>
@@ -791,6 +795,10 @@ class UI {
           'autoReload2Play', 'Play', 'input Play',
           config.autoReload2Play
         )}
+      </p>
+      <p>
+        ${this.button('autoReload2Reset', 'Reset',
+        'reset data(use when it stucks)')}
       </p>
     </div>
   </div>
@@ -903,6 +911,16 @@ class Main {
       UI.labelToggleState('plotIsSaved', true);
     } else if (key == 'exportSaveButton') {
       Game.ExportSave();
+    } else if (key == 'autoReloadReset') {
+      this.config.autoReloadSave = "";
+      this.config.autoReloadSaveSecond = 9999;
+      this.config.autoReloadReloads = 0;
+      this.config.autoReloadNumber = 0;
+    } else if (key == 'autoReload2Reset') {
+      this.config.autoReload2Save = "";
+      this.config.autoReload2SaveSecond = 9999;
+      this.config.autoReload2Reloads = 0;
+      this.config.autoReload2Plants = [];
     }
     this.save();
   }
