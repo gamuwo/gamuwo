@@ -431,11 +431,11 @@ class Garden {
 //         config.autoHarvestWeeds = true;
 //         config.autoHarvestCleanGarden = false;
 //         config.autoPlant = false;
-        this.handleToggle('autoHarvest');
-        this.handleToggle('autoHarvestWeeds');
-        this.handleToggle('autoHarvestCleanGarden');
-        this.handleToggle('autoPlant');
-        this.save();
+        Main.handleToggle('autoHarvest');
+        Main.handleToggle('autoHarvestWeeds');
+        Main.handleToggle('autoHarvestCleanGarden');
+        Main.handleToggle('autoPlant');
+        Main.save();
         
         //harvest all plants without QB and JQB
         this.forEachTile((x, y) => {
