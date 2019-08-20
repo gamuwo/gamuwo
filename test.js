@@ -49,6 +49,7 @@ class Config {
       autoReload2SaveSecond: 9999,
       autoReload2Reloads: 0,
       autoReload2Plants: [],
+      autoJQB: false,
     };
   }
 
@@ -234,6 +235,57 @@ class Garden {
       sound.play();
     }
     
+    //auto JQB
+    if(config.autoJQB){
+      //harvest all plants without QB and JQB
+      this.forEachTile((x, y) => {
+        let tile = this.getTile(x, y);
+        if(tile.seedId != 21 && tile.seedId != 22){
+          this.harvest(x, y);
+        }
+      });
+      
+      //check num of plants
+      let numPlants = 0;
+      let numMatureQB = 0;
+      let numJQB = 0;
+      this.forEachTile((x, y) => {
+        if(!tileIsEmpty(x, y)){
+          numPlants += 1;
+          let tile = this.getTile(x, y);
+          let stage = this.getPlantStage(tile);
+          if(tile.seedId = 21 && stage == "mature"){
+            numMatureQB += 1;
+          } else if(tile.seedId = 22) {
+            numJQB += 1;
+          }
+        }
+      });
+      console.log("[auto JQB]numPlants:" + numPlants);
+      console.log("[auto JQB]numMatureQB:" + numMatureQB);
+      console.log("[auto JQB]numJQB:" + numJQB);
+
+      if(numPlants == 0){
+        //if no plants, plant QB and turn on auto-reload2 for QB
+        //plant QB
+        this.forEachTile((x, y) => {
+          if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
+            this.plantSeed((21 - 1), x, y);
+          }
+        });
+        //turn on auto-reload2 for QB
+        config.autoReload2 = true;
+        config.autoReload2ID.value = 21;
+        config.autoReload2Grow.value = 2;
+        config.autoReload2Number.value = 3;
+        config.autoReload2Play.value = 0;
+      }
+      
+      //if 21QB mature, turn on auto-reload1 for JQB
+      
+      //if 4JQB is exist, harvest all QB and turn on auto-reload2 for JQB
+    }
+    
     //auto reload
     if(config.autoReload){
       try{
@@ -245,9 +297,9 @@ class Garden {
               //save
               config.autoReloadSave = Game.WriteSave(1);
               config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-              console.log("save:" + config.autoReloadSave);
-              console.log("second:" + config.autoReloadSaveSecond);
-              console.log("X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
+              console.log("[auto reload]save:" + config.autoReloadSave);
+              console.log("[auto reload]second:" + config.autoReloadSaveSecond);
+              console.log("[auto reload]X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
             }
           } else {
             //max mode
@@ -264,10 +316,10 @@ class Garden {
               config.autoReloadSave = Game.WriteSave(1);
               config.autoReloadSaveSecond = this.secondsBeforeNextTick;
               config.autoReloadNumber = targetNumber;
-              console.log("save:" + config.autoReloadSave);
-              console.log("second:" + config.autoReloadSaveSecond);
-              console.log("number:" + config.autoReloadNumber);
-              console.log("max:" + config.autoReloadMax.value);
+              console.log("[auto reload]save:" + config.autoReloadSave);
+              console.log("[auto reload]second:" + config.autoReloadSaveSecond);
+              console.log("[auto reload]number:" + config.autoReloadNumber);
+              console.log("[auto reload]max:" + config.autoReloadMax.value);
             }
           }
         }
@@ -281,19 +333,19 @@ class Garden {
             //check
             if(tileAr.seedId == config.autoReloadID.value){
               //grow
-              console.log("grow!");
-              console.log("reloads:" + config.autoReloadReloads);
+              console.log("[auto reload]grow!");
+              console.log("[auto reload]reloads:" + config.autoReloadReloads);
               //reset save
               config.autoReloadSave = "";
               config.autoReloadSaveSecond = 9999;
               config.autoReloadReloads = 0;
-              console.log("reset:" + config.autoReloadSave);
-              console.log("second:" + config.autoReloadSaveSecond);
-              console.log("reloads:" + config.autoReloadReloads);
+              console.log("[auto reload]reset:" + config.autoReloadSave);
+              console.log("[auto reload]second:" + config.autoReloadSaveSecond);
+              console.log("[auto reload]reloads:" + config.autoReloadReloads);
             } else {
               //reload
               config.autoReloadReloads += 1;
-              console.log("reload! try:" + config.autoReloadReloads);
+              console.log("[auto reload]reload! try:" + config.autoReloadReloads);
               Game.LoadSave(config.autoReloadSave);
             }
           } else {
@@ -308,28 +360,28 @@ class Garden {
             //check
             if(targetNumber > parseInt(config.autoReloadNumber)){
               //grow
-              console.log("grow!");
-              console.log("target:" + targetNumber);
-              console.log("reloads:" + config.autoReloadReloads);
+              console.log("[auto reload]grow!");
+              console.log("[auto reload]target:" + targetNumber);
+              console.log("[auto reload]reloads:" + config.autoReloadReloads);
               //reset save
               config.autoReloadSave = "";
               config.autoReloadSaveSecond = 9999;
               config.autoReloadReloads = 0;
               config.autoReloadNumber = 0;
-              console.log("reset:" + config.autoReloadSave);
-              console.log("second:" + config.autoReloadSaveSecond);
-              console.log("reloads:" + config.autoReloadReloads);
-              console.log("number:" + config.autoReloadNumber);
+              console.log("[auto reload]reset:" + config.autoReloadSave);
+              console.log("[auto reload]second:" + config.autoReloadSaveSecond);
+              console.log("[auto reload]reloads:" + config.autoReloadReloads);
+              console.log("[auto reload]number:" + config.autoReloadNumber);
             } else {
               //reload
               config.autoReloadReloads += 1;
-              console.log("reload! try:" + config.autoReloadReloads);
+              console.log("[auto reload]reload! try:" + config.autoReloadReloads);
               Game.LoadSave(config.autoReloadSave);
             }
           }
         }
       } catch(e){
-        console.log("some error:" + e.message);
+        console.log("[auto reload]some error:" + e.message);
       }
     }
     
@@ -353,9 +405,9 @@ class Garden {
             config.autoReload2Save = Game.WriteSave(1);
             config.autoReload2SaveSecond = this.secondsBeforeNextTick;
             config.autoReload2Plants = targetPlants;
-            console.log("save:" + config.autoReload2Save);
-            console.log("second:" + config.autoReload2SaveSecond);
-            console.log("target plants:" + config.autoReload2Plants);
+            console.log("[auto reload2]save:" + config.autoReload2Save);
+            console.log("[auto reload2]second:" + config.autoReload2SaveSecond);
+            console.log("[auto reload2]target plants:" + config.autoReload2Plants);
           }
         }
         
@@ -370,8 +422,8 @@ class Garden {
             upperAge = parseInt(config.autoReload2Plants[(parseInt(config.autoReload2Number.value) - 1)][2]) + parseInt(config.autoReload2Play.value);
             targetNumber = parseInt(config.autoReload2Number.value);
           }
-          console.log("upperAge:" + upperAge);
-          console.log("targetNumber:" + targetNumber);
+          console.log("[auto reload2]upperAge:" + upperAge);
+          console.log("[auto reload2]targetNumber:" + targetNumber);
           
           //check
           let grows = 0;
@@ -394,31 +446,31 @@ class Garden {
               grows += 1;
             }
           }
-          console.log("grows:" + grows);
-          console.log("livingPlants:" + livingPlants);
+          console.log("[auto reload2]grows:" + grows);
+          console.log("[auto reload2]livingPlants:" + livingPlants);
           
           if(livingPlants >= targetNumber && grows < targetNumber){
             //reload
             config.autoReload2Reloads += 1;
-            console.log("reload! try:" + config.autoReload2Reloads);
+            console.log("[auto reload2]reload! try:" + config.autoReload2Reloads);
             Game.LoadSave(config.autoReload2Save);
           } else {
             //grow
-            console.log("grow! or target plant was harvested");
-            console.log("reloads:" + config.autoReload2Reloads);
+            console.log("[auto reload2]grow! or target plant was harvested");
+            console.log("[auto reload2]reloads:" + config.autoReload2Reloads);
             config.autoReload2Save = "";
             config.autoReload2SaveSecond = 9999;
             config.autoReload2Reloads = 0;
             config.autoReload2Plants = [];
-            console.log("reset:" + config.autoReload2Save);
-            console.log("second:" + config.autoReload2SaveSecond);
-            console.log("reloads:" + config.autoReload2Reloads);
-            console.log("target plants:" + config.autoReload2Plants);
+            console.log("[auto reload2]reset:" + config.autoReload2Save);
+            console.log("[auto reload2]second:" + config.autoReload2SaveSecond);
+            console.log("[auto reload2]reloads:" + config.autoReload2Reloads);
+            console.log("[auto reload2]target plants:" + config.autoReload2Plants);
           }
         }
         
       } catch(e){
-        console.log("some error:" + e.message);
+        console.log("[auto reload2]some error:" + e.message);
       }
     }
     
@@ -800,6 +852,12 @@ class UI {
         ${this.button('autoReload2Reset', 'Reset',
         'reset data(use when it stucks)')}
       </p>
+    </div>
+    <div class="cookieGardenHelperPanel" id="autoJQB">
+      <h2>
+        Auto-JQB
+        ${this.button('autoJQB', '', '', true, config.autoJQB)}
+      </h2>
     </div>
   </div>
 </div>`);
