@@ -427,10 +427,15 @@ class Garden {
     if(config.autoJQB && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 10){
       try{
         //switch buttons
-        config.autoHarvest = true;
-        config.autoHarvestWeeds = true;
-        config.autoHarvestCleanGarden = false;
-        config.autoPlant = false;
+//         config.autoHarvest = true;
+//         config.autoHarvestWeeds = true;
+//         config.autoHarvestCleanGarden = false;
+//         config.autoPlant = false;
+        this.handleToggle('autoHarvest');
+        this.handleToggle('autoHarvestWeeds');
+        this.handleToggle('autoHarvestCleanGarden');
+        this.handleToggle('autoPlant');
+        this.save();
         
         //harvest all plants without QB and JQB
         this.forEachTile((x, y) => {
