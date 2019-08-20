@@ -234,58 +234,7 @@ class Garden {
       sound.volume = 0.3;
       sound.play();
     }
-    
-    //auto JQB
-    if(config.autoJQB){
-      //harvest all plants without QB and JQB
-      this.forEachTile((x, y) => {
-        let tile = this.getTile(x, y);
-        if(tile.seedId != 21 && tile.seedId != 22){
-          this.harvest(x, y);
-        }
-      });
-      
-      //check num of plants
-      let numPlants = 0;
-      let numMatureQB = 0;
-      let numJQB = 0;
-      this.forEachTile((x, y) => {
-        if(!tileIsEmpty(x, y)){
-          numPlants += 1;
-          let tile = this.getTile(x, y);
-          let stage = this.getPlantStage(tile);
-          if(tile.seedId = 21 && stage == "mature"){
-            numMatureQB += 1;
-          } else if(tile.seedId = 22) {
-            numJQB += 1;
-          }
-        }
-      });
-      console.log("[auto JQB]numPlants:" + numPlants);
-      console.log("[auto JQB]numMatureQB:" + numMatureQB);
-      console.log("[auto JQB]numJQB:" + numJQB);
-
-      if(numPlants == 0){
-        //if no plants, plant QB and turn on auto-reload2 for QB
-        //plant QB
-        this.forEachTile((x, y) => {
-          if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
-            this.plantSeed((21 - 1), x, y);
-          }
-        });
-        //turn on auto-reload2 for QB
-        config.autoReload2 = true;
-        config.autoReload2ID.value = 21;
-        config.autoReload2Grow.value = 2;
-        config.autoReload2Number.value = 3;
-        config.autoReload2Play.value = 0;
-      }
-      
-      //if 21QB mature, turn on auto-reload1 for JQB
-      
-      //if 4JQB is exist, harvest all QB and turn on auto-reload2 for JQB
-    }
-    
+        
     //auto reload
     if(config.autoReload){
       try{
@@ -471,6 +420,94 @@ class Garden {
         
       } catch(e){
         console.log("[auto reload2]some error:" + e.message);
+      }
+    }
+
+    //auto JQB
+    if(config.autoJQB && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 10){
+      try{
+        //switch buttons
+        config.autoHarvest = true;
+        config.autoHarvestWeeds = true;
+        config.autoHarvestCleanGarden = false;
+        config.autoPlant = false;
+        
+        //harvest all plants without QB and JQB
+        this.forEachTile((x, y) => {
+          let tile = this.getTile(x, y);
+          if(tile.seedId != 21 && tile.seedId != 22){
+            this.harvest(x, y);
+          }
+        });
+        
+        //check num of plants
+        let numPlants = 0;
+        let numMatureQB = 0;
+        let numJQB = 0;
+        this.forEachTile((x, y) => {
+          if(!tileIsEmpty(x, y)){
+            numPlants += 1;
+            let tile = this.getTile(x, y);
+            let stage = this.getPlantStage(tile);
+            if(tile.seedId = 21 && stage == "mature"){
+              numMatureQB += 1;
+            } else if(tile.seedId = 22) {
+              numJQB += 1;
+            }
+          }
+        });
+        console.log("[auto JQB]numPlants:" + numPlants);
+        console.log("[auto JQB]numMatureQB:" + numMatureQB);
+        console.log("[auto JQB]numJQB:" + numJQB);
+  
+        if(numPlants == 0){
+          //if no plants, plant QB and turn on auto-reload2 for QB
+          //plant QB
+          this.forEachTile((x, y) => {
+            if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
+              this.plantSeed((21 - 1), x, y);
+            }
+          });
+          //turn off autoHarvestCheckCpSMult
+          config.autoHarvestCheckCpSMult = false;
+          //turn off auto-reload
+          config.autoReload = false;
+          //turn on auto-reload2 for QB
+          config.autoReload2 = true;
+          config.autoReload2ID.value = 21;
+          config.autoReload2Grow.value = 2;
+          config.autoReload2Number.value = 3;
+          config.autoReload2Play.value = 0;
+          console.log("[auto JQB]no plants here, so planted QBs, turn on auto-reload2 for QB");
+          
+        } else if(numMatureQB >= 21 && numJQB < 4){
+          //if 21QB mature, turn on auto-reload1 for JQB
+          //turn off autoHarvestCheckCpSMult
+          config.autoHarvestCheckCpSMult = false;
+          //turn off auto-reload2
+          config.autoReload2 = false;
+          //turn on auto-reload for JQB
+          config.autoReload = true;
+          config.autoReloadID = 22;
+          config.autoReloadMax = 4;
+          console.log("[auto JQB]all QB mature, so turn on auto-reload for JQB");
+          
+        } else if(numJQB >= 4){
+          //if 4JQB is exist, harvest all QB and turn on auto-reload2 for JQB
+          //turn on autoHarvestCheckCpSMult
+          config.autoHarvestCheckCpSMult = true;
+          //turn off auto-reload
+          config.autoReload = false;
+          //turn on auto-reload2 for QB
+          config.autoReload2 = true;
+          config.autoReload2ID.value = 22;
+          config.autoReload2Grow.value = 1;
+          config.autoReload2Number.value = 2;
+          config.autoReload2Play.value = 2;
+          console.log("[auto JQB]4 JQB here, so harvest QBs and turn on auto-reload2 for JQB");
+        }
+      } catch(e){
+        console.log("[auto JQB]some error:" + e.message);
       }
     }
     
