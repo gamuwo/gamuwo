@@ -445,7 +445,7 @@ class Garden {
         let numMatureQB = 0;
         let numJQB = 0;
         this.forEachTile((x, y) => {
-          if(!tileIsEmpty(x, y)){
+          if(!this.tileIsEmpty(x, y)){
             numPlants += 1;
             let tile = this.getTile(x, y);
             let stage = this.getPlantStage(tile);
