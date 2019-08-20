@@ -431,10 +431,10 @@ class Garden {
 //         config.autoHarvestWeeds = true;
 //         config.autoHarvestCleanGarden = false;
 //         config.autoPlant = false;
-        Main.handleToggle('autoHarvest');
-        Main.handleToggle('autoHarvestWeeds');
-        Main.handleToggle('autoHarvestCleanGarden');
-        Main.handleToggle('autoPlant');
+        if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
+        if(!config.autoHarvestWeeds){ Main.handleToggle('autoHarvestWeeds'); }
+        if(config.autoHarvestCleanGarden){ Main.handleToggle('autoHarvestCleanGarden'); }
+        if(config.autoPlant){ Main.handleToggle('autoPlant'); }
         Main.save();
         
         //harvest all plants without QB and JQB
