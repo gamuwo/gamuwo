@@ -471,7 +471,7 @@ class Garden {
     }
 
     //auto JQB
-    if(config.autoJQB && this.secondsBeforeNextTick <= 170 && this.secondsBeforeNextTick >= 10){
+    if(config.autoJQB && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 10){
       try{
         //switch buttons
         if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
@@ -508,8 +508,6 @@ class Garden {
           console.log("[auto JQB]numPlants:" + numPlants);
           console.log("[auto JQB]numMatureQB:" + numMatureQB);
           console.log("[auto JQB]numJQB:" + numJQB);
-          
-          console.log("[auto JQB]" + this.logDate() + "stage:3 -> 0" + " sugar:" + Game.lumps);
         }
   
         if(config.autoJQBStage.value == 0 && numPlants == 0){
