@@ -259,10 +259,10 @@ class Garden {
               //save
               config.autoReloadSave = Game.WriteSave(1);
               config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-              if(config.logLevel >= 2){
+              if(config.logLevel.value >= 2){
                 console.log("[auto reload]save!");
               }
-              if(config.logLevel >= 3){
+              if(config.logLevel.value >= 3){
                 console.log("[auto reload]save:" + config.autoReloadSave);
                 console.log("[auto reload]second:" + config.autoReloadSaveSecond);
                 console.log("[auto reload]X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
@@ -283,10 +283,10 @@ class Garden {
               config.autoReloadSave = Game.WriteSave(1);
               config.autoReloadSaveSecond = this.secondsBeforeNextTick;
               config.autoReloadNumber = targetNumber;
-              if(config.logLevel >= 2){
+              if(config.logLevel.value >= 2){
                 console.log("[auto reload]save!");
               }
-              if(config.logLevel >= 3){
+              if(config.logLevel.value >= 3){
                 console.log("[auto reload]save:" + config.autoReloadSave);
                 console.log("[auto reload]second:" + config.autoReloadSaveSecond);
                 console.log("[auto reload]number:" + config.autoReloadNumber);
@@ -305,14 +305,14 @@ class Garden {
             //check
             if(tileAr.seedId == config.autoReloadID.value){
               //grow
-              if(config.logLevel >= 2){
+              if(config.logLevel.value >= 2){
                 console.log("[auto reload]grow! reloads:" + config.autoReloadReloads);
               }
               //reset save
               config.autoReloadSave = "";
               config.autoReloadSaveSecond = 9999;
               config.autoReloadReloads = 0;
-              if(config.logLevel >= 3){
+              if(config.logLevel.value >= 3){
                 console.log("[auto reload]reset:" + config.autoReloadSave);
                 console.log("[auto reload]second:" + config.autoReloadSaveSecond);
                 console.log("[auto reload]reloads:" + config.autoReloadReloads);
@@ -320,7 +320,7 @@ class Garden {
             } else {
               //reload
               config.autoReloadReloads += 1;
-              if(config.logLevel >= 3){
+              if(config.logLevel.value >= 3){
                 console.log("[auto reload]reload! try:" + config.autoReloadReloads);
               }
               Game.LoadSave(config.autoReloadSave);
@@ -337,10 +337,10 @@ class Garden {
             //check
             if(targetNumber > parseInt(config.autoReloadNumber)){
               //grow
-              if(config.logLevel >= 2){
+              if(config.logLevel.value >= 2){
                 console.log("[auto reload]grow! reloads:" + config.autoReloadReloads);
               }
-              if(config.logLevel >= 3){
+              if(config.logLevel.value >= 3){
                 console.log("[auto reload]target:" + targetNumber);
               }
               //reset save
@@ -348,7 +348,7 @@ class Garden {
               config.autoReloadSaveSecond = 9999;
               config.autoReloadReloads = 0;
               config.autoReloadNumber = 0;
-              if(config.logLevel >= 3){
+              if(config.logLevel.value >= 3){
                 console.log("[auto reload]reset:" + config.autoReloadSave);
                 console.log("[auto reload]second:" + config.autoReloadSaveSecond);
                 console.log("[auto reload]reloads:" + config.autoReloadReloads);
@@ -357,7 +357,7 @@ class Garden {
             } else {
               //reload
               config.autoReloadReloads += 1;
-              if(config.logLevel >= 3){
+              if(config.logLevel.value >= 3){
                 console.log("[auto reload]reload! try:" + config.autoReloadReloads);
               }
               Game.LoadSave(config.autoReloadSave);
@@ -389,10 +389,10 @@ class Garden {
             config.autoReload2Save = Game.WriteSave(1);
             config.autoReload2SaveSecond = this.secondsBeforeNextTick;
             config.autoReload2Plants = targetPlants;
-            if(config.logLevel >= 2){
+            if(config.logLevel.value >= 2){
               console.log("[auto reload2]save!");
             }
-            if(config.logLevel >= 3){
+            if(config.logLevel.value >= 3){
               console.log("[auto reload2]save:" + config.autoReload2Save);
               console.log("[auto reload2]second:" + config.autoReload2SaveSecond);
               console.log("[auto reload2]target plants:" + config.autoReload2Plants);
@@ -411,7 +411,7 @@ class Garden {
             upperAge = parseInt(config.autoReload2Plants[(parseInt(config.autoReload2Number.value) - 1)][2]) + parseInt(config.autoReload2Play.value);
             targetNumber = parseInt(config.autoReload2Number.value);
           }
-          if(config.logLevel >= 3){
+          if(config.logLevel.value >= 3){
             console.log("[auto reload2]upperAge:" + upperAge);
             console.log("[auto reload2]targetNumber:" + targetNumber);
           }
@@ -436,27 +436,27 @@ class Garden {
               grows += 1;
             }
           }
-          if(config.logLevel >= 3){
+          if(config.logLevel.value >= 3){
             console.log("[auto reload2]grows:" + grows);
           }
           
           if(grows < targetNumber){
             //reload
             config.autoReload2Reloads += 1;
-            if(config.logLevel >= 3){
+            if(config.logLevel.value >= 3){
               console.log("[auto reload2]reload! try:" + config.autoReload2Reloads);
             }
             Game.LoadSave(config.autoReload2Save);
           } else {
             //grow
-            if(config.logLevel >= 2){
+            if(config.logLevel.value >= 2){
               console.log("[auto reload2]grow! reloads:" + config.autoReload2Reloads);
             }
             config.autoReload2Save = "";
             config.autoReload2SaveSecond = 9999;
             config.autoReload2Reloads = 0;
             config.autoReload2Plants = [];
-            if(config.logLevel >= 3){
+            if(config.logLevel.value >= 3){
               console.log("[auto reload2]reset:" + config.autoReload2Save);
               console.log("[auto reload2]second:" + config.autoReload2SaveSecond);
               console.log("[auto reload2]reloads:" + config.autoReload2Reloads);
@@ -504,7 +504,7 @@ class Garden {
             }
           }
         });
-        if(config.logLevel >= 3){
+        if(config.logLevel.value >= 3){
           console.log("[auto JQB]numPlants:" + numPlants);
           console.log("[auto JQB]numMatureQB:" + numMatureQB);
           console.log("[auto JQB]numJQB:" + numJQB);
@@ -540,10 +540,10 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 1;
           //save config
           Main.save();
-          if(config.logLevel >= 1){
+          if(config.logLevel.value >= 1){
             console.log("[auto JQB]" + logDate() + "stage:0 -> 1");
           }
-          if(config.logLevel >= 2){
+          if(config.logLevel.value >= 2){
             console.log("[auto JQB]no plants here, so planted QBs, turn on auto-reload2 for QB");
           }
         }
@@ -565,10 +565,10 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 2;
           //save config
           Main.save();
-          if(config.logLevel >= 1){
+          if(config.logLevel.value >= 1){
             console.log("[auto JQB]" + logDate() + "stage:1 -> 2");
           }
-          if(config.logLevel >= 2){
+          if(config.logLevel.value >= 2){
             console.log("[auto JQB]all QB mature, so turn on auto-reload for JQB");
           }
         }
@@ -594,10 +594,10 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 3;
           //save config
           Main.save();
-          if(config.logLevel >= 1){
+          if(config.logLevel.value >= 1){
             console.log("[auto JQB]" + logDate() + "stage:2 -> 3");
           }
-          if(config.logLevel >= 2){
+          if(config.logLevel.value >= 2){
             console.log("[auto JQB]4 JQB here, so harvest QBs and turn on auto-reload2 for JQB");
           }
         }
@@ -615,10 +615,10 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 0;
           //save config
           Main.save();
-          if(config.logLevel >= 1){
+          if(config.logLevel.value >= 1){
             console.log("[auto JQB]" + logDate() + "stage:3 -> 0" + " sugar:" + Game.lumps);
           }
-          if(config.logLevel >= 2){
+          if(config.logLevel.value >= 2){
             console.log("[auto JQB]all JQB was harvested, so change stage to 0");
           }
         }
