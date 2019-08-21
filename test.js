@@ -190,7 +190,7 @@ class Garden {
   }
   
   static logDate() {
-    let logNow = new date();
+    let logNow = new Date();
     let logYear = logNow.getFullYear();
     let logMonth = logNow.getMonth() + 1;
     let logDay = logNow.getDate();
