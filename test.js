@@ -471,7 +471,7 @@ class Garden {
     }
 
     //auto JQB
-    if(config.autoJQB && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 10){
+    if(config.autoJQB && this.secondsBeforeNextTick <= 170 && this.secondsBeforeNextTick >= 10){
       try{
         //switch buttons
         if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
@@ -509,7 +509,7 @@ class Garden {
           console.log("[auto JQB]numMatureQB:" + numMatureQB);
           console.log("[auto JQB]numJQB:" + numJQB);
           
-          console.log("[auto JQB]" + logDate() + "stage:3 -> 0" + " sugar:" + Game.lumps);
+          console.log("[auto JQB]" + this.logDate() + "stage:3 -> 0" + " sugar:" + Game.lumps);
         }
   
         if(config.autoJQBStage.value == 0 && numPlants == 0){
@@ -541,7 +541,7 @@ class Garden {
           //save config
           Main.save();
           if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + logDate() + "stage:0 -> 1");
+            console.log("[auto JQB]" + this.logDate() + "stage:0 -> 1");
           }
           if(config.logLevel.value >= 2){
             console.log("[auto JQB]no plants here, so planted QBs, turn on auto-reload2 for QB");
@@ -566,7 +566,7 @@ class Garden {
           //save config
           Main.save();
           if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + logDate() + "stage:1 -> 2");
+            console.log("[auto JQB]" + this.logDate() + "stage:1 -> 2");
           }
           if(config.logLevel.value >= 2){
             console.log("[auto JQB]all QB mature, so turn on auto-reload for JQB");
@@ -595,7 +595,7 @@ class Garden {
           //save config
           Main.save();
           if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + logDate() + "stage:2 -> 3");
+            console.log("[auto JQB]" + this.logDate() + "stage:2 -> 3");
           }
           if(config.logLevel.value >= 2){
             console.log("[auto JQB]4 JQB here, so harvest QBs and turn on auto-reload2 for JQB");
@@ -616,7 +616,7 @@ class Garden {
           //save config
           Main.save();
           if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + logDate() + "stage:3 -> 0" + " sugar:" + Game.lumps);
+            console.log("[auto JQB]" + this.logDate() + "stage:3 -> 0" + " sugar:" + Game.lumps);
           }
           if(config.logLevel.value >= 2){
             console.log("[auto JQB]all JQB was harvested, so change stage to 0");
