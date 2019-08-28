@@ -947,12 +947,10 @@ class UI {
         'Plant the selected seed on all empty tiles')}
       </p>
       <p>
-        ${this.button('quickLoad', 'Quick load',
-        'load before tick savedata')}
-      </p>
-      <p>
         ${this.button('exportSaveButton', 'Export save',
         'open export save window')}
+        ${this.button('quickLoad', 'Quick load',
+        'load before tick savedata')}
       </p>
       <p>
         ${this.button(
@@ -982,12 +980,12 @@ class UI {
           'autoReloadY', 'Y', 'input Y(only works when max = 0)',
           config.autoReloadY
         )}
+      </p>
+      <p>
         ${this.numberInput(
           'autoReloadID', 'ID', 'input ID',
           config.autoReloadID
         )}
-      </p>
-      <p>
         ${this.numberInput(
           'autoReloadMax', 'Max', 'input max plants(if 0, use xy)',
           config.autoReloadMax
