@@ -954,14 +954,12 @@ class UI {
       </p>
       <p>
         ${this.button(
-          'playSound', 'Play sound',
+          'playSound', 'Sound',
           'play beep sound when 10-15sec before tick', true,
           config.playSound
         )}
-      </p>
-      <p>
         ${this.numberInput(
-          'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive)',
+          'logLevel', 'Log', 'input log level(0:no log 1:a little 2:normal 3:massive)',
           config.logLevel
         )}
       </p>
