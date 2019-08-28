@@ -978,14 +978,10 @@ class UI {
           'autoReloadX', 'X', 'input x(only works when max = 0)',
           config.autoReloadX
         )}
-      </p>
-      <p>
         ${this.numberInput(
           'autoReloadY', 'Y', 'input Y(only works when max = 0)',
           config.autoReloadY
         )}
-      </p>
-      <p>
         ${this.numberInput(
           'autoReloadID', 'ID', 'input ID',
           config.autoReloadID
@@ -1012,8 +1008,6 @@ class UI {
           'autoReload2ID', 'ID', 'input target ID',
           config.autoReload2ID
         )}
-      </p>
-      <p>
         ${this.numberInput(
           'autoReload2Grow', 'Grow', 'input Grow',
           config.autoReload2Grow
@@ -1024,8 +1018,6 @@ class UI {
           'autoReload2Number', 'Number', 'input Number',
           config.autoReload2Number
         )}
-      </p>
-      <p>
         ${this.numberInput(
           'autoReload2Play', 'Play', 'input Play',
           config.autoReload2Play
