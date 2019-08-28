@@ -697,8 +697,8 @@ class UI {
 #autoReload2 { color: coral; }
 #autoReload2 a { color: coral; }
 
-#autoJQB { color: Rich lilac; }
-#autoJQB a { color: Rich lilac; }
+#autoJQB { color: violet; }
+#autoJQB a { color: violet; }
 
 #autoHarvestPanel a:hover,
 #autoPlantPanel a:hover,
@@ -986,7 +986,7 @@ class UI {
           'autoReloadX', 'X', 'input x(only works when max = 0)',
           config.autoReloadX
         )}
-        <span style=”margin-right: 5px;”></span>
+        &nbsp;
         ${this.numberInput(
           'autoReloadY', 'Y', 'input Y(only works when max = 0)',
           config.autoReloadY
@@ -1017,7 +1017,7 @@ class UI {
           'autoReload2ID', 'ID', 'input target ID',
           config.autoReload2ID
         )}
-        <span style=”margin-right: 10px;”></span>
+        &nbsp;&nbsp;
         ${this.numberInput(
           'autoReload2Grow', 'Grow', 'input Grow',
           config.autoReload2Grow
