@@ -691,6 +691,12 @@ class UI {
 #autoPlantPanel { color: lightgreen; }
 #autoPlantPanel a { color: lightgreen; }
 
+#autoReload { color: aqua; }
+#autoReload a { color: aqua; }
+
+#autoReload2 { color: coral; }
+#autoReload2 a { color: coral; }
+
 #autoHarvestPanel a:hover,
 #autoPlantPanel a:hover { color: white; }
 
@@ -974,7 +980,7 @@ class UI {
           'autoReloadX', 'X', 'input x(only works when max = 0)',
           config.autoReloadX
         )}
-        &nbsp;&nbsp;
+        &nbsp;
         ${this.numberInput(
           'autoReloadY', 'Y', 'input Y(only works when max = 0)',
           config.autoReloadY
