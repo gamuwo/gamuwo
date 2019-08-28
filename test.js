@@ -194,10 +194,15 @@ class Garden {
     let logNow = new Date();
     let logYear = logNow.getFullYear();
     let logMonth = logNow.getMonth() + 1;
+    logMonth = ("0" + logMonth).slice(-2);
     let logDay = logNow.getDate();
+    logDay = ("0" + logDay).slice(-2);
     let logHour = logNow.getHours();
+    logHour = ("0" + logHour).slice(-2);
     let logMinute = logNow.getMinutes();
+    logMinute = ("0" + logMinute).slice(-2);
     let logSecond = logNow.getSeconds();
+    logSecond = ("0" + logSecond).slice(-2);
     return "[" + logYear + "/" + logMonth + "/" + logDay + " " + logHour + ":" + logMinute + ":" + logSecond + "]";
   }
   
@@ -255,6 +260,8 @@ class Garden {
         }
       }
     });
+    
+    console.log("[test]" + this.logDate() + "unchi");
     
     //play sound
     if(config.playSound && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
