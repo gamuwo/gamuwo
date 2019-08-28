@@ -52,6 +52,7 @@ class Config {
       autoReload2Plants: [],
       autoJQB: false,
       autoJQBStage: { value: 0, min: 0 },
+      quickLoadSave: "",
     };
   }
 
@@ -261,6 +262,11 @@ class Garden {
     }
     if(config.playSound && this.secondsBeforeNextTick <= 178 && this.secondsBeforeNextTick >= 177){
       this.playSound2();
+    }
+    
+    //for quick load
+    if(this.secondsBeforeNextTick <= 5){
+      config.quickLoadSave = Game.WriteSave(1);
     }
         
     //auto reload
@@ -941,6 +947,10 @@ class UI {
         'Plant the selected seed on all empty tiles')}
       </p>
       <p>
+        ${this.button('quickLoad', 'Quick load',
+        'load before tick savedata')}
+      </p>
+      <p>
         ${this.button('exportSaveButton', 'Export save',
         'open export save window')}
       </p>
@@ -1148,6 +1158,10 @@ class Main {
       UI.labelToggleState('plotIsSaved', true);
     } else if (key == 'exportSaveButton') {
       Game.ExportSave();
+    } else if (key == 'quickLoad') {
+      if(this.config.quickLoadSave != "") {
+        Game.LoadSave(this.config.quickLoadSave);
+      }
     } else if (key == 'autoReloadReset') {
       this.config.autoReloadSave = "";
       this.config.autoReloadSaveSecond = 9999;
