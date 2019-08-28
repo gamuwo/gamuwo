@@ -959,9 +959,13 @@ class UI {
         'Plant the selected seed on all empty tiles')}
       </p>
       <p>
-        ${this.button('exportSaveButton', 'Export save',
+        ${this.button('saveButton', 'Save',
+        'save')}
+        ${this.button('exportSaveButton', 'ES',
         'open export save window')}
-        ${this.button('quickLoad', 'Quick load',
+        ${this.button('fileSaveButton', 'FS',
+        'file save')}
+        ${this.button('quickLoad', 'QL',
         'load before tick savedata')}
       </p>
       <p>
@@ -1158,8 +1162,12 @@ class Main {
     } else if (key == 'savePlot') {
       this.config['savedPlot'] = Garden.clonePlot();
       UI.labelToggleState('plotIsSaved', true);
+    } else if (key == 'saveButton') {
+      Game.toSave=true;
     } else if (key == 'exportSaveButton') {
       Game.ExportSave();
+    } else if (key == 'fileSaveButton') {
+      Game.FileSave();
     } else if (key == 'quickLoad') {
       if(this.config.quickLoadSave != "") {
         Game.LoadSave(this.config.quickLoadSave);
