@@ -261,8 +261,6 @@ class Garden {
       }
     });
     
-    console.log("[test]" + this.logDate() + "unchi");
-    
     //play sound
     if(config.playSound && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
       this.playSound1();
