@@ -697,11 +697,14 @@ class UI {
 #autoReload2 { color: coral; }
 #autoReload2 a { color: coral; }
 
-#autoJQB { color: lilac; }
-#autoJQB a { color: lilac; }
+#autoJQB { color: Rich lilac; }
+#autoJQB a { color: Rich lilac; }
 
 #autoHarvestPanel a:hover,
-#autoPlantPanel a:hover { color: white; }
+#autoPlantPanel a:hover,
+#autoReload a:hover,
+#autoReload2 a:hover,
+#autoJQB a:hover { color: white; }
 
 #cookieGardenHelperTitle {
   color: grey;
