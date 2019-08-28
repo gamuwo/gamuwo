@@ -973,7 +973,7 @@ class UI {
       </h2>
       <p>
         ${this.numberInput(
-          'autoReloadX', 'X', 'input x(only works when max = 0)',
+          'autoReloadX', 'X ', 'input x(only works when max = 0)',
           config.autoReloadX
         )}
         ${this.numberInput(
@@ -1003,7 +1003,7 @@ class UI {
       </h2>
       <p>
         ${this.numberInput(
-          'autoReload2ID', 'ID', 'input target ID',
+          'autoReload2ID', 'ID ', 'input target ID',
           config.autoReload2ID
         )}
         ${this.numberInput(
@@ -1013,7 +1013,7 @@ class UI {
       </p>
       <p>
         ${this.numberInput(
-          'autoReload2Number', 'Number', 'input Number',
+          'autoReload2Number', 'Num', 'input Number',
           config.autoReload2Number
         )}
         ${this.numberInput(
