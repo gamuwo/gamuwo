@@ -697,6 +697,9 @@ class UI {
 #autoReload2 { color: coral; }
 #autoReload2 a { color: coral; }
 
+#autoJQB { color: lilac; }
+#autoJQB a { color: lilac; }
+
 #autoHarvestPanel a:hover,
 #autoPlantPanel a:hover { color: white; }
 
