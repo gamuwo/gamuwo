@@ -544,8 +544,8 @@ class Garden {
           document.getElementById(UI.makeId("autoReload2ID")).value = 21;
           config.autoReload2Grow.value = 2;
           document.getElementById(UI.makeId("autoReload2Grow")).value = 2;
-          config.autoReload2Number.value = 3;
-          document.getElementById(UI.makeId("autoReload2Number")).value = 3;
+          config.autoReload2Number.value = 2;
+          document.getElementById(UI.makeId("autoReload2Number")).value = 2;
           config.autoReload2Play.value = 0;
           document.getElementById(UI.makeId("autoReload2Play")).value = 0;
           //change stage
