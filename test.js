@@ -1017,7 +1017,7 @@ class UI {
           'autoReload2ID', 'ID', 'input target ID',
           config.autoReload2ID
         )}
-        &nbsp;&thinsp;&thinsp;
+        &emsp;
         ${this.numberInput(
           'autoReload2Grow', 'Grow', 'input Grow',
           config.autoReload2Grow
