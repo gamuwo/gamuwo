@@ -974,6 +974,18 @@ class UI {
           Boolean(config.savedPlot.length))}
       </p>
     </div>
+    <div class="cookieGardenHelperPanel" id="autoJQB">
+      <h2>
+        Auto-JQB
+        ${this.button('autoJQB', '', '', true, config.autoJQB)}
+      </h2>
+      <p>
+        ${this.numberInput(
+          'autoJQBStage', 'stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
+          config.autoJQBStage
+        )}
+      </p>
+    </div>
     <div class="cookieGardenHelperPanel" id="manualToolsPanel">
       <h2>Manual tools</h2>
       <p>
@@ -1065,18 +1077,6 @@ class UI {
       <p>
         ${this.button('autoReload2Reset', 'Reset',
         'reset data(use when it stucks)')}
-      </p>
-    </div>
-    <div class="cookieGardenHelperPanel" id="autoJQB">
-      <h2>
-        Auto-JQB
-        ${this.button('autoJQB', '', '', true, config.autoJQB)}
-      </h2>
-      <p>
-        ${this.numberInput(
-          'autoJQBStage', 'stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
-          config.autoJQBStage
-        )}
       </p>
     </div>
   </div>
