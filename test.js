@@ -1082,7 +1082,6 @@ class UI {
         ${this.button('autoReload2Reset', 'Reset',
         'reset data(use when it stucks)')}
         Try:<span id="autoReload2Disp">0</span>
-        &thinsp;
         Grow:<span id="autoReload2Disp2">0</span>
       </p>
     </div>
