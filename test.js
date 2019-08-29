@@ -712,6 +712,7 @@ class UI {
 }
 .cookieGardenHelperAutoLeftPanel {
   float: left;
+  margin-right: 5px;
 }
 .cookieGardenHelperAutoRightPanel {
   overflow: hidden;
