@@ -161,13 +161,15 @@ class Garden {
     if (plant.weed && config.autoHarvestWeeds) {
       this.harvest(x, y);
     }
-    let [seedId, age] = config.savedPlot[y][x];
-    seedId--;
-    if (config.autoHarvestCleanGarden &&
-        ((plant.unlocked && seedId == -1) ||
-         (seedId > -1 && seedId != plant.id))
-        ) {
-      this.harvest(x, y);
+    if (config.savedPlot.length > 0) {
+      let [seedId, age] = config.savedPlot[y][x];
+      seedId--;
+      if (config.autoHarvestCleanGarden &&
+          ((plant.unlocked && seedId == -1) ||
+           (seedId > -1 && seedId != plant.id))
+          ) {
+        this.harvest(x, y);
+      }
     }
   }
 
@@ -1126,8 +1128,8 @@ class Main {
     Garden.minigame.convert = () => {
       this.config.savedPlot = [];
       UI.labelToggleState('plotIsSaved', false);
-      this.handleToggle('autoHarvest');
-      this.handleToggle('autoPlant');
+      if(this.config.autoHarvest){ Main.handleToggle('autoHarvest'); }
+      if(this.config.autoPlant){ Main.handleToggle('autoPlant'); }
       this.save();
       oldConvert();
     }
