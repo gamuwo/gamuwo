@@ -345,6 +345,7 @@ class Garden {
             //check
             if(tileAr.seedId == config.autoReloadID.value){
               //grow
+              document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
               if(config.logLevel.value >= 2){
                 console.log("[auto reload]grow! reloads:" + config.autoReloadReloads);
               }
@@ -378,6 +379,7 @@ class Garden {
             //check
             if(targetNumber > parseInt(config.autoReloadNumber)){
               //grow
+              document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
               if(config.logLevel.value >= 2){
                 console.log("[auto reload]grow! reloads:" + config.autoReloadReloads);
               }
@@ -493,6 +495,7 @@ class Garden {
             Game.LoadSave(config.autoReload2Save);
           } else {
             //grow
+            document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
             if(config.logLevel.value >= 2){
               console.log("[auto reload2]grow! reloads:" + config.autoReload2Reloads);
             }
