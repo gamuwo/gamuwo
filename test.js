@@ -219,9 +219,7 @@ class Garden {
     logHour = ("0" + logHour).slice(-2);
     let logMinute = logNow.getMinutes();
     logMinute = ("0" + logMinute).slice(-2);
-    let logSecond = logNow.getSeconds();
-    logSecond = ("0" + logSecond).slice(-2);
-    return "[" + logYear + "/" + logMonth + "/" + logDay + " " + logHour + ":" + logMinute + ":" + logSecond + "]";
+    return logYear + "/" + logMonth + "/" + logDay + " " + logHour + ":" + logMinute;
   }
   
   static playSound1() {
@@ -993,7 +991,7 @@ class UI {
       <p>
         ${this.button('quickLoad', 'QL',
         'load before tick savedata')}
-        <div id="quickLoadSaveTime">not saved</div>
+        <span id="quickLoadSaveTime">not saved</span>
       </p>
       <p>
         ${this.button(
