@@ -1068,11 +1068,13 @@ class UI {
           )}
         </p>
       </div>
-      <p>
-        ${this.button('autoReloadReset', 'Reset',
-        'reset data(use when it stucks)')}
-        Try:<span id="autoReloadDisp">0</span>
-      </p>
+      <div class="cookieGardenHelperClearPanel">
+        <p>
+          ${this.button('autoReloadReset', 'Reset',
+          'reset data(use when it stucks)')}
+          Try:<span id="autoReloadDisp">0</span>
+        </p>
+      </div>
     </div>
     <div class="cookieGardenHelperPanel" id="autoReload2">
       <h2>
@@ -1111,12 +1113,14 @@ class UI {
           )}
         </p>
       </div>
-      <p>
-        ${this.button('autoReload2Reset', 'Reset',
-        'reset data(use when it stucks)')}
-        Try:<span id="autoReload2Disp">0</span>
-        Grow:<span id="autoReload2Disp2">0</span>
-      </p>
+      <div class="cookieGardenHelperClearPanel">
+        <p>
+          ${this.button('autoReload2Reset', 'Reset',
+          'reset data(use when it stucks)')}
+          Try:<span id="autoReload2Disp">0</span>
+          Grow:<span id="autoReload2Disp2">0</span>
+        </p>
+      </div>
     </div>
   </div>
 </div>`);
