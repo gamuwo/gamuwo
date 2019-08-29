@@ -1000,36 +1000,28 @@ class UI {
         'load before tick savedata')}
         <span id="quickLoadSaveTime">Not saved</span>
       </p>
-      <div class="cookieGardenHelperSubPanel">
-        <p>
-          ${this.button(
-            'playSound', 'Sound',
-            'play beep sound when 10-15sec before tick', true,
-            config.playSound
-          )}
-        </p>
-      </div>
-      <div class="cookieGardenHelperSubPanel">
-        <p>
-          ${this.numberInput(
-            'logLevel', 'Log', 'input log level(0:no log 1:a little 2:normal 3:massive)',
-            config.logLevel
-          )}
-        </p>
-      </div>
-      <div class="cookieGardenHelperClearPanel">
-        <p id="autoJQB">
-          ${this.button(
-            'autoJQB', 'JQB',
-            'auto harvest JQB', true,
-            config.autoJQB
-          )}
-          ${this.numberInput(
-            'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
-            config.autoJQBStage
-          )}
-        </p>
-      </div>
+      <p>
+        ${this.button(
+          'playSound', 'Sound',
+          'play beep sound when 10-15sec before tick', true,
+          config.playSound
+        )}
+        ${this.numberInput(
+          'logLevel', 'Log', 'input log level(0:no log 1:a little 2:normal 3:massive)',
+          config.logLevel
+        )}
+      </p>
+      <p id="autoJQB">
+        ${this.button(
+          'autoJQB', 'JQB',
+          'auto harvest JQB', true,
+          config.autoJQB
+        )}
+        ${this.numberInput(
+          'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
+          config.autoJQBStage
+        )}
+      </p>
     </div>
     <div class="cookieGardenHelperPanel" id="autoReload">
       <h2>
