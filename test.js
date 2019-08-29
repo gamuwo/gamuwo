@@ -1014,7 +1014,9 @@ class UI {
           )}
         </p>
       </div>
-      <p>
+      <p id="autoJQB">
+        ${this.button('testButtonHoge', 'test',
+        'test')}
         ${this.button(
           'autoJQB', 'JQB',
           'auto harvest JQB', true,
