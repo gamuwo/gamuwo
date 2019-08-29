@@ -1025,27 +1025,38 @@ class UI {
         Auto-reload
         ${this.button('autoReload', '', '', true, config.autoReload)}
       </h2>
-      <p>
-        ${this.numberInput(
-          'autoReloadX', 'X', 'input x(only works when max = 0)',
-          config.autoReloadX
-        )}
-        &thinsp;
-        ${this.numberInput(
-          'autoReloadY', 'Y', 'input Y(only works when max = 0)',
-          config.autoReloadY
-        )}
-      </p>
-      <p>
-        ${this.numberInput(
-          'autoReloadID', 'ID', 'input ID',
-          config.autoReloadID
-        )}
-        ${this.numberInput(
-          'autoReloadMax', 'Max', 'input max plants(if 0, use xy)',
-          config.autoReloadMax
-        )}
-      </p>
+      <div class="cookieGardenHelperSubPanel">
+        <p>
+          ${this.numberInput(
+            'autoReloadX', 'X', 'input x(only works when max = 0)',
+            config.autoReloadX
+          )}
+        </p>
+      </div>
+      <div class="cookieGardenHelperSubPanel">
+        <p>
+          ${this.numberInput(
+            'autoReloadY', 'Y', 'input Y(only works when max = 0)',
+            config.autoReloadY
+          )}
+        </p>
+      </div>
+      <div class="cookieGardenHelperSubPanel">
+        <p>
+          ${this.numberInput(
+            'autoReloadID', 'ID', 'input ID',
+            config.autoReloadID
+          )}
+        </p>
+      </div>
+      <div class="cookieGardenHelperSubPanel">
+        <p>
+          ${this.numberInput(
+            'autoReloadMax', 'Max', 'input max plants(if 0, use xy)',
+            config.autoReloadMax
+          )}
+        </p>
+      </div>
       <p>
         ${this.button('autoReloadReset', 'Reset',
         'reset data(use when it stucks)')}
