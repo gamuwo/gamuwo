@@ -210,16 +210,13 @@ class Garden {
   
     static saveDate() {
     let logNow = new Date();
-    let logYear = logNow.getFullYear();
-    let logMonth = logNow.getMonth() + 1;
-    logMonth = ("0" + logMonth).slice(-2);
-    let logDay = logNow.getDate();
-    logDay = ("0" + logDay).slice(-2);
     let logHour = logNow.getHours();
     logHour = ("0" + logHour).slice(-2);
     let logMinute = logNow.getMinutes();
     logMinute = ("0" + logMinute).slice(-2);
-    return logYear + "/" + logMonth + "/" + logDay + " " + logHour + ":" + logMinute;
+    let logSecond = logNow.getSeconds();
+    logSecond = ("0" + logSecond).slice(-2);
+    return logHour + ":" + logMinute + ":" + logSecond;
   }
   
   static playSound1() {
@@ -286,7 +283,7 @@ class Garden {
     }
     
     //for quick load
-    if(this.secondsBeforeNextTick <= 5){
+    if(config.playSound && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
       config.quickLoadSave = Game.WriteSave(1);
       document.getElementById("quickLoadSaveTime").innerText = this.saveDate();
     }
@@ -518,7 +515,7 @@ class Garden {
     }
 
     //auto JQB
-    if(config.autoJQB && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 10){
+    if(config.autoJQB && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
       try{
         //switch buttons
         if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
@@ -1004,7 +1001,7 @@ class UI {
         'file save')}
       </p>
       <p>
-        ${this.button('quickLoad', 'QL',
+        ${this.button('quickLoad', 'Quick load',
         'load before tick savedata')}
         <span id="quickLoadSaveTime">Not saved</span>
       </p>
