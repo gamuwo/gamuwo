@@ -363,6 +363,7 @@ class Garden {
             } else {
               //reload
               config.autoReloadReloads += 1;
+              document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
               if(config.logLevel.value >= 3){
                 console.log("[auto reload]reload! try:" + config.autoReloadReloads);
               }
@@ -400,6 +401,7 @@ class Garden {
             } else {
               //reload
               config.autoReloadReloads += 1;
+              document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
               if(config.logLevel.value >= 3){
                 console.log("[auto reload]reload! try:" + config.autoReloadReloads);
               }
@@ -1046,6 +1048,7 @@ class UI {
       <p>
         ${this.button('autoReloadReset', 'Reset',
         'reset data(use when it stucks)')}
+        Try:<span id="autoReloadDisp">0</span>
       </p>
     </div>
     <div class="cookieGardenHelperPanel" id="autoReload2">
