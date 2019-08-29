@@ -710,6 +710,9 @@ class UI {
   float: left;
   width: 50%;
 }
+.cookieGardenHelperClearPanel {
+  clear: both;
+}
 
 #autoHarvestPanel { color: wheat; }
 #autoHarvestPanel a { color: wheat; }
@@ -1014,18 +1017,18 @@ class UI {
           )}
         </p>
       </div>
-      <div class="cookieGardenHelperSubPanel">
-      <p id="autoJQB">
-        ${this.button(
-          'autoJQB', 'JQB',
-          'auto harvest JQB', true,
-          config.autoJQB
-        )}
-        ${this.numberInput(
-          'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
-          config.autoJQBStage
-        )}
-      </p>
+      <div class="cookieGardenHelperClearPanel">
+        <p id="autoJQB">
+          ${this.button(
+            'autoJQB', 'JQB',
+            'auto harvest JQB', true,
+            config.autoJQB
+          )}
+          ${this.numberInput(
+            'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
+            config.autoJQBStage
+          )}
+        </p>
       </div>
     </div>
     <div class="cookieGardenHelperPanel" id="autoReload">
