@@ -1068,27 +1068,38 @@ class UI {
         Auto-reload2
         ${this.button('autoReload2', '', '', true, config.autoReload2)}
       </h2>
-      <p>
-        ${this.numberInput(
-          'autoReload2ID', 'ID', 'input target ID',
-          config.autoReload2ID
-        )}
-        &ensp;&thinsp;
-        ${this.numberInput(
-          'autoReload2Grow', 'Grow', 'input Grow',
-          config.autoReload2Grow
-        )}
-      </p>
-      <p>
-        ${this.numberInput(
-          'autoReload2Number', 'Num', 'input Number',
-          config.autoReload2Number
-        )}
-        ${this.numberInput(
-          'autoReload2Play', 'Play', 'input Play',
-          config.autoReload2Play
-        )}
-      </p>
+      <div class="cookieGardenHelperSubPanel">
+        <p>
+          ${this.numberInput(
+            'autoReload2ID', 'ID', 'input target ID',
+            config.autoReload2ID
+          )}
+        </p>
+      </div>
+      <div class="cookieGardenHelperSubPanel">
+        <p>
+          ${this.numberInput(
+            'autoReload2Grow', 'Grow', 'input Grow',
+            config.autoReload2Grow
+          )}
+        </p>
+      </div>
+      <div class="cookieGardenHelperSubPanel">
+        <p>
+          ${this.numberInput(
+            'autoReload2Number', 'Num', 'input Number',
+            config.autoReload2Number
+          )}
+        </p>
+      </div>
+      <div class="cookieGardenHelperSubPanel">
+        <p>
+          ${this.numberInput(
+            'autoReload2Play', 'Play', 'input Play',
+            config.autoReload2Play
+          )}
+        </p>
+      </div>
       <p>
         ${this.button('autoReload2Reset', 'Reset',
         'reset data(use when it stucks)')}
