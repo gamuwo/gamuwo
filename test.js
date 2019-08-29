@@ -486,6 +486,7 @@ class Garden {
           if(grows < targetNumber){
             //reload
             config.autoReload2Reloads += 1;
+            document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
             if(config.logLevel.value >= 3){
               console.log("[auto reload2]reload! try:" + config.autoReload2Reloads);
             }
@@ -1076,6 +1077,7 @@ class UI {
       <p>
         ${this.button('autoReload2Reset', 'Reset',
         'reset data(use when it stucks)')}
+        Try:<span id="autoReload2Disp">0</span>
       </p>
     </div>
   </div>
