@@ -712,7 +712,7 @@ class UI {
 }
 .cookieGardenHelperAutoLeftPanel {
   float: left;
-  margin-right: 5px;
+  margin-right: 10px;
 }
 .cookieGardenHelperAutoRightPanel {
   overflow: hidden;
@@ -1039,20 +1039,6 @@ class UI {
       <div class="cookieGardenHelperAutoLeftPanel">
         <p>
           ${this.numberInput(
-            'autoReloadX', 'X', 'input x(only works when max = 0)',
-            config.autoReloadX
-          )}
-        </p>
-        <p>
-          ${this.numberInput(
-            'autoReloadY', 'Y', 'input Y(only works when max = 0)',
-            config.autoReloadY
-          )}
-        </p>
-      </div>
-      <div class="cookieGardenHelperAutoRightPanel">
-        <p>
-          ${this.numberInput(
             'autoReloadID', 'ID', 'input ID',
             config.autoReloadID
           )}
@@ -1061,6 +1047,20 @@ class UI {
           ${this.numberInput(
             'autoReloadMax', 'Max', 'input max plants(if 0, use xy)',
             config.autoReloadMax
+          )}
+        </p>
+      </div>
+      <div class="cookieGardenHelperAutoRightPanel">
+        <p>
+          ${this.numberInput(
+            'autoReloadX', 'X', 'input x(only works when max = 0)',
+            config.autoReloadX
+          )}
+        </p>
+        <p>
+          ${this.numberInput(
+            'autoReloadY', 'Y', 'input Y(only works when max = 0)',
+            config.autoReloadY
           )}
         </p>
       </div>
@@ -1077,23 +1077,13 @@ class UI {
         Auto-reload2
         ${this.button('autoReload2', '', '', true, config.autoReload2)}
       </h2>
-      <div class="cookieGardenHelperSubPanel">
+      <div class="cookieGardenHelperAutoLeftPanel">
         <p>
           ${this.numberInput(
             'autoReload2ID', 'ID', 'input target ID',
             config.autoReload2ID
           )}
         </p>
-      </div>
-      <div class="cookieGardenHelperSubPanel">
-        <p>
-          ${this.numberInput(
-            'autoReload2Grow', 'Grow', 'input Grow',
-            config.autoReload2Grow
-          )}
-        </p>
-      </div>
-      <div class="cookieGardenHelperSubPanel">
         <p>
           ${this.numberInput(
             'autoReload2Number', 'Num', 'input Number',
@@ -1101,7 +1091,13 @@ class UI {
           )}
         </p>
       </div>
-      <div class="cookieGardenHelperSubPanel">
+      <div class="cookieGardenHelperAutoRightPanel">
+        <p>
+          ${this.numberInput(
+            'autoReload2Grow', 'Grow', 'input Grow',
+            config.autoReload2Grow
+          )}
+        </p>
         <p>
           ${this.numberInput(
             'autoReload2Play', 'Play', 'input Play',
