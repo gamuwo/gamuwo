@@ -1014,9 +1014,8 @@ class UI {
           )}
         </p>
       </div>
+      <div class="cookieGardenHelperSubPanel">
       <p id="autoJQB">
-        ${this.button('testButtonHoge', 'test',
-        'test')}
         ${this.button(
           'autoJQB', 'JQB',
           'auto harvest JQB', true,
@@ -1027,6 +1026,7 @@ class UI {
           config.autoJQBStage
         )}
       </p>
+      </div>
     </div>
     <div class="cookieGardenHelperPanel" id="autoReload">
       <h2>
