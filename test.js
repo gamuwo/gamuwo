@@ -975,7 +975,7 @@ class UI {
       </p>
     </div>
     <div class="cookieGardenHelperPanel" id="manualToolsPanel">
-      <h2>Manual tools</h2>
+      <h2>Tools</h2>
       <p>
         ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
         'Plant the selected seed on all empty tiles')}
@@ -1004,13 +1004,12 @@ class UI {
           config.logLevel
         )}
       </p>
-    </div>
-    <div class="cookieGardenHelperPanel" id="autoJQB">
-      <h2>
-        Auto-JQB
-        ${this.button('autoJQB', '', '', true, config.autoJQB)}
-      </h2>
-      <p>
+      <p id="autoJQB">
+        ${this.button(
+          'autoJQB', 'JQB',
+          'auto harvest JQB', true,
+          config.autoJQB
+        )}
         ${this.numberInput(
           'autoJQBStage', 'stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
           config.autoJQBStage
