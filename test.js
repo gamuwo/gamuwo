@@ -481,6 +481,7 @@ class Garden {
               grows += 1;
             }
           }
+          document.getElementById("autoReload2Disp2").innerText = grows;
           if(config.logLevel.value >= 3){
             console.log("[auto reload2]grows:" + grows);
           }
@@ -1081,6 +1082,8 @@ class UI {
         ${this.button('autoReload2Reset', 'Reset',
         'reset data(use when it stucks)')}
         Try:<span id="autoReload2Disp">0</span>
+        &thinsp;
+        Grow:<span id="autoReload2Disp2">0</span>
       </p>
     </div>
   </div>
