@@ -710,6 +710,13 @@ class UI {
   float: left;
   width: 50%;
 }
+.cookieGardenHelperAutoLeftPanel {
+  float: left;
+}
+.cookieGardenHelperAutoRightPanel {
+  overflow: hidden;
+  zoom: 1;
+}
 .cookieGardenHelperClearPanel {
   clear: both;
 }
@@ -1028,15 +1035,13 @@ class UI {
         Auto-reload
         ${this.button('autoReload', '', '', true, config.autoReload)}
       </h2>
-      <div class="cookieGardenHelperSubPanel">
+      <div class="cookieGardenHelperAutoLeftPanel">
         <p>
           ${this.numberInput(
             'autoReloadX', 'X', 'input x(only works when max = 0)',
             config.autoReloadX
           )}
         </p>
-      </div>
-      <div class="cookieGardenHelperSubPanel">
         <p>
           ${this.numberInput(
             'autoReloadY', 'Y', 'input Y(only works when max = 0)',
@@ -1044,15 +1049,13 @@ class UI {
           )}
         </p>
       </div>
-      <div class="cookieGardenHelperSubPanel">
+      <div class="cookieGardenHelperAutoRightPanel">
         <p>
           ${this.numberInput(
             'autoReloadID', 'ID', 'input ID',
             config.autoReloadID
           )}
         </p>
-      </div>
-      <div class="cookieGardenHelperSubPanel">
         <p>
           ${this.numberInput(
             'autoReloadMax', 'Max', 'input max plants(if 0, use xy)',
