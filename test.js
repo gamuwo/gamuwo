@@ -588,16 +588,14 @@ class Garden {
           document.getElementById(UI.makeId("autoReload2Number")).value = 2;
           config.autoReload2Play.value = 0;
           document.getElementById(UI.makeId("autoReload2Play")).value = 0;
+          
           //change stage
           config.autoJQBStage.value = 1;
           document.getElementById(UI.makeId("autoJQBStage")).value = 1;
           //save config
           Main.save();
           if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + this.logDate() + "stage:0 -> 1");
-          }
-          if(config.logLevel.value >= 2){
-            console.log("[auto JQB]no plants here, so planted QBs, turn on auto-reload2 for QB");
+            console.log("[auto JQB]" + this.logDate() + "stage:0->1");
           }
         }
         
@@ -613,16 +611,14 @@ class Garden {
           document.getElementById(UI.makeId("autoReloadID")).value = 22;
           config.autoReloadMax.value = 4;
           document.getElementById(UI.makeId("autoReloadMax")).value = 4;
+          
           //change stage
           config.autoJQBStage.value = 2;
           document.getElementById(UI.makeId("autoJQBStage")).value = 2;
           //save config
           Main.save();
           if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + this.logDate() + "stage:1 -> 2");
-          }
-          if(config.logLevel.value >= 2){
-            console.log("[auto JQB]all QB mature, so turn on auto-reload for JQB");
+            console.log("[auto JQB]" + this.logDate() + "stage:1->2");
           }
         }
         
@@ -642,37 +638,59 @@ class Garden {
           document.getElementById(UI.makeId("autoReload2Number")).value = 2;
           config.autoReload2Play.value = 2;
           document.getElementById(UI.makeId("autoReload2Play")).value = 2;
+          
           //change stage
           config.autoJQBStage.value = 3;
           document.getElementById(UI.makeId("autoJQBStage")).value = 3;
           //save config
           Main.save();
           if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + this.logDate() + "stage:2 -> 3");
-          }
-          if(config.logLevel.value >= 2){
-            console.log("[auto JQB]4 JQB here, so harvest QBs and turn on auto-reload2 for JQB");
+            console.log("[auto JQB]" + this.logDate() + "stage:2->3");
           }
         }
         
-        if(config.autoJQBStage.value == 3 && numJQB == 0){
-          //if all JQB harvested, change stage to 0
+        if(config.autoJQBStage.value == 3 && minJQBAge >= 70){
+          //if youngest JQB's age >= 70, plant QB
+          this.forEachTile((x, y) => {
+            if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
+              this.plantSeed((21 - 1), x, y);
+            }
+          });
+          
+          //change stage
+          config.autoJQBStage.value = 4;
+          document.getElementById(UI.makeId("autoJQBStage")).value = 4;
+          //save config
+          Main.save();
+          if(config.logLevel.value >= 1){
+            console.log("[auto JQB]" + this.logDate() + "stage:3->4");
+          }
+        }
+        
+        if(config.autoJQBStage.value == 4 && numJQB == 0){
+          //if all JQB harvested, change stage to 1
           //turn off autoHarvestCheckCpSMult
           if(config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
           //turn off auto-reload
           if(config.autoReload){ Main.handleToggle('autoReload'); }
-          //turn off auto-reload2
-          if(config.autoReload2){ Main.handleToggle('autoReload2'); }
+          //turn on auto-reload2 for QB
+          if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
+          config.autoReload2ID.value = 21;
+          document.getElementById(UI.makeId("autoReload2ID")).value = 21;
+          config.autoReload2Grow.value = 2;
+          document.getElementById(UI.makeId("autoReload2Grow")).value = 2;
+          config.autoReload2Number.value = 2;
+          document.getElementById(UI.makeId("autoReload2Number")).value = 2;
+          config.autoReload2Play.value = 0;
+          document.getElementById(UI.makeId("autoReload2Play")).value = 0;
+          
           //change stage
-          config.autoJQBStage.value = 0;
-          document.getElementById(UI.makeId("autoJQBStage")).value = 0;
+          config.autoJQBStage.value = 1;
+          document.getElementById(UI.makeId("autoJQBStage")).value = 1;
           //save config
           Main.save();
           if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + this.logDate() + "stage:3 -> 0" + " sugar:" + Game.lumps);
-          }
-          if(config.logLevel.value >= 2){
-            console.log("[auto JQB]all JQB was harvested, so change stage to 0");
+            console.log("[auto JQB]" + this.logDate() + "stage:4->1" + " sugar:" + Game.lumps);
           }
         }
         
