@@ -536,6 +536,9 @@ class Garden {
         let numPlants = 0;
         let numMatureQB = 0;
         let numJQB = 0;
+        let JQBAge = [];
+        let minJQBAge = 0;
+        
         this.forEachTile((x, y) => {
           if(!this.tileIsEmpty(x, y)){
             numPlants += 1;
@@ -545,13 +548,21 @@ class Garden {
               numMatureQB += 1;
             } else if(tile.seedId == 22) {
               numJQB += 1;
+              JQBAge.push(tile.age);
             }
           }
         });
+        
+        if(JQBAge.length > 0){
+          JQBAge.sort(function(a,b){return(a - b);});
+          minJQBAge = JQBAge[0];
+        }
+        
         if(config.logLevel.value >= 3){
           console.log("[auto JQB]numPlants:" + numPlants);
           console.log("[auto JQB]numMatureQB:" + numMatureQB);
           console.log("[auto JQB]numJQB:" + numJQB);
+          console.log("[auto JQB]minJQBAge:" + minJQBAge);
         }
         
         if(config.autoJQBStage.value == 0 && numPlants == 0 && this.getPlant(21).unlocked){
