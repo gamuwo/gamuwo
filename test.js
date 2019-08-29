@@ -973,13 +973,13 @@ class UI {
         ${this.labelWithState('plotIsSaved', 'No saved plot', 'Plot saved',
           Boolean(config.savedPlot.length))}
       </p>
-    </div>
-    <div class="cookieGardenHelperPanel" id="manualToolsPanel">
-      <h2>Tools</h2>
       <p>
         ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
         'Plant the selected seed on all empty tiles')}
       </p>
+    </div>
+    <div class="cookieGardenHelperPanel" id="manualToolsPanel">
+      <h2>Tools</h2>
       <p>
         ${this.button('saveButton', 'Save',
         'save')}
