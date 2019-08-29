@@ -537,8 +537,8 @@ class Garden {
           console.log("[auto JQB]numMatureQB:" + numMatureQB);
           console.log("[auto JQB]numJQB:" + numJQB);
         }
-  
-        if(config.autoJQBStage.value == 0 && numPlants == 0){
+        
+        if(config.autoJQBStage.value == 0 && numPlants == 0 && this.getPlant(21).unlocked){
           //if no plants, plant QB and turn on auto-reload2 for QB
           //plant QB
           this.forEachTile((x, y) => {
