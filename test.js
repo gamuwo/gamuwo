@@ -1140,6 +1140,10 @@ class Main {
     this.timerInterval = 1000;
     this.config = Config.load();
     UI.build(this.config);
+    
+    //delete quick load save
+    this.config.quickLoadSave = "";
+    this.save();
 
     // sacrifice garden
     let oldConvert = Garden.minigame.convert;
