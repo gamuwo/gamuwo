@@ -983,9 +983,9 @@ class UI {
       <p>
         ${this.button('saveButton', 'Save',
         'save')}
-        ${this.button('exportSaveButton', 'ES',
+        ${this.button('exportSaveButton', 'Exp',
         'open export save window')}
-        ${this.button('fileSaveButton', 'FS',
+        ${this.button('fileSaveButton', 'File',
         'file save')}
       </p>
       <p>
