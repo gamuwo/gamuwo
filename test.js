@@ -991,7 +991,7 @@ class UI {
       <p>
         ${this.button('quickLoad', 'QL',
         'load before tick savedata')}
-        <span id="quickLoadSaveTime">not saved</span>
+        <span id="quickLoadSaveTime">Not saved</span>
       </p>
       <p>
         ${this.button(
@@ -1011,7 +1011,7 @@ class UI {
           config.autoJQB
         )}
         ${this.numberInput(
-          'autoJQBStage', 'stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
+          'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
           config.autoJQBStage
         )}
       </p>
