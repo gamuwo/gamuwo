@@ -283,7 +283,7 @@ class Garden {
     }
     
     //for quick load
-    if(config.playSound && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
+    if(this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
       config.quickLoadSave = Game.WriteSave(1);
       document.getElementById("quickLoadSaveTime").innerText = this.saveDate();
     }
