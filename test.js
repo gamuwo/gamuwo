@@ -997,17 +997,23 @@ class UI {
         'load before tick savedata')}
         <span id="quickLoadSaveTime">Not saved</span>
       </p>
-      <p>
-        ${this.button(
-          'playSound', 'Sound',
-          'play beep sound when 10-15sec before tick', true,
-          config.playSound
-        )}
-        ${this.numberInput(
-          'logLevel', 'Log', 'input log level(0:no log 1:a little 2:normal 3:massive)',
-          config.logLevel
-        )}
-      </p>
+      <div class="cookieGardenHelperSubPanel">
+        <p>
+          ${this.button(
+            'playSound', 'Sound',
+            'play beep sound when 10-15sec before tick', true,
+            config.playSound
+          )}
+        </p>
+      </div>
+      <div class="cookieGardenHelperSubPanel">
+        <p>
+          ${this.numberInput(
+            'logLevel', 'Log', 'input log level(0:no log 1:a little 2:normal 3:massive)',
+            config.logLevel
+          )}
+        </p>
+      </div>
       <p id="autoJQB">
         ${this.button(
           'autoJQB', 'JQB',
