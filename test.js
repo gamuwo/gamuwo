@@ -281,7 +281,7 @@ class Garden {
     if(config.playSound && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
       this.playSound1();
     }
-    if(config.playSound && this.secondsBeforeNextTick <= 179 && this.secondsBeforeNextTick >= 177){
+    if(config.playSound && this.secondsBeforeNextTick <= 178 && this.secondsBeforeNextTick >= 176){
       this.playSound2();
     }
     
