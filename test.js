@@ -936,7 +936,6 @@ class UI {
           config.autoHarvestCleanGarden
         )}
       </p>
-      <h3>mature</h3>
       <p>
         ${this.button(
           'autoHarvestNewSeeds', '[m]New seeds',
@@ -951,7 +950,7 @@ class UI {
           config.autoHarvestCheckCpSMult
         )}
         ${this.numberInput(
-          'autoHarvestMiniCpSMult', 'Mini',
+          'autoHarvestMiniCpSMult', 'Min',
           'Minimum CpS multiplier for the auto-harvest to happen',
           config.autoHarvestMiniCpSMult
         )}
@@ -971,7 +970,7 @@ class UI {
           config.autoHarvestCheckCpSMultDying
         )}
         ${this.numberInput(
-          'autoHarvestMiniCpSMultDying', 'Mini',
+          'autoHarvestMiniCpSMultDying', 'Min',
           'Minimum CpS multiplier for the auto-harvest to happen',
           config.autoHarvestMiniCpSMultDying
         )}
@@ -1032,11 +1031,10 @@ class UI {
         )}
       </p>
       <p id="autoJQB">
-        ${this.button(
-          'autoJQB', 'JQB',
-          'auto harvest JQB', true,
-          config.autoJQB
-        )}
+        <h2>
+          Auto-JQB
+          ${this.button('autoJQB', '', '', true, config.autoJQB)}
+        </h2>
         ${this.numberInput(
           'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
           config.autoJQBStage
