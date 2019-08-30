@@ -756,12 +756,12 @@ class UI {
 #autoHarvestPanel a { color: wheat; }
 #autoHarvestImmortalPanel { color: wheat; }
 #autoHarvestImmortalPanel a { color: wheat; }
-#autoHarvestYoungPanel { color: #CFB178; }
-#autoHarvestYoungPanel a { color: #CFB178; }
-#autoHarvestMaturePanel { color: #A88749; }
-#autoHarvestMaturePanel a { color: #A88749; }
-#autoHarvestDyingPanel { color: #826225; }
-#autoHarvestDyingPanel a { color: #826225; }
+#autoHarvestYoungPanel { color: wheat; }
+#autoHarvestYoungPanel a { color: wheat; }
+#autoHarvestMaturePanel { color: wheat; }
+#autoHarvestMaturePanel a { color: wheat; }
+#autoHarvestDyingPanel { color: wheat; }
+#autoHarvestDyingPanel a { color: wheat; }
 
 #autoPlantPanel { color: lightgreen; }
 #autoPlantPanel a { color: lightgreen; }
