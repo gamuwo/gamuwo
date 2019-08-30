@@ -1009,6 +1009,18 @@ class UI {
         ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
         'Plant the selected seed on all empty tiles')}
       </p>
+      <span id="autoJQB">
+        <h2>
+          Auto-JQB
+          ${this.button('autoJQB', '', '', true, config.autoJQB)}
+        </h2>
+        <p>
+          ${this.numberInput(
+            'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
+            config.autoJQBStage
+          )}
+        </p>
+      </span>
     </div>
     <div class="cookieGardenHelperPanel" id="manualToolsPanel">
       <h2>Tools</h2>
@@ -1036,18 +1048,6 @@ class UI {
           config.logLevel
         )}
       </p>
-      <span id="autoJQB">
-        <h2>
-          Auto-JQB
-          ${this.button('autoJQB', '', '', true, config.autoJQB)}
-        </h2>
-        <p>
-          ${this.numberInput(
-            'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
-            config.autoJQBStage
-          )}
-        </p>
-      </span>
     </div>
     <div class="cookieGardenHelperPanel" id="autoReload">
       <h2>
