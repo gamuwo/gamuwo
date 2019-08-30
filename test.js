@@ -763,6 +763,10 @@ class UI {
 #autoHarvestDyingPanel { color: #b2a182; }
 #autoHarvestDyingPanel a { color: #b2a182; }
 
+#autoHarvestImmortalPanel,
+#autoHarvestYoungPanel,
+#autoHarvestMaturePanel { border-bottom: solid 1px wheat; }
+
 #autoPlantPanel { color: lightgreen; }
 #autoPlantPanel a { color: lightgreen; }
 
