@@ -944,7 +944,7 @@ class UI {
         Auto-harvest
         ${this.button('autoHarvest', '', '', true, config.autoHarvest)}
       </h2>
-      <span id="autoHarvestImmortalPanel">
+      <div id="autoHarvestImmortalPanel">
         <p>
           ${this.button(
             'autoHarvestAvoidImmortals', '[i]Avoid immortals',
@@ -952,7 +952,7 @@ class UI {
             config.autoHarvestAvoidImmortals
           )}
         </p>
-      </span>
+      </div>
       <span id="autoHarvestYoungPanel">
         <p>
           ${this.button(
