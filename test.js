@@ -1217,6 +1217,7 @@ class UI {
     
     doc.elId('cookieGardenHelperFileLoadButton').onchange = (event) => {
       Game.FileLoad(event);
+      $(this).val('');
     }
     
   }
