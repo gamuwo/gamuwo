@@ -742,7 +742,7 @@ class UI {
 }
 .cookieGardenHelperAutoLeftPanel {
   float: left;
-  margin-right: 10px;
+  margin-right: 6px;
 }
 .cookieGardenHelperAutoRightPanel {
   overflow: hidden;
@@ -819,7 +819,7 @@ class UI {
 }
 #cookieGardenHelper a.toggleBtn,
 #cookieGardenHelper a.btn {
-  padding: 0px;
+  padding: 2px;
 }
 #cookieGardenHelper span.labelWithState:not(.active) .labelStateActive,
 #cookieGardenHelper span.labelWithState.active .labelStateNotActive {
