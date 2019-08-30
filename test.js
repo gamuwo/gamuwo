@@ -31,6 +31,7 @@ class Config {
       autoPlantMaxiCpSMult: { value: 0, min: 0 },
       savedPlot: [],
       playSound: false,
+      playSound2: false,
       logLevel: { value: 0, min: 0 },
       autoReload: false,
       autoReloadX: { value: 0, min: 0, max: 5 },
@@ -278,7 +279,7 @@ class Garden {
     if(config.playSound && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
       this.playSound1();
     }
-    if(config.playSound && this.secondsBeforeNextTick <= 178 && this.secondsBeforeNextTick >= 176){
+    if(config.playSound2 && this.secondsBeforeNextTick <= 178 && this.secondsBeforeNextTick >= 176){
       this.playSound2();
     }
     
@@ -1046,11 +1047,18 @@ class UI {
       <p>
         ${this.button(
           'playSound', 'Sound',
-          'play beep sound when 10-15sec before tick', true,
+          'play beep sound before 10-15sec from tick', true,
           config.playSound
         )}
+        ${this.button(
+          'playSound2', 'Sound2',
+          'play beep sound after tick', true,
+          config.playSound2
+        )}
+      </p>
+      <p>
         ${this.numberInput(
-          'logLevel', 'Log', 'input log level(0:no log 1:a little 2:normal 3:massive)',
+          'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive)',
           config.logLevel
         )}
       </p>
