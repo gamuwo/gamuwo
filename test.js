@@ -1066,7 +1066,7 @@ class UI {
         'file save')}
         <a class="btn option" style="position:relative;">
           <input id="cookieGardenHelperFileLoadButton" type="file" 
-          style="cursor:pointer;opacity:0;position:absolute;left:0px;top:0px;width:100%;height:100%;" />
+          style="opacity:0;position:absolute;left:0px;top:0px;width:100%;height:100%;" />
           Load from file
         </a>
       </p>
