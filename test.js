@@ -653,8 +653,8 @@ class Garden {
           }
         }
         
-        if(config.autoJQBStage.value == 3 && minJQBAge >= 70){
-          //if youngest JQB's age >= 70, plant QB
+        if(config.autoJQBStage.value == 3 && minJQBAge >= 65){
+          //if youngest JQB's age >= 65, plant QB
           this.forEachTile((x, y) => {
             if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
               this.plantSeed((21 - 1), x, y);
