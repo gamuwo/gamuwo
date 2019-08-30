@@ -819,7 +819,8 @@ class UI {
 }
 #cookieGardenHelper a.toggleBtn,
 #cookieGardenHelper a.btn {
-  padding: 2px;
+  padding-right: 3px;
+  padding-left: 3px;
 }
 #cookieGardenHelper span.labelWithState:not(.active) .labelStateActive,
 #cookieGardenHelper span.labelWithState.active .labelStateNotActive {
