@@ -751,9 +751,6 @@ class UI {
 .cookieGardenHelperClearPanel {
   clear: both;
 }
-.a.toggleBtn {
-  padding: 0px;
-}
 
 #autoHarvestPanel { color: wheat; }
 #autoHarvestPanel a { color: wheat; }
@@ -813,12 +810,16 @@ class UI {
   text-indent: 0;
 }
 #cookieGardenHelper input[type=number] {
-  width: 2em;
+  width: 2.5em;
 }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
 #cookieGardenHelper a.toggleBtn.off .toggleBtnOn {
   display: none;
+}
+#cookieGardenHelper a.toggleBtn,
+#cookieGardenHelper a.btn {
+  padding: 0px;
 }
 #cookieGardenHelper span.labelWithState:not(.active) .labelStateActive,
 #cookieGardenHelper span.labelWithState.active .labelStateNotActive {
