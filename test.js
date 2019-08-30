@@ -754,6 +754,14 @@ class UI {
 
 #autoHarvestPanel { color: wheat; }
 #autoHarvestPanel a { color: wheat; }
+#autoHarvestImmortalPanel { color: wheat; }
+#autoHarvestImmortalPanel a { color: wheat; }
+#autoHarvestYoungPanel { color: #dec9a2; }
+#autoHarvestYoungPanel a { color: #dec9a2; }
+#autoHarvestMaturePanel { color: #c8b592; }
+#autoHarvestMaturePanel a { color: #c8b592; }
+#autoHarvestDyingPanel { color: #b2a182; }
+#autoHarvestDyingPanel a { color: #b2a182; }
 
 #autoPlantPanel { color: lightgreen; }
 #autoPlantPanel a { color: lightgreen; }
@@ -768,6 +776,10 @@ class UI {
 #autoJQB a { color: violet; }
 
 #autoHarvestPanel a:hover,
+#autoHarvestImmortalPanel a:hover,
+#autoHarvestYoungPanel a:hover,
+#autoHarvestMaturePanel a:hover,
+#autoHarvestDyingPanel a:hover,
 #autoPlantPanel a:hover,
 #autoReload a:hover,
 #autoReload2 a:hover,
@@ -922,66 +934,74 @@ class UI {
         Auto-harvest
         ${this.button('autoHarvest', '', '', true, config.autoHarvest)}
       </h2>
-      <p>
-        ${this.button(
-          'autoHarvestAvoidImmortals', '[i]Avoid immortals',
-          'Do not harvest immortal plants', true,
-          config.autoHarvestAvoidImmortals
-        )}
-      </p>
-      <p>
-        ${this.button(
-          'autoHarvestWeeds', '[y]Remove weeds',
-          'Remove weeds as soon as they appear', true,
-          config.autoHarvestWeeds
-        )}
-      </p>
-      <p>
-        ${this.button(
-          'autoHarvestCleanGarden', '[y]Clean Garden',
-          'Only allow saved and unlocked seeds', true,
-          config.autoHarvestCleanGarden
-        )}
-      </p>
-      <p>
-        ${this.button(
-          'autoHarvestNewSeeds', '[m]New seeds',
-          'Harvest new seeds as soon as they are mature', true,
-          config.autoHarvestNewSeeds
-        )}
-      </p>
-      <p>
-        ${this.button(
-          'autoHarvestCheckCpSMult', '[m]Harvest',
-          'Check the CpS multiplier before harvesting (see below)', true,
-          config.autoHarvestCheckCpSMult
-        )}
-        ${this.numberInput(
-          'autoHarvestMiniCpSMult', 'Min',
-          'Minimum CpS multiplier for the auto-harvest to happen',
-          config.autoHarvestMiniCpSMult
-        )}
-      </p>
-      <p>
-        ${this.button(
-          'autoHarvestDying', '[d]Dying plants',
-          `Harvest dying plants, ${config.autoHarvestDyingSeconds}s before `
-          + `the new tick occurs`, true,
-          config.autoHarvestDying
-        )}
-      </p>
-      <p>
-        ${this.button(
-          'autoHarvestCheckCpSMultDying', '[d]Harvest',
-          'Check the CpS multiplier before harvesting (see below)', true,
-          config.autoHarvestCheckCpSMultDying
-        )}
-        ${this.numberInput(
-          'autoHarvestMiniCpSMultDying', 'Min',
-          'Minimum CpS multiplier for the auto-harvest to happen',
-          config.autoHarvestMiniCpSMultDying
-        )}
-      </p>
+      <span id="autoHarvestImmortalPanel">
+        <p>
+          ${this.button(
+            'autoHarvestAvoidImmortals', '[i]Avoid immortals',
+            'Do not harvest immortal plants', true,
+            config.autoHarvestAvoidImmortals
+          )}
+        </p>
+      </span>
+      <span id="autoHarvestYoungPanel">
+        <p>
+          ${this.button(
+            'autoHarvestWeeds', '[y]Remove weeds',
+            'Remove weeds as soon as they appear', true,
+            config.autoHarvestWeeds
+          )}
+        </p>
+        <p>
+          ${this.button(
+            'autoHarvestCleanGarden', '[y]Clean garden',
+            'Only allow saved and unlocked seeds', true,
+            config.autoHarvestCleanGarden
+          )}
+        </p>
+      </span>
+      <span id="autoHarvestMaturePanel">
+        <p>
+          ${this.button(
+            'autoHarvestNewSeeds', '[m]New seeds',
+            'Harvest new seeds as soon as they are mature', true,
+            config.autoHarvestNewSeeds
+          )}
+        </p>
+        <p>
+          ${this.button(
+            'autoHarvestCheckCpSMult', '[m]Harvest',
+            'Check the CpS multiplier before harvesting (see below)', true,
+            config.autoHarvestCheckCpSMult
+          )}
+          ${this.numberInput(
+            'autoHarvestMiniCpSMult', 'Min',
+            'Minimum CpS multiplier for the auto-harvest to happen',
+            config.autoHarvestMiniCpSMult
+          )}
+        </p>
+      </span>
+      <span id="autoHarvestDyingPanel">
+        <p>
+          ${this.button(
+            'autoHarvestDying', '[d]Dying plants',
+            `Harvest dying plants, ${config.autoHarvestDyingSeconds}s before `
+            + `the new tick occurs`, true,
+            config.autoHarvestDying
+          )}
+        </p>
+        <p>
+          ${this.button(
+            'autoHarvestCheckCpSMultDying', '[d]Harvest',
+            'Check the CpS multiplier before harvesting (see below)', true,
+            config.autoHarvestCheckCpSMultDying
+          )}
+          ${this.numberInput(
+            'autoHarvestMiniCpSMultDying', 'Min',
+            'Minimum CpS multiplier for the auto-harvest to happen',
+            config.autoHarvestMiniCpSMultDying
+          )}
+        </p>
+      </span>
     </div>
     <div class="cookieGardenHelperPanel" id="autoPlantPanel">
       <h2>
