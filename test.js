@@ -751,6 +751,9 @@ class UI {
 .cookieGardenHelperClearPanel {
   clear: both;
 }
+.a.toggleBtn {
+  padding: 0px;
+}
 
 #autoHarvestPanel { color: wheat; }
 #autoHarvestPanel a { color: wheat; }
@@ -810,7 +813,7 @@ class UI {
   text-indent: 0;
 }
 #cookieGardenHelper input[type=number] {
-  width: 3em;
+  width: 2em;
 }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
