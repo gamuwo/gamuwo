@@ -1064,7 +1064,6 @@ class UI {
       <p>
         ${this.button('fileSaveButton', 'Save to file',
         'file save')}
-        <a class="option"><input id="fileLoadButton" type="file" style="cursor:pointer;opacity:0;position:absolute;left:0px;top:0px;width:100%;height:100%;" onchange="Game.FileLoad(this);"/>Load from file</a>
       </p>
       <p>
         ${this.button('quickLoad', 'Quick load',
