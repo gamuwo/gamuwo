@@ -756,16 +756,12 @@ class UI {
 #autoHarvestPanel a { color: wheat; }
 #autoHarvestImmortalPanel { color: wheat; }
 #autoHarvestImmortalPanel a { color: wheat; }
-#autoHarvestYoungPanel { color: #dec9a2; }
-#autoHarvestYoungPanel a { color: #dec9a2; }
-#autoHarvestMaturePanel { color: #c8b592; }
-#autoHarvestMaturePanel a { color: #c8b592; }
-#autoHarvestDyingPanel { color: #b2a182; }
-#autoHarvestDyingPanel a { color: #b2a182; }
-
-#autoHarvestImmortalPanel,
-#autoHarvestYoungPanel,
-#autoHarvestMaturePanel { border-bottom: solid 1px wheat; }
+#autoHarvestYoungPanel { color: #CFB178; }
+#autoHarvestYoungPanel a { color: #CFB178; }
+#autoHarvestMaturePanel { color: #A88749; }
+#autoHarvestMaturePanel a { color: #A88749; }
+#autoHarvestDyingPanel { color: #826225; }
+#autoHarvestDyingPanel a { color: #826225; }
 
 #autoPlantPanel { color: lightgreen; }
 #autoPlantPanel a { color: lightgreen; }
