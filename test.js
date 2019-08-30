@@ -1027,9 +1027,15 @@ class UI {
       <p>
         ${this.button('saveButton', 'Save',
         'save')}
-        ${this.button('exportSaveButton', 'Export',
+      </p>
+      <p>
+        ${this.button('exportSaveButton', 'Export save',
         'open export save window')}
-        ${this.button('fileSaveButton', 'File',
+        ${this.button('importSaveButton', 'Import save',
+        'open import save window')}
+      </p>
+      <p>
+        ${this.button('fileSaveButton', 'Save to file',
         'file save')}
       </p>
       <p>
@@ -1248,6 +1254,8 @@ class Main {
       Game.toSave=true;
     } else if (key == 'exportSaveButton') {
       Game.ExportSave();
+    } else if (key == 'importSaveButton') {
+      Game.ImportSave();
     } else if (key == 'fileSaveButton') {
       Game.FileSave();
     } else if (key == 'quickLoad') {
