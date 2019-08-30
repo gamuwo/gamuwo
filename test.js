@@ -1009,33 +1009,35 @@ class UI {
         </p>
       </div>
     </div>
-    <div class="cookieGardenHelperPanel" id="autoPlantPanel">
-      <h2>
-        Auto-plant
-        ${this.button('autoPlant', '', '', true, config.autoPlant)}
-      </h2>
-      <p>
-        ${this.button(
-          'autoPlantCheckCpSMult', 'Plant',
-          'Check the CpS multiplier before planting (see below)', true,
-          config.autoPlantCheckCpSMult
-        )}
-        ${this.numberInput(
-          'autoPlantMaxiCpSMult', 'Max',
-          'Maximum CpS multiplier for the auto-plant to happen',
-          config.autoPlantMaxiCpSMult
-        )}
-      </p>
-      <p>
-        ${this.button('savePlot', 'Save plot',
-          'Save the current plot; these seeds will be replanted later')}
-        ${this.labelWithState('plotIsSaved', 'No saved plot', 'Plot saved',
-          Boolean(config.savedPlot.length))}
-      </p>
-      <p>
-        ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
-        'Plant the selected seed on all empty tiles')}
-      </p>
+    <div class="cookieGardenHelperPanel">
+      <div id="autoPlantPanel">
+        <h2>
+          Auto-plant
+          ${this.button('autoPlant', '', '', true, config.autoPlant)}
+        </h2>
+        <p>
+          ${this.button(
+            'autoPlantCheckCpSMult', 'Plant',
+            'Check the CpS multiplier before planting (see below)', true,
+            config.autoPlantCheckCpSMult
+          )}
+          ${this.numberInput(
+            'autoPlantMaxiCpSMult', 'Max',
+            'Maximum CpS multiplier for the auto-plant to happen',
+            config.autoPlantMaxiCpSMult
+          )}
+        </p>
+        <p>
+          ${this.button('savePlot', 'Save plot',
+            'Save the current plot; these seeds will be replanted later')}
+          ${this.labelWithState('plotIsSaved', 'No saved plot', 'Plot saved',
+            Boolean(config.savedPlot.length))}
+        </p>
+        <p>
+          ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
+          'Plant the selected seed on all empty tiles')}
+        </p>
+      </div>
       <div id="autoJQB">
         <h2>
           Auto-JQB
@@ -1094,87 +1096,89 @@ class UI {
         )}
       </p>
     </div>
-    <div class="cookieGardenHelperPanel" id="autoReload">
-      <h2>
-        Auto-reload
-        ${this.button('autoReload', '', '', true, config.autoReload)}
-      </h2>
-      <div class="cookieGardenHelperAutoLeftPanel">
-        <p>
-          ${this.numberInput(
-            'autoReloadID', 'ID', 'input ID',
-            config.autoReloadID
-          )}
-        </p>
-        <p>
-          ${this.numberInput(
-            'autoReloadMax', 'Max', 'input max plants(if 0, use xy)',
-            config.autoReloadMax
-          )}
-        </p>
+    <div class="cookieGardenHelperPanel">
+      <div id="autoReload">
+        <h2>
+          Auto-reload
+          ${this.button('autoReload', '', '', true, config.autoReload)}
+        </h2>
+        <div class="cookieGardenHelperAutoLeftPanel">
+          <p>
+            ${this.numberInput(
+              'autoReloadID', 'ID', 'input ID',
+              config.autoReloadID
+            )}
+          </p>
+          <p>
+            ${this.numberInput(
+              'autoReloadMax', 'Max', 'input max plants(if 0, use xy)',
+              config.autoReloadMax
+            )}
+          </p>
+        </div>
+        <div class="cookieGardenHelperAutoRightPanel">
+          <p>
+            ${this.numberInput(
+              'autoReloadX', 'X', 'input x(only works when max = 0)',
+              config.autoReloadX
+            )}
+          </p>
+          <p>
+            ${this.numberInput(
+              'autoReloadY', 'Y', 'input Y(only works when max = 0)',
+              config.autoReloadY
+            )}
+          </p>
+        </div>
+        <div class="cookieGardenHelperClearPanel">
+          <p>
+            ${this.button('autoReloadReset', 'Reset',
+            'reset data(use when it stucks)')}
+            Try:<span id="autoReloadDisp">0</span>
+          </p>
+        </div>
       </div>
-      <div class="cookieGardenHelperAutoRightPanel">
-        <p>
-          ${this.numberInput(
-            'autoReloadX', 'X', 'input x(only works when max = 0)',
-            config.autoReloadX
-          )}
-        </p>
-        <p>
-          ${this.numberInput(
-            'autoReloadY', 'Y', 'input Y(only works when max = 0)',
-            config.autoReloadY
-          )}
-        </p>
-      </div>
-      <div class="cookieGardenHelperClearPanel">
-        <p>
-          ${this.button('autoReloadReset', 'Reset',
-          'reset data(use when it stucks)')}
-          Try:<span id="autoReloadDisp">0</span>
-        </p>
-      </div>
-    </div>
-    <div class="cookieGardenHelperPanel" id="autoReload2">
-      <h2>
-        Auto-reload2
-        ${this.button('autoReload2', '', '', true, config.autoReload2)}
-      </h2>
-      <div class="cookieGardenHelperAutoLeftPanel">
-        <p>
-          ${this.numberInput(
-            'autoReload2ID', 'ID', 'input target ID',
-            config.autoReload2ID
-          )}
-        </p>
-        <p>
-          ${this.numberInput(
-            'autoReload2Number', 'Num', 'input Number',
-            config.autoReload2Number
-          )}
-        </p>
-      </div>
-      <div class="cookieGardenHelperAutoRightPanel">
-        <p>
-          ${this.numberInput(
-            'autoReload2Grow', 'Grow', 'input Grow',
-            config.autoReload2Grow
-          )}
-        </p>
-        <p>
-          ${this.numberInput(
-            'autoReload2Play', 'Play', 'input Play',
-            config.autoReload2Play
-          )}
-        </p>
-      </div>
-      <div class="cookieGardenHelperClearPanel">
-        <p>
-          ${this.button('autoReload2Reset', 'Reset',
-          'reset data(use when it stucks)')}
-          Try:<span id="autoReload2Disp">0</span>
-          Grow:<span id="autoReload2Disp2">0</span>
-        </p>
+      <div id="autoReload2">
+        <h2>
+          Auto-reload2
+          ${this.button('autoReload2', '', '', true, config.autoReload2)}
+        </h2>
+        <div class="cookieGardenHelperAutoLeftPanel">
+          <p>
+            ${this.numberInput(
+              'autoReload2ID', 'ID', 'input target ID',
+              config.autoReload2ID
+            )}
+          </p>
+          <p>
+            ${this.numberInput(
+              'autoReload2Number', 'Num', 'input Number',
+              config.autoReload2Number
+            )}
+          </p>
+        </div>
+        <div class="cookieGardenHelperAutoRightPanel">
+          <p>
+            ${this.numberInput(
+              'autoReload2Grow', 'Grow', 'input Grow',
+              config.autoReload2Grow
+            )}
+          </p>
+          <p>
+            ${this.numberInput(
+              'autoReload2Play', 'Play', 'input Play',
+              config.autoReload2Play
+            )}
+          </p>
+        </div>
+        <div class="cookieGardenHelperClearPanel">
+          <p>
+            ${this.button('autoReload2Reset', 'Reset',
+            'reset data(use when it stucks)')}
+            Try:<span id="autoReload2Disp">0</span>
+            Grow:<span id="autoReload2Disp2">0</span>
+          </p>
+        </div>
       </div>
     </div>
   </div>
