@@ -776,12 +776,12 @@ class UI {
   color: grey;
   font-size: 1.5em;
   font-style: normal;
-  margin-bottom: 0.1em;
-  margin-top: -0.1em;
+  margin-bottom: 0.2em;
+  margin-top: 0em;
   text-align: center;
 }
 #cookieGardenHelper h2 {
-  font-size: 1em;
+  font-size: 1.3em;
   line-height: 2em;
 }
 #cookieGardenHelper h3 {
