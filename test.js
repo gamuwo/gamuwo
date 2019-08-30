@@ -773,7 +773,7 @@ class UI {
 #autoJQB a:hover { color: white; }
 
 #cookieGardenHelperUrl {
-  float: left;
+  position:absolute;
 }
 
 #cookieGardenHelperTitle {
