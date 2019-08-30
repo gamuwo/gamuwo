@@ -819,8 +819,8 @@ class UI {
 }
 #cookieGardenHelper a.toggleBtn,
 #cookieGardenHelper a.btn {
-  padding-right: 3px;
-  padding-left: 3px;
+  padding-right: 4px;
+  padding-left: 4px;
   margin: 1px;
 }
 #cookieGardenHelper span.labelWithState:not(.active) .labelStateActive,
@@ -1064,6 +1064,7 @@ class UI {
       <p>
         ${this.button('fileSaveButton', 'Save to file',
         'file save')}
+        <a class="option" style="position:relative;"><input id="FileLoadInput" type="file" style="cursor:pointer;opacity:0;position:absolute;left:0px;top:0px;width:100%;height:100%;" onchange="Game.FileLoad(event);"/>Load from file</a>
       </p>
       <p>
         ${this.button('quickLoad', 'Quick load',
