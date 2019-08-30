@@ -953,7 +953,7 @@ class UI {
           )}
         </p>
       </div>
-      <span id="autoHarvestYoungPanel">
+      <div id="autoHarvestYoungPanel">
         <p>
           ${this.button(
             'autoHarvestWeeds', '[y]Remove weeds',
@@ -968,8 +968,8 @@ class UI {
             config.autoHarvestCleanGarden
           )}
         </p>
-      </span>
-      <span id="autoHarvestMaturePanel">
+      </div>
+      <div id="autoHarvestMaturePanel">
         <p>
           ${this.button(
             'autoHarvestNewSeeds', '[m]New seeds',
@@ -989,8 +989,8 @@ class UI {
             config.autoHarvestMiniCpSMult
           )}
         </p>
-      </span>
-      <span id="autoHarvestDyingPanel">
+      </div>
+      <div id="autoHarvestDyingPanel">
         <p>
           ${this.button(
             'autoHarvestDying', '[d]Dying plants',
@@ -1011,7 +1011,7 @@ class UI {
             config.autoHarvestMiniCpSMultDying
           )}
         </p>
-      </span>
+      </div>
     </div>
     <div class="cookieGardenHelperPanel" id="autoPlantPanel">
       <h2>
@@ -1040,7 +1040,7 @@ class UI {
         ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
         'Plant the selected seed on all empty tiles')}
       </p>
-      <span id="autoJQB">
+      <div id="autoJQB">
         <h2>
           Auto-JQB
           ${this.button('autoJQB', '', '', true, config.autoJQB)}
@@ -1051,7 +1051,7 @@ class UI {
             config.autoJQBStage
           )}
         </p>
-      </span>
+      </div>
     </div>
     <div class="cookieGardenHelperPanel" id="manualToolsPanel">
       <h2>Tools</h2>
