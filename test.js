@@ -774,14 +774,14 @@ class UI {
 
 #cookieGardenHelperTitle {
   color: grey;
-  font-size: 1.5em;
+  font-size: 1.7em;
   font-style: normal;
   margin-bottom: 0.2em;
   margin-top: 0em;
   text-align: center;
 }
 #cookieGardenHelper h2 {
-  font-size: 1.3em;
+  font-size: 1.5em;
   line-height: 2em;
 }
 #cookieGardenHelper h3 {
