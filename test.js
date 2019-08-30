@@ -772,6 +772,10 @@ class UI {
 #autoReload2 a:hover,
 #autoJQB a:hover { color: white; }
 
+#cookieGardenHelperUrl {
+  float: left;
+}
+
 #cookieGardenHelperTitle {
   color: grey;
   font-size: 1.7em;
@@ -906,8 +910,10 @@ class UI {
     doc.elId('row2').insertAdjacentHTML('beforeend', `
 <div id="cookieGardenHelper">
   <style>${this.css}</style>
-  <a href="${this.readmeLink}"
-    target="new">how it works</a>
+  <div id="cookieGardenHelperUrl">
+    <a href="${this.readmeLink}"
+      target="new">how it works</a>
+  </div>
   <div id="cookieGardenHelperTitle" class="title">Cookie Garden Helper Mod</div>
   <div id="cookieGardenHelperTools">
     <div class="cookieGardenHelperPanel" id="autoHarvestPanel">
