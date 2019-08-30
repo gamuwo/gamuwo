@@ -1030,16 +1030,18 @@ class UI {
           config.logLevel
         )}
       </p>
-      <p id="autoJQB">
+      <span id="autoJQB">
         <h2>
           Auto-JQB
           ${this.button('autoJQB', '', '', true, config.autoJQB)}
         </h2>
-        ${this.numberInput(
-          'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
-          config.autoJQBStage
-        )}
-      </p>
+        <p>
+          ${this.numberInput(
+            'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
+            config.autoJQBStage
+          )}
+        </p>
+      </span>
     </div>
     <div class="cookieGardenHelperPanel" id="autoReload">
       <h2>
