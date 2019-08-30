@@ -1065,7 +1065,7 @@ class UI {
         ${this.button('fileSaveButton', 'Save to file',
         'file save')}
         <a class="btn option">
-          <input id="cookieGardenHelperFileLoadButton" type="file" style="cursor:pointer;opacity:0;position:absolute;left:0px;top:0px;width:100%;height:100%;" />
+          <input id="cookieGardenHelperFileLoadButton" type="file" />
           Load from file
         </a>
       </p>
