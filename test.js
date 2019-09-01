@@ -55,6 +55,7 @@ class Config {
       autoReload2Plants: [],
       autoJQB: false,
       autoJQBStage: { value: 0, min: 0 },
+      autoJQBFlag: false,
       quickLoadSave: "",
       quickLoadFlag: false,
     };
@@ -248,6 +249,7 @@ class Garden {
       config.playSoundFlag = false;
       config.playSound2Flag = false;
       config.quickLoadFlag = false;
+      config.autoJQBFlag = false;
     }
       
     this.forEachTile((x, y) => {
@@ -544,7 +546,7 @@ class Garden {
     }
 
     //auto JQB
-    if(config.autoJQB && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
+    if(config.autoJQB && !config.autoJQBFlag && this.secondsBeforeNextTick <= 15){
       try{
         //switch buttons
         if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
@@ -722,6 +724,8 @@ class Garden {
             console.log("[auto JQB]" + this.logDate() + "stage:4->1" + " sugar:" + Game.lumps);
           }
         }
+        
+        config.autoJQBFlag = true;
         
       } catch(e){
         console.error("[auto JQB]some error:" + e.message);
