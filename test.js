@@ -949,6 +949,7 @@ class UI {
           )}
         </p>
       </div>
+      <hr>
       <div id="autoHarvestYoungPanel">
         <p>
           ${this.button(
@@ -965,6 +966,7 @@ class UI {
           )}
         </p>
       </div>
+      <hr>
       <div id="autoHarvestMaturePanel">
         <p>
           ${this.button(
@@ -986,6 +988,7 @@ class UI {
           )}
         </p>
       </div>
+      <hr>
       <div id="autoHarvestDyingPanel">
         <p>
           ${this.button(
