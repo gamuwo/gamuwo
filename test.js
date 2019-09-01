@@ -785,6 +785,10 @@ class UI {
 #autoReload2 a:hover,
 #autoJQB a:hover { color: white; }
 
+#autoHarvestImmortalPanel a:hover,
+#autoHarvestYoungPanel a:hover,
+#autoHarvestMaturePanel a:hover { margin-bottom: 0.1em }
+
 #cookieGardenHelperUrl {
   position:absolute;
 }
@@ -949,7 +953,6 @@ class UI {
           )}
         </p>
       </div>
-      <hr>
       <div id="autoHarvestYoungPanel">
         <p>
           ${this.button(
@@ -966,7 +969,6 @@ class UI {
           )}
         </p>
       </div>
-      <hr>
       <div id="autoHarvestMaturePanel">
         <p>
           ${this.button(
@@ -988,7 +990,6 @@ class UI {
           )}
         </p>
       </div>
-      <hr>
       <div id="autoHarvestDyingPanel">
         <p>
           ${this.button(
