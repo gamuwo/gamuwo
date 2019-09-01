@@ -840,7 +840,8 @@ class UI {
   position:absolute;
   right: 0;
   bottom: 0;
-  margin: 1em;
+  margin-right: 1em;
+  margin-bottom: 0.2em;
 }
 
 #cookieGardenHelperTitle {
