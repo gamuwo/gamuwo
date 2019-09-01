@@ -31,7 +31,9 @@ class Config {
       autoPlantMaxiCpSMult: { value: 0, min: 0 },
       savedPlot: [],
       playSound: false,
+      playSoundFlag: false,
       playSound2: false,
+      playSound2Flag: false,
       logLevel: { value: 0, min: 0 },
       autoReload: false,
       autoReloadX: { value: 0, min: 0, max: 5 },
@@ -239,6 +241,12 @@ class Garden {
   static run(config) {
     //for Debug
     let startTime = new Date();
+    
+    //for one time events
+    if(this.secondsBeforeNextTick >= 179){
+      config.playSoundFlag = false;
+      config.playSound2Flag = false;
+    }
       
     this.forEachTile((x, y) => {
       if (config.autoHarvest && !this.tileIsEmpty(x, y)) {
@@ -279,11 +287,13 @@ class Garden {
     });
     
     //play sound
-    if(config.playSound && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
+    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 15){
       this.playSound1();
+      config.playSoundFlag = true;
     }
-    if(config.playSound2 && this.secondsBeforeNextTick <= 178 && this.secondsBeforeNextTick >= 176){
+    if(config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= 178){
       this.playSound2();
+      config.playSound2Flag = true;
     }
     
     //for quick load
