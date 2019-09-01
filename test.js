@@ -546,6 +546,7 @@ class Garden {
     }
 
     //auto JQB
+    console.log("secondsBeforeNextTick:" + this.secondsBeforeNextTick);
     if(config.autoJQB && !config.autoJQBFlag && this.secondsBeforeNextTick <= 15){
       try{
         //switch buttons
