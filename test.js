@@ -291,6 +291,7 @@ class Garden {
     });
     
     //play sound
+    console.log("playSoundFlag:" + config.playSoundFlag);
     if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 15){
       this.playSound1();
       config.playSoundFlag = true;
@@ -547,6 +548,7 @@ class Garden {
 
     //auto JQB
     console.log("secondsBeforeNextTick:" + this.secondsBeforeNextTick);
+    console.log("playSoundFlag:" + config.playSoundFlag);
     console.log("autoJQBFlag:" + config.autoJQBFlag);
     if(config.autoJQB && !config.autoJQBFlag && this.secondsBeforeNextTick <= 15){
       try{
