@@ -785,9 +785,9 @@ class UI {
 #autoReload2 a:hover,
 #autoJQB a:hover { color: white; }
 
-#autoHarvestImmortalPanel a:hover,
-#autoHarvestYoungPanel a:hover,
-#autoHarvestMaturePanel a:hover { margin-bottom: 0.2em }
+#autoHarvestImmortalPanel,
+#autoHarvestYoungPanel,
+#autoHarvestMaturePanel { margin-bottom: 0.2em }
 
 #cookieGardenHelperUrl {
   position:absolute;
