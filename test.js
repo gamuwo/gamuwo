@@ -58,6 +58,7 @@ class Config {
       autoJQBFlag: false,
       quickLoadSave: "",
       quickLoadFlag: false,
+      interval: { value: 1000, min: 0 },
     };
   }
 
@@ -915,6 +916,15 @@ class UI {
   ${options.max !== undefined ? `max="${options.max}"` : ''} />
 <label for="${id}" title="${title}">${text}</label>`;
   }
+  
+  static numberInputWidth(name, text, title, options, width) {
+    let id = this.makeId(name);
+    return `
+<input type="number" style="width: ${width};" name="${name}" id="${id}" value="${options.value}" step=1
+  ${options.min !== undefined ? `min="${options.min}"` : ''}
+  ${options.max !== undefined ? `max="${options.max}"` : ''} />
+<label for="${id}" title="${title}">${text}</label>`;
+  }
 
   static button(name, text, title, toggle, active) {
     if (toggle) {
@@ -1133,6 +1143,12 @@ class UI {
         )}
       </p>
       <p>
+        ${this.numberInputWidth(
+          'interval', 'Interval', 'input interval(ms)',
+          config.interval, 4
+        )}
+      </p>
+      <p>
         ${this.numberInput(
           'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
           config.logLevel
@@ -1291,8 +1307,8 @@ class UI {
 
 class Main {
   static init() {
-    this.timerInterval = 500;
     this.config = Config.load();
+    this.timerInterval = parseInt(this.config.interval.value);
     UI.build(this.config);
     
     //delete quick load save
