@@ -733,6 +733,7 @@ class Garden {
     if(config.logLevel.value >= 4){
       console.log("[debug]run time:" + (endTime.getTime() - startTime.getTime()) + "ms");
     }
+    document.getElementById("toolsDisp").innerText = (endTime.getTime() - startTime.getTime());
     
   }
 }
@@ -1125,6 +1126,9 @@ class UI {
           'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
           config.logLevel
         )}
+      </p>
+      <p>
+        Run time:<span id="toolsDisp">0</span>ms
       </p>
     </div>
     <div class="cookieGardenHelperPanel">
