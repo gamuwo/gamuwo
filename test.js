@@ -738,7 +738,7 @@ class Garden {
     if(config.logLevel.value >= 4){
       console.log("[debug]run time:" + (endTime.getTime() - startTime.getTime()) + "ms");
     }
-    document.getElementById("toolsDisp").innerText = (endTime.getTime() - startTime.getTime());
+    document.getElementById("runtimeDisp").innerText = (endTime.getTime() - startTime.getTime());
     
   }
 }
@@ -829,6 +829,7 @@ class UI {
   position:absolute;
   right: 0;
   bottom: 0;
+  margin: 1em;
 }
 
 #cookieGardenHelperTitle {
@@ -1225,7 +1226,7 @@ class UI {
     </div>
   </div>
   <div id="cookieGardenHelperRuntime">
-    Run time:<span id="toolsDisp">0</span>ms
+    Run time:<span id="runtimeDisp">0</span>ms
   </div>
 </div>`);
 
