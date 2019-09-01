@@ -1245,7 +1245,7 @@ class UI {
 
 class Main {
   static init() {
-    this.timerInterval = 1000;
+    this.timerInterval = 500;
     this.config = Config.load();
     UI.build(this.config);
     
