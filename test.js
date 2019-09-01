@@ -237,6 +237,10 @@ class Garden {
   }
 
   static run(config) {
+    if(config.logLevel.value >= 4){
+      console.log("[debug]" + this.logDate() + "start");
+    }
+      
     this.forEachTile((x, y) => {
       if (config.autoHarvest && !this.tileIsEmpty(x, y)) {
         let tile = this.getTile(x, y);
@@ -701,6 +705,10 @@ class Garden {
       } catch(e){
         console.error("[auto JQB]some error:" + e.message);
       }
+    }
+    
+    if(config.logLevel.value >= 4){
+      console.log("[debug]" + this.logDate() + "end");
     }
     
   }
