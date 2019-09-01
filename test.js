@@ -859,7 +859,7 @@ class UI {
   right: 0;
   bottom: 0;
   margin-right: 1em;
-  margin-bottom: 0.2em;
+  margin-bottom: 0.5em;
 }
 
 #cookieGardenHelperTitle {
