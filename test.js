@@ -920,7 +920,7 @@ class UI {
   static numberInputWidth(name, text, title, options, width) {
     let id = this.makeId(name);
     return `
-<input type="number" style="width: ${width};" name="${name}" id="${id}" value="${options.value}" step=1
+<input type="number" style="width: ${width}em;" name="${name}" id="${id}" value="${options.value}" step=1
   ${options.min !== undefined ? `min="${options.min}"` : ''}
   ${options.max !== undefined ? `max="${options.max}"` : ''} />
 <label for="${id}" title="${title}">${text}</label>`;
