@@ -825,6 +825,11 @@ class UI {
 #cookieGardenHelperUrl {
   position:absolute;
 }
+#cookieGardenHelperRuntime {
+  position:absolute;
+  right: 0;
+  bottom: 0;
+}
 
 #cookieGardenHelperTitle {
   color: grey;
@@ -1132,9 +1137,6 @@ class UI {
           config.logLevel
         )}
       </p>
-      <p>
-        Run time:<span id="toolsDisp">0</span>ms
-      </p>
     </div>
     <div class="cookieGardenHelperPanel">
       <div id="autoReload">
@@ -1221,6 +1223,9 @@ class UI {
         </div>
       </div>
     </div>
+  </div>
+  <div id="cookieGardenHelperRuntime">
+    Run time:<span id="toolsDisp">0</span>ms
   </div>
 </div>`);
 
