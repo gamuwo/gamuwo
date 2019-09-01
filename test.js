@@ -56,6 +56,7 @@ class Config {
       autoJQB: false,
       autoJQBStage: { value: 0, min: 0 },
       quickLoadSave: "",
+      quickLoadFlag: false,
     };
   }
 
@@ -246,6 +247,7 @@ class Garden {
     if(this.secondsBeforeNextTick >= 179){
       config.playSoundFlag = false;
       config.playSound2Flag = false;
+      config.quickLoadFlag = false;
     }
       
     this.forEachTile((x, y) => {
@@ -290,16 +292,26 @@ class Garden {
     if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 15){
       this.playSound1();
       config.playSoundFlag = true;
+      if(config.logLevel.value >= 3){
+        console.log("[play sound]sound!");
+      }
     }
     if(config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= 178){
       this.playSound2();
       config.playSound2Flag = true;
+      if(config.logLevel.value >= 3){
+        console.log("[play sound2]sound!");
+      }
     }
     
     //for quick load
-    if(this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
+    if(!config.quickLoadFlag && this.secondsBeforeNextTick <= 15){
       config.quickLoadSave = Game.WriteSave(1);
       document.getElementById("quickLoadSaveTime").innerText = this.saveDate();
+      config.quickLoadFlag = true;
+      if(config.logLevel.value >= 3){
+        console.log("[quick load]save!");
+      }
     }
         
     //auto reload
