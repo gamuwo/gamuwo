@@ -507,7 +507,7 @@ class Garden {
     //auto reload
     if(config.autoReload){
       try{
-        //5sec before tick
+        //2sec before tick
         if(this.secondsBeforeNextTick <= 2 && config.autoReloadSaveSecond == 9999){
           if(parseInt(config.autoReloadMax.value) == 0){
             //xy mode
@@ -650,7 +650,7 @@ class Garden {
     //auto reload2
     if(config.autoReload2){
       try{
-        //5sec before tick
+        //2sec before tick
         if(this.secondsBeforeNextTick <= 2 && config.autoReload2SaveSecond == 9999){
           let targetPlants = [];
           this.forEachTile((x, y) => {
