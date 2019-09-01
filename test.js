@@ -1174,7 +1174,7 @@ class UI {
       <p>
         ${this.numberInputWidth(
           'interval', 'Reload interval', 'input auto reload interval(ms)',
-          config.interval, 4
+          config.interval, 3.5
         )}
       </p>
       <p>
