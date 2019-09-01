@@ -237,9 +237,8 @@ class Garden {
   }
 
   static run(config) {
-    if(config.logLevel.value >= 4){
-      console.log("[debug]" + this.logDate() + "start");
-    }
+    //for Debug
+    let startTime = new Date();
       
     this.forEachTile((x, y) => {
       if (config.autoHarvest && !this.tileIsEmpty(x, y)) {
@@ -707,8 +706,10 @@ class Garden {
       }
     }
     
+    //for Debug
+    let endTime = new Date();
     if(config.logLevel.value >= 4){
-      console.log("[debug]" + this.logDate() + "end");
+      console.log("[debug]run time:" + (endTime.getTime() - startTime.getTime()) + "ms");
     }
     
   }
@@ -1053,7 +1054,7 @@ class UI {
         </h2>
         <p>
           ${this.numberInput(
-            'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing)',
+            'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing 4:JQB+QB growing)',
             config.autoJQBStage
           )}
         </p>
@@ -1099,7 +1100,7 @@ class UI {
       </p>
       <p>
         ${this.numberInput(
-          'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive)',
+          'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
           config.logLevel
         )}
       </p>
