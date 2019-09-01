@@ -523,6 +523,11 @@ class Garden {
                 console.log("[auto reload]second:" + config.autoReloadSaveSecond);
                 console.log("[auto reload]X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
               }
+              //reset interval
+              Main.restart(parseInt(config.interval.value));
+              if(config.logLevel.value >= 2){
+                console.log("[auto reload]reset interval:" + Main.timerInterval);
+              }
             }
           } else {
             //max mode
@@ -548,6 +553,11 @@ class Garden {
                 console.log("[auto reload]number:" + config.autoReloadNumber);
                 console.log("[auto reload]max:" + config.autoReloadMax.value);
               }
+              //reset interval
+              Main.restart(parseInt(config.interval.value));
+              if(config.logLevel.value >= 2){
+                console.log("[auto reload]reset interval:" + Main.timerInterval);
+              }
             }
           }
         }
@@ -561,9 +571,13 @@ class Garden {
             //check
             if(tileAr.seedId == config.autoReloadID.value){
               //grow
+              //reset interval
+              Main.restart(1000);
+              
               document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
               if(config.logLevel.value >= 2){
                 console.log("[auto reload]grow! reloads:" + config.autoReloadReloads);
+                console.log("[auto reload]reset interval:" + Main.timerInterval);
               }
               //reset save
               config.autoReloadSave = "";
@@ -595,9 +609,13 @@ class Garden {
             //check
             if(targetNumber > parseInt(config.autoReloadNumber)){
               //grow
+              //reset interval
+              Main.restart(1000);
+              
               document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
               if(config.logLevel.value >= 2){
                 console.log("[auto reload]grow! reloads:" + config.autoReloadReloads);
+                console.log("[auto reload]reset interval:" + Main.timerInterval);
               }
               if(config.logLevel.value >= 3){
                 console.log("[auto reload]target:" + targetNumber);
@@ -1155,7 +1173,7 @@ class UI {
       </p>
       <p>
         ${this.numberInputWidth(
-          'interval', 'Interval', 'input interval(ms)',
+          'interval', 'Reload interval', 'input auto reload interval(ms)',
           config.interval, 4
         )}
       </p>
