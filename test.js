@@ -23,7 +23,7 @@ class Config {
       autoHarvestCheckCpSMult: false,
       autoHarvestMiniCpSMult: { value: 1, min: 0 },
       autoHarvestDying: true,
-      autoHarvestDyingSeconds: 5,
+      autoHarvestDyingSeconds: 30,
       autoHarvestCheckCpSMultDying: false,
       autoHarvestMiniCpSMultDying: { value: 1, min: 0 },
       autoPlant: false,
@@ -508,7 +508,7 @@ class Garden {
     if(config.autoReload){
       try{
         //5sec before tick
-        if(this.secondsBeforeNextTick <= 5 && config.autoReloadSaveSecond == 9999){
+        if(this.secondsBeforeNextTick <= 2 && config.autoReloadSaveSecond == 9999){
           if(parseInt(config.autoReloadMax.value) == 0){
             //xy mode
             if(this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value)){
@@ -651,7 +651,7 @@ class Garden {
     if(config.autoReload2){
       try{
         //5sec before tick
-        if(this.secondsBeforeNextTick <= 5 && config.autoReload2SaveSecond == 9999){
+        if(this.secondsBeforeNextTick <= 2 && config.autoReload2SaveSecond == 9999){
           let targetPlants = [];
           this.forEachTile((x, y) => {
             let tileAr2 = this.getTile(x, y);
