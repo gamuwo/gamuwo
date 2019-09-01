@@ -657,6 +657,11 @@ class Garden {
               console.log("[auto reload2]second:" + config.autoReload2SaveSecond);
               console.log("[auto reload2]target plants:" + config.autoReload2Plants);
             }
+            //reset interval
+            Main.restart(parseInt(config.interval.value));
+            if(config.logLevel.value >= 2){
+              console.log("[auto reload2]reset interval:" + Main.timerInterval);
+            }
           }
         }
         
@@ -711,9 +716,13 @@ class Garden {
             Game.LoadSave(config.autoReload2Save);
           } else {
             //grow
+            //reset interval
+            Main.restart(1000);
+            
             document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
             if(config.logLevel.value >= 2){
               console.log("[auto reload2]grow! reloads:" + config.autoReload2Reloads);
+              console.log("[auto reload2]reset interval:" + Main.timerInterval);
             }
             config.autoReload2Save = "";
             config.autoReload2SaveSecond = 9999;
@@ -739,6 +748,7 @@ class Garden {
     if(config.logLevel.value >= 4){
       console.log("[debug]run time:" + (endTime.getTime() - startTime.getTime()) + "ms");
     }
+    document.getElementById("intervalDisp").innerText = Main.timerInterval;
     document.getElementById("runtimeDisp").innerText = (endTime.getTime() - startTime.getTime());
     
   }
@@ -826,7 +836,7 @@ class UI {
 #cookieGardenHelperUrl {
   position:absolute;
 }
-#cookieGardenHelperRuntime {
+#cookieGardenHelperRightBottom {
   position:absolute;
   right: 0;
   bottom: 0;
@@ -1241,7 +1251,8 @@ class UI {
       </div>
     </div>
   </div>
-  <div id="cookieGardenHelperRuntime">
+  <div id="cookieGardenHelperRightBottom">
+    Interval:<span id="intervalDisp">1000</span>ms
     Run time:<span id="runtimeDisp">0</span>ms
   </div>
 </div>`);
@@ -1307,8 +1318,8 @@ class UI {
 
 class Main {
   static init() {
+    this.timerInterval = 1000;
     this.config = Config.load();
-    this.timerInterval = parseInt(this.config.interval.value);
     UI.build(this.config);
     
     //delete quick load save
@@ -1330,6 +1341,15 @@ class Main {
   }
 
   static start() {
+    this.timerId = window.setInterval(
+      () => Garden.run(this.config),
+      this.timerInterval
+    );
+  }
+  
+  static restart(interval) {
+    this.stop();
+    this.timerInterval = interval;
     this.timerId = window.setInterval(
       () => Garden.run(this.config),
       this.timerInterval
