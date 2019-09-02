@@ -712,6 +712,12 @@ class Garden {
       }
     }
 
+    //lump reload
+    if(config.lumpReload){
+      Game.clickLump();
+      if(config.lumpReload){ Main.handleToggle('lumpReload'); }
+      this.writeLog(3, "lump reload", false, "type:" + Game.lumpCurrentType);
+    }
     
     //for Debug
     let endTime = new Date();
