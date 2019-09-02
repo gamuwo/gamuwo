@@ -1374,16 +1374,16 @@ class Main {
   }
 
   static handleToggle(key) {
-    console.log("handleToggle");
-    
     this.config[key] = !this.config[key];
     this.save();
     UI.toggleButton(key);
+    
+    if(key == "lumpReload" && this.config[key]){
+      console.log("lumpReload ON");
+    }
   }
 
   static handleClick(key) {
-    console.log("handleClick");
-    
     if (key == 'fillGardenWithSelectedSeed') {
       Garden.fillGardenWithSelectedSeed();
     } else if (key == 'savePlot') {
