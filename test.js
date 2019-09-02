@@ -1134,6 +1134,7 @@ class UI {
         ${this.button('quickSave2', 'QS2',
         'quick save')}
         ${this.button('quickLoad2', 'QL2',
+        'quick load')}
         <span id="quickLoad2SaveTime">Not saved</span>
       </p>
       <p>
@@ -1320,6 +1321,7 @@ class Main {
     
     //delete quick load save
     this.config.quickLoadSave = "";
+    this.config.quickLoad2Save = "";
     this.save();
 
     // sacrifice garden
