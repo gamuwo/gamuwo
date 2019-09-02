@@ -807,7 +807,7 @@ class UI {
 
 #autoHarvestImmortalPanel,
 #autoHarvestYoungPanel,
-#autoHarvestMaturePanel { margin-bottom: 0.5em; }
+#autoHarvestMaturePanel { margin-bottom: 0.4em; }
 
 #cookieGardenHelperUrl {
   position:absolute;
