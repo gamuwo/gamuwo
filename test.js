@@ -883,7 +883,7 @@ class UI {
 }
 #cookieGardenHelper h2 {
   font-size: 1.5em;
-  line-height: 2em;
+  line-height: 1.5em;
 }
 #cookieGardenHelper h3 {
   color: lightgrey;
