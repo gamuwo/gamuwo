@@ -198,6 +198,15 @@ class Garden {
     }
   }
   
+  static writeLog(level, functionName, isDate, text) {
+    if(config.logLevel.value >= level){
+      let logText = text;
+      if(isDate) logText = logDate() + logText;
+      if(functionName != "") logText = functionName + logText;
+      console.log(logText);
+    }
+  }
+  
   static logDate() {
     let logNow = new Date();
     let logYear = logNow.getFullYear();
@@ -242,6 +251,13 @@ class Garden {
   }
 
   static run(config) {
+    writeLog(1, "test", false, "level1, funcName, noDate");
+    writeLog(2, "test", false, "level2, funcName, noDate");
+    writeLog(3, "test", false, "level3, funcName, noDate");
+    writeLog(3, "", false, "level3, noName, noDate");
+    writeLog(3, "test", true, "level3, funcName, Date");
+    writeLog(3, "", true, "level3, noName, Date");
+    
     //for Debug
     let startTime = new Date();
     
@@ -295,9 +311,7 @@ class Garden {
     if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 15){
       this.playSound1();
       config.playSoundFlag = true;
-      if(config.logLevel.value >= 3){
-        console.log("[play sound]sound!");
-      }
+      writeLog(3, "play sound", false, "sound!");
     }
     if(config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= 178){
       this.playSound2();
