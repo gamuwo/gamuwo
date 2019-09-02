@@ -61,6 +61,7 @@ class Config {
       quickLoad2Save: "",
       interval: { value: 1000, min: 0 },
       lumpReload: false,
+      lumpReloadNum: { value: 0, min: 0 },
       lumpReloadType: { value: 0, min: 0 },
       lumpReloadSave: "",
       lumpReloadReloads: 0,
@@ -716,10 +717,13 @@ class Garden {
 
     //lump reload
     if(config.lumpReload){
+      let numBefore = Game.lumps;
       let lumpTBefore = Game.lumpT;
+      this.writeLog(3, "lump reload", false, "Game.lumps(before click):" + Game.lumps);
       this.writeLog(3, "lump reload", false, "Game.lumpT(before click):" + Game.lumpT);
       
       Game.clickLump();
+      this.writeLog(3, "lump reload", false, "Game.lumps(after click):" + Game.lumps);
       this.writeLog(3, "lump reload", false, "Game.lumpT(after click):" + Game.lumpT);
       this.writeLog(3, "lump reload", false, "type:" + Game.lumpCurrentType);
       
@@ -733,11 +737,14 @@ class Garden {
         
         if(config.lumpReload){ Main.handleToggle('lumpReload'); }
       } else {
-        if(Game.lumpCurrentType == config.lumpReloadType.value) {
+        if(Game.lumps >= (numBefore + parseInt(config.lumpReloadNum.value)) && Game.lumpCurrentType == config.lumpReloadType.value) {
           //grow
           config.lumpReloadSave = "";
           document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
-          this.writeLog(2, "lump reload", false, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads);
+          document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
+          this.writeLog(2, "lump reload", false, "grow! type:" + Game.lumpCurrentType);
+          this.writeLog(2, "lump reload", false, "reloads:" + config.lumpReloadReloads);
+          this.writeLog(2, "lump reload", false, "gain:" + Game.lumps - numBefore);
           config.lumpReloadReloads = 0;
           //reset interval
           Main.restart(1000);
@@ -748,6 +755,7 @@ class Garden {
           //reload
           config.lumpReloadReloads += 1;
           document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
+          document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
           this.writeLog(3, "lump reload", false, "reload! try:" + config.lumpReloadReloads);
           Game.LoadSave(config.lumpReloadSave);
         }
@@ -1140,10 +1148,17 @@ class UI {
         </h2>
         <p>
           ${this.numberInput(
+            'lumpReloadNum', 'Num', 'input number',
+            config.lumpReloadNum
+          )}
+          ${this.numberInput(
             'lumpReloadType', 'Type', 'input suger lump type(0:normal 1:bifurcated 2:golden 3:meaty 4:caramelized)',
             config.lumpReloadType
           )}
+        </p>
+        <p>
           Try:<span id="lumpReloadDisp">0</span>
+          Gain:<span id="lumpReloadDisp2">0</span>
         </p>
       </div>
     </div>
