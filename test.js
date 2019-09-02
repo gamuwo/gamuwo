@@ -63,6 +63,7 @@ class Config {
       lumpReload: false,
       lumpReloadType: { value: 0, min: 0 },
       lumpReloadSave: "",
+      lumpReloadReloads: 0,
     };
   }
 
@@ -715,18 +716,43 @@ class Garden {
 
     //lump reload
     if(config.lumpReload){
-      this.writeLog(3, "lump reload", false, "Game.lumpT:" + Game.lumpT);
+      let lumpTBefore = Game.lumpT;
+      this.writeLog(3, "lump reload", false, "Game.lumpT(before click):" + Game.lumpT);
       
       Game.clickLump();
-      this.writeLog(3, "lump reload", false, "Game.lumpT:" + Game.lumpT);
+      this.writeLog(3, "lump reload", false, "Game.lumpT(after click):" + Game.lumpT);
       this.writeLog(3, "lump reload", false, "type:" + Game.lumpCurrentType);
       
-      config.lumpReloadSave = "";
-      //reset interval
-      Main.restart(1000);
-      this.writeLog(2, "lump reload", false, "reset interval:" + Main.timerInterval);
+      if(lumpTBefore == Game.lumpT){
+        //not mature
+        config.lumpReloadSave = "";
+        this.writeLog(2, "lump reload", false, "not mature");
+        //reset interval
+        Main.restart(1000);
+        this.writeLog(2, "lump reload", false, "reset interval:" + Main.timerInterval);
+        
+        if(config.lumpReload){ Main.handleToggle('lumpReload'); }
+      } else {
+        if(Game.lumpCurrentType == config.lumpReloadType.value) {
+          //grow
+          config.lumpReloadSave = "";
+          document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
+          this.writeLog(2, "lump reload", false, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads);
+          config.lumpReloadReloads = 0;
+          //reset interval
+          Main.restart(1000);
+          this.writeLog(2, "lump reload", false, "reset interval:" + Main.timerInterval);
+          
+          if(config.lumpReload){ Main.handleToggle('lumpReload'); }
+        } else {
+          //reload
+          config.lumpReloadReloads += 1;
+          document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
+          this.writeLog(3, "lump reload", false, "reload! try:" + config.lumpReloadReloads);
+          Game.LoadSave(config.lumpReloadSave);
+        }
+      }
       
-      if(config.lumpReload){ Main.handleToggle('lumpReload'); }
     }
     
     //for Debug
@@ -1117,6 +1143,7 @@ class UI {
             'lumpReloadType', 'Type', 'input suger lump type(0:normal 1:bifurcated 2:golden 3:meaty 4:caramelized)',
             config.lumpReloadType
           )}
+          Try:<span id="lumpReloadDisp">0</span>
         </p>
       </div>
     </div>
