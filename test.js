@@ -715,7 +715,10 @@ class Garden {
 
     //lump reload
     if(config.lumpReload){
+      this.writeLog(3, "lump reload", false, "Game.lumpT:" + Game.lumpT);
+      
       Game.clickLump();
+      this.writeLog(3, "lump reload", false, "Game.lumpT:" + Game.lumpT);
       this.writeLog(3, "lump reload", false, "type:" + Game.lumpCurrentType);
       
       config.lumpReloadSave = "";
