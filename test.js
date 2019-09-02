@@ -58,6 +58,7 @@ class Config {
       autoJQBFlag: false,
       quickLoadSave: "",
       quickLoadFlag: false,
+      quickLoad2Save: "",
       interval: { value: 1000, min: 0 },
       lumpReload: false,
       lumpReloadType: { value: 0, min: 0 },
@@ -1130,6 +1131,12 @@ class UI {
         <span id="quickLoadSaveTime">Not saved</span>
       </p>
       <p>
+        ${this.button('quickSave2', 'QS2',
+        'quick save')}
+        ${this.button('quickLoad2', 'QL2',
+        <span id="quickLoad2SaveTime">Not saved</span>
+      </p>
+      <p>
         ${this.button(
           'playSound', 'Sound',
           'play beep sound before 10-15sec from tick', true,
@@ -1381,6 +1388,13 @@ class Main {
     } else if (key == 'quickLoad') {
       if(this.config.quickLoadSave != "") {
         Game.LoadSave(this.config.quickLoadSave);
+      }
+    } else if (key == 'quickSave2') {
+      this.config.quickLoad2Save = Game.WriteSave(1);
+      document.getElementById("quickLoad2SaveTime").innerText = Garden.saveDate();
+    } else if (key == 'quickLoad2') {
+      if(this.config.quickLoad2Save != "") {
+        Game.LoadSave(this.config.quickLoad2Save);
       }
     } else if (key == 'autoReloadReset') {
       this.config.autoReloadSave = "";
