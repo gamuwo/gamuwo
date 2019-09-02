@@ -199,7 +199,7 @@ class Garden {
   }
   
   static writeLog(level, functionName, isDate, text) {
-    if(config.logLevel.value >= level){
+    if(Main.config.logLevel.value >= level){
       let logText = text;
       if(isDate) logText = logDate() + logText;
       if(functionName != "") logText = functionName + logText;
