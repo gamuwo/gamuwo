@@ -294,7 +294,7 @@ class Garden {
           config.savedPlot.length > 0
         ) {
         let [seedId, age] = config.savedPlot[y][x];
-        if (seedId > 0) {
+        if (seedId > 0 && this.getPlant(seedId).unlocked) {
           this.plantSeed(seedId - 1, x, y);
         }
       }
