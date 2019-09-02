@@ -62,6 +62,7 @@ class Config {
       interval: { value: 1000, min: 0 },
       lumpReload: false,
       lumpReloadType: { value: 0, min: 0 },
+      lumpReloadSave: "",
     };
   }
 
@@ -715,8 +716,14 @@ class Garden {
     //lump reload
     if(config.lumpReload){
       Game.clickLump();
-      if(config.lumpReload){ Main.handleToggle('lumpReload'); }
       this.writeLog(3, "lump reload", false, "type:" + Game.lumpCurrentType);
+      
+      config.lumpReloadSave = "";
+      //reset interval
+      Main.restart(1000);
+      this.writeLog(2, "lump reload", false, "reset interval:" + Main.timerInterval);
+      
+      if(config.lumpReload){ Main.handleToggle('lumpReload'); }
     }
     
     //for Debug
@@ -1379,7 +1386,12 @@ class Main {
     UI.toggleButton(key);
     
     if(key == "lumpReload" && this.config[key]){
-      console.log("lumpReload ON");
+      //lump reload ON
+      Garden.writeLog(2, "lump reload", false, "lump reload on");
+      this.config.lumpReloadSave = Game.WriteSave(1);
+      //reset interval
+      this.restart(parseInt(this.config.interval.value));
+      Garden.writeLog(2, "lump reload", false, "reset interval:" + Main.timerInterval);
     }
   }
 
