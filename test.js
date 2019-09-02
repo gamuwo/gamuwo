@@ -202,7 +202,7 @@ class Garden {
     if(Main.config.logLevel.value >= level){
       let logText = text;
       if(isDate) logText = this.logDate() + logText;
-      if(functionName != "") logText = functionName + logText;
+      if(functionName != "") logText = "[" + functionName + "]" +  logText;
       console.log(logText);
     }
   }
