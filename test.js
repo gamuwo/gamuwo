@@ -59,6 +59,8 @@ class Config {
       quickLoadSave: "",
       quickLoadFlag: false,
       interval: { value: 1000, min: 0 },
+      lumpReload: false,
+      lumpReloadType: { value: 0, min: 0 },
     };
   }
 
@@ -1077,6 +1079,18 @@ class UI {
           ${this.numberInput(
             'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing 4:JQB+QB growing)',
             config.autoJQBStage
+          )}
+        </p>
+      </div>
+      <div id="lumpReload">
+        <h2>
+          Lump-reload
+          ${this.button('lumpReload', '', '', true, config.lumpReload)}
+        </h2>
+        <p>
+          ${this.numberInput(
+            'lumpReloadType', 'Type', 'input suger lump type(0:normal 1:bifurcated 2:golden 3:meaty 4:caramelized)',
+            config.lumpReloadType
           )}
         </p>
       </div>
