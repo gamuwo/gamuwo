@@ -742,9 +742,10 @@ class Garden {
           config.lumpReloadSave = "";
           document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
           document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
+          document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
           this.writeLog(2, "lump reload", false, "grow! type:" + Game.lumpCurrentType);
           this.writeLog(2, "lump reload", false, "reloads:" + config.lumpReloadReloads);
-          this.writeLog(2, "lump reload", false, "gain:" + Game.lumps - numBefore);
+          this.writeLog(2, "lump reload", false, "gain:" + (Game.lumps - numBefore));
           config.lumpReloadReloads = 0;
           //reset interval
           Main.restart(1000);
@@ -756,6 +757,7 @@ class Garden {
           config.lumpReloadReloads += 1;
           document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
           document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
+          document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
           this.writeLog(3, "lump reload", false, "reload! try:" + config.lumpReloadReloads);
           Game.LoadSave(config.lumpReloadSave);
         }
@@ -1159,6 +1161,7 @@ class UI {
         <p>
           Try:<span id="lumpReloadDisp">0</span>
           Gain:<span id="lumpReloadDisp2">0</span>
+          Type:<span id="lumpReloadDisp3">0</span>
         </p>
       </div>
     </div>
