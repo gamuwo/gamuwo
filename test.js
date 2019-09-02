@@ -512,13 +512,12 @@ class Garden {
               //save
               config.autoReloadSave = Game.WriteSave(1);
               config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-              this.writeLog(2, "auto reload", false, "save!");
-              this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave);
+              this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
               this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
               this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
               //reset interval
               Main.restart(parseInt(config.interval.value));
-              this.writeLog(2, "auto reload", false, "reset interval:" + Main.timerInterval);
+              this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
             }
           } else {
             //max mode
@@ -535,14 +534,13 @@ class Garden {
               config.autoReloadSave = Game.WriteSave(1);
               config.autoReloadSaveSecond = this.secondsBeforeNextTick;
               config.autoReloadNumber = targetNumber;
-              this.writeLog(2, "auto reload", false, "save!");
-              this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave);
+              this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
               this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
               this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
               this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
               //reset interval
               Main.restart(parseInt(config.interval.value));
-              this.writeLog(2, "auto reload", false, "reset interval:" + Main.timerInterval);
+              this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
             }
           }
         }
@@ -561,7 +559,7 @@ class Garden {
               
               document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
               this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
-              this.writeLog(2, "auto reload", false, "reset interval:" + Main.timerInterval);
+              this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
               //reset save
               config.autoReloadSave = "";
               config.autoReloadSaveSecond = 9999;
@@ -593,7 +591,7 @@ class Garden {
               
               document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
               this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
-              this.writeLog(2, "auto reload", false, "reset interval:" + Main.timerInterval);
+              this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
               this.writeLog(3, "auto reload", false, "target:" + targetNumber);
               //reset save
               config.autoReloadSave = "";
@@ -638,13 +636,12 @@ class Garden {
             config.autoReload2Save = Game.WriteSave(1);
             config.autoReload2SaveSecond = this.secondsBeforeNextTick;
             config.autoReload2Plants = targetPlants;
-            this.writeLog(2, "auto reload2", false, "save!");
-            this.writeLog(3, "auto reload2", false, "save:" + config.autoReload2Save);
+            this.writeLog(3, "auto reload2", false, "save:" + config.autoReload2Save.substr(0, 15) + "...");
             this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
             this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
             //reset interval
             Main.restart(parseInt(config.interval.value));
-            this.writeLog(2, "auto reload2", false, "reset interval:" + Main.timerInterval);
+            this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
           }
         }
         
@@ -698,7 +695,7 @@ class Garden {
             
             document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
             this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
-            this.writeLog(2, "auto reload2", false, "reset interval:" + Main.timerInterval);
+            this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
             config.autoReload2Save = "";
             config.autoReload2SaveSecond = 9999;
             config.autoReload2Reloads = 0;
@@ -733,7 +730,7 @@ class Garden {
         this.writeLog(2, "lump reload", false, "not mature");
         //reset interval
         Main.restart(1000);
-        this.writeLog(2, "lump reload", false, "reset interval:" + Main.timerInterval);
+        this.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
         
         if(config.lumpReload){ Main.handleToggle('lumpReload'); }
       } else {
@@ -743,13 +740,11 @@ class Garden {
           document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
           document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
           document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
-          this.writeLog(2, "lump reload", false, "grow! type:" + Game.lumpCurrentType);
-          this.writeLog(2, "lump reload", false, "reloads:" + config.lumpReloadReloads);
-          this.writeLog(2, "lump reload", false, "gain:" + (Game.lumps - numBefore));
+          this.writeLog(1, "lump reload", false, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads + " gain:" + (Game.lumps - numBefore));
           config.lumpReloadReloads = 0;
           //reset interval
           Main.restart(1000);
-          this.writeLog(2, "lump reload", false, "reset interval:" + Main.timerInterval);
+          this.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
           
           if(config.lumpReload){ Main.handleToggle('lumpReload'); }
         } else {
@@ -1439,7 +1434,7 @@ class Main {
       this.config.lumpReloadSave = Game.WriteSave(1);
       //reset interval
       this.restart(parseInt(this.config.interval.value));
-      Garden.writeLog(2, "lump reload", false, "reset interval:" + Main.timerInterval);
+      Garden.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
     }
   }
 
