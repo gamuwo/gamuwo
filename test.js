@@ -791,6 +791,9 @@ class UI {
 #autoJQB { color: violet; }
 #autoJQB a { color: violet; }
 
+#lumpReload { color: gold; }
+#lumpReload a { color: gold; }
+
 #autoHarvestPanel a:hover,
 #autoHarvestImmortalPanel a:hover,
 #autoHarvestYoungPanel a:hover,
@@ -799,7 +802,8 @@ class UI {
 #autoPlantPanel a:hover,
 #autoReload a:hover,
 #autoReload2 a:hover,
-#autoJQB a:hover { color: white; }
+#autoJQB a:hover,
+#lumpReload a:hover { color: white; }
 
 #cookieGardenHelperUrl {
   position:absolute;
