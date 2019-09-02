@@ -251,13 +251,6 @@ class Garden {
   }
 
   static run(config) {
-    this.writeLog(1, "test", false, "level1, funcName, noDate");
-    this.writeLog(2, "test", false, "level2, funcName, noDate");
-    this.writeLog(3, "test", false, "level3, funcName, noDate");
-    this.writeLog(3, "", false, "level3, noName, noDate");
-    this.writeLog(3, "test", true, "level3, funcName, Date");
-    this.writeLog(3, "", true, "level3, noName, Date");
-    
     //for Debug
     let startTime = new Date();
     
@@ -316,9 +309,7 @@ class Garden {
     if(config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= 178){
       this.playSound2();
       config.playSound2Flag = true;
-      if(config.logLevel.value >= 3){
-        console.log("[play sound2]sound!");
-      }
+      this.writeLog(3, "play sound2", false, "sound!");
     }
     
     //for quick load
@@ -326,9 +317,7 @@ class Garden {
       config.quickLoadSave = Game.WriteSave(1);
       document.getElementById("quickLoadSaveTime").innerText = this.saveDate();
       config.quickLoadFlag = true;
-      if(config.logLevel.value >= 3){
-        console.log("[quick load]save!");
-      }
+      this.writeLog(3, "quick load", false, "save!");
     }
     
     //auto JQB
@@ -375,12 +364,10 @@ class Garden {
           minJQBAge = JQBAge[0];
         }
         
-        if(config.logLevel.value >= 3){
-          console.log("[auto JQB]numPlants:" + numPlants);
-          console.log("[auto JQB]numMatureQB:" + numMatureQB);
-          console.log("[auto JQB]numJQB:" + numJQB);
-          console.log("[auto JQB]minJQBAge:" + minJQBAge);
-        }
+        this.writeLog(3, "auto JQB", false, "numPlants:" + numPlants);
+        this.writeLog(3, "auto JQB", false, "numMatureQB:" + numMatureQB);
+        this.writeLog(3, "auto JQB", false, "numJQB:" + numJQB);
+        this.writeLog(3, "auto JQB", false, "minJQBAge:" + minJQBAge);
         
         if(config.autoJQBStage.value == 0 && numPlants == 0 && this.getPlant(21).unlocked){
           //if no plants, plant QB and turn on auto-reload2 for QB
@@ -411,9 +398,7 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 1;
           //save config
           Main.save();
-          if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + this.logDate() + "stage:0->1");
-          }
+          this.writeLog(1, "auto JQB", true, "stage:0->1");
         }
         
         if(config.autoJQBStage.value == 1 && numMatureQB >= 21){
@@ -434,9 +419,7 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 2;
           //save config
           Main.save();
-          if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + this.logDate() + "stage:1->2");
-          }
+          this.writeLog(1, "auto JQB", true, "stage:1->2");
         }
         
         if(config.autoJQBStage.value == 2 && numJQB >= 4){
@@ -461,9 +444,7 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 3;
           //save config
           Main.save();
-          if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + this.logDate() + "stage:2->3");
-          }
+          this.writeLog(1, "auto JQB", true, "stage:2->3");
         }
         
         if(config.autoJQBStage.value == 3 && minJQBAge >= 65){
@@ -479,9 +460,7 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 4;
           //save config
           Main.save();
-          if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + this.logDate() + "stage:3->4");
-          }
+          this.writeLog(1, "auto JQB", true, "stage:3->4");
         }
         
         if(config.autoJQBStage.value == 4 && numJQB == 0){
@@ -506,9 +485,7 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 1;
           //save config
           Main.save();
-          if(config.logLevel.value >= 1){
-            console.log("[auto JQB]" + this.logDate() + "stage:4->1" + " sugar:" + Game.lumps);
-          }
+          this.writeLog(1, "auto JQB", true, "stage:4->1" + " sugar:" + Game.lumps);
         }
         
         config.autoJQBFlag = true;
@@ -529,19 +506,13 @@ class Garden {
               //save
               config.autoReloadSave = Game.WriteSave(1);
               config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-              if(config.logLevel.value >= 2){
-                console.log("[auto reload]save!");
-              }
-              if(config.logLevel.value >= 3){
-                console.log("[auto reload]save:" + config.autoReloadSave);
-                console.log("[auto reload]second:" + config.autoReloadSaveSecond);
-                console.log("[auto reload]X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
-              }
+              this.writeLog(2, "auto reload", false, "save!");
+              this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave);
+              this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
+              this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
               //reset interval
               Main.restart(parseInt(config.interval.value));
-              if(config.logLevel.value >= 2){
-                console.log("[auto reload]reset interval:" + Main.timerInterval);
-              }
+              this.writeLog(2, "auto reload", false, "reset interval:" + Main.timerInterval);
             }
           } else {
             //max mode
@@ -558,20 +529,14 @@ class Garden {
               config.autoReloadSave = Game.WriteSave(1);
               config.autoReloadSaveSecond = this.secondsBeforeNextTick;
               config.autoReloadNumber = targetNumber;
-              if(config.logLevel.value >= 2){
-                console.log("[auto reload]save!");
-              }
-              if(config.logLevel.value >= 3){
-                console.log("[auto reload]save:" + config.autoReloadSave);
-                console.log("[auto reload]second:" + config.autoReloadSaveSecond);
-                console.log("[auto reload]number:" + config.autoReloadNumber);
-                console.log("[auto reload]max:" + config.autoReloadMax.value);
-              }
+              this.writeLog(2, "auto reload", false, "save!");
+              this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave);
+              this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
+              this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
+              this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
               //reset interval
               Main.restart(parseInt(config.interval.value));
-              if(config.logLevel.value >= 2){
-                console.log("[auto reload]reset interval:" + Main.timerInterval);
-              }
+              this.writeLog(2, "auto reload", false, "reset interval:" + Main.timerInterval);
             }
           }
         }
@@ -589,26 +554,20 @@ class Garden {
               Main.restart(1000);
               
               document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-              if(config.logLevel.value >= 2){
-                console.log("[auto reload]grow! reloads:" + config.autoReloadReloads);
-                console.log("[auto reload]reset interval:" + Main.timerInterval);
-              }
+              this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
+              this.writeLog(2, "auto reload", false, "reset interval:" + Main.timerInterval);
               //reset save
               config.autoReloadSave = "";
               config.autoReloadSaveSecond = 9999;
               config.autoReloadReloads = 0;
-              if(config.logLevel.value >= 3){
-                console.log("[auto reload]reset:" + config.autoReloadSave);
-                console.log("[auto reload]second:" + config.autoReloadSaveSecond);
-                console.log("[auto reload]reloads:" + config.autoReloadReloads);
-              }
+              this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
+              this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
+              this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
             } else {
               //reload
               config.autoReloadReloads += 1;
               document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-              if(config.logLevel.value >= 3){
-                console.log("[auto reload]reload! try:" + config.autoReloadReloads);
-              }
+              this.writeLog(3, "auto reload", false, "reload! try:" + config.autoReloadReloads);
               Game.LoadSave(config.autoReloadSave);
             }
           } else {
@@ -627,31 +586,23 @@ class Garden {
               Main.restart(1000);
               
               document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-              if(config.logLevel.value >= 2){
-                console.log("[auto reload]grow! reloads:" + config.autoReloadReloads);
-                console.log("[auto reload]reset interval:" + Main.timerInterval);
-              }
-              if(config.logLevel.value >= 3){
-                console.log("[auto reload]target:" + targetNumber);
-              }
+              this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
+              this.writeLog(2, "auto reload", false, "reset interval:" + Main.timerInterval);
+              this.writeLog(3, "auto reload", false, "target:" + targetNumber);
               //reset save
               config.autoReloadSave = "";
               config.autoReloadSaveSecond = 9999;
               config.autoReloadReloads = 0;
               config.autoReloadNumber = 0;
-              if(config.logLevel.value >= 3){
-                console.log("[auto reload]reset:" + config.autoReloadSave);
-                console.log("[auto reload]second:" + config.autoReloadSaveSecond);
-                console.log("[auto reload]reloads:" + config.autoReloadReloads);
-                console.log("[auto reload]number:" + config.autoReloadNumber);
-              }
+              this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
+              this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
+              this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
+              this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
             } else {
               //reload
               config.autoReloadReloads += 1;
               document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-              if(config.logLevel.value >= 3){
-                console.log("[auto reload]reload! try:" + config.autoReloadReloads);
-              }
+              this.writeLog(3, "auto reload", false, "reload! try:" + config.autoReloadReloads);
               Game.LoadSave(config.autoReloadSave);
             }
           }
@@ -681,19 +632,13 @@ class Garden {
             config.autoReload2Save = Game.WriteSave(1);
             config.autoReload2SaveSecond = this.secondsBeforeNextTick;
             config.autoReload2Plants = targetPlants;
-            if(config.logLevel.value >= 2){
-              console.log("[auto reload2]save!");
-            }
-            if(config.logLevel.value >= 3){
-              console.log("[auto reload2]save:" + config.autoReload2Save);
-              console.log("[auto reload2]second:" + config.autoReload2SaveSecond);
-              console.log("[auto reload2]target plants:" + config.autoReload2Plants);
-            }
+            this.writeLog(2, "auto reload2", false, "save!");
+            this.writeLog(3, "auto reload2", false, "save:" + config.autoReload2Save);
+            this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
+            this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
             //reset interval
             Main.restart(parseInt(config.interval.value));
-            if(config.logLevel.value >= 2){
-              console.log("[auto reload2]reset interval:" + Main.timerInterval);
-            }
+            this.writeLog(2, "auto reload2", false, "reset interval:" + Main.timerInterval);
           }
         }
         
@@ -708,10 +653,8 @@ class Garden {
             upperAge = parseInt(config.autoReload2Plants[(parseInt(config.autoReload2Number.value) - 1)][2]) + parseInt(config.autoReload2Play.value);
             targetNumber = parseInt(config.autoReload2Number.value);
           }
-          if(config.logLevel.value >= 3){
-            console.log("[auto reload2]upperAge:" + upperAge);
-            console.log("[auto reload2]targetNumber:" + targetNumber);
-          }
+          this.writeLog(3, "auto reload2", false, "upperAge:" + upperAge);
+          this.writeLog(3, "auto reload2", false, "targetNumber:" + targetNumber);
           
           //check
           let grows = 0;
@@ -734,17 +677,13 @@ class Garden {
             }
           }
           document.getElementById("autoReload2Disp2").innerText = grows;
-          if(config.logLevel.value >= 3){
-            console.log("[auto reload2]grows:" + grows);
-          }
+          this.writeLog(3, "auto reload2", false, "grows:" + grows);
           
           if(grows < targetNumber){
             //reload
             config.autoReload2Reloads += 1;
             document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
-            if(config.logLevel.value >= 3){
-              console.log("[auto reload2]reload! try:" + config.autoReload2Reloads);
-            }
+            this.writeLog(3, "auto reload2", false, "reload! try:" + config.autoReload2Reloads);
             Game.LoadSave(config.autoReload2Save);
           } else {
             //grow
@@ -752,20 +691,16 @@ class Garden {
             Main.restart(1000);
             
             document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
-            if(config.logLevel.value >= 2){
-              console.log("[auto reload2]grow! reloads:" + config.autoReload2Reloads);
-              console.log("[auto reload2]reset interval:" + Main.timerInterval);
-            }
+            this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
+            this.writeLog(2, "auto reload2", false, "reset interval:" + Main.timerInterval);
             config.autoReload2Save = "";
             config.autoReload2SaveSecond = 9999;
             config.autoReload2Reloads = 0;
             config.autoReload2Plants = [];
-            if(config.logLevel.value >= 3){
-              console.log("[auto reload2]reset:" + config.autoReload2Save);
-              console.log("[auto reload2]second:" + config.autoReload2SaveSecond);
-              console.log("[auto reload2]reloads:" + config.autoReload2Reloads);
-              console.log("[auto reload2]target plants:" + config.autoReload2Plants);
-            }
+            this.writeLog(3, "auto reload2", false, "reset:" + config.autoReload2Save);
+            this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
+            this.writeLog(3, "auto reload2", false, "reloads:" + config.autoReload2Reloads);
+            this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
           }
         }
         
@@ -777,9 +712,8 @@ class Garden {
     
     //for Debug
     let endTime = new Date();
-    if(config.logLevel.value >= 4){
-      console.log("[debug]run time:" + (endTime.getTime() - startTime.getTime()) + "ms");
-    }
+    this.writeLog(4, "debug", false, "run time:" + (endTime.getTime() - startTime.getTime()) + "ms");
+    
     document.getElementById("intervalDisp").innerText = Main.timerInterval;
     document.getElementById("runtimeDisp").innerText = (endTime.getTime() - startTime.getTime());
     
