@@ -805,6 +805,10 @@ class UI {
 #autoJQB a:hover,
 #lumpReload a:hover { color: white; }
 
+#autoHarvestImmortalPanel,
+#autoHarvestYoungPanel,
+#autoHarvestMaturePanel { margin-bottom: 0.5em; }
+
 #cookieGardenHelperUrl {
   position:absolute;
 }
