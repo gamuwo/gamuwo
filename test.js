@@ -70,6 +70,7 @@ class Config {
       lumpReloadType: { value: 0, min: 0 },
       lumpReloadSave: "",
       lumpReloadReloads: 0,
+      rightBottomDisplaySave: [],
     };
   }
 
@@ -1535,10 +1536,25 @@ class UI {
     }
     
     doc.elId('cookieGardenHelperRightBottom').onmouseout = (event) => {
-      document.getElementById("rightBottomAutoReload").style.display = "block";
+      if(Main.config.rightBottomDisplaySave.length == 3){
+        document.getElementById("rightBottomAutoReload").style.display = Main.config.rightBottomDisplaySave[0];
+        document.getElementById("rightBottomAutoReload2").style.display = Main.config.rightBottomDisplaySave[1];
+        document.getElementById("rightBottomLumpReload").style.display = Main.config.rightBottomDisplaySave[2];
+        Main.config.rightBottomDisplaySave = [];
+        Main.save();
+      }
     }
     doc.elId('cookieGardenHelperRightBottom').onmouseover = (event) => {
-      document.getElementById("rightBottomAutoReload").style.display = "block !important";
+      let displaySave = [];
+      displaySave[0] = document.getElementById("rightBottomAutoReload").style.display;
+      displaySave[1] = document.getElementById("rightBottomAutoReload2").style.display;
+      displaySave[2] = document.getElementById("rightBottomLumpReload").style.display;
+      Main.config.rightBottomDisplaySave = displaySave;
+      Main.save();
+      
+      document.getElementById("rightBottomAutoReload").style.display = "block";
+      document.getElementById("rightBottomAutoReload2").style.display = "block";
+      document.getElementById("rightBottomLumpReload").style.display = "block";
     }
     
     doc.elId('cookieGardenHelperFileLoadButton').onchange = (event) => {
