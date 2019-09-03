@@ -44,6 +44,7 @@ class Config {
       autoReloadSaveSecond: 9999,
       autoReloadReloads: 0,
       autoReloadNumber: 0,
+      autoReloadButtonSave: [],
       autoReload2: false,
       autoReload2ID: { value: 0, min: 0 },
       autoReload2Grow: { value: 0, min: 0 },
@@ -312,12 +313,12 @@ class Garden {
     });
     
     //play sound
-    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 10){
+    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 10 this.secondsBeforeNextTick >= 8){
       this.playSound1();
       config.playSoundFlag = true;
       this.writeLog(3, "play sound", false, "sound!");
     }
-    if(config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= 178){
+    if(config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= 178 this.secondsBeforeNextTick >= 176){
       this.playSound2();
       config.playSound2Flag = true;
       this.writeLog(3, "play sound2", false, "sound!");
@@ -332,7 +333,7 @@ class Garden {
     }
     
     //auto lump
-    if(!config.lumpReload && config.autoLump && !config.autoLumpFlag && this.secondsBeforeNextTick <= 15){
+    if(!config.lumpReload && config.autoLump && !config.autoLumpFlag && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
       if(config.autoLumpButtonSave.length == 0){
         //check suger lump is mature
   			let lumpAge = Date.now() - Game.lumpT;
@@ -394,7 +395,7 @@ class Garden {
     }
             
     //auto JQB
-    if(config.autoJQB && !config.autoJQBFlag && this.secondsBeforeNextTick <= 10){
+    if(config.autoJQB && !config.autoJQBFlag && this.secondsBeforeNextTick <= 10 && this.secondsBeforeNextTick >= 8){
       try{
         //switch buttons
         if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
@@ -582,6 +583,24 @@ class Garden {
               this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
               this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
               this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
+            
+              //save other button state
+              let buttonSave = [];
+              buttonSave[0] = config.autoHarvest;
+              buttonSave[1] = config.autoPlant;
+              buttonSave[2] = config.autoJQB;
+              buttonSave[3] = config.autoLump;
+              buttonSave[4] = config.autoReload2;
+              config.autoReloadButtonSave = buttonSave;
+              
+              //turn off other button
+              if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
+              if(config.autoPlant){ Main.handleToggle('autoPlant'); }
+              if(config.autoJQB){ Main.handleToggle('autoJQB'); }
+              if(config.autoLump){ Main.handleToggle('autoLump'); }
+              if(config.autoReload2){ Main.handleToggle('autoReload2'); }
+              Main.save();
+            
               //reset interval
               Main.restart(parseInt(config.interval.value));
               this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
@@ -605,6 +624,24 @@ class Garden {
               this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
               this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
               this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
+            
+              //save other button state
+              let buttonSave = [];
+              buttonSave[0] = config.autoHarvest;
+              buttonSave[1] = config.autoPlant;
+              buttonSave[2] = config.autoJQB;
+              buttonSave[3] = config.autoLump;
+              buttonSave[4] = config.autoReload2;
+              config.autoReloadButtonSave = buttonSave;
+              
+              //turn off other button
+              if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
+              if(config.autoPlant){ Main.handleToggle('autoPlant'); }
+              if(config.autoJQB){ Main.handleToggle('autoJQB'); }
+              if(config.autoLump){ Main.handleToggle('autoLump'); }
+              if(config.autoReload2){ Main.handleToggle('autoReload2'); }
+              Main.save();
+            
               //reset interval
               Main.restart(parseInt(config.interval.value));
               this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
@@ -634,6 +671,17 @@ class Garden {
               this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
               this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
               this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
+            
+              //restore other button state
+              if(config.autoReloadButtonSave[0]){ Main.handleToggle('autoHarvest'); }
+              if(config.autoReloadButtonSave[1]){ Main.handleToggle('autoPlant'); }
+              if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
+              if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
+              if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
+              
+              config.autoReloadButtonSave = [];
+              Main.save();
+              this.writeLog(3, "auto reload", false, "restore buttons");
             } else {
               //reload
               config.autoReloadReloads += 1;
@@ -669,6 +717,17 @@ class Garden {
               this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
               this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
               this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
+            
+              //restore other button state
+              if(config.autoReloadButtonSave[0]){ Main.handleToggle('autoHarvest'); }
+              if(config.autoReloadButtonSave[1]){ Main.handleToggle('autoPlant'); }
+              if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
+              if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
+              if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
+              
+              config.autoReloadButtonSave = [];
+              Main.save();
+              this.writeLog(3, "auto reload", false, "restore buttons");
             } else {
               //reload
               config.autoReloadReloads += 1;
@@ -836,7 +895,7 @@ class Garden {
           document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
           document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
           document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
-          this.writeLog(1, "lump reload", false, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads + " gain:" + (Game.lumps - numBefore));
+          this.writeLog(1, "lump reload", true, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads + " gain:" + (Game.lumps - numBefore) + " sugar:" + Game.lumps);
           config.lumpReloadReloads = 0;
           //reset interval
           Main.restart(1000);
@@ -1571,6 +1630,7 @@ class Main {
       this.config.autoReloadSaveSecond = 9999;
       this.config.autoReloadReloads = 0;
       this.config.autoReloadNumber = 0;
+      this.config.autoReloadButtonSave = [];
     } else if (key == 'autoReload2Reset') {
       this.config.autoReload2Save = "";
       this.config.autoReload2SaveSecond = 9999;
