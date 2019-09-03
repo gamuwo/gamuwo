@@ -1315,11 +1315,6 @@ class UI {
             config.lumpReloadType
           )}
         </p>
-        <p>
-          Try:<span id="lumpReloadDisp">0</span>
-          Gain:<span id="lumpReloadDisp2">0</span>
-          Type:<span id="lumpReloadDisp3">0</span>
-        </p>
       </div>
     </div>
     <div class="cookieGardenHelperPanel" id="manualToolsPanel">
@@ -1418,7 +1413,6 @@ class UI {
           <p>
             ${this.button('autoReloadReset', 'Reset',
             'reset data(use when it stucks)')}
-            Try:<span id="autoReloadDisp">0</span>
           </p>
         </div>
       </div>
@@ -1459,16 +1453,28 @@ class UI {
           <p>
             ${this.button('autoReload2Reset', 'Reset',
             'reset data(use when it stucks)')}
-            Try:<span id="autoReload2Disp">0</span>
-            Grow:<span id="autoReload2Disp2">0</span>
           </p>
         </div>
       </div>
     </div>
   </div>
   <div id="cookieGardenHelperRightBottom">
-    Interval:<span id="intervalDisp">1000</span>ms
-    Run time:<span id="runtimeDisp">0</span>ms
+    <div id="lumpReload">
+      Try:<span id="lumpReloadDisp">0</span>
+      Gain:<span id="lumpReloadDisp2">0</span>
+      Type:<span id="lumpReloadDisp3">0</span>
+    </div>
+    <div id="autoReload">
+      Try:<span id="autoReloadDisp">0</span>
+    </div>
+    <div id="autoReload2">
+      Try:<span id="autoReload2Disp">0</span>
+      Grow:<span id="autoReload2Disp2">0</span>
+    </div>
+    <div>
+      Interval:<span id="intervalDisp">1000</span>ms
+      Run time:<span id="runtimeDisp">0</span>ms
+    </div>
   </div>
 </div>`);
 
