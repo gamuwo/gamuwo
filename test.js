@@ -601,6 +601,11 @@ class Garden {
               if(config.autoReload2){ Main.handleToggle('autoReload2'); }
               Main.save();
             
+              //display
+              document.getElementById("rightBottomAutoReload").style.display = "block";
+              document.getElementById("rightBottomAutoReload2").style.display = "none";
+              document.getElementById("rightBottomLumpReload").style.display = "none";
+            
               //reset interval
               Main.restart(parseInt(config.interval.value));
               this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
@@ -641,6 +646,11 @@ class Garden {
               if(config.autoLump){ Main.handleToggle('autoLump'); }
               if(config.autoReload2){ Main.handleToggle('autoReload2'); }
               Main.save();
+            
+              //display
+              document.getElementById("rightBottomAutoReload").style.display = "block";
+              document.getElementById("rightBottomAutoReload2").style.display = "none";
+              document.getElementById("rightBottomLumpReload").style.display = "none";
             
               //reset interval
               Main.restart(parseInt(config.interval.value));
@@ -782,6 +792,11 @@ class Garden {
             if(config.autoLump){ Main.handleToggle('autoLump'); }
             if(config.autoReload){ Main.handleToggle('autoReload'); }
             Main.save();
+            
+            //display
+            document.getElementById("rightBottomAutoReload").style.display = "none";
+            document.getElementById("rightBottomAutoReload2").style.display = "block";
+            document.getElementById("rightBottomLumpReload").style.display = "none";
             
             //reset interval
             Main.restart(parseInt(config.interval.value));
@@ -985,17 +1000,17 @@ class UI {
 #autoPlantPanel { color: lightgreen; }
 #autoPlantPanel a { color: lightgreen; }
 
-#autoReload { color: aqua; }
-#autoReload a { color: aqua; }
+#autoReload, #rightBottomAutoReload { color: aqua; }
+#autoReload, #rightBottomAutoReload a { color: aqua; }
 
-#autoReload2 { color: coral; }
-#autoReload2 a { color: coral; }
+#autoReload2, #rightBottomAutoReload2 { color: coral; }
+#autoReload2, #rightBottomAutoReload2 a { color: coral; }
 
 #autoJQB { color: violet; }
 #autoJQB a { color: violet; }
 
-#lumpReload { color: gold; }
-#lumpReload a { color: gold; }
+#lumpReload, #rightBottomLumpReload { color: gold; }
+#lumpReload, #rightBottomLumpReload a { color: gold; }
 
 #autoHarvestPanel a:hover,
 #autoHarvestImmortalPanel a:hover,
@@ -1015,6 +1030,7 @@ class UI {
 #cookieGardenHelperUrl {
   position:absolute;
 }
+
 #cookieGardenHelperRightBottom {
   position:absolute;
   right: 0;
@@ -1023,6 +1039,10 @@ class UI {
   margin-bottom: 0.5em;
   text-align: right;
 }
+
+#rightBottomAutoReload,
+#rightBottomAutoReload2,
+#rightBottomLumpReload { display: none }
 
 #cookieGardenHelperTitle {
   color: grey;
@@ -1460,15 +1480,15 @@ class UI {
     </div>
   </div>
   <div id="cookieGardenHelperRightBottom">
-    <div id="lumpReload">
+    <div id=rightBottomLumpReload">
       Try:<span id="lumpReloadDisp">0</span>
       Gain:<span id="lumpReloadDisp2">0</span>
       Type:<span id="lumpReloadDisp3">0</span>
     </div>
-    <div id="autoReload">
+    <div id="rightBottomAutoReload">
       Try:<span id="autoReloadDisp">0</span>
     </div>
-    <div id="autoReload2">
+    <div id="rightBottomAutoReload2">
       Try:<span id="autoReload2Disp">0</span>
       Grow:<span id="autoReload2Disp2">0</span>
     </div>
@@ -1601,6 +1621,10 @@ class Main {
       //lump reload ON
       Garden.writeLog(2, "lump reload", false, "lump reload on");
       this.config.lumpReloadSave = Game.WriteSave(1);
+      //display
+      document.getElementById("rightBottomAutoReload").style.display = "none";
+      document.getElementById("rightBottomAutoReload2").style.display = "none";
+      document.getElementById("rightBottomLumpReload").style.display = "block";
       //reset interval
       this.restart(parseInt(this.config.interval.value));
       Garden.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
