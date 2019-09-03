@@ -862,7 +862,7 @@ class Garden {
           Main.restart(1000);
           //for average
           this.pushLimit(config.autoReload2Reloads, config.autoReload2TryHistory);
-          let tryAverage = this.arrayAverage(config.autoReload2TryHistory);
+          let tryAverage = this.arrayAverage(config.autoReload2TryHistory).toFixed(2) + "(" + config.autoReload2TryHistory.length + ")";
           document.getElementById("autoReload2Disp3").innerText = tryAverage;
           this.writeLog(3, "auto reload2", false, "try average:" + tryAverage);
           
@@ -1708,6 +1708,7 @@ class Main {
       this.config.autoReload2Reloads = 0;
       this.config.autoReload2Plants = [];
       this.config.autoReload2ButtonSave = [];
+      this.config.autoReload2TryHistory = [];
     }
     this.save();
   }
