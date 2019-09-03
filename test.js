@@ -60,6 +60,9 @@ class Config {
       quickLoadFlag: false,
       quickLoad2Save: "",
       interval: { value: 1000, min: 0 },
+      autoLump: false,
+      autoLumpFlag: false,
+      autoLumpButtonSave: []
       lumpReload: false,
       lumpReloadNum: { value: 0, min: 0 },
       lumpReloadType: { value: 0, min: 0 },
@@ -266,6 +269,7 @@ class Garden {
       config.playSound2Flag = false;
       config.quickLoadFlag = false;
       config.autoJQBFlag = false;
+      config.autoLumpFlag = false;
     }
       
     this.forEachTile((x, y) => {
@@ -307,7 +311,7 @@ class Garden {
     });
     
     //play sound
-    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 15){
+    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 10){
       this.playSound1();
       config.playSoundFlag = true;
       this.writeLog(3, "play sound", false, "sound!");
@@ -319,15 +323,77 @@ class Garden {
     }
     
     //for quick load
-    if(!config.quickLoadFlag && this.secondsBeforeNextTick <= 15){
+    if(!config.quickLoadFlag && this.secondsBeforeNextTick <= 5){
       config.quickLoadSave = Game.WriteSave(1);
       document.getElementById("quickLoadSaveTime").innerText = this.saveDate();
       config.quickLoadFlag = true;
       this.writeLog(3, "quick load", false, "save!");
     }
     
+    //auto lump
+    if(!config.lumpReload && config.autoLump && !config.autoLumpFlag && this.secondsBeforeNextTick <= 15){
+      if(config.autoLumpButtonSave.length == 0){
+        //check suger lump is mature
+  			let lumpAge = Date.now() - Game.lumpT;
+  			if (lumpAge >= Game.lumpMatureAge) {
+          //save other button state
+          let buttonSave = [];
+          buttonSave[0] = config.autoHarvest;
+          buttonSave[1] = config.autoPlant;
+          buttonSave[2] = config.autoJQB;
+          buttonSave[3] = config.autoReload;
+          buttonSave[4] = config.autoReload2;
+          config.autoLumpButtonSave = buttonSave;
+          
+          //turn off other button
+          if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
+          if(config.autoPlant){ Main.handleToggle('autoPlant'); }
+          if(config.autoJQB){ Main.handleToggle('autoJQB'); }
+          if(config.autoReload){ Main.handleToggle('autoReload'); }
+          if(config.autoReload2){ Main.handleToggle('autoReload2'); }
+          
+          //turn on lump reload
+          if(Game.lumpCurrentType == 0){
+            config.lumpReloadNum.value = 1;
+            document.getElementById(UI.makeId("lumpReloadNum")).value = 1;
+          } else if(Game.lumpCurrentType == 1){
+            config.lumpReloadNum.value = 2;
+            document.getElementById(UI.makeId("lumpReloadNum")).value = 2;
+          } else if(Game.lumpCurrentType == 2){
+            config.lumpReloadNum.value = 7;
+            document.getElementById(UI.makeId("lumpReloadNum")).value = 7;
+          } else if(Game.lumpCurrentType == 3){
+            config.lumpReloadNum.value = 2;
+            document.getElementById(UI.makeId("lumpReloadNum")).value = 2;
+          } else if(Game.lumpCurrentType == 4){
+            config.lumpReloadNum.value = 3;
+            document.getElementById(UI.makeId("lumpReloadNum")).value = 3;
+          }
+          config.lumpReloadType.value = 2;
+          document.getElementById(UI.makeId("lumpReloadType")).value = 2;
+          
+          if(!config.lumpReload){ Main.handleToggle('lumpReload'); }
+          Main.save();
+          this.writeLog(3, "auto lump", false, "turn on lump reload");
+  			}
+      } else {
+        //restore other button state
+        if(config.autoLumpButtonSave[0]){ Main.handleToggle('autoHarvest'); }
+        if(config.autoLumpButtonSave[1]){ Main.handleToggle('autoPlant'); }
+        if(config.autoLumpButtonSave[2]){ Main.handleToggle('autoJQB'); }
+        if(config.autoLumpButtonSave[3]){ Main.handleToggle('autoReload'); }
+        if(config.autoLumpButtonSave[4]){ Main.handleToggle('autoReload2'); }
+        
+        config.autoLumpButtonSave = [];
+        Main.save();
+        this.writeLog(3, "auto lump", false, "restore buttons");
+      }
+      config.autoLumpFlag = true;
+      this.writeLog(3, "auto lump", false, "check!");
+    }
+            
     //auto JQB
-    if(config.autoJQB && !config.autoJQBFlag && this.secondsBeforeNextTick <= 15){
+    if(config.autoJQB && !config.autoJQBFlag && this.secondsBeforeNextTick <= 10){
       try{
         //switch buttons
         if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
@@ -1140,9 +1206,16 @@ class UI {
       </div>
       <div id="lumpReload">
         <h2>
-          Lump-reload
-          ${this.button('lumpReload', '', '', true, config.lumpReload)}
+          Auto-lump
+          ${this.button('autoLump', '', '', true, config.autoLump)}
         </h2>
+        <p>
+          ${this.button(
+            'lumpReload', 'Lump reload',
+            'reload for sugar lump', true,
+            config.lumpReload
+          )}
+        </p>
         <p>
           ${this.numberInput(
             'lumpReloadNum', 'Num', 'input number',
