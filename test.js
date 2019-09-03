@@ -1543,6 +1543,8 @@ class UI {
         Main.config.rightBottomDisplaySave = [];
         Main.save();
       }
+      document.getElementById("cookieGardenHelperRightBottom").style.border = "none";
+      document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "auto";
     }
     doc.elId('cookieGardenHelperRightBottom').onmouseover = (event) => {
       let displaySave = [];
@@ -1555,6 +1557,9 @@ class UI {
       document.getElementById("rightBottomAutoReload").style.display = "block";
       document.getElementById("rightBottomAutoReload2").style.display = "block";
       document.getElementById("rightBottomLumpReload").style.display = "block";
+      
+      document.getElementById("cookieGardenHelperRightBottom").style.border = "solid";
+      document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "1";
     }
     
     doc.elId('cookieGardenHelperFileLoadButton').onchange = (event) => {
