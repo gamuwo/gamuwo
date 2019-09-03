@@ -55,6 +55,7 @@ class Config {
       autoReload2Reloads: 0,
       autoReload2Plants: [],
       autoReload2ButtonSave: [],
+      autoReload2TryHistory: [],
       autoJQB: false,
       autoJQBStage: { value: 0, min: 0 },
       autoJQBFlag: false,
@@ -397,489 +398,475 @@ class Garden {
             
     //auto JQB
     if(config.autoJQB && !config.autoJQBFlag && this.secondsBeforeNextTick <= 10 && this.secondsBeforeNextTick >= 8){
-      try{
-        //switch buttons
-        if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
-        if(!config.autoHarvestWeeds){ Main.handleToggle('autoHarvestWeeds'); }
-        if(config.autoHarvestCleanGarden){ Main.handleToggle('autoHarvestCleanGarden'); }
-        if(config.autoPlant){ Main.handleToggle('autoPlant'); }
-        Main.save();
-        
-        //harvest all plants without QB and JQB
-        this.forEachTile((x, y) => {
+      //switch buttons
+      if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
+      if(!config.autoHarvestWeeds){ Main.handleToggle('autoHarvestWeeds'); }
+      if(config.autoHarvestCleanGarden){ Main.handleToggle('autoHarvestCleanGarden'); }
+      if(config.autoPlant){ Main.handleToggle('autoPlant'); }
+      Main.save();
+      
+      //harvest all plants without QB and JQB
+      this.forEachTile((x, y) => {
+        let tile = this.getTile(x, y);
+        if(tile.seedId != 21 && tile.seedId != 22){
+          this.harvest(x, y);
+        }
+      });
+      
+      //check num of plants
+      let numPlants = 0;
+      let numMatureQB = 0;
+      let numJQB = 0;
+      let JQBAge = [];
+      let minJQBAge = 0;
+      
+      this.forEachTile((x, y) => {
+        if(!this.tileIsEmpty(x, y)){
+          numPlants += 1;
           let tile = this.getTile(x, y);
-          if(tile.seedId != 21 && tile.seedId != 22){
-            this.harvest(x, y);
+          let stage = this.getPlantStage(tile);
+          if(tile.seedId == 21 && stage == "mature"){
+            numMatureQB += 1;
+          } else if(tile.seedId == 22) {
+            numJQB += 1;
+            JQBAge.push(tile.age);
           }
-        });
-        
-        //check num of plants
-        let numPlants = 0;
-        let numMatureQB = 0;
-        let numJQB = 0;
-        let JQBAge = [];
-        let minJQBAge = 0;
-        
-        this.forEachTile((x, y) => {
-          if(!this.tileIsEmpty(x, y)){
-            numPlants += 1;
-            let tile = this.getTile(x, y);
-            let stage = this.getPlantStage(tile);
-            if(tile.seedId == 21 && stage == "mature"){
-              numMatureQB += 1;
-            } else if(tile.seedId == 22) {
-              numJQB += 1;
-              JQBAge.push(tile.age);
-            }
-          }
-        });
-        
-        if(JQBAge.length > 0){
-          JQBAge.sort(function(a,b){return(a - b);});
-          minJQBAge = JQBAge[0];
         }
-        
-        this.writeLog(3, "auto JQB", false, "numPlants:" + numPlants);
-        this.writeLog(3, "auto JQB", false, "numMatureQB:" + numMatureQB);
-        this.writeLog(3, "auto JQB", false, "numJQB:" + numJQB);
-        this.writeLog(3, "auto JQB", false, "minJQBAge:" + minJQBAge);
-        
-        if(config.autoJQBStage.value == 0 && numPlants == 0 && this.getPlant(21).unlocked){
-          //if no plants, plant QB and turn on auto-reload2 for QB
-          //plant QB
-          this.forEachTile((x, y) => {
-            if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
-              this.plantSeed((21 - 1), x, y);
-            }
-          });
-          
-          //turn off autoHarvestCheckCpSMult
-          if(config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
-          //turn off auto-reload
-          if(config.autoReload){ Main.handleToggle('autoReload'); }
-          //turn on auto-reload2 for QB
-          if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
-          config.autoReload2ID.value = 21;
-          document.getElementById(UI.makeId("autoReload2ID")).value = 21;
-          config.autoReload2Grow.value = 2;
-          document.getElementById(UI.makeId("autoReload2Grow")).value = 2;
-          config.autoReload2Number.value = 3;
-          document.getElementById(UI.makeId("autoReload2Number")).value = 3;
-          config.autoReload2Play.value = 0;
-          document.getElementById(UI.makeId("autoReload2Play")).value = 0;
-          
-          //change stage
-          config.autoJQBStage.value = 1;
-          document.getElementById(UI.makeId("autoJQBStage")).value = 1;
-          //save config
-          Main.save();
-          this.writeLog(1, "auto JQB", true, "stage:0->1");
-        }
-        
-        if(config.autoJQBStage.value == 1 && numMatureQB >= 21){
-          //if 21QB mature, turn on auto-reload1 for JQB
-          //turn off autoHarvestCheckCpSMult
-          if(config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
-          //turn off auto-reload2
-          if(config.autoReload2){ Main.handleToggle('autoReload2'); }
-          //turn on auto-reload for JQB
-          if(!config.autoReload){ Main.handleToggle('autoReload'); }
-          config.autoReloadID.value = 22;
-          document.getElementById(UI.makeId("autoReloadID")).value = 22;
-          config.autoReloadMax.value = 4;
-          document.getElementById(UI.makeId("autoReloadMax")).value = 4;
-          
-          //change stage
-          config.autoJQBStage.value = 2;
-          document.getElementById(UI.makeId("autoJQBStage")).value = 2;
-          //save config
-          Main.save();
-          this.writeLog(1, "auto JQB", true, "stage:1->2");
-        }
-        
-        if(config.autoJQBStage.value == 2 && numJQB >= 4){
-          //if 4JQB is exist, harvest all QB and turn on auto-reload2 for JQB
-          //turn on autoHarvestCheckCpSMult
-          if(!config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
-          //turn off auto-reload
-          if(config.autoReload){ Main.handleToggle('autoReload'); }
-          //turn on auto-reload2 for QB
-          if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
-          config.autoReload2ID.value = 22;
-          document.getElementById(UI.makeId("autoReload2ID")).value = 22;
-          config.autoReload2Grow.value = 1;
-          document.getElementById(UI.makeId("autoReload2Grow")).value = 1;
-          config.autoReload2Number.value = 3;
-          document.getElementById(UI.makeId("autoReload2Number")).value = 3;
-          config.autoReload2Play.value = 2;
-          document.getElementById(UI.makeId("autoReload2Play")).value = 2;
-          
-          //change stage
-          config.autoJQBStage.value = 3;
-          document.getElementById(UI.makeId("autoJQBStage")).value = 3;
-          //save config
-          Main.save();
-          this.writeLog(1, "auto JQB", true, "stage:2->3");
-        }
-        
-        if(config.autoJQBStage.value == 3 && minJQBAge >= 65){
-          //if youngest JQB's age >= 65, plant QB
-          this.forEachTile((x, y) => {
-            if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
-              this.plantSeed((21 - 1), x, y);
-            }
-          });
-          
-          //change stage
-          config.autoJQBStage.value = 4;
-          document.getElementById(UI.makeId("autoJQBStage")).value = 4;
-          //save config
-          Main.save();
-          this.writeLog(1, "auto JQB", true, "stage:3->4");
-        }
-        
-        if(config.autoJQBStage.value == 4 && numJQB == 0){
-          //if all JQB harvested, change stage to 1
-          //turn off autoHarvestCheckCpSMult
-          if(config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
-          //turn off auto-reload
-          if(config.autoReload){ Main.handleToggle('autoReload'); }
-          //turn on auto-reload2 for QB
-          if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
-          config.autoReload2ID.value = 21;
-          document.getElementById(UI.makeId("autoReload2ID")).value = 21;
-          config.autoReload2Grow.value = 2;
-          document.getElementById(UI.makeId("autoReload2Grow")).value = 2;
-          config.autoReload2Number.value = 3;
-          document.getElementById(UI.makeId("autoReload2Number")).value = 3;
-          config.autoReload2Play.value = 0;
-          document.getElementById(UI.makeId("autoReload2Play")).value = 0;
-          
-          //change stage
-          config.autoJQBStage.value = 1;
-          document.getElementById(UI.makeId("autoJQBStage")).value = 1;
-          //save config
-          Main.save();
-          this.writeLog(1, "auto JQB", true, "stage:4->1" + " sugar:" + Game.lumps);
-        }
-        
-        config.autoJQBFlag = true;
-        
-      } catch(e){
-        console.error("[auto JQB]some error:" + e.message);
+      });
+      
+      if(JQBAge.length > 0){
+        JQBAge.sort(function(a,b){return(a - b);});
+        minJQBAge = JQBAge[0];
       }
+      
+      this.writeLog(3, "auto JQB", false, "numPlants:" + numPlants);
+      this.writeLog(3, "auto JQB", false, "numMatureQB:" + numMatureQB);
+      this.writeLog(3, "auto JQB", false, "numJQB:" + numJQB);
+      this.writeLog(3, "auto JQB", false, "minJQBAge:" + minJQBAge);
+      
+      if(config.autoJQBStage.value == 0 && numPlants == 0 && this.getPlant(21).unlocked){
+        //if no plants, plant QB and turn on auto-reload2 for QB
+        //plant QB
+        this.forEachTile((x, y) => {
+          if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
+            this.plantSeed((21 - 1), x, y);
+          }
+        });
+        
+        //turn off autoHarvestCheckCpSMult
+        if(config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
+        //turn off auto-reload
+        if(config.autoReload){ Main.handleToggle('autoReload'); }
+        //turn on auto-reload2 for QB
+        if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
+        config.autoReload2ID.value = 21;
+        document.getElementById(UI.makeId("autoReload2ID")).value = 21;
+        config.autoReload2Grow.value = 2;
+        document.getElementById(UI.makeId("autoReload2Grow")).value = 2;
+        config.autoReload2Number.value = 3;
+        document.getElementById(UI.makeId("autoReload2Number")).value = 3;
+        config.autoReload2Play.value = 0;
+        document.getElementById(UI.makeId("autoReload2Play")).value = 0;
+        
+        //change stage
+        config.autoJQBStage.value = 1;
+        document.getElementById(UI.makeId("autoJQBStage")).value = 1;
+        //save config
+        Main.save();
+        this.writeLog(1, "auto JQB", true, "stage:0->1");
+      }
+      
+      if(config.autoJQBStage.value == 1 && numMatureQB >= 21){
+        //if 21QB mature, turn on auto-reload1 for JQB
+        //turn off autoHarvestCheckCpSMult
+        if(config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
+        //turn off auto-reload2
+        if(config.autoReload2){ Main.handleToggle('autoReload2'); }
+        //turn on auto-reload for JQB
+        if(!config.autoReload){ Main.handleToggle('autoReload'); }
+        config.autoReloadID.value = 22;
+        document.getElementById(UI.makeId("autoReloadID")).value = 22;
+        config.autoReloadMax.value = 4;
+        document.getElementById(UI.makeId("autoReloadMax")).value = 4;
+        
+        //change stage
+        config.autoJQBStage.value = 2;
+        document.getElementById(UI.makeId("autoJQBStage")).value = 2;
+        //save config
+        Main.save();
+        this.writeLog(1, "auto JQB", true, "stage:1->2");
+      }
+      
+      if(config.autoJQBStage.value == 2 && numJQB >= 4){
+        //if 4JQB is exist, harvest all QB and turn on auto-reload2 for JQB
+        //turn on autoHarvestCheckCpSMult
+        if(!config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
+        //turn off auto-reload
+        if(config.autoReload){ Main.handleToggle('autoReload'); }
+        //turn on auto-reload2 for QB
+        if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
+        config.autoReload2ID.value = 22;
+        document.getElementById(UI.makeId("autoReload2ID")).value = 22;
+        config.autoReload2Grow.value = 1;
+        document.getElementById(UI.makeId("autoReload2Grow")).value = 1;
+        config.autoReload2Number.value = 3;
+        document.getElementById(UI.makeId("autoReload2Number")).value = 3;
+        config.autoReload2Play.value = 2;
+        document.getElementById(UI.makeId("autoReload2Play")).value = 2;
+        
+        //change stage
+        config.autoJQBStage.value = 3;
+        document.getElementById(UI.makeId("autoJQBStage")).value = 3;
+        //save config
+        Main.save();
+        this.writeLog(1, "auto JQB", true, "stage:2->3");
+      }
+      
+      if(config.autoJQBStage.value == 3 && minJQBAge >= 65){
+        //if youngest JQB's age >= 65, plant QB
+        this.forEachTile((x, y) => {
+          if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
+            this.plantSeed((21 - 1), x, y);
+          }
+        });
+        
+        //change stage
+        config.autoJQBStage.value = 4;
+        document.getElementById(UI.makeId("autoJQBStage")).value = 4;
+        //save config
+        Main.save();
+        this.writeLog(1, "auto JQB", true, "stage:3->4");
+      }
+      
+      if(config.autoJQBStage.value == 4 && numJQB == 0){
+        //if all JQB harvested, change stage to 1
+        //turn off autoHarvestCheckCpSMult
+        if(config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
+        //turn off auto-reload
+        if(config.autoReload){ Main.handleToggle('autoReload'); }
+        //turn on auto-reload2 for QB
+        if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
+        config.autoReload2ID.value = 21;
+        document.getElementById(UI.makeId("autoReload2ID")).value = 21;
+        config.autoReload2Grow.value = 2;
+        document.getElementById(UI.makeId("autoReload2Grow")).value = 2;
+        config.autoReload2Number.value = 3;
+        document.getElementById(UI.makeId("autoReload2Number")).value = 3;
+        config.autoReload2Play.value = 0;
+        document.getElementById(UI.makeId("autoReload2Play")).value = 0;
+        
+        //change stage
+        config.autoJQBStage.value = 1;
+        document.getElementById(UI.makeId("autoJQBStage")).value = 1;
+        //save config
+        Main.save();
+        this.writeLog(1, "auto JQB", true, "stage:4->1" + " sugar:" + Game.lumps);
+      }
+      
+      config.autoJQBFlag = true;
     }
         
     //auto reload
     if(config.autoReload){
-      try{
-        //2sec before tick
-        if(this.secondsBeforeNextTick <= 2 && config.autoReloadSaveSecond == 9999){
-          if(parseInt(config.autoReloadMax.value) == 0){
-            //xy mode
-            if(this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value)){
-              //save
-              config.autoReloadSave = Game.WriteSave(1);
-              config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-              this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
-              this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
-              this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
-            
-              //save other button state
-              let buttonSave = [];
-              buttonSave[0] = config.autoHarvest;
-              buttonSave[1] = config.autoPlant;
-              buttonSave[2] = config.autoJQB;
-              buttonSave[3] = config.autoLump;
-              buttonSave[4] = config.autoReload2;
-              config.autoReloadButtonSave = buttonSave;
-              
-              //turn off other button
-              if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
-              if(config.autoPlant){ Main.handleToggle('autoPlant'); }
-              if(config.autoJQB){ Main.handleToggle('autoJQB'); }
-              if(config.autoLump){ Main.handleToggle('autoLump'); }
-              if(config.autoReload2){ Main.handleToggle('autoReload2'); }
-              Main.save();
-            
-              //display
-              document.getElementById("rightBottomAutoReload").style.display = "block";
-              document.getElementById("rightBottomAutoReload2").style.display = "none";
-              document.getElementById("rightBottomLumpReload").style.display = "none";
-            
-              //reset interval
-              Main.restart(parseInt(config.interval.value));
-              this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
-            }
-          } else {
-            //max mode
-            let targetNumber = 0;
-            this.forEachTile((x, y) => {
-              let tileAr = this.getTile(x, y);
-              if(tileAr.seedId == config.autoReloadID.value){
-                targetNumber += 1;
-              }
-            });
-            
-            if(targetNumber < parseInt(config.autoReloadMax.value)){
-              //save
-              config.autoReloadSave = Game.WriteSave(1);
-              config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-              config.autoReloadNumber = targetNumber;
-              this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
-              this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
-              this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
-              this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
-            
-              //save other button state
-              let buttonSave = [];
-              buttonSave[0] = config.autoHarvest;
-              buttonSave[1] = config.autoPlant;
-              buttonSave[2] = config.autoJQB;
-              buttonSave[3] = config.autoLump;
-              buttonSave[4] = config.autoReload2;
-              config.autoReloadButtonSave = buttonSave;
-              
-              //turn off other button
-              if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
-              if(config.autoPlant){ Main.handleToggle('autoPlant'); }
-              if(config.autoJQB){ Main.handleToggle('autoJQB'); }
-              if(config.autoLump){ Main.handleToggle('autoLump'); }
-              if(config.autoReload2){ Main.handleToggle('autoReload2'); }
-              Main.save();
-            
-              //display
-              document.getElementById("rightBottomAutoReload").style.display = "block";
-              document.getElementById("rightBottomAutoReload2").style.display = "none";
-              document.getElementById("rightBottomLumpReload").style.display = "none";
-            
-              //reset interval
-              Main.restart(parseInt(config.interval.value));
-              this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
-            }
-          }
-        }
-        
-        //after tick
-        if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
-          if(parseInt(config.autoReloadMax.value) == 0){
-            //xy mode
-            //get tile info
-            let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
-            //check
-            if(tileAr.seedId == config.autoReloadID.value){
-              //grow
-              //reset interval
-              Main.restart(1000);
-              
-              document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-              this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
-              this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
-              //reset save
-              config.autoReloadSave = "";
-              config.autoReloadSaveSecond = 9999;
-              config.autoReloadReloads = 0;
-              this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
-              this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
-              this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
-            
-              //restore other button state
-              if(config.autoReloadButtonSave[0]){ Main.handleToggle('autoHarvest'); }
-              if(config.autoReloadButtonSave[1]){ Main.handleToggle('autoPlant'); }
-              if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
-              if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
-              if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
-              
-              config.autoReloadButtonSave = [];
-              Main.save();
-              this.writeLog(3, "auto reload", false, "restore buttons");
-            } else {
-              //reload
-              config.autoReloadReloads += 1;
-              document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-              this.writeLog(3, "auto reload", false, "reload! try:" + config.autoReloadReloads);
-              Game.LoadSave(config.autoReloadSave);
-            }
-          } else {
-            //max mode
-            let targetNumber = 0;
-            this.forEachTile((x, y) => {
-              let tileAr = this.getTile(x, y);
-              if(tileAr.seedId == config.autoReloadID.value){
-                targetNumber += 1;
-              }
-            });
-            //check
-            if(targetNumber > parseInt(config.autoReloadNumber)){
-              //grow
-              //reset interval
-              Main.restart(1000);
-              
-              document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-              this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
-              this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
-              this.writeLog(3, "auto reload", false, "target:" + targetNumber);
-              //reset save
-              config.autoReloadSave = "";
-              config.autoReloadSaveSecond = 9999;
-              config.autoReloadReloads = 0;
-              config.autoReloadNumber = 0;
-              this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
-              this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
-              this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
-              this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
-            
-              //restore other button state
-              if(config.autoReloadButtonSave[0]){ Main.handleToggle('autoHarvest'); }
-              if(config.autoReloadButtonSave[1]){ Main.handleToggle('autoPlant'); }
-              if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
-              if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
-              if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
-              
-              config.autoReloadButtonSave = [];
-              Main.save();
-              this.writeLog(3, "auto reload", false, "restore buttons");
-            } else {
-              //reload
-              config.autoReloadReloads += 1;
-              document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-              this.writeLog(3, "auto reload", false, "reload! try:" + config.autoReloadReloads);
-              Game.LoadSave(config.autoReloadSave);
-            }
-          }
-        }
-      } catch(e){
-        console.error("[auto reload]some error:" + e.message);
-      }
-    }
-    
-    //auto reload2
-    if(config.autoReload2){
-      try{
-        //2sec before tick
-        if(this.secondsBeforeNextTick <= 2 && config.autoReload2SaveSecond == 9999){
-          let targetPlants = [];
-          this.forEachTile((x, y) => {
-            let tileAr2 = this.getTile(x, y);
-            if(tileAr2.seedId == config.autoReload2ID.value){
-              targetPlants.push([x, y, tileAr2.age]);
-            }
-          });
-          
-          if(targetPlants.length > 0){
-            //sort by age
-            targetPlants.sort(function(a,b){return(a[2] - b[2]);});
+      //2sec before tick
+      if(this.secondsBeforeNextTick <= 2 && config.autoReloadSaveSecond == 9999){
+        if(parseInt(config.autoReloadMax.value) == 0){
+          //xy mode
+          if(this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value)){
             //save
-            config.autoReload2Save = Game.WriteSave(1);
-            config.autoReload2SaveSecond = this.secondsBeforeNextTick;
-            config.autoReload2Plants = targetPlants;
-            this.writeLog(3, "auto reload2", false, "save:" + config.autoReload2Save.substr(0, 15) + "...");
-            this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
-            this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
-            
+            config.autoReloadSave = Game.WriteSave(1);
+            config.autoReloadSaveSecond = this.secondsBeforeNextTick;
+            this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
+            this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
+            this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
+          
             //save other button state
             let buttonSave = [];
             buttonSave[0] = config.autoHarvest;
             buttonSave[1] = config.autoPlant;
             buttonSave[2] = config.autoJQB;
             buttonSave[3] = config.autoLump;
-            buttonSave[4] = config.autoReload;
-            config.autoReload2ButtonSave = buttonSave;
+            buttonSave[4] = config.autoReload2;
+            config.autoReloadButtonSave = buttonSave;
             
             //turn off other button
             if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
             if(config.autoPlant){ Main.handleToggle('autoPlant'); }
             if(config.autoJQB){ Main.handleToggle('autoJQB'); }
             if(config.autoLump){ Main.handleToggle('autoLump'); }
-            if(config.autoReload){ Main.handleToggle('autoReload'); }
+            if(config.autoReload2){ Main.handleToggle('autoReload2'); }
             Main.save();
-            
+          
             //display
-            document.getElementById("rightBottomAutoReload").style.display = "none";
-            document.getElementById("rightBottomAutoReload2").style.display = "block";
+            document.getElementById("rightBottomAutoReload").style.display = "block";
+            document.getElementById("rightBottomAutoReload2").style.display = "none";
             document.getElementById("rightBottomLumpReload").style.display = "none";
-            
+          
             //reset interval
             Main.restart(parseInt(config.interval.value));
-            this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
+            this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
+          }
+        } else {
+          //max mode
+          let targetNumber = 0;
+          this.forEachTile((x, y) => {
+            let tileAr = this.getTile(x, y);
+            if(tileAr.seedId == config.autoReloadID.value){
+              targetNumber += 1;
+            }
+          });
+          
+          if(targetNumber < parseInt(config.autoReloadMax.value)){
+            //save
+            config.autoReloadSave = Game.WriteSave(1);
+            config.autoReloadSaveSecond = this.secondsBeforeNextTick;
+            config.autoReloadNumber = targetNumber;
+            this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
+            this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
+            this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
+            this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
+          
+            //save other button state
+            let buttonSave = [];
+            buttonSave[0] = config.autoHarvest;
+            buttonSave[1] = config.autoPlant;
+            buttonSave[2] = config.autoJQB;
+            buttonSave[3] = config.autoLump;
+            buttonSave[4] = config.autoReload2;
+            config.autoReloadButtonSave = buttonSave;
+            
+            //turn off other button
+            if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
+            if(config.autoPlant){ Main.handleToggle('autoPlant'); }
+            if(config.autoJQB){ Main.handleToggle('autoJQB'); }
+            if(config.autoLump){ Main.handleToggle('autoLump'); }
+            if(config.autoReload2){ Main.handleToggle('autoReload2'); }
+            Main.save();
+          
+            //display
+            document.getElementById("rightBottomAutoReload").style.display = "block";
+            document.getElementById("rightBottomAutoReload2").style.display = "none";
+            document.getElementById("rightBottomLumpReload").style.display = "none";
+          
+            //reset interval
+            Main.restart(parseInt(config.interval.value));
+            this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
           }
         }
-        
-        //after tick
-        if(this.secondsBeforeNextTick >= config.autoReload2SaveSecond + 10){
-          let upperAge = 0;
-          let targetNumber = 0;
-          if(parseInt(config.autoReload2Number.value) > config.autoReload2Plants.length){
-            upperAge = parseInt(config.autoReload2Plants[config.autoReload2Plants.length - 1][2]);
-            targetNumber = parseInt(config.autoReload2Plants.length);
-          } else {
-            upperAge = parseInt(config.autoReload2Plants[(parseInt(config.autoReload2Number.value) - 1)][2]) + parseInt(config.autoReload2Play.value);
-            targetNumber = parseInt(config.autoReload2Number.value);
-          }
-          this.writeLog(3, "auto reload2", false, "upperAge:" + upperAge);
-          this.writeLog(3, "auto reload2", false, "targetNumber:" + targetNumber);
-          
+      }
+      
+      //after tick
+      if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
+        if(parseInt(config.autoReloadMax.value) == 0){
+          //xy mode
+          //get tile info
+          let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
           //check
-          let grows = 0;
-          for(let i = 0; i < config.autoReload2Plants.length; i++){
-            let targetPlant = config.autoReload2Plants[i];
-            if(parseInt(targetPlant[2]) > upperAge){
-              //above upper age
-              break;
-            }
-            
-            if(this.tileIsEmpty(targetPlant[0], targetPlant[1])){
-              //target plant was harvested
-              grows += 1;
-              continue;
-            }
-            
-            let tileAr2 = this.getTile(targetPlant[0], targetPlant[1]);
-            if(parseInt(tileAr2.age) >= (parseInt(targetPlant[2]) + parseInt(config.autoReload2Grow.value))){
-              grows += 1;
-            }
-          }
-          document.getElementById("autoReload2Disp2").innerText = grows;
-          this.writeLog(3, "auto reload2", false, "grows:" + grows);
-          
-          if(grows < targetNumber){
-            //reload
-            config.autoReload2Reloads += 1;
-            document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
-            this.writeLog(3, "auto reload2", false, "reload! try:" + config.autoReload2Reloads);
-            Game.LoadSave(config.autoReload2Save);
-          } else {
+          if(tileAr.seedId == config.autoReloadID.value){
             //grow
             //reset interval
             Main.restart(1000);
             
-            document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
-            this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
-            this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
-            config.autoReload2Save = "";
-            config.autoReload2SaveSecond = 9999;
-            config.autoReload2Reloads = 0;
-            config.autoReload2Plants = [];
-            this.writeLog(3, "auto reload2", false, "reset:" + config.autoReload2Save);
-            this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
-            this.writeLog(3, "auto reload2", false, "reloads:" + config.autoReload2Reloads);
-            this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
-            
+            document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
+            this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
+            this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
+            //reset save
+            config.autoReloadSave = "";
+            config.autoReloadSaveSecond = 9999;
+            config.autoReloadReloads = 0;
+            this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
+            this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
+            this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
+          
             //restore other button state
-            if(config.autoReload2ButtonSave[0]){ Main.handleToggle('autoHarvest'); }
-            if(config.autoReload2ButtonSave[1]){ Main.handleToggle('autoPlant'); }
-            if(config.autoReload2ButtonSave[2]){ Main.handleToggle('autoJQB'); }
-            if(config.autoReload2ButtonSave[3]){ Main.handleToggle('autoLump'); }
-            if(config.autoReload2ButtonSave[4]){ Main.handleToggle('autoReload'); }
+            if(config.autoReloadButtonSave[0]){ Main.handleToggle('autoHarvest'); }
+            if(config.autoReloadButtonSave[1]){ Main.handleToggle('autoPlant'); }
+            if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
+            if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
+            if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
             
-            config.autoReload2ButtonSave = [];
+            config.autoReloadButtonSave = [];
             Main.save();
-            this.writeLog(3, "auto reload2", false, "restore buttons");
+            this.writeLog(3, "auto reload", false, "restore buttons");
+          } else {
+            //reload
+            config.autoReloadReloads += 1;
+            document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
+            this.writeLog(3, "auto reload", false, "reload! try:" + config.autoReloadReloads);
+            Game.LoadSave(config.autoReloadSave);
+          }
+        } else {
+          //max mode
+          let targetNumber = 0;
+          this.forEachTile((x, y) => {
+            let tileAr = this.getTile(x, y);
+            if(tileAr.seedId == config.autoReloadID.value){
+              targetNumber += 1;
+            }
+          });
+          //check
+          if(targetNumber > parseInt(config.autoReloadNumber)){
+            //grow
+            //reset interval
+            Main.restart(1000);
+            
+            document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
+            this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
+            this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
+            this.writeLog(3, "auto reload", false, "target:" + targetNumber);
+            //reset save
+            config.autoReloadSave = "";
+            config.autoReloadSaveSecond = 9999;
+            config.autoReloadReloads = 0;
+            config.autoReloadNumber = 0;
+            this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
+            this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
+            this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
+            this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
+          
+            //restore other button state
+            if(config.autoReloadButtonSave[0]){ Main.handleToggle('autoHarvest'); }
+            if(config.autoReloadButtonSave[1]){ Main.handleToggle('autoPlant'); }
+            if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
+            if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
+            if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
+            
+            config.autoReloadButtonSave = [];
+            Main.save();
+            this.writeLog(3, "auto reload", false, "restore buttons");
+          } else {
+            //reload
+            config.autoReloadReloads += 1;
+            document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
+            this.writeLog(3, "auto reload", false, "reload! try:" + config.autoReloadReloads);
+            Game.LoadSave(config.autoReloadSave);
           }
         }
+      }
+    }
+    
+    //auto reload2
+    if(config.autoReload2){
+      //2sec before tick
+      if(this.secondsBeforeNextTick <= 2 && config.autoReload2SaveSecond == 9999){
+        let targetPlants = [];
+        this.forEachTile((x, y) => {
+          let tileAr2 = this.getTile(x, y);
+          if(tileAr2.seedId == config.autoReload2ID.value){
+            targetPlants.push([x, y, tileAr2.age]);
+          }
+        });
         
-      } catch(e){
-        console.error("[auto reload2]some error:" + e.message);
+        if(targetPlants.length > 0){
+          //sort by age
+          targetPlants.sort(function(a,b){return(a[2] - b[2]);});
+          //save
+          config.autoReload2Save = Game.WriteSave(1);
+          config.autoReload2SaveSecond = this.secondsBeforeNextTick;
+          config.autoReload2Plants = targetPlants;
+          this.writeLog(3, "auto reload2", false, "save:" + config.autoReload2Save.substr(0, 15) + "...");
+          this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
+          this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
+          
+          //save other button state
+          let buttonSave = [];
+          buttonSave[0] = config.autoHarvest;
+          buttonSave[1] = config.autoPlant;
+          buttonSave[2] = config.autoJQB;
+          buttonSave[3] = config.autoLump;
+          buttonSave[4] = config.autoReload;
+          config.autoReload2ButtonSave = buttonSave;
+          
+          //turn off other button
+          if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
+          if(config.autoPlant){ Main.handleToggle('autoPlant'); }
+          if(config.autoJQB){ Main.handleToggle('autoJQB'); }
+          if(config.autoLump){ Main.handleToggle('autoLump'); }
+          if(config.autoReload){ Main.handleToggle('autoReload'); }
+          Main.save();
+          
+          //display
+          document.getElementById("rightBottomAutoReload").style.display = "none";
+          document.getElementById("rightBottomAutoReload2").style.display = "block";
+          document.getElementById("rightBottomLumpReload").style.display = "none";
+          
+          //reset interval
+          Main.restart(parseInt(config.interval.value));
+          this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
+        }
+      }
+      
+      //after tick
+      if(this.secondsBeforeNextTick >= config.autoReload2SaveSecond + 10){
+        let upperAge = 0;
+        let targetNumber = 0;
+        if(parseInt(config.autoReload2Number.value) > config.autoReload2Plants.length){
+          upperAge = parseInt(config.autoReload2Plants[config.autoReload2Plants.length - 1][2]);
+          targetNumber = parseInt(config.autoReload2Plants.length);
+        } else {
+          upperAge = parseInt(config.autoReload2Plants[(parseInt(config.autoReload2Number.value) - 1)][2]) + parseInt(config.autoReload2Play.value);
+          targetNumber = parseInt(config.autoReload2Number.value);
+        }
+        this.writeLog(3, "auto reload2", false, "upperAge:" + upperAge);
+        this.writeLog(3, "auto reload2", false, "targetNumber:" + targetNumber);
+        
+        //check
+        let grows = 0;
+        for(let i = 0; i < config.autoReload2Plants.length; i++){
+          let targetPlant = config.autoReload2Plants[i];
+          if(parseInt(targetPlant[2]) > upperAge){
+            //above upper age
+            break;
+          }
+          
+          if(this.tileIsEmpty(targetPlant[0], targetPlant[1])){
+            //target plant was harvested
+            grows += 1;
+            continue;
+          }
+          
+          let tileAr2 = this.getTile(targetPlant[0], targetPlant[1]);
+          if(parseInt(tileAr2.age) >= (parseInt(targetPlant[2]) + parseInt(config.autoReload2Grow.value))){
+            grows += 1;
+          }
+        }
+        document.getElementById("autoReload2Disp2").innerText = grows;
+        this.writeLog(3, "auto reload2", false, "grows:" + grows);
+        
+        if(grows < targetNumber){
+          //reload
+          config.autoReload2Reloads += 1;
+          document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
+          this.writeLog(3, "auto reload2", false, "reload! try:" + config.autoReload2Reloads);
+          Game.LoadSave(config.autoReload2Save);
+        } else {
+          //grow
+          //reset interval
+          Main.restart(1000);
+          
+          document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
+          this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
+          this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
+          config.autoReload2Save = "";
+          config.autoReload2SaveSecond = 9999;
+          config.autoReload2Reloads = 0;
+          config.autoReload2Plants = [];
+          this.writeLog(3, "auto reload2", false, "reset:" + config.autoReload2Save);
+          this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
+          this.writeLog(3, "auto reload2", false, "reloads:" + config.autoReload2Reloads);
+          this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
+          
+          //restore other button state
+          if(config.autoReload2ButtonSave[0]){ Main.handleToggle('autoHarvest'); }
+          if(config.autoReload2ButtonSave[1]){ Main.handleToggle('autoPlant'); }
+          if(config.autoReload2ButtonSave[2]){ Main.handleToggle('autoJQB'); }
+          if(config.autoReload2ButtonSave[3]){ Main.handleToggle('autoLump'); }
+          if(config.autoReload2ButtonSave[4]){ Main.handleToggle('autoReload'); }
+          
+          config.autoReload2ButtonSave = [];
+          Main.save();
+          this.writeLog(3, "auto reload2", false, "restore buttons");
+        }
       }
     }
 
