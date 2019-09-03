@@ -1562,7 +1562,7 @@ class UI {
       
       document.getElementById("cookieGardenHelperRightBottom").style.borderStyle = "solid";
       document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "1";
-      document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "inherit";
+      document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "#000";
     }
     
     doc.elId('cookieGardenHelperFileLoadButton').onchange = (event) => {
