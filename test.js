@@ -791,11 +791,11 @@ class Garden {
             this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
             
             //restore other button state
-            if(config.autoLumpButtonSave[0]){ Main.handleToggle('autoHarvest'); }
-            if(config.autoLumpButtonSave[1]){ Main.handleToggle('autoPlant'); }
-            if(config.autoLumpButtonSave[2]){ Main.handleToggle('autoJQB'); }
-            if(config.autoLumpButtonSave[3]){ Main.handleToggle('autoLump'); }
-            if(config.autoLumpButtonSave[4]){ Main.handleToggle('autoReload'); }
+            if(config.autoReload2ButtonSave[0]){ Main.handleToggle('autoHarvest'); }
+            if(config.autoReload2ButtonSave[1]){ Main.handleToggle('autoPlant'); }
+            if(config.autoReload2ButtonSave[2]){ Main.handleToggle('autoJQB'); }
+            if(config.autoReload2ButtonSave[3]){ Main.handleToggle('autoLump'); }
+            if(config.autoReload2ButtonSave[4]){ Main.handleToggle('autoReload'); }
             
             config.autoReload2ButtonSave = [];
             Main.save();
