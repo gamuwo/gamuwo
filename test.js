@@ -45,6 +45,7 @@ class Config {
       autoReloadReloads: 0,
       autoReloadNumber: 0,
       autoReloadButtonSave: [],
+      autoReloadTryHistory: [],
       autoReload2: false,
       autoReload2ID: { value: 0, min: 0 },
       autoReload2Grow: { value: 0, min: 0 },
@@ -683,6 +684,11 @@ class Garden {
             //grow
             //reset interval
             Main.restart(1000);
+            //for average
+            this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory);
+            let tryAverage = this.arrayAverage(config.autoReloadTryHistory).toFixed(2) + "(" + config.autoReloadTryHistory.length + ")";
+            document.getElementById("autoReloadDisp2").innerText = tryAverage;
+            this.writeLog(3, "auto reload", false, "try average:" + tryAverage);
             
             document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
             this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
@@ -701,7 +707,6 @@ class Garden {
             if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
             if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
             if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
-            
             config.autoReloadButtonSave = [];
             Main.save();
             this.writeLog(3, "auto reload", false, "restore buttons");
@@ -726,6 +731,11 @@ class Garden {
             //grow
             //reset interval
             Main.restart(1000);
+            //for average
+            this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory);
+            let tryAverage = this.arrayAverage(config.autoReloadTryHistory).toFixed(2) + "(" + config.autoReloadTryHistory.length + ")";
+            document.getElementById("autoReloadDisp2").innerText = tryAverage;
+            this.writeLog(3, "auto reload", false, "try average:" + tryAverage);
             
             document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
             this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
@@ -747,7 +757,6 @@ class Garden {
             if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
             if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
             if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
-            
             config.autoReloadButtonSave = [];
             Main.save();
             this.writeLog(3, "auto reload", false, "restore buttons");
@@ -1497,6 +1506,7 @@ class UI {
     </div>
     <div id="rightBottomAutoReload">
       Try:<span id="autoReloadDisp">0</span>
+      Ave:<span id="autoReloadDisp2">0</span>
     </div>
     <div id="rightBottomAutoReload2">
       Try:<span id="autoReload2Disp">0</span>
@@ -1702,6 +1712,7 @@ class Main {
       this.config.autoReloadReloads = 0;
       this.config.autoReloadNumber = 0;
       this.config.autoReloadButtonSave = [];
+      this.config.autoReloadTryHistory = [];
     } else if (key == 'autoReload2Reset') {
       this.config.autoReload2Save = "";
       this.config.autoReload2SaveSecond = 9999;
