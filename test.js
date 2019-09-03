@@ -313,12 +313,12 @@ class Garden {
     });
     
     //play sound
-    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 10 this.secondsBeforeNextTick >= 8){
+    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 10 && this.secondsBeforeNextTick >= 8){
       this.playSound1();
       config.playSoundFlag = true;
       this.writeLog(3, "play sound", false, "sound!");
     }
-    if(config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= 178 this.secondsBeforeNextTick >= 176){
+    if(config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= 178 && this.secondsBeforeNextTick >= 176){
       this.playSound2();
       config.playSound2Flag = true;
       this.writeLog(3, "play sound2", false, "sound!");
