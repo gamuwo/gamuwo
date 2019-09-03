@@ -1546,7 +1546,7 @@ class UI {
       }
       document.getElementById("cookieGardenHelperRightBottom").style.outlineStyle = "none";
       document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "auto";
-      document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "transparent";
+      document.getElementById("cookieGardenHelperRightBottom").style.backgroundImage = "none";
     }
     doc.elId('cookieGardenHelperRightBottom').onmouseover = (event) => {
       let displaySave = [];
@@ -1562,7 +1562,7 @@ class UI {
       
       document.getElementById("cookieGardenHelperRightBottom").style.outlineStyle = "solid";
       document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "1";
-      document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "#000";
+      document.getElementById("cookieGardenHelperRightBottom").style.backgroundImage = "url(img/darkNoise.jpg)";
     }
     
     doc.elId('cookieGardenHelperFileLoadButton').onchange = (event) => {
