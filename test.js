@@ -1506,12 +1506,12 @@ class UI {
     </div>
     <div id="rightBottomAutoReload">
       Try:<span id="autoReloadDisp">0</span>
-      Ave:<span id="autoReloadDisp2">0</span>
+      Ave:<span id="autoReloadDisp2">0(0)</span>
     </div>
     <div id="rightBottomAutoReload2">
       Try:<span id="autoReload2Disp">0</span>
       Grow:<span id="autoReload2Disp2">0</span>
-      Ave:<span id="autoReload2Disp3">0</span>
+      Ave:<span id="autoReload2Disp3">0(0)</span>
     </div>
     <div>
       Interval:<span id="intervalDisp">1000</span>ms
