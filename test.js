@@ -249,9 +249,19 @@ class Garden {
   
   static pushLimit(input, array) {
     array.push(input);
-    if(array.length > 5){
+    if(array.length > 1000){
       array.shift();
     }
+  }
+  
+  static arrayAverage(array) {
+    if(array.length == 0) return 0;
+    
+    let sum = 0;
+    array.forEach(function(item) {
+      sum += item;
+    });
+    return sum/array.length;
   }
   
   static playSound1() {
@@ -850,6 +860,11 @@ class Garden {
           //grow
           //reset interval
           Main.restart(1000);
+          //for average
+          this.pushLimit(config.autoReload2Reloads, config.autoReload2TryHistory);
+          let tryAverage = arrayAverage(config.autoReload2TryHistory);
+          document.getElementById("autoReload2Disp3").innerText = tryAverage;
+          this.writeLog(3, "auto reload2", false, "try average:" + tryAverage);
           
           document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
           this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
@@ -869,7 +884,6 @@ class Garden {
           if(config.autoReload2ButtonSave[2]){ Main.handleToggle('autoJQB'); }
           if(config.autoReload2ButtonSave[3]){ Main.handleToggle('autoLump'); }
           if(config.autoReload2ButtonSave[4]){ Main.handleToggle('autoReload'); }
-          
           config.autoReload2ButtonSave = [];
           Main.save();
           this.writeLog(3, "auto reload2", false, "restore buttons");
@@ -1487,6 +1501,7 @@ class UI {
     <div id="rightBottomAutoReload2">
       Try:<span id="autoReload2Disp">0</span>
       Grow:<span id="autoReload2Disp2">0</span>
+      Ave:<span id="autoReload2Disp3">0</span>
     </div>
     <div>
       Interval:<span id="intervalDisp">1000</span>ms
