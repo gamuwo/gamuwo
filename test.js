@@ -1179,6 +1179,64 @@ class UI {
   </div>
   <div id="cookieGardenHelperTitle" class="title">Cookie Garden Helper Mod</div>
   <div id="cookieGardenHelperTools">
+    <div class="cookieGardenHelperPanel" id="manualToolsPanel">
+      <h2>Tools</h2>
+      <p>
+        ${this.button('saveButton', 'Save',
+        'save')}
+      </p>
+      <p>
+        ${this.button('exportSaveButton', 'Export save',
+        'open export save window')}
+        ${this.button('importSaveButton', 'Import save',
+        'open import save window')}
+      </p>
+      <p>
+        ${this.button('fileSaveButton', 'Save to file',
+        'file save')}
+        <a class="btn option" style="position:relative;">
+          <input id="cookieGardenHelperFileLoadButton" type="file" 
+          style="cursor:pointer;opacity:0;position:absolute;left:0px;top:0px;width:100%;height:100%;" />
+          Load from file
+        </a>
+      </p>
+      <p>
+        ${this.button('quickLoad', 'Quick load',
+        'load before tick savedata')}
+        <span id="quickLoadSaveTime">Not saved</span>
+      </p>
+      <p>
+        ${this.button('quickSave2', 'QS2',
+        'quick save')}
+        ${this.button('quickLoad2', 'QL2',
+        'quick load')}
+        <span id="quickLoad2SaveTime">Not saved</span>
+      </p>
+      <p>
+        ${this.button(
+          'playSound', 'Sound',
+          'play beep sound before 10-15sec from tick', true,
+          config.playSound
+        )}
+        ${this.button(
+          'playSound2', 'Sound2',
+          'play beep sound after tick', true,
+          config.playSound2
+        )}
+      </p>
+      <p>
+        ${this.numberInputWidth(
+          'interval', 'Reload interval', 'input auto reload interval(ms)',
+          config.interval, 3.5
+        )}
+      </p>
+      <p>
+        ${this.numberInput(
+          'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
+          config.logLevel
+        )}
+      </p>
+    </div>
     <div class="cookieGardenHelperPanel" id="autoHarvestPanel">
       <h2>
         Auto-harvest
@@ -1317,64 +1375,6 @@ class UI {
           )}
         </p>
       </div>
-    </div>
-    <div class="cookieGardenHelperPanel" id="manualToolsPanel">
-      <h2>Tools</h2>
-      <p>
-        ${this.button('saveButton', 'Save',
-        'save')}
-      </p>
-      <p>
-        ${this.button('exportSaveButton', 'Export save',
-        'open export save window')}
-        ${this.button('importSaveButton', 'Import save',
-        'open import save window')}
-      </p>
-      <p>
-        ${this.button('fileSaveButton', 'Save to file',
-        'file save')}
-        <a class="btn option" style="position:relative;">
-          <input id="cookieGardenHelperFileLoadButton" type="file" 
-          style="cursor:pointer;opacity:0;position:absolute;left:0px;top:0px;width:100%;height:100%;" />
-          Load from file
-        </a>
-      </p>
-      <p>
-        ${this.button('quickLoad', 'Quick load',
-        'load before tick savedata')}
-        <span id="quickLoadSaveTime">Not saved</span>
-      </p>
-      <p>
-        ${this.button('quickSave2', 'QS2',
-        'quick save')}
-        ${this.button('quickLoad2', 'QL2',
-        'quick load')}
-        <span id="quickLoad2SaveTime">Not saved</span>
-      </p>
-      <p>
-        ${this.button(
-          'playSound', 'Sound',
-          'play beep sound before 10-15sec from tick', true,
-          config.playSound
-        )}
-        ${this.button(
-          'playSound2', 'Sound2',
-          'play beep sound after tick', true,
-          config.playSound2
-        )}
-      </p>
-      <p>
-        ${this.numberInputWidth(
-          'interval', 'Reload interval', 'input auto reload interval(ms)',
-          config.interval, 3.5
-        )}
-      </p>
-      <p>
-        ${this.numberInput(
-          'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
-          config.logLevel
-        )}
-      </p>
     </div>
     <div class="cookieGardenHelperPanel">
       <div id="autoReload">
