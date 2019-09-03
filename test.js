@@ -1480,7 +1480,7 @@ class UI {
     </div>
   </div>
   <div id="cookieGardenHelperRightBottom">
-    <div id=rightBottomLumpReload">
+    <div id="rightBottomLumpReload">
       Try:<span id="lumpReloadDisp">0</span>
       Gain:<span id="lumpReloadDisp2">0</span>
       Type:<span id="lumpReloadDisp3">0</span>
