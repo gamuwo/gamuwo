@@ -1039,6 +1039,7 @@ class UI {
   margin-right: 1em;
   margin-bottom: 0.5em;
   text-align: right;
+  border-width: 1px;
 }
 
 #rightBottomAutoReload,
@@ -1545,6 +1546,7 @@ class UI {
       }
       document.getElementById("cookieGardenHelperRightBottom").style.border = "none";
       document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "auto";
+      document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "inherit";
     }
     doc.elId('cookieGardenHelperRightBottom').onmouseover = (event) => {
       let displaySave = [];
@@ -1560,6 +1562,7 @@ class UI {
       
       document.getElementById("cookieGardenHelperRightBottom").style.border = "solid";
       document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "1";
+      document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "transparent";
     }
     
     doc.elId('cookieGardenHelperFileLoadButton').onchange = (event) => {
