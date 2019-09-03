@@ -1021,6 +1021,7 @@ class UI {
   bottom: 0;
   margin-right: 1em;
   margin-bottom: 0.5em;
+  text-align: right;
 }
 
 #cookieGardenHelperTitle {
