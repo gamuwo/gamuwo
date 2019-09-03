@@ -1534,6 +1534,13 @@ class UI {
       Main.handleMouseoverPlotIsSaved(this);
     }
     
+    doc.elId('cookieGardenHelperRightBottom').onmouseout = (event) => {
+      document.getElementById("rightBottomAutoReload").style.display = "block";
+    }
+    doc.elId('cookieGardenHelperRightBottom').onmouseover = (event) => {
+      document.getElementById("rightBottomAutoReload").style.display = "block !important";
+    }
+    
     doc.elId('cookieGardenHelperFileLoadButton').onchange = (event) => {
       Game.FileLoad(event);
       document.getElementById("cookieGardenHelperFileLoadButton").value = "";
