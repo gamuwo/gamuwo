@@ -1546,7 +1546,7 @@ class UI {
       }
       document.getElementById("cookieGardenHelperRightBottom").style.borderStyle = "none";
       document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "auto";
-      document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "#000";
+      document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "gray";
     }
     doc.elId('cookieGardenHelperRightBottom').onmouseover = (event) => {
       let displaySave = [];
