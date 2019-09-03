@@ -53,6 +53,7 @@ class Config {
       autoReload2SaveSecond: 9999,
       autoReload2Reloads: 0,
       autoReload2Plants: [],
+      autoReload2ButtonSave: [],
       autoJQB: false,
       autoJQBStage: { value: 0, min: 0 },
       autoJQBFlag: false,
@@ -312,8 +313,6 @@ class Garden {
     
     //play sound
     if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 10){
-      console.log("secs:" + this.secondsBeforeNextTick);
-      
       this.playSound1();
       config.playSoundFlag = true;
       this.writeLog(3, "play sound", false, "sound!");
@@ -707,6 +706,24 @@ class Garden {
             this.writeLog(3, "auto reload2", false, "save:" + config.autoReload2Save.substr(0, 15) + "...");
             this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
             this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
+            
+            //save other button state
+            let buttonSave = [];
+            buttonSave[0] = config.autoHarvest;
+            buttonSave[1] = config.autoPlant;
+            buttonSave[2] = config.autoJQB;
+            buttonSave[3] = config.autoLump;
+            buttonSave[4] = config.autoReload;
+            config.autoReload2ButtonSave = buttonSave;
+            
+            //turn off other button
+            if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
+            if(config.autoPlant){ Main.handleToggle('autoPlant'); }
+            if(config.autoJQB){ Main.handleToggle('autoJQB'); }
+            if(config.autoLump){ Main.handleToggle('autoLump'); }
+            if(config.autoReload){ Main.handleToggle('autoReload'); }
+            Main.save();
+            
             //reset interval
             Main.restart(parseInt(config.interval.value));
             this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
@@ -772,6 +789,17 @@ class Garden {
             this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
             this.writeLog(3, "auto reload2", false, "reloads:" + config.autoReload2Reloads);
             this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
+            
+            //restore other button state
+            if(config.autoLumpButtonSave[0]){ Main.handleToggle('autoHarvest'); }
+            if(config.autoLumpButtonSave[1]){ Main.handleToggle('autoPlant'); }
+            if(config.autoLumpButtonSave[2]){ Main.handleToggle('autoJQB'); }
+            if(config.autoLumpButtonSave[3]){ Main.handleToggle('autoLump'); }
+            if(config.autoLumpButtonSave[4]){ Main.handleToggle('autoReload'); }
+            
+            config.autoReload2ButtonSave = [];
+            Main.save();
+            this.writeLog(3, "auto reload2", false, "restore buttons");
           }
         }
         
@@ -1548,6 +1576,7 @@ class Main {
       this.config.autoReload2SaveSecond = 9999;
       this.config.autoReload2Reloads = 0;
       this.config.autoReload2Plants = [];
+      this.config.autoReload2ButtonSave = [];
     }
     this.save();
   }
