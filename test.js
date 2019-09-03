@@ -1039,7 +1039,7 @@ class UI {
   margin-right: 1em;
   margin-bottom: 0.5em;
   text-align: right;
-  border-width: 1px;
+  outline-width: 1px;
 }
 
 #rightBottomAutoReload,
@@ -1544,7 +1544,7 @@ class UI {
         Main.config.rightBottomDisplaySave = [];
         Main.save();
       }
-      document.getElementById("cookieGardenHelperRightBottom").style.borderStyle = "none";
+      document.getElementById("cookieGardenHelperRightBottom").style.outlineStyle = "none";
       document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "auto";
       document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "transparent";
     }
@@ -1560,7 +1560,7 @@ class UI {
       document.getElementById("rightBottomAutoReload2").style.display = "block";
       document.getElementById("rightBottomLumpReload").style.display = "block";
       
-      document.getElementById("cookieGardenHelperRightBottom").style.borderStyle = "solid";
+      document.getElementById("cookieGardenHelperRightBottom").style.outlineStyle = "solid";
       document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "1";
       document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "#000";
     }
