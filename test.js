@@ -312,6 +312,8 @@ class Garden {
     
     //play sound
     if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 10){
+      console.log("secs:" + this.secondsBeforeNextTick);
+      
       this.playSound1();
       config.playSoundFlag = true;
       this.writeLog(3, "play sound", false, "sound!");
