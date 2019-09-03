@@ -62,7 +62,7 @@ class Config {
       interval: { value: 1000, min: 0 },
       autoLump: false,
       autoLumpFlag: false,
-      autoLumpButtonSave: []
+      autoLumpButtonSave: [],
       lumpReload: false,
       lumpReloadNum: { value: 0, min: 0 },
       lumpReloadType: { value: 0, min: 0 },
