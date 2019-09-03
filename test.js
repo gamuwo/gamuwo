@@ -273,14 +273,6 @@ class Garden {
   static run(config) {
     //for Debug
     let startTime = new Date();
-    let testArray = [];
-    this.pushLimit(1, testArray);
-    this.pushLimit(2, testArray);
-    this.pushLimit(3, testArray);
-    this.pushLimit(4, testArray);
-    this.pushLimit(5, testArray);
-    this.pushLimit(6, testArray);
-    console.log(testArray);
     
     //for one time events
     if(this.secondsBeforeNextTick >= 179){
