@@ -250,7 +250,7 @@ class Garden {
   static pushLimit(input, array) {
     array.push(input);
     if(array.length > 5){
-      array.shift;
+      array.shift();
     }
   }
   
