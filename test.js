@@ -540,8 +540,8 @@ class Garden {
         this.writeLog(1, "auto JQB", true, "stage:2->3");
       }
       
-      if(config.autoJQBStage.value == 3 && minJQBAge >= 65){
-        //if youngest JQB's age >= 65, plant QB
+      if(config.autoJQBStage.value == 3 && minJQBAge >= 60){
+        //if youngest JQB's age >= 60, plant QB
         this.forEachTile((x, y) => {
           if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
             this.plantSeed((21 - 1), x, y);
@@ -1713,6 +1713,8 @@ class Main {
       this.config.autoReloadNumber = 0;
       this.config.autoReloadButtonSave = [];
       this.config.autoReloadTryHistory = [];
+      document.getElementById("autoReloadDisp").innerText = "0";
+      document.getElementById("autoReloadDisp2").innerText = "0(0)";
     } else if (key == 'autoReload2Reset') {
       this.config.autoReload2Save = "";
       this.config.autoReload2SaveSecond = 9999;
@@ -1720,6 +1722,9 @@ class Main {
       this.config.autoReload2Plants = [];
       this.config.autoReload2ButtonSave = [];
       this.config.autoReload2TryHistory = [];
+      document.getElementById("autoReload2Disp").innerText = "0";
+      document.getElementById("autoReload2Disp2").innerText = "0";
+      document.getElementById("autoReload2Disp3").innerText = "0(0)";
     }
     this.save();
   }
