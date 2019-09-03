@@ -949,7 +949,7 @@ class UI {
   display: none;
 }
 #cookieGardenHelper {
-  background: #000 url(img/BGgarden.jpg);
+  background: #000 url(img/darkNoise.jpg);
   display: none;
   padding: 1em;
   position: inherit;
