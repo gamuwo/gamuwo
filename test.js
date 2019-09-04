@@ -886,8 +886,9 @@ class Garden {
             grows += 1;
           }
         }
-        document.getElementById("autoReload2Disp2").innerText = grows;
-        this.writeLog(3, "auto reload2", false, "grows:" + grows);
+        let growsString = grows + "/" +targetNumber;
+        document.getElementById("autoReload2Disp2").innerText = growsString;
+        this.writeLog(3, "auto reload2", false, "grows:" + growsString);
         
         if(grows < targetNumber){
           //reload
