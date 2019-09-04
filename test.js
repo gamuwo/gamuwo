@@ -300,6 +300,7 @@ class Garden {
     if(this.secondsBeforeNextTick >= 179){
       config.playSoundFlag = false;
       config.playSound2Flag = false;
+      config.playSoundMatureFlag = false;
       config.quickLoadFlag = false;
       config.autoJQBFlag = false;
       config.autoLumpFlag = false;
