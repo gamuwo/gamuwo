@@ -1014,7 +1014,8 @@ class UI {
   display: none;
 }
 #cookieGardenHelper {
-  background: #000 url(https://gamuwo.github.io/gamuwo/background.png);
+  background: #000 url(https://gamuwo.github.io/gamuwo/background.jpg);
+  background-size: 100% 100%;
   display: none;
   padding: 1em;
   position: inherit;
