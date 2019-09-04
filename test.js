@@ -1515,23 +1515,33 @@ class UI {
   </div>
   <div id="cookieGardenHelperRightBottom">
     <div id="rightBottomLumpReload">
-      Try:<span id="lumpReloadDisp">0</span>
-      Gain:<span id="lumpReloadDisp2">0</span>
-      Type:<span id="lumpReloadDisp3">0</span>
+      <p>
+        Try:<span id="lumpReloadDisp">0</span>
+        Gain:<span id="lumpReloadDisp2">0</span>
+        Type:<span id="lumpReloadDisp3">0</span>
+      </p>
     </div>
     <div id="rightBottomAutoReload">
-      Try:<span id="autoReloadDisp">0</span>
-      Ave:<span id="autoReloadDisp2">0(0)</span>
+      <p>
+        Try:<span id="autoReloadDisp">0</span>
+        Ave:<span id="autoReloadDisp2">0(0)</span>
+      </p>
     </div>
     <div id="rightBottomAutoReload2">
-      Try:<span id="autoReload2Disp">0</span>
-      Grow:<span id="autoReload2Disp2">0</span>
-      Ave:<span id="autoReload2Disp3">0(0)</span>
-      Age:<span id="autoReload2Disp4">0-0</span>
+      <p>
+        Try:<span id="autoReload2Disp">0</span>
+        Grow:<span id="autoReload2Disp2">0</span>
+      </p>
+      <p>
+        Ave:<span id="autoReload2Disp3">0(0)</span>
+        Age:<span id="autoReload2Disp4">0-0</span>
+      </p>
     </div>
     <div>
-      Interval:<span id="intervalDisp">1000</span>ms
-      Run time:<span id="runtimeDisp">0</span>ms
+      <p>
+        Interval:<span id="intervalDisp">1000</span>ms
+        Run time:<span id="runtimeDisp">0</span>ms
+      </p>
     </div>
   </div>
 </div>`);
