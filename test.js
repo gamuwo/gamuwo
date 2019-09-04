@@ -874,6 +874,21 @@ class Garden {
           let tryAverage = this.arrayAverage(config.autoReload2TryHistory).toFixed(2) + "(" + config.autoReload2TryHistory.length + ")";
           document.getElementById("autoReload2Disp3").innerText = tryAverage;
           this.writeLog(3, "auto reload2", false, "try average:" + tryAverage);
+          //for max min age
+          let ageArray = [];
+          this.forEachTile((x, y) => {
+            let tileForAge = this.getTile(x, y);
+            if(tileForAge.seedId == config.autoReload2ID.value){
+              ageArray.push(tileForAge.age);
+            }
+          });
+          let ageString = "0-0";
+          if(ageArray.length > 0){
+            ageArray.sort(function(a,b){return(a - b);});
+            ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1];
+          }
+          document.getElementById("autoReload2Disp4").innerText = ageString;
+          this.writeLog(3, "auto reload2", false, "age:" + ageString);
           
           document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
           this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
@@ -1512,6 +1527,7 @@ class UI {
       Try:<span id="autoReload2Disp">0</span>
       Grow:<span id="autoReload2Disp2">0</span>
       Ave:<span id="autoReload2Disp3">0(0)</span>
+      Age:<span id="autoReload2Disp4">0-0</span>
     </div>
     <div>
       Interval:<span id="intervalDisp">1000</span>ms
@@ -1713,7 +1729,6 @@ class Main {
       this.config.autoReloadNumber = 0;
       this.config.autoReloadButtonSave = [];
       this.config.autoReloadTryHistory = [];
-      document.getElementById("autoReloadDisp").innerText = "0";
       document.getElementById("autoReloadDisp2").innerText = "0(0)";
     } else if (key == 'autoReload2Reset') {
       this.config.autoReload2Save = "";
@@ -1722,8 +1737,6 @@ class Main {
       this.config.autoReload2Plants = [];
       this.config.autoReload2ButtonSave = [];
       this.config.autoReload2TryHistory = [];
-      document.getElementById("autoReload2Disp").innerText = "0";
-      document.getElementById("autoReload2Disp2").innerText = "0";
       document.getElementById("autoReload2Disp3").innerText = "0(0)";
     }
     this.save();
