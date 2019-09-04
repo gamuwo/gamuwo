@@ -342,8 +342,6 @@ class Garden {
       this.playSound2();
       config.playSound2Flag = true;
       this.writeLog(3, "play sound2", false, "sound!");
-      //debug
-      this.writeLog(0, "debug", true, "tick");
     }
     
     //for quick load
@@ -862,18 +860,12 @@ class Garden {
         this.writeLog(3, "auto reload2", false, "grows:" + grows);
         
         if(grows < targetNumber){
-          //debug
-          this.writeLog(0, "debug", true, "reload");
-          
           //reload
           config.autoReload2Reloads += 1;
           document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
           this.writeLog(3, "auto reload2", false, "reload! try:" + config.autoReload2Reloads);
           Game.LoadSave(config.autoReload2Save);
         } else {
-          //debug
-          this.writeLog(0, "debug", true, "grow");
-          
           //grow
           //reset interval
           Main.restart(1000);
