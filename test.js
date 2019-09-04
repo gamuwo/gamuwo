@@ -34,6 +34,9 @@ class Config {
       playSoundFlag: false,
       playSound2: false,
       playSound2Flag: false,
+      playSoundMature: false,
+      playSoundMatureFlag: false,
+      playSoundMatureID: { value: 0, min: 0 },
       logLevel: { value: 0, min: 0 },
       autoReload: false,
       autoReloadX: { value: 0, min: 0, max: 5 },
@@ -274,10 +277,18 @@ class Garden {
   }
   
   static playSound2() {
-      var base64 = "UklGRhYJAABXQVZFZm10IBAAAAABAAEAESsAABErAAABAAgAZGF0YUAIAACAgICAgICAgICAgICAgICAgICAgICAgICAgH9/f39/f39/gIGCgoOEhYWFhYOCgH59e3p4eHd3eHl6fX+BhIaJiouMjIuKiIWCgH16eHZ0dHN0dXd5fH+BhIeJi4yNjYyLiYaDgH16eHV0c3JzdHZ4e36ChYeKjI2Ojo2MiYeDgH16d3VzcnJyc3V4e36BhIeKjI2Ojo6MioeEgH16d3VzcnFyc3V3en6BhIeKjI6Pj46NioiEgX16d3VzcXFxcnR3en2BhIeKjI6Pj4+Ni4iFgX56d3RycXBwcXN2en2BhIiLjY+QkJCOi4iFgX16d3RycXBxcnR3en2AhIeKjI6QkJCOjImFgn56d3RycG9vcXN1eX2AhIiLjY+QkZCOjImFgn56d3RycG9vcHJ1eHyAhIeLjY+QkZCPjImGgn57d3RycG9vcHJ1eHyAhIeKjY+QkZCPjImGgn57d3RycG9vcHJ1eHyAhIeKjY+QkZCPjImGgn56d3RycG9wcXN1eXyAhIeKjY+QkJCOjImGgn97eHVycG9vcHJ1eHyAhIeLjY+RkZCPjImGgn56d3RycG9vcHJ1eHyAhIeKjY+RkZGPjYqGgn56d3RycG9vcHJ1eHyAhIeKjY+QkZCOjImGgn97eHVzcXBwcHJ1eHt/g4aKjI6QkJCPjYqGg397eHVzcXBwcXN1eHt/goaJjI6PkJCPjYqHg4B8eHVzcXBwcHJ0d3t+goaJjI6PkJCPjYqHg4B8eXZzcXBwcXJ1d3t+goWJi42PkJCPjYuIhIB9eXZzcXBwcHJ0d3p+goWIi42PkJCPjYuIhIB9eXZ0cnFwcXJ0d3p+goWIi42PkJCPjYqHhIB8eXZ0cnFxcXN1eHt+goWIioyOjo6OjImGg4B9end1c3JycnR1eHt+gYWIioyNjo2MioiGhIF/fHp4dnNycXJzdnl+goaKjY+QjoyIhH97eHV0dHZ6foKGiYyNjIiEf3p2cnFxc3Z7gIWKjpGSkI2HgXt1cW5tb3N5f4aLkJOUko2HgXp0cG1tb3R5f4aLj5KSkY2Ignx2cW5tbnF3fIOJjpKTko+KhH54cm5tbXF2fIKJjpGTko+KhH54c29ubnB1eoCGjJCTk5GNiIF7dXBtbG5yd36Fi5CUlJKOiIF6dHBtbW9zeH+Fi4+SlJKPioN9d3JubGxvdHqAh4yRlJWTjoeAeXNubGxuc3mAhoyRlJSSjYeBe3VwbWxucnd9g4mOkpSTkIuFfnhybmxsb3V7goiOkpOTkIuFfnhzb21ucHV7gYeMkJKTkY2Hgnt2cW5tbnJ3foSKj5KTkY6Jgnx3cm9ub3J3fYOJjpGTko+KhH54c29tbW90eX+Fi5CTlJKPiYN8dnFtbG1wdnyDiY+SlJOPioR+eHJubG1wdXuCiI6SlJOQi4aAenRvbGxuc3h/hYqPk5STkIqEfXdxbWtsb3V7gomPk5WUkYuEfXZwbGpscHd+ho2SlZWSjYeAeXNvbGxucnh+hYqPk5STkIuFfnhzbmxsbnJ4f4WLkJOVlJCLhH13cW1rbG91e4KJjpKUk5CMhn95c29sbG5zeX+Fi4+Sk5KOiYR9eHNvbW5wdXuBh42Rk5KPioR+eHRxb3Bzd3yBhoqOkJCOi4aBfHdzcHBxdXl9goaKjY+PjYmFgHt3c3JydHd7gISIi42NjImFgXx4dXNzdXh8gYSGh4qNjoqDfHl6fX15c3J3gYqNh398gYuSjX5va3aHj4Z0aXCEl5qJcml0ipiTfmtpeY6Wi3dqcIKSlIVya3WIlZB+bm19j5SJd21ygpGShXRsdYaUkYBvbXuNlIp4bHGCkpSFcmpzh5WSgW5qeIyXjnpqbH+TmIhwZXGLnJR6ZGeBm5yEamN1kJ2Rd2Vpf5eci3FjbIacmoRqYXGOoZl8YmF5mKKPcGBrh5yZgWhkeJSfj3JgaoegnoJkXnWVpJR0XmSAnaKMbV1ph5+ehmlfcI6hmXxhYXuao45uXWqJoZ2BZF51laOTc15mg56giWtebIqhnIFlX3WTopR2YGWBnJ+Ial9wjqCYe2NiepehkHFfaIWenoVnXnCPoph8Y2J5lqGSc19mg56fhmhfcZChlXliZn+YnYpvY2+Jm5Z/aWZ5kp2QdGJpg5ydh2thb4qdmoNpYXKOn5Z8ZWV7lJyNc2RthZqYgmpld5KekHNhaoadnINoYXOPn5Z7ZGR6lZ6PdWNpgJicinBibYicmYBoZHiSnI92ZmyClZeHcWlzh5aSgG1qeY+Zj3hoa3+TmIp1aXCDk5SFcmt1iJSQfm5seo6Yj3lnaX+ZnolrX2+NoJh9Y2J5laGRdGFmgZufiWxgbYmemoFnYXWToJJ1YWiCm52IbGBui5+ZfmVieJSgknZiZ3+YnoxwYGuHnZyDZ2BykKGWeWJkfZigjXBgaoaenYVoX3GPoJd7ZGR5lJ+RdmJmf5meim5iboicmYFpY3aSn5FzYWuInZqBZ2Fzj6GZfWJheZiij3BfaISdnodrYG+MoJp+ZGF5l6GQcV9phZ2chWphco+flXpkZn2VnIxzZGyEmZqGbGNyjJuTfGtrfI+ViXZsc4OQkIJ0cHqHjol9dXZ/iIuFe3V5gomJgXl2fIWKh353d36Hi4V7dXiCioqAd3V9iIyGenN3g42MgHVye4mPiXtwcoCPkoV0bXWHk49+b299jZKId250g4+OgnRxeoiOiH10d4CIiIN9e32Bg4KAf3+AgIGAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIBMSVNUQgAAAElORk9JQ1JECwAAADE5OTUtMDktMjAAAElFTkcOAAAATWljaGFlbCBCcm9zcwBJU0ZUDAAAAFNvdW5kIEZvcmdlAGN1ZSAcAAAAAQAAAAEAAAAAAAAAZGF0YQAAAAAAAAAAAAAAAExJU1Q8AAAAYWR0bGx0eHQUAAAAAQAAAD8IAAByZ24gAAAAAAAAAABsYWJsFAAAAAEAAABSZWNvcmQgVGFrZSAwMDEA"
+      var base64 = "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"
 
       var sound = new Audio("data:audio/wav;base64," + base64);
-      sound.volume = 1;
+      sound.volume = 0.5;
+      sound.play();
+  }
+  
+  static playSoundMature() {
+      var base64 = "UklGRjAeAABXQVZFZm10IBIAAAABAAEAcBcAAHAXAAABAAgAAABkYXRhdRIAAH6KlJKSkpOUk5KSk5OTlJKQj46Pj5CRkpSUlZWUk5KSkpGRkJGRkZKTk5KSkpOTk5STlJSTk5OTk5OTkpGRkZGRkZKRkZCQkZGRkJGRkZGRkJGRkpGRkZGSkZKRkZKSkpKSkpKSkZGSkZKSkpKSkZGRkZKSkpKSkpKSk5KTk5KSkpKSkZGSkpKSkpOTlJKSkpOTk5OTlJSTkpKSkpOUlJOTkpGSkpKTlJSVlJOTk5OTkpKSkpOTlJKRkpKTlJSTk5OTk5OTk5SUlJSUk5OTk5OUk5SUk5SUlJSUlJSTk5KSk5OTkpKRkpKRkpOTlJOTk5OTk5KRkpOTlJOTk5OTkpKSk5SUlJSUk5SUlJSUlJSTkpKSkpKTlJOUk5OTkpGSk5OSkpOUk5OTk5KTk5OTkpKTkpOTk5OTk5OTkpOSkpOTk5OSk5KSkpGSkpKSkpOTkpOTk5KSkpOTkpKSkpKRkpKSk5OTk5OTk5KSk5STk5OSkpKTlJOTlJSUk5OSk5OUlJOTk5OTkpKSkpOTk5KSkZGSkpOUlJSUk5OTk5KTk5OTkpKTk5KSk5OTk5OTk5STkpOTk5OTk5STkpGRkJCQkZOSkpKSkpKRkZKSkpKSkZGRkpKSkZKSkpKSkZGRkZKSkpKSk5GRkZKRkZKSkZGRkZGRkpKTkpKSkZGQkZGRkZKTkpOTkpGQkJKTk5OTk5KTkpGSk5OTkpGSkZGRkpKTk5OTlJOSk5OTkpOSkpKRkZGRkpOSkpKTk5KRkZGRkZKSkpGRkZKRkpOSkpGRkZGSkZKSkpOSk5KSkpKSkpKRkpKSkpKRkpGRkZGRkZGRkZKSkpGRkZCPj4+Pj5CQkJCQkJCQkJGRkI+Pj4+Pj4+PkJCQj4+PkI+PkJCQkJCQj4+Oj4+Pj4+Pjo2NjY6Ojo6Pjo6Ojo6Ojo6Pjo6OjY2MjY2Njo6Ojo6NjY2NjY2NjY6NjY2MjY2MjYyMjIyMi4yMjY2MjIyMjIuLi4uLi4uLi4uLi4uLioqKioqKioqKioqKioqKiYmJiYmJiYmJiYmJiYmJiIiIiIiIh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4aGhoaGhoaGhYaGhoaFhYWFhYWFhYWFhYWEhISEhISEhISEhISEhIOEhISDg4ODg4F+fXt6dW9kWE1QgYZSNB09YDQhNi8hESI5OyUCKWeQp5WKl6SmgXOapsK4iqrM3ryUsM3kwJm21enAlrfX6L2WuNXgsIuuytCcgKS8vol2nLSwgHyftKp4ep2woXN9nayYb3uZpI1rfJWeimt8lJuIbnqQmIlweIuUiW5whI+IbWuAjIluZnyLjHBke4yOc2R6jJBzY3qNkHNjeo2QcGF7j5BuYXyQj2pifpKOZ2OBloxgY4aZiFxnip2DWGuPn3xWcpWfc1Z2mZxpWH6el2RdgaCQWmGIo4lXZ46lgFVvlaZ4V3ebo25YfKCfZlyFp5lcX42rjlZol66AUXGgq29Qe6qlXlWKs5ZQX5m6gklxrrloSoO/qk5WnMuNPWeyyWY7gsu1REug2YwxZ8HVXTWJ3LQ2S63nfypt0NNLNpTopS1WvuhrLHzfxz1Cpu+PKWbM3lYyjOixMVC37HUpd97OPz2j8ZYnYM7mWC2M7bguSLf0eiNw3thEM5n1oidVxPBoJ3rnzTo9ovaXJ1zJ6mAtf+XEO0Sk8JMvYsLiZjd/2MJITpnbl0Boq8t3T36qqWdliJWNdH+PkpKToaWnr7CupKGinpKHjI6JfHmCh31xd4OGe3WBiod7fouOg3uEj4t+foyQhXqCkJCBfoyUjICEkpaJgIuXkYSDj5aNgYeSkYaAiZKOg4SPkoqEipKSiYaPlI6GiZGQiYaMkI2Gh46PiYaLkI6JiI2QjIeJj4+Jh4yPi4eIjI2Kh4iNjIeFiY2LiIiLjouHiIyOiYiKjo2JiYqMi4mIio2KiImLi4iIioyKiYmKi4qIiIuMiomKjIuJiYqKh4aFhoWFiY6RkY6OjouEgIOKkZSTnZyQjYuNjomEgoOEhoqNjYqKi42MhYCAhIaBfXuDjYmFjpubgnN5iIlzb3+VhmlqfYxxXXKVmWxYZYuMWlZ/vateTnWzllVcjcSeZHChzY9TZp/CeUVipL5uS3S+ynBXiNDFZVuR1rRXXZzcplJoruOWT3K73n5KesjVa02J1cdaVZjesUxep+KXRGy54HxCe8rUYkmN2b9MVaHioD9lteF+PHfJ0ltBi9q3QVGk5JEzZr3eZzV/1sZERJrlnTBcuONtL3jUykI/meeeLFu642ktetfGP0Ge5pQsX8DcXTKD3LY3SqnlfixszNBMO5Lini5ZuN5lMH/ZujlIpuSBK2zM0Uo5lOSdLFu+4GEug9+2NEqu6HgpcdbLQD6e6pApY8naUTWP5qYsVbvjZi5528E6RabqgSps0dBHPJfplytew99YMofkrjBRtOhsLHrbxDlEpeyGKGrO1ko3lOmgKlvB42Aug+G5NEqu6Hsqb9LNRjuZ5pgtXL/dXzGD3bY5S6rjfzBuy8xQPpPeoTdatNlwN3zNvU1Lm9aVPWW1zG1BgcW0UlOZyZNHaa3Ddkt/uLFfWJK9m1Vqn7qGVXqmsnVehaimbGqKppprd4yfkHWCiJSLgYWHkoyGg4aPi4V/ho6MhICKkI2DhI+SjIWKkpGJhY2RjISFjY2GgIWLiIB/hoqEfoKIiIF+hYqGf4CHiYR/g4mIg4GGioiCg4iKh4OGioqFg4eJioeEiYqIhIWJiIeEhoqIh4SJioiGh4uKiIaKi4iHiIqIh4eIiYmIh4mLiIWIiomGh4iKiIWEh4mFgoSIiISDh4uJhYiLjYmIi46NiYmKjImGhoiJhoWHioqGhoeJiIaIi4yJh4aGhYODhomKi4+PjIaEhoiHhIeJg3pzcniEiYqOj5STiYGAjJCLlZWIgHN3gXxqWV1rcmdgZ2eHi2F6mYZ+Y0pCGw4+hnxMV3iWaj9Zgp91X4K1zoprltjUeW+l6M5yfbz3t2SFzPeZW4/c6npeoOzTX2Ss7KxIbb3riUR/0N1lTJXhxE1dru2gP2/B43Q8gdHLT0eY3aM1W7DedzN2yMtOPpDZpjRWrdx3LnHFx0w7kNWfNFeu1nAwdsi+SEKX15M0X7XNYzmCzas/T6LRejVvwbxORZTQjThjt8RaP4rOmjtcsMpkPILNpD9Xqs5rOn7MqkFUqdFuOnvLrEFTp9FvOnvKqkBTp9FtPH3LqT9UpNFxPX3JrEFWqM5vPoDKqENZrMpsQYHMo0ZbrsloRYLMnUdfrsZkSYXLl0hlsMFhT4zIj0pstLhdVpLFhkxytq5bXZfCfFF6uaRWZZ29c1WDuptVbaO4bFmJvJNUcam1Z1yOvotSda2zYVyRwIdRdrGyXlyUw4RPdrSyW1yVxoNOdra0W1qVyYVNc7W3XFmRyopMb7C7YFWLyJROaavBaVKDxaBRYaLHdU54v65XWpXJhU1ts7tkVYbFm1NjoMN5Una0rmJei7eQX2+Wpn1ofJeUeHOJmIt4fZKShHuIk4uAgI2Mg32EjIV+f4mJgn+Fi4V+f4eGfnyBiIN+gIiKhIKHjImEhIqMh4OGioeBgYeJhICDiIeCgIWIhICCh4eCgISHhYCBhYaDgIOGhYGBhIaDgYKFhoOChIaFgoOFhoSCg4aFg4KEhoSCg4WGhIOEhoWCg4aGhYSFh4aDgoOEgn+Ag4OAgIGDgoCBhIWDgYKDg4GBg4WDgYGCg4aKjpCNioWCgYGDhYSBf4GChomJhH11c3V5dHFzY2BUWXJoXEw5PEpihJaRgoB7YEc5O1BXQywZIjk1NVJ0a1xzlaGNlLfVzaKZqsGtgXybv6B2hqvAnIKdz+q5pMbx76ujyO/TjpvG46t2lMLQh3Gez79ye7Hcqm2Qx9iIbJ3QumZwp8yMUHixuGJTjcGaTWmpxHRPhsKsVGCgxH1GdLOrUFCOvH4/aaqtU02JvIRDaqmxWU2IuoZCZqWtVUuEtoE/ZaSrU0qGuIFAaKirUk6KuHs/a6mkTVCOtXJCcauaS1mWr2hKfa6LS2aepV5Vh6t6T3KhllhikKVsWICkiFhxmZxkZIuheVx9no1db5Sba2KIoYBcfJ6WYWyVo3Nch6WLWXKfn2VekKl9VXyomFpnnatvV4uxjFJ0qaNfXpmvdlKEsJBSbqelYVyYsXlUhLGRVXGopWFfmrB2U4myjVJ0raJbYaCwcFOPt4hPe7OfV2WosWlUlriBTX+2mVJprKxiV5u4e02FuZZQbbCtXlqeuHlNh7uTTXCyqlxaobpzTIu7kUxytKtZW6K6c0yLvZNKcrOuWFiiv3VIir+YR222slZVpL90R4u/lUZvtbJXVqHBeUSHwZ1FarW3WlGfwn1Dgr+hR2avvGBMlsWJQXm5sk9ZosV1Q4TAo0VlqcNkSY3HlkBts75WT5nLgUF5vrBIXKjGakmHxZlCbLS4WFWUx4JGdrezUVuWyH9JdbS1VlqOxYlPcKS2Z16ArZdlcoeehHN0hZSCdnqNkIB4g5GMfHuJkol6gY6PgXqHjol7fYmHfHaBiH9zdH1+d3SFlpOIi5iVhoCLk4l/hZOShoSPlYqBhpCMf3+Kj4V+ho+NgYGKjoV+hIyLgYKJjYaBhouMhoaLj4yJio2OjYqLjo+Oio2Pj4uJjZCPiYuQkoyJjZGQiYuRkoyIjZGOh4mQkYqGjZOPh4mRkoqHjpOPh4qQkYqHjZGPiYuOkIyKjI6OioyMjoyMjY2MjI2Mi4uOjY2Ljo6Mi4yQjo6Lj4+NjI2Rjo2MkZCNi42Qjo2NkY+NjI+OjIuMkI6NjJCQjo2Oj4+PjpGPjo6PkI6Oj5GOjo6Qj46Oj5CPj5CTkpCPkZKOjY6RkI6PkZGOjI6QjoyNkZGPjpCTkI6Pk5OPjZGUkY6OkpOPjpGUko6PlJWQjpKVk4+Pk5OPjZCTkY2Pk5OPjpGTj42QlJOQj5KUkI2Pk5OQkZOTkI+Rk5KRkZKUkZCRkpKQkZKTkZGSkpKSkpOTlJSTk5OTkZGQkZKRkZGSkZGRk5ORkZKTkpGRk5OSkZKTkpCRk5ORkJKTkpGSk5OSkZKUk5GSlJSSkJKTkZCQkZKQkJOTk5GSlJSTk5OUlJOTlJOTk5OUk5OUk5KRkpOTkpGSk5OSkpKTk5KSkpKSk5OTkpKSkpGSkpOTk5OTkpGRkZKSkpKTk5OSkpKRkpKUlJOTk5OTkpKSkpKTk5GRkZGRkZKSk5KSkpKSkpOTk5KTkpKSkpOSkpKSlJSTk5KTkpKTk5SUlJOTkpGSkpKSlJOSkZKSkpKTk5SUk5KSkpKTlJOTlJSUkpKTlJSUlJSVlJSTkpKTlJSUk5STkpKSkpOUlJOTkpOTkpKTk5OTkpKSkpKTkpKSkpOTk5STk5OTk5OSk5OSk5KRkZKSkZKSkpKTk5OTk5KSkpKSkZKSkpGRkZGRkZKSkpGRkpKSk5OSkpOTk5OSk5OSkpKTk5OTkpOTk5OTk5SVlZSUk5OTk5OTk5OUlJSTk5OTk5KSk5KSk5OUlZSUlJOTk5STkpOTlJSTlJSUlJSUk5OTk5KRkpKTk5OTk5OUk5OTk5SUlJOTk5OTk5OTk5OTk5SUlJSUlJSUlJSTk5SSk5STk5OTk5KSkpKSk5OTk5OTlJSTk5OTk5OTk5OTkpKSkpGTk5KTkpKSkZKTk5OUlJOSkpKTkpOTk5OTk5OTlJOUk5KSkpGOj5CPkZCSkI6Pj5CRkpKTlZWVlZWUlJWVk5GQj5GRkpOTk5SUlJSVk5OUlZWVk5OUlJOTk5OTkpKSkpOTk5SUlJSUlJSUlJSUk5OTk5OTk5KSkZKSkZKRkpKTk5OTlJSUk5KSkZGRkZGRkZKTkZGSkZGRkJCRkZGQkJCQkZGRkpKTkpGRkZKSk5OTkpGRkpOSk5OTk5KSkpKTk5SUlJOUk5OTk5STk5OTkpGRkZGSkpOTlJSSkpKSk5OTlJSTk5OSk5OTk5OSkpKSkZGSk5OSk5OTk5KSk5OSkpOUk5OTlJSTk5OTlJSVlJSUlJSTlJSUlJSUlJSTlJSUlJOTk5OUk5OUlJSUlJSTlJSTkpKSk5OUlJSUlZWUk5OTk5KSk5OTk5STkpKSkpKSk5OTk5OTk5OTk5OTk5OTk5KTk5OTk5OTk5SUk5KTk5STk5OUlJSTk5SUlJSUk5KTk5KTk5OTk5KSkpKSkpKSkpKRkpOSk5OTlJOTk5OTk5OSkpOTk5OSkZGRkZKSkpOTk5KTkpKSk5OTk5KSkZKTk5KSkpOTkpKSkpKTk5SSkwBDU0VUCAAAAOn9AAAAAAAAaWQzII4AAABJRDMDAAAAAAEEVEVOQwAAAC0AAAH//lMAdwBpAHQAYwBoACAAqQAgAE4AQwBIACAAUwBvAGYAdAB3AGEAcgBlAFRJVDIAAABDAAAB//5CAGUAZQBwACAAMgAtAFMAbwB1AG4AZABCAGkAYgBsAGUALgBjAG8AbQAtADEANwA5ADgANQA4ADEAOQA3ADEATElTVE4AAABJTkZPSU5BTSEAAABCZWVwIDItU291bmRCaWJsZS5jb20tMTc5ODU4MTk3MQAASVNSQxcAAABTd2l0Y2ggwqkgTkNIIFNvZnR3YXJlAABESVNQJgAAAAEAAABCZWVwIDItU291bmRCaWJsZS5jb20tMTc5ODU4MTk3MQAAYmV4dFoC"
+
+      var sound = new Audio("data:audio/wav;base64," + base64);
+      sound.volume = 0.5;
       sound.play();
   }
 
@@ -342,6 +353,24 @@ class Garden {
       this.playSound2();
       config.playSound2Flag = true;
       this.writeLog(3, "play sound2", false, "sound!");
+    }
+    if(config.playSoundMature && !config.playSoundMatureFlag && this.secondsBeforeNextTick <= 176 && this.secondsBeforeNextTick >= 174){
+      let isMature = false;
+      this.forEachTile((x, y) => {
+        let tileForSound = this.getTile(x, y);
+        if(tileForSound.seedId == config.playSoundMatureID.value){
+          let matureValue = this.getPlant(config.playSoundMatureID.value).mature;
+          this.writeLog(3, "play sound mature", false, "mature:" + matureValue);
+          
+          if(tileForSound.age >= matureValue) isMature = true;
+        }
+      });
+      
+      if(isMature){
+        this.playSoundMature();
+        this.writeLog(3, "play sound mature", false, "sound!");
+      }
+      config.playSoundMatureFlag = true;
     }
     
     //for quick load
@@ -1238,6 +1267,10 @@ class UI {
       <p>
         ${this.button('saveButton', 'Save',
         'save')}
+        ${this.numberInput(
+          'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
+          config.logLevel
+        )}
       </p>
       <p>
         ${this.button('exportSaveButton', 'Export save',
@@ -1279,15 +1312,20 @@ class UI {
         )}
       </p>
       <p>
-        ${this.numberInputWidth(
-          'interval', 'Reload interval', 'input auto reload interval(ms)',
-          config.interval, 3.5
+        ${this.button(
+          'playSoundMature', 'Sound mature',
+          'play beep sound after target plant is mature', true,
+          config.playSoundMature
+        )}
+        ${this.numberInput(
+          'playSoundMatureID', 'ID', 'input ID',
+          config.playSoundMatureID
         )}
       </p>
       <p>
-        ${this.numberInput(
-          'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
-          config.logLevel
+        ${this.numberInputWidth(
+          'interval', 'Reload interval', 'input auto reload interval(ms)',
+          config.interval, 3.5
         )}
       </p>
     </div>
