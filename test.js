@@ -361,7 +361,7 @@ class Garden {
         let tileForSound = this.getTile(x, y);
         if(tileForSound.seedId == config.playSoundMatureID.value){
           let matureValue = this.getPlant(config.playSoundMatureID.value).mature;
-          this.writeLog(3, "play sound mature", false, "mature:" + matureValue);
+          this.writeLog(4, "play sound mature", false, "mature:" + matureValue);
           
           if(tileForSound.age >= matureValue) isMature = true;
         }
@@ -915,10 +915,10 @@ class Garden {
               ageArray.push(tileForAge.age);
             }
           });
-          let ageString = "0-0";
+          let ageString = "0-0/0";
           if(ageArray.length > 0){
             ageArray.sort(function(a,b){return(a - b);});
-            ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1];
+            ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "/" + this.getPlant(config.autoReload2ID.value).mature;
           }
           document.getElementById("autoReload2Disp4").innerText = ageString;
           this.writeLog(3, "auto reload2", false, "age:" + ageString);
@@ -1573,11 +1573,11 @@ class UI {
     <div id="rightBottomAutoReload2">
       <p>
         Try:<span id="autoReload2Disp">0</span>
-        Grow:<span id="autoReload2Disp2">0</span>
+        Grow:<span id="autoReload2Disp2">0/0(0)</span>
       </p>
       <p>
         Ave:<span id="autoReload2Disp3">0(0)</span>
-        Age:<span id="autoReload2Disp4">0-0</span>
+        Age:<span id="autoReload2Disp4">0-0/0</span>
       </p>
     </div>
     <div>
