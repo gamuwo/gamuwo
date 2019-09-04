@@ -1119,6 +1119,8 @@ class UI {
   margin-bottom: 0.2em;
   margin-top: 0em;
   text-align: center;
+  -webkit-text-stroke: 1px #FFF;
+  text-stroke: 1px #FFF;
 }
 #cookieGardenHelper h2 {
   font-size: 1.5em;
