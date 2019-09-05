@@ -1140,9 +1140,8 @@ class UI {
 }
 .logText {
   width: 100%;
-  height: 100%;
+  height: calc(100% - 1.5em);
   border: solid 1px;
-  margin: 1em;
   padding: 1em;
   user-select: text;
   overflow: auto;
