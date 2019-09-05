@@ -1129,7 +1129,7 @@ class UI {
 }
 .logBox {
   float: left;
-  width: 33.33%;
+  width: calc(100% - 8px);
   height: 100%;
   border: solid 1px;
   mergin: 1em;
