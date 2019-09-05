@@ -1124,9 +1124,11 @@ class UI {
 #logPanel.visible {
   display: block;
 }
-#logArea {
-  width: 100%;
+.logBox {
+  float: left;
+  width: calc(100% / 3);
   height: 100%;
+  border: solid 1px;
 }
 
 #cookieGardenHelperTitle {
@@ -1611,7 +1613,15 @@ class UI {
 </div>
 <div id="logPanel">
   <style>${this.css}</style>
-  <textarea id="logArea"></textarea>
+  <div class="logBox" id="logLevel1">
+    test<br>test<br>test
+  </div>
+  <div class="logBox" id="logLevel2">
+    test<br>test<br>test
+  </div>
+  <div class="logBox" id="logLevel3">
+    test<br>test<br>test
+  </div>
 </div>`);
 
     doc.elId('cookieGardenHelperProductButton').onclick = (event) => {
