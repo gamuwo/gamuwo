@@ -1122,6 +1122,7 @@ class UI {
 #cookieGardenHelper h2 {
   font-size: 1.5em;
   line-height: 1.5em;
+  text-decoration: underline;
 }
 #cookieGardenHelper h3 {
   color: lightgrey;
@@ -1569,7 +1570,7 @@ class UI {
       Try:<span id="autoReload2Disp">0</span>
       Grow:<span id="autoReload2Disp2">0/0(0)</span><br>
       Ave:<span id="autoReload2Disp3">0(0)</span><br>
-      Age:<span id="autoReload2Disp4">0-0/0</span>
+      Age:<span id="autoReload2Disp4">0-0(0)/0</span>
     </div>
     <div>
       Interval:<span id="intervalDisp">1000</span>ms
