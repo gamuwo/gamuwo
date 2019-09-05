@@ -1142,7 +1142,7 @@ class UI {
 #logPanel {
   background: #000 url(https://gamuwo.github.io/gamuwo/logback.jpg);
   display: none;
-  padding: 0.5em;
+  padding: 1em;
   position: inherit;
   height: 20em;
 }
