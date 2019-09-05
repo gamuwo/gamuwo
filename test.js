@@ -223,7 +223,7 @@ class Garden {
     
     if(Main.config.logLevel.value >= level) console.log(logText);
     if(!Array.isArray(Main.config.logHistory[level])) Main.config.logHistory[level] = [];
-    pushLimit(logText, Main.config.logHistory[level]);
+    this.pushLimit(logText, Main.config.logHistory[level]);
   }
   
   static logDate() {
