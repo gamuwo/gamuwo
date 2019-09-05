@@ -363,8 +363,6 @@ class Garden {
         let tileForSound = this.getTile(x, y);
         if(tileForSound.seedId == config.playSoundMatureID.value){
           let matureValue = this.getPlant(config.playSoundMatureID.value).mature;
-          this.writeLog(4, "play sound mature", false, "mature:" + matureValue);
-          
           if(tileForSound.age >= matureValue) isMature = true;
         }
       });
@@ -1004,10 +1002,7 @@ class Garden {
       
     }
     
-    //for Debug
     let endTime = new Date();
-    this.writeLog(4, "debug", false, "run time:" + (endTime.getTime() - startTime.getTime()) + "ms");
-    
     document.getElementById("intervalDisp").innerText = Main.timerInterval;
     document.getElementById("runtimeDisp").innerText = (endTime.getTime() - startTime.getTime());
     
@@ -1124,6 +1119,7 @@ class UI {
 
 #logPanel {
   display: none;
+  height: 20em;
   border: solid 1px;
 }
 #logPanel.visible {
@@ -1609,9 +1605,10 @@ class UI {
       </p>
     </div>
   </div>
-  <div id="logPanel">
-    <span id="logArea">test<br>test2<br>test3</span>
-  </div>
+</div>
+<div id="logPanel">
+  <style>${this.css}</style>
+  <textarea id="logArea"></textarea>
 </div>`);
 
     doc.elId('cookieGardenHelperProductButton').onclick = (event) => {
