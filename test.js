@@ -1059,6 +1059,21 @@ class UI {
   margin: 0.2em 0em 0.2em 0em;
 }
 
+.boxRightTitle {
+  position: relative;
+  display: inline-block;
+  padding: 0em 0.1em 0em 0.1em;
+  margin: 0.2em 0em 0.2em 0em;
+  outline: dashed 1px;
+}
+.boxRightTitle .boxTitle {
+  position: absolute;
+  display: inline-block;
+  top: -2px;
+  right: -2px;
+  font-weight: bold;
+}
+
 #autoHarvestPanel { color: wheat; }
 #autoHarvestPanel a { color: wheat; }
 #autoHarvestImmortalPanel { color: wheat; }
@@ -1343,7 +1358,8 @@ class UI {
         Auto-harvest
         ${this.button('autoHarvest', '', '', true, config.autoHarvest)}
       </h2>
-      <div class="boxDashed" id="autoHarvestImmortalPanel">
+      <div class="boxRightTitle" id="autoHarvestImmortalPanel">
+        <span class="boxTitle">Immortal</span>
         <p>
           ${this.button(
             'autoHarvestAvoidImmortals', '[i]Avoid immortals',
@@ -1352,7 +1368,8 @@ class UI {
           )}
         </p>
       </div>
-      <div class="boxDashed" id="autoHarvestYoungPanel">
+      <div class="boxRightTitle" id="autoHarvestYoungPanel">
+        <span class="boxTitle">Young</span>
         <p>
           ${this.button(
             'autoHarvestWeeds', '[y]Remove weeds',
@@ -1368,7 +1385,8 @@ class UI {
           )}
         </p>
       </div>
-      <div class="boxDashed" id="autoHarvestMaturePanel">
+      <div class="boxRightTitle" id="autoHarvestMaturePanel">
+        <span class="boxTitle">Mature</span>
         <p>
           ${this.button(
             'autoHarvestNewSeeds', '[m]New seeds',
@@ -1389,7 +1407,8 @@ class UI {
           )}
         </p>
       </div>
-      <div class="boxDashed" id="autoHarvestDyingPanel">
+      <div class="boxRightTitle" id="autoHarvestDyingPanel">
+        <span class="boxTitle">Dying</span>
         <p>
           ${this.button(
             'autoHarvestDying', '[d]Dying plants',
