@@ -1080,6 +1080,9 @@ class UI {
   padding: 0em 0em 0.1em 0em;
   margin: 0em 0em 0.2em 0em;
 }
+.underline {
+  text-decoration: underline;
+}
 
 #autoHarvestPanel { color: wheat; }
 #autoHarvestPanel a { color: wheat; }
@@ -1172,9 +1175,6 @@ class UI {
   overflow: auto;
   box-sizing: border-box;
 }
-.underline {
-  text-decoration: underline;
-}
 #logPanel a.toggleBtn,
 #logPanel a.btn {
   padding-right: 4px;
@@ -1193,7 +1193,6 @@ class UI {
 #cookieGardenHelper h2 {
   font-size: 1.5em;
   line-height: 1.5em;
-  text-decoration: underline;
 }
 #cookieGardenHelper h3 {
   color: lightgrey;
@@ -1344,7 +1343,7 @@ class UI {
   <div id="cookieGardenHelperTitle" class="title">Cookie Garden Helper Mod</div>
   <div id="cookieGardenHelperTools">
     <div class="cookieGardenHelperPanel" id="manualToolsPanel">
-      <h2>Tools</h2>
+      <h2><span class="underline">Tools</span></h2>
       <p>
         ${this.button('saveButton', 'Save',
         'save')}
@@ -1412,7 +1411,7 @@ class UI {
     </div>
     <div class="cookieGardenHelperPanel" id="autoHarvestPanel">
       <h2>
-        Auto-harvest
+        <span class="underline">Auto-harvest</span>
         ${this.button('autoHarvest', '', '', true, config.autoHarvest)}
       </h2>
       <div class="boxDashed" id="autoHarvestImmortalPanel">
@@ -1487,7 +1486,7 @@ class UI {
     <div class="cookieGardenHelperPanel">
       <div id="autoPlantPanel">
         <h2>
-          Auto-plant
+          <span class="underline">Auto-plant</span>
           ${this.button('autoPlant', '', '', true, config.autoPlant)}
         </h2>
         <p>
@@ -1515,7 +1514,7 @@ class UI {
       </div>
       <div id="autoJQB">
         <h2>
-          Auto-JQB
+          <span class="underline">Auto-JQB</span>
           ${this.button('autoJQB', '', '', true, config.autoJQB)}
         </h2>
         <p>
@@ -1527,7 +1526,7 @@ class UI {
       </div>
       <div id="lumpReload">
         <h2>
-          Auto-lump
+          <span class="underline">Auto-lump</span>
           ${this.button('autoLump', '', '', true, config.autoLump)}
         </h2>
         <p>
@@ -1552,7 +1551,7 @@ class UI {
     <div class="cookieGardenHelperPanel">
       <div id="autoReload">
         <h2>
-          Auto-reload
+          <span class="underline">Auto-reload</span>
           ${this.button('autoReload', '', '', true, config.autoReload)}
         </h2>
         <div class="cookieGardenHelperAutoLeftPanel">
@@ -1592,7 +1591,7 @@ class UI {
       </div>
       <div id="autoReload2">
         <h2>
-          Auto-reload2
+          <span class="underline">Auto-reload2</span>
           ${this.button('autoReload2', '', '', true, config.autoReload2)}
         </h2>
         <div class="cookieGardenHelperAutoLeftPanel">
