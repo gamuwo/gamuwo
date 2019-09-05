@@ -1129,7 +1129,6 @@ class UI {
 }
 #logPanel h2 {
   font-size: 1.5em;
-  line-height: 1.5em;
   text-decoration: underline;
 }
 .logBox {
