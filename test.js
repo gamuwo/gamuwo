@@ -1665,7 +1665,7 @@ class UI {
 <div id="logPanel">
   <style>${this.css}</style>
   <h2>
-    <span id="underline">Log</span>
+    <span class="underline">Log</span>
     ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
     ${this.button('logResetButton', 'Reset', 'reset log')}
   </h2>
