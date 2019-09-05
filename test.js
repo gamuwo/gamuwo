@@ -234,7 +234,7 @@ class Garden {
     for(let i = 0; i < Main.config.logHistory[level].length; i++){
       logText = logText + Main.config.logHistory[level][i] + "¥n";
     }
-    logText.slice(0, -4);
+    if(logText != "") logText.slice(0, -2);
     document.getElementById("logLevel" + level).textContent = logText;
   }
   
@@ -1760,6 +1760,11 @@ class Main {
     this.config.quickLoadSave = "";
     this.config.quickLoad2Save = "";
     this.save();
+    
+    //display log area
+    Garden.displayLog(1);
+    Garden.displayLog(2);
+    Garden.displayLog(3);
 
     // sacrifice garden
     let oldConvert = Garden.minigame.convert;
