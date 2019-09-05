@@ -232,10 +232,10 @@ class Garden {
   static displayLog(level) {
     let logText = "";
     for(let i = 0; i < Main.config.logHistory[level].length; i++){
-      logText = logText + Main.config.logHistory[level][i] + "<br>";
+      logText = logText + Main.config.logHistory[level][i] + "¥n";
     }
     logText.slice(0, -4);
-    document.getElementById("logLevel" + level).innerText = logText;
+    document.getElementById("logLevel" + level).textContent = logText;
   }
   
   static logDate() {
