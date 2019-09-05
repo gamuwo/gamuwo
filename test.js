@@ -1139,6 +1139,8 @@ class UI {
   box-sizing: border-box;
 }
 .logText {
+  width: 100%;
+  height: 100%;
   border: solid 1px;
   mergin: 1em;
   user-select: text;
