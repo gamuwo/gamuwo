@@ -1124,6 +1124,7 @@ class UI {
 #logPanel.visible {
   display: block;
 }
+/*
 .logBox {
   float: left;
   width: 33.33%;
@@ -1131,7 +1132,7 @@ class UI {
   border: solid 1px;
   mergin: 1em;
 }
-
+*/
 #cookieGardenHelperTitle {
   color: white;
   font-size: 1.7em;
