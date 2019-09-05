@@ -1134,6 +1134,7 @@ class UI {
 }
 #cookieGardenHelper input[type=number] {
   width: 2.5em;
+  border-radius: 3px;
 }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
