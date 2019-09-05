@@ -1158,7 +1158,7 @@ class UI {
 }
 .logText {
   width: calc(100% - 0.2em);
-  height: calc(100% - 5em);
+  height: calc(100% - 4.5em);
   border: solid 1px;
   padding: 0.2em;
   margin: 0 0.1em;
@@ -1658,11 +1658,11 @@ class UI {
 </div>
 <div id="logPanel">
   <style>${this.css}</style>
-  <div class="logBox">
   <p>
     ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
     ${this.button('logResetButton', 'Reset', 'reset log')}
   </p>
+  <div class="logBox">
     <h2>Level1</h2>
     <div class="logText" id="logLevel1">
     </div>
