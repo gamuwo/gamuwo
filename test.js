@@ -1065,6 +1065,10 @@ class UI {
   margin: 0em 0em 0.2em 0em;
 }
 
+.inlineBlock {
+  display: inline-block;
+}
+
 .boxSolid {
   display: inline-block;
   padding: 0.1em 0.2em;
@@ -1405,7 +1409,7 @@ class UI {
             )}
           </p>
         </div>
-        <div id="autoHarvestDyingPanel">
+        <div class="inlineBlock" id="autoHarvestDyingPanel">
           <p>
             ${this.button(
               'autoHarvestDying', '[d]Dying plants',
