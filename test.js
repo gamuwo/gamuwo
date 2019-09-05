@@ -233,7 +233,7 @@ class Garden {
     if(Array.isArray(Main.config.logHistory[level])){
       let logText = "";
       for(let i = 0; i < Main.config.logHistory[level].length; i++){
-        logText = logText + Main.config.logHistory[level][i] + "¥n";
+        logText = logText + Main.config.logHistory[level][i] + "\n";
       }
       logText.slice(0, -2);
       document.getElementById("logLevel" + level).textContent = logText;
