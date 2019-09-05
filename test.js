@@ -1616,7 +1616,6 @@ class UI {
   </div>
 </div>
 <div id="logPanel">
-  <p>aiueo</p>
   <style>${this.css}</style>
   <div class="logBox" id="logLevel1">
     <p>test<br>test<br>test</p>
