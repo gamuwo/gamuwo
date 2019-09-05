@@ -1065,20 +1065,12 @@ class UI {
   margin: 0em 0em 0.2em 0em;
 }
 
-.boxTitle {
+.boxSolid {
   position: relative;
   display: inline-block;
-  margin: 0 0;
-  padding: 0.2em 0.2em;
+  padding: 0.1em 0.2em;
   border: solid 1px;
   border-radius: 4px;
-}
-.boxTitle .titleText {
-  position: absolute;
-  display: inline-block;
-  top: -13px;
-  left: 10px;
-  padding: 0 9px;
 }
 
 #autoHarvestPanel { color: wheat; }
@@ -1435,8 +1427,8 @@ class UI {
       </div>
     </div>
     <div class="cookieGardenHelperPanel">
-      <div class="boxTitle" id="autoPlantPanel">
-        <h2 class="titleText">
+      <div class="boxSolid" id="autoPlantPanel">
+        <h2>
           Auto-plant
           ${this.button('autoPlant', '', '', true, config.autoPlant)}
         </h2>
