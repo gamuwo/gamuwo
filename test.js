@@ -1160,11 +1160,11 @@ class UI {
 .logBox {
   float: left;
   width: calc(100% / 3);
-  height: 100%;
+  height: calc(100% - 1.5em);
 }
 .logText {
   width: calc(100% - 0.2em);
-  height: calc(100% - 4.5em);
+  height: calc(100% - 1.2em);
   border: solid 1px;
   padding: 0.2em;
   margin: 0 0.1em;
