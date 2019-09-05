@@ -1118,13 +1118,11 @@ class UI {
 #rightBottomLumpReload { display: none }
 
 #logPanel {
-  display: none;
   height: 20em;
 }
 #logPanel.visible {
   display: block;
 }
-/*
 .logBox {
   float: left;
   width: 33.33%;
@@ -1132,7 +1130,7 @@ class UI {
   border: solid 1px;
   mergin: 1em;
 }
-*/
+
 #cookieGardenHelperTitle {
   color: white;
   font-size: 1.7em;
@@ -1616,13 +1614,13 @@ class UI {
 <div id="logPanel">
   <style>${this.css}</style>
   <div class="logBox" id="logLevel1">
-    test<br>test<br>test
+    <p>test<br>test<br>test</p>
   </div>
   <div class="logBox" id="logLevel2">
-    test<br>test<br>test
+    <p>test<br>test<br>test</p>
   </div>
   <div class="logBox" id="logLevel3">
-    test<br>test<br>test
+    <p>test<br>test<br>test</p>
   </div>
 </div>`);
 
