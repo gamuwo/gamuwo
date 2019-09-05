@@ -1067,10 +1067,11 @@ class UI {
 
 .boxTitle {
   position: relative;
-  margin: 2em 0;
-  padding: 0.5em 1em;
-  border: solid 3px #95ccff;
-  border-radius: 8px;
+  display: inline-block;
+  margin: 0 0;
+  padding: 0.2em 0.2em;
+  border: solid 1px;
+  border-radius: 4px;
 }
 .boxTitle .titleText {
   position: absolute;
@@ -1078,10 +1079,6 @@ class UI {
   top: -13px;
   left: 10px;
   padding: 0 9px;
-  line-height: 1;
-  background: #FFF;
-  color: #95ccff;
-  font-weight: bold;
 }
 
 #autoHarvestPanel { color: wheat; }
