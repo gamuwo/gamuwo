@@ -76,6 +76,7 @@ class Config {
       lumpReloadSave: "",
       lumpReloadReloads: 0,
       rightBottomDisplaySave: [],
+      logHistory: [],
     };
   }
 
@@ -216,12 +217,13 @@ class Garden {
   }
   
   static writeLog(level, functionName, isDate, text) {
-    if(Main.config.logLevel.value >= level){
-      let logText = text;
-      if(isDate) logText = this.logDate() + logText;
-      if(functionName != "") logText = "[" + functionName + "]" +  logText;
-      console.log(logText);
-    }
+    let logText = text;
+    if(isDate) logText = this.logDate() + logText;
+    if(functionName != "") logText = "[" + functionName + "]" +  logText;
+    
+    if(Main.config.logLevel.value >= level) console.log(logText);
+    if(!Array.isArray(Main.config.logHistory[level])) Main.config.logHistory[level] = [];
+    pushLimit(logText, Main.config.logHistory[level]);
   }
   
   static logDate() {
@@ -240,7 +242,7 @@ class Garden {
     return "[" + logYear + "/" + logMonth + "/" + logDay + " " + logHour + ":" + logMinute + ":" + logSecond + "]";
   }
   
-    static saveDate() {
+  static saveDate() {
     let logNow = new Date();
     let logHour = logNow.getHours();
     logHour = ("0" + logHour).slice(-2);
