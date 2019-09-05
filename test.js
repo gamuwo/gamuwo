@@ -1122,6 +1122,10 @@ class UI {
 #rightBottomAutoReload2,
 #rightBottomLumpReload { display: none }
 
+#logPanel {
+  
+}
+
 #cookieGardenHelperTitle {
   color: white;
   font-size: 1.7em;
@@ -1596,6 +1600,9 @@ class UI {
         Run time:<span id="runtimeDisp">0</span>ms
       </p>
     </div>
+  </div>
+  <div id="logPanel">
+    <span id="logArea">test<br>test2<br>test3</span>
   </div>
 </div>`);
 
