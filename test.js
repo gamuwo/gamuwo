@@ -1172,6 +1172,9 @@ class UI {
   padding-left: 4px;
   margin: 1px;
 }
+#logPanel p {
+  text-indent: 0;
+}
 
 #cookieGardenHelperTitle {
   color: white;
