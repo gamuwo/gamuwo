@@ -715,8 +715,10 @@ class Garden {
             //reset interval
             Main.restart(1000);
             //for average
-            this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory);
-            let tryAverage = this.arrayAverage(config.autoReloadTryHistory).toFixed(2) + "(" + config.autoReloadTryHistory.length + ")";
+            let id = config.autoReloadID.value;
+            if(!Array.isArray(config.autoReloadTryHistory[id])) config.autoReloadTryHistory[id] = [];
+            this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory[id]);
+            let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReloadTryHistory[id]).toFixed(2) + "(" + config.autoReloadTryHistory[id].length + ")";
             document.getElementById("autoReloadDisp2").innerText = tryAverage;
             this.writeLog(3, "auto reload", false, "try average:" + tryAverage);
             
@@ -762,8 +764,10 @@ class Garden {
             //reset interval
             Main.restart(1000);
             //for average
-            this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory);
-            let tryAverage = this.arrayAverage(config.autoReloadTryHistory).toFixed(2) + "(" + config.autoReloadTryHistory.length + ")";
+            let id = config.autoReloadID.value;
+            if(!Array.isArray(config.autoReloadTryHistory[id])) config.autoReloadTryHistory[id] = [];
+            this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory[id]);
+            let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReloadTryHistory[id]).toFixed(2) + "(" + config.autoReloadTryHistory[id].length + ")";
             document.getElementById("autoReloadDisp2").innerText = tryAverage;
             this.writeLog(3, "auto reload", false, "try average:" + tryAverage);
             
