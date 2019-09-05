@@ -224,6 +224,18 @@ class Garden {
     if(Main.config.logLevel.value >= level) console.log(logText);
     if(!Array.isArray(Main.config.logHistory[level])) Main.config.logHistory[level] = [];
     this.pushLimit(logText, Main.config.logHistory[level]);
+    
+    //tabun omoi
+    displayLog(level);
+  }
+  
+  static displayLog(level) {
+    let logText = "":
+    for(let i = 0; i < Main.config.logHistory[level].length; i++){
+      logText = logText + Main.config.logHistory[level][i] + "<br>";
+    }
+    logText.slice(0, -4);
+    document.getElementById("logLevel" + level).innerText = logText;
   }
   
   static logDate() {
@@ -1632,19 +1644,16 @@ class UI {
   <div class="logBox">
     <h2>Level1</h2>
     <div class="logText" id="logLevel1">
-      hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge
     </div>
   </div>
   <div class="logBox">
     <h2>Level2</h2>
     <div class="logText" id="logLevel2">
-    
     </div>
   </div>
   <div class="logBox">
     <h2>Level3</h2>
     <div class="logText" id="logLevel3">
-    
     </div>
   </div>
 </div>`);
