@@ -236,7 +236,7 @@ class Garden {
         logText = logText + Main.config.logHistory[level][i] + "\n";
       }
       logText.slice(0, -2);
-      document.getElementById("logLevel" + level).textContent = logText;
+      document.getElementById("logLevel" + level).innerText = logText;
     }
   }
   
