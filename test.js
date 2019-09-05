@@ -1127,6 +1127,11 @@ class UI {
 #logPanel.visible {
   display: block;
 }
+#logPanel h2 {
+  font-size: 1.5em;
+  line-height: 1.5em;
+  text-decoration: underline;
+}
 .logBox {
   float: left;
   width: calc(100% / 3);
@@ -1138,6 +1143,7 @@ class UI {
   mergin: 1em;
   user-select: text;
   overflow: auto;
+  box-sizing: border-box;
 }
 
 #cookieGardenHelperTitle {
@@ -1625,7 +1631,7 @@ class UI {
   <div class="logBox">
     <h2>Level1</h2>
     <div class="logText" id="logLevel1">
-      hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge
+      hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge
     </div>
   </div>
   <div class="logBox">
