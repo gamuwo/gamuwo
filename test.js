@@ -1126,9 +1126,10 @@ class UI {
 }
 .logBox {
   float: left;
-  width: calc(100% / 3);
+  width: 33.33%;
   height: 100%;
   border: solid 1px;
+  mergin: 1em;
 }
 
 #cookieGardenHelperTitle {
