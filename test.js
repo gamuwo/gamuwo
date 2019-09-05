@@ -1409,7 +1409,7 @@ class UI {
             )}
           </p>
         </div>
-        <div class="inlineBlock" id="autoHarvestDyingPanel">
+        <div class="boxDashed" id="autoHarvestDyingPanel">
           <p>
             ${this.button(
               'autoHarvestDying', '[d]Dying plants',
