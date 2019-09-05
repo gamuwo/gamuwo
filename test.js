@@ -903,8 +903,10 @@ class Garden {
           //reset interval
           Main.restart(1000);
           //for average
-          this.pushLimit(config.autoReload2Reloads, config.autoReload2TryHistory);
-          let tryAverage = this.arrayAverage(config.autoReload2TryHistory).toFixed(2) + "(" + config.autoReload2TryHistory.length + ")";
+          let id = config.autoReload2ID.value;
+          if(!Array.isArray(config.autoReload2TryHistory[id])) config.autoReload2TryHistory[id] = [];
+          this.pushLimit(config.autoReload2Reloads, config.autoReload2TryHistory[id]);
+          let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReload2TryHistory[id]).toFixed(2) + "(" + config.autoReload2TryHistory[id].length + ")";
           document.getElementById("autoReload2Disp3").innerText = tryAverage;
           this.writeLog(3, "auto reload2", false, "try average:" + tryAverage);
           //for max min age
