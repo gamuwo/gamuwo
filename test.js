@@ -570,8 +570,8 @@ class Garden {
         this.writeLog(1, "auto JQB", true, "stage:2->3");
       }
       
-      if(config.autoJQBStage.value == 3 && minJQBAge >= 60){
-        //if youngest JQB's age >= 60, plant QB
+      if(config.autoJQBStage.value == 3 && minJQBAge >= 55){
+        //if youngest JQB's age >= 55, plant QB
         this.forEachTile((x, y) => {
           if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
             this.plantSeed((21 - 1), x, y);
@@ -1065,6 +1065,25 @@ class UI {
   margin: 0em 0em 0.2em 0em;
 }
 
+.boxTitle {
+  position: relative;
+  margin: 2em 0;
+  padding: 0.5em 1em;
+  border: solid 3px #95ccff;
+  border-radius: 8px;
+}
+.boxTitle .titleText {
+  position: absolute;
+  display: inline-block;
+  top: -13px;
+  left: 10px;
+  padding: 0 9px;
+  line-height: 1;
+  background: #FFF;
+  color: #95ccff;
+  font-weight: bold;
+}
+
 #autoHarvestPanel { color: wheat; }
 #autoHarvestPanel a { color: wheat; }
 #autoHarvestImmortalPanel { color: wheat; }
@@ -1419,8 +1438,8 @@ class UI {
       </div>
     </div>
     <div class="cookieGardenHelperPanel">
-      <div id="autoPlantPanel">
-        <h2>
+      <div class="boxTitle" id="autoPlantPanel">
+        <h2 class="titleText">
           Auto-plant
           ${this.button('autoPlant', '', '', true, config.autoPlant)}
         </h2>
