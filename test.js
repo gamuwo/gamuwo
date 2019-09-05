@@ -1118,6 +1118,10 @@ class UI {
 #rightBottomLumpReload { display: none }
 
 #logPanel {
+  background: #000 url(https://gamuwo.github.io/gamuwo/background.jpg);
+  display: none;
+  padding: 1em;
+  position: inherit;
   height: 20em;
 }
 #logPanel.visible {
@@ -1612,6 +1616,7 @@ class UI {
   </div>
 </div>
 <div id="logPanel">
+  <p>aiueo</p>
   <style>${this.css}</style>
   <div class="logBox" id="logLevel1">
     <p>test<br>test<br>test</p>
