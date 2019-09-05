@@ -234,6 +234,8 @@ class Garden {
       }
       logText.slice(0, -2);
       document.getElementById("logLevel" + level).innerText = logText;
+    } else {
+      document.getElementById("logLevel" + level).innerText = "";
     }
   }
   
@@ -1145,7 +1147,9 @@ class UI {
   display: block;
 }
 #logPanel h2 {
-  font-size: 1.2em;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  text-decoration: underline;
 }
 .logBox {
   float: left;
@@ -1155,7 +1159,7 @@ class UI {
 }
 .logText {
   width: calc(100% - 0.2em);
-  height: calc(100% - 1.2em);
+  height: calc(100% - 3em);
   border: solid 1px;
   padding: 0.2em;
   margin: 0 0.1em;
@@ -1646,6 +1650,10 @@ class UI {
 </div>
 <div id="logPanel">
   <style>${this.css}</style>
+  <p>
+    ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
+    ${this.button('logResetButton', 'Reset', 'reset log')}
+  </p>
   <div class="logBox">
     <h2>Level1</h2>
     <div class="logText" id="logLevel1">
@@ -1875,6 +1883,18 @@ class Main {
       this.config.autoReload2ButtonSave = [];
       this.config.autoReload2TryHistory = [];
       document.getElementById("autoReload2Disp3").innerText = "0(0)";
+    } else if (key == 'logResetButton') {
+      this.config.logHistory = [];
+      Garden.displayLog(1);
+      Garden.displayLog(2);
+      Garden.displayLog(3);
+    } else if (key == 'logRefreshButton') {
+      Garden.displayLog(1);
+      Garden.displayLog(2);
+      Garden.displayLog(3);
+      Garden.goBottom("logLevel1");
+      Garden.goBottom("logLevel2");
+      Garden.goBottom("logLevel3");
     }
     this.save();
   }
