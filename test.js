@@ -1126,6 +1126,9 @@ class UI {
   display: none;
   border: solid 1px;
 }
+#logPanel.visible {
+  display: block;
+}
 
 #cookieGardenHelperTitle {
   color: white;
