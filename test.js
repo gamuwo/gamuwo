@@ -1395,7 +1395,7 @@ class UI {
           )}
         </p>
       </div>
-      <div class="boxDashed" id="autoHarvestDyingPanel">
+      <div id="autoHarvestDyingPanel">
         <p>
           ${this.button(
             'autoHarvestDying', '[d]Dying plants',
