@@ -224,9 +224,6 @@ class Garden {
     if(Main.config.logLevel.value >= level) console.log(logText);
     if(!Array.isArray(Main.config.logHistory[level])) Main.config.logHistory[level] = [];
     this.pushLimit(logText, Main.config.logHistory[level]);
-    
-    //tabun omoi
-    this.displayLog(level);
   }
   
   static displayLog(level) {
@@ -1671,6 +1668,12 @@ class UI {
     };
     
     doc.elId('cookieGardenHelperLogButton').onclick = (event) => {
+      Garden.displayLog(1);
+      Garden.displayLog(2);
+      Garden.displayLog(3);
+      Garden.goBottom("logLevel1");
+      Garden.goBottom("logLevel2");
+      Garden.goBottom("logLevel3");
       doc.elId('logPanel').classList.toggle('visible');
     };
 
@@ -1768,14 +1771,6 @@ class Main {
     this.config.quickLoadSave = "";
     this.config.quickLoad2Save = "";
     this.save();
-    
-    //display log area
-    Garden.displayLog(1);
-    Garden.displayLog(2);
-    Garden.displayLog(3);
-    Garden.goBottom("logLevel1");
-    Garden.goBottom("logLevel2");
-    Garden.goBottom("logLevel3");
 
     // sacrifice garden
     let oldConvert = Garden.minigame.convert;
