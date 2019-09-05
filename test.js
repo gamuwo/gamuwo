@@ -1055,6 +1055,7 @@ class UI {
 .boxDashed {
   display: inline-block;
   border-bottom: dashed 1px;
+  padding: 0em 0em 0.1em 0em;
   margin: 0em 0em 0.2em 0em;
 }
 
