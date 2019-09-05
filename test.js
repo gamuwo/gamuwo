@@ -1159,13 +1159,19 @@ class UI {
 }
 .logText {
   width: calc(100% - 0.2em);
-  height: calc(100% - 3em);
+  height: calc(100% - 4em);
   border: solid 1px;
   padding: 0.2em;
   margin: 0 0.1em;
   user-select: text;
   overflow: auto;
   box-sizing: border-box;
+}
+#logPanel a.toggleBtn,
+#logPanel a.btn {
+  padding-right: 4px;
+  padding-left: 4px;
+  margin: 1px;
 }
 
 #cookieGardenHelperTitle {
@@ -1704,6 +1710,12 @@ class UI {
     });
 
     doc.qSelAll('#cookieGardenHelper a.btn').forEach((a) => {
+      a.onclick = (event) => {
+        Main.handleClick(a.name);
+      };
+    });
+    
+    doc.qSelAll('#logPanel a.btn').forEach((a) => {
       a.onclick = (event) => {
         Main.handleClick(a.name);
       };
