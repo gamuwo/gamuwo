@@ -1131,9 +1131,13 @@ class UI {
   float: left;
   width: calc(100% / 3);
   height: 100%;
+  box-sizing: border-box;
+}
+.logText {
   border: solid 1px;
   mergin: 1em;
-  box-sizing: border-box;
+  user-select: text;
+  overflow: auto;
 }
 
 #cookieGardenHelperTitle {
@@ -1618,14 +1622,23 @@ class UI {
 </div>
 <div id="logPanel">
   <style>${this.css}</style>
-  <div class="logBox" id="logLevel1">
-    <p>test<br>test<br>test</p>
+  <div class="logBox">
+    <h2>Level1</h2>
+    <div class="logText" id="logLevel1">
+      hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge<br>hoge
+    </div>
   </div>
-  <div class="logBox" id="logLevel2">
-    <p>test<br>test<br>test</p>
+  <div class="logBox">
+    <h2>Level2</h2>
+    <div class="logText" id="logLevel2">
+    
+    </div>
   </div>
-  <div class="logBox" id="logLevel3">
-    <p>test<br>test<br>test</p>
+  <div class="logBox">
+    <h2>Level3</h2>
+    <div class="logText" id="logLevel3">
+    
+    </div>
   </div>
 </div>`);
 
