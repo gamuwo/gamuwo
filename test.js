@@ -1120,10 +1120,13 @@ class UI {
 #logPanel {
   display: none;
   height: 20em;
-  border: solid 1px;
 }
 #logPanel.visible {
   display: block;
+}
+#logArea {
+  width: 100%;
+  height: 100%;
 }
 
 #cookieGardenHelperTitle {
