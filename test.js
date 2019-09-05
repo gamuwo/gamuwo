@@ -1577,14 +1577,14 @@ class UI {
     <div id="rightBottomAutoReload">
       <p>
         Try:<span id="autoReloadDisp">0</span>
-        Ave:<span id="autoReloadDisp2">0(0)</span>
+        Ave:<span id="autoReloadDisp2">[0]0(0)</span>
       </p>
     </div>
     <div id="rightBottomAutoReload2">
       <p>
         Try:<span id="autoReload2Disp">0</span>
         Grow:<span id="autoReload2Disp2">0/0(0)</span><br>
-        Ave:<span id="autoReload2Disp3">0(0)</span><br>
+        Ave:<span id="autoReload2Disp3">[0]0(0)</span><br>
         Age:<span id="autoReload2Disp4">0-0(0)/0</span>
       </p>
     </div>
