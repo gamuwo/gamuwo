@@ -1137,10 +1137,11 @@ class UI {
   box-sizing: border-box;
 }
 .logText {
-  width: 100%;
+  width: calc(100% - 0.2em);
   height: calc(100% - 1.2em);
   border: solid 1px;
   padding: 0.2em;
+  margin: 0 0.1em;
   user-select: text;
   overflow: auto;
   box-sizing: border-box;
