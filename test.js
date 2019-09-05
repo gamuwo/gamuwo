@@ -1137,7 +1137,7 @@ class UI {
 #rightBottomLumpReload { display: none }
 
 #logPanel {
-  background: #000 url(https://gamuwo.github.io/gamuwo/background.jpg);
+  background: #000 url(https://gamuwo.github.io/gamuwo/logback.jpg);
   display: none;
   padding: 0.5em;
   position: inherit;
