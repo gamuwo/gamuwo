@@ -1120,7 +1120,7 @@ class UI {
 #logPanel {
   background: #000 url(https://gamuwo.github.io/gamuwo/background.jpg);
   display: none;
-  padding: 1em;
+  padding: 0.5em;
   position: inherit;
   height: 20em;
 }
@@ -1128,8 +1128,7 @@ class UI {
   display: block;
 }
 #logPanel h2 {
-  font-size: 1.5em;
-  text-decoration: underline;
+  font-size: 1.2em;
 }
 .logBox {
   float: left;
@@ -1139,9 +1138,9 @@ class UI {
 }
 .logText {
   width: 100%;
-  height: calc(100% - 1.5em);
+  height: calc(100% - 1.2em);
   border: solid 1px;
-  padding: 1em;
+  padding: 0.2em;
   user-select: text;
   overflow: auto;
   box-sizing: border-box;
