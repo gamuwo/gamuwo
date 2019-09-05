@@ -1123,7 +1123,8 @@ class UI {
 #rightBottomLumpReload { display: none }
 
 #logPanel {
-  
+  display: none;
+  border: solid 1px;
 }
 
 #cookieGardenHelperTitle {
@@ -1273,6 +1274,10 @@ class UI {
     doc.qSel('#row2 .productButtons').insertAdjacentHTML('beforeend', `
         <div id="cookieGardenHelperProductButton" class="productButton">
           Cookie Garden Helper Mod
+        </div>`);
+    doc.qSel('#row2 .productButtons').insertAdjacentHTML('beforeend', `
+        <div id="cookieGardenHelperLogButton" class="productButton">
+          Log
         </div>`);
     doc.elId('row2').insertAdjacentHTML('beforeend', `
 <div id="cookieGardenHelper">
@@ -1608,6 +1613,10 @@ class UI {
 
     doc.elId('cookieGardenHelperProductButton').onclick = (event) => {
       doc.elId('cookieGardenHelper').classList.toggle('visible');
+    };
+    
+    doc.elId('cookieGardenHelperLogButton').onclick = (event) => {
+      doc.elId('logPanel').classList.toggle('visible');
     };
 
     doc.qSelAll('#cookieGardenHelper input').forEach((input) => {
