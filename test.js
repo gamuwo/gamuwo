@@ -1151,6 +1151,13 @@ class UI {
   line-height: 1.5em;
   text-decoration: underline;
 }
+#logPanel h3 {
+  font-size: 1.2em;
+  line-height: 1.2em;
+}
+#logPanel p {
+  text-indent: 0;
+}
 .logBox {
   float: left;
   width: calc(100% / 3);
@@ -1171,9 +1178,6 @@ class UI {
   padding-right: 4px;
   padding-left: 4px;
   margin: 1px;
-}
-#logPanel p {
-  text-indent: 0;
 }
 
 #cookieGardenHelperTitle {
@@ -1658,22 +1662,23 @@ class UI {
 </div>
 <div id="logPanel">
   <style>${this.css}</style>
-  <p>
+  <h2>
+    Log
     ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
     ${this.button('logResetButton', 'Reset', 'reset log')}
-  </p>
+  </h2>
   <div class="logBox">
-    <h2>Level1</h2>
+    <h3>Level1</h3>
     <div class="logText" id="logLevel1">
     </div>
   </div>
   <div class="logBox">
-    <h2>Level2</h2>
+    <h3>Level2</h3>
     <div class="logText" id="logLevel2">
     </div>
   </div>
   <div class="logBox">
-    <h2>Level3</h2>
+    <h3>Level3</h3>
     <div class="logText" id="logLevel3">
     </div>
   </div>
