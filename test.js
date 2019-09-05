@@ -226,11 +226,11 @@ class Garden {
     this.pushLimit(logText, Main.config.logHistory[level]);
     
     //tabun omoi
-    displayLog(level);
+    this.displayLog(level);
   }
   
   static displayLog(level) {
-    let logText = "":
+    let logText = "";
     for(let i = 0; i < Main.config.logHistory[level].length; i++){
       logText = logText + Main.config.logHistory[level][i] + "<br>";
     }
