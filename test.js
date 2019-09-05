@@ -1055,8 +1055,8 @@ class UI {
 .boxDashed {
   display: inline-block;
   outline: dashed 1px;
-  padding: 0.1em;
-  margin: 0.2em;
+  padding: 0em 0.1em 0em 0.1em;
+  margin: 0em 0em 0.2em 0em;
 }
 
 #autoHarvestPanel { color: wheat; }
