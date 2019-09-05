@@ -1149,7 +1149,6 @@ class UI {
 #logPanel h2 {
   font-size: 1.5em;
   line-height: 1.5em;
-  text-decoration: underline;
 }
 #logPanel h3 {
   font-size: 1.2em;
@@ -1172,6 +1171,9 @@ class UI {
   user-select: text;
   overflow: auto;
   box-sizing: border-box;
+}
+.underline {
+  text-decoration: underline;
 }
 #logPanel a.toggleBtn,
 #logPanel a.btn {
@@ -1663,7 +1665,7 @@ class UI {
 <div id="logPanel">
   <style>${this.css}</style>
   <h2>
-    Log
+    <span id="underline">Log</span>
     ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
     ${this.button('logResetButton', 'Reset', 'reset log')}
   </h2>
