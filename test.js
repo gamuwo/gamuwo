@@ -1052,6 +1052,10 @@ class UI {
   clear: both;
 }
 
+.boxDashed {
+  border: dashed 1px;
+}
+
 #autoHarvestPanel { color: wheat; }
 #autoHarvestPanel a { color: wheat; }
 #autoHarvestImmortalPanel { color: wheat; }
@@ -1088,10 +1092,6 @@ class UI {
 #autoReload2 a:hover,
 #autoJQB a:hover,
 #lumpReload a:hover { color: white; }
-
-#autoHarvestImmortalPanel,
-#autoHarvestYoungPanel,
-#autoHarvestMaturePanel { margin-bottom: 0.5em; }
 
 #cookieGardenHelperUrl {
   position:absolute;
@@ -1340,7 +1340,7 @@ class UI {
         Auto-harvest
         ${this.button('autoHarvest', '', '', true, config.autoHarvest)}
       </h2>
-      <div id="autoHarvestImmortalPanel">
+      <div class="boxDashed" id="autoHarvestImmortalPanel">
         <p>
           ${this.button(
             'autoHarvestAvoidImmortals', '[i]Avoid immortals',
@@ -1349,7 +1349,7 @@ class UI {
           )}
         </p>
       </div>
-      <div id="autoHarvestYoungPanel">
+      <div class="boxDashed" id="autoHarvestYoungPanel">
         <p>
           ${this.button(
             'autoHarvestWeeds', '[y]Remove weeds',
@@ -1365,7 +1365,7 @@ class UI {
           )}
         </p>
       </div>
-      <div id="autoHarvestMaturePanel">
+      <div class="boxDashed" id="autoHarvestMaturePanel">
         <p>
           ${this.button(
             'autoHarvestNewSeeds', '[m]New seeds',
@@ -1386,7 +1386,7 @@ class UI {
           )}
         </p>
       </div>
-      <div id="autoHarvestDyingPanel">
+      <div class="boxDashed" id="autoHarvestDyingPanel">
         <p>
           ${this.button(
             'autoHarvestDying', '[d]Dying plants',
