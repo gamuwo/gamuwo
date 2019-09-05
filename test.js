@@ -1653,12 +1653,12 @@ class UI {
     </div>
   </div>
 </div>
-<div id="logPanel">
-  <style>${this.css}</style>
   <p>
     ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
     ${this.button('logResetButton', 'Reset', 'reset log')}
   </p>
+<div id="logPanel">
+  <style>${this.css}</style>
   <div class="logBox">
     <h2>Level1</h2>
     <div class="logText" id="logLevel1">
