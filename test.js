@@ -1142,7 +1142,8 @@ class UI {
   width: 100%;
   height: 100%;
   border: solid 1px;
-  mergin: 1em;
+  margin: 1em;
+  padding: 1em;
   user-select: text;
   overflow: auto;
   box-sizing: border-box;
