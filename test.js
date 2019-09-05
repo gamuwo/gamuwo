@@ -236,10 +236,14 @@ class Garden {
         logText = logText + Main.config.logHistory[level][i] + "\n";
       }
       logText.slice(0, -2);
-      let obj = document.getElementById("logLevel" + level);
-      obj.innerText = logText;
-      obj.scrollTop = obj.scrollHeight;
+      document.getElementById("logLevel" + level).innerText = logText;
     }
+  }
+  
+  function goBottom(targetId) {
+    let obj = document.getElementById(targetId);
+    if(!obj) return;
+    obj.scrollTop = obj.scrollHeight;
   }
   
   static logDate() {
@@ -1769,6 +1773,9 @@ class Main {
     Garden.displayLog(1);
     Garden.displayLog(2);
     Garden.displayLog(3);
+    Garden.goBottom("logLevel1");
+    Garden.goBottom("logLevel2");
+    Garden.goBottom("logLevel3");
 
     // sacrifice garden
     let oldConvert = Garden.minigame.convert;
