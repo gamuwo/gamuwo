@@ -240,7 +240,7 @@ class Garden {
     }
   }
   
-  function goBottom(targetId) {
+  static goBottom(targetId) {
     let obj = document.getElementById(targetId);
     if(!obj) return;
     obj.scrollTop = obj.scrollHeight;
