@@ -918,7 +918,7 @@ class Garden {
           let ageString = "0-0/0";
           if(ageArray.length > 0){
             ageArray.sort(function(a,b){return(a - b);});
-            ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "/" + this.getPlant(config.autoReload2ID.value).mature;
+            ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")/" + this.getPlant(config.autoReload2ID.value).mature;
           }
           document.getElementById("autoReload2Disp4").innerText = ageString;
           this.writeLog(3, "auto reload2", false, "age:" + ageString);
@@ -1639,7 +1639,7 @@ class UI {
       
       document.getElementById("cookieGardenHelperRightBottom").style.outlineStyle = "solid";
       document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "1";
-      document.getElementById("cookieGardenHelperRightBottom").style.backgroundImage = "url(img/darkNoise.jpg)";
+      document.getElementById("cookieGardenHelperRightBottom").style.backgroundImage = "url(https://gamuwo.github.io/gamuwo/background.jpg)";
     }
     
     doc.elId('cookieGardenHelperFileLoadButton').onchange = (event) => {
