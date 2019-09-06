@@ -1169,7 +1169,7 @@ class UI {
   width: calc(100% - 0.4em);
   height: calc(100% - 1.44em);
   border: solid 2px;
-  padding: 0.5em;
+  padding: 0.4em;
   margin: 0 0.2em;
   user-select: text;
   overflow: auto;
