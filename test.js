@@ -1693,10 +1693,10 @@ class UI {
       Garden.displayLog(1);
       Garden.displayLog(2);
       Garden.displayLog(3);
+      doc.elId('logPanel').classList.toggle('visible');
       Garden.goBottom("logLevel1");
       Garden.goBottom("logLevel2");
       Garden.goBottom("logLevel3");
-      doc.elId('logPanel').classList.toggle('visible');
     };
 
     doc.qSelAll('#cookieGardenHelper input').forEach((input) => {
