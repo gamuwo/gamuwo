@@ -1710,6 +1710,16 @@ class UI {
         }
       };
     });
+    
+    doc.qSelAll('#cookieGardenHelper input').forEach((input) => {
+      input.onclick = (event) => {
+        if (input.type == 'number') {
+          console.log("onclick input id:" + input.id);
+          let id = input.id;
+          
+        }
+      };
+    });
 
     doc.qSelAll('#cookieGardenHelper a.toggleBtn').forEach((a) => {
       a.onclick = (event) => {
