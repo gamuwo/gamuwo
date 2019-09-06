@@ -1717,6 +1717,7 @@ class UI {
           let id = input.id;
           if(id !== undefined && id.length > 2 && id.slice(-2) == "ID" && Garden.selectedSeed > -1){
             input.value = Garden.selectedSeed + 1;
+            Main.handleChange(input.name, input.value);
           }
         }
       };
