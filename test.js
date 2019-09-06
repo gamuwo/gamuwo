@@ -1174,7 +1174,8 @@ class UI {
   user-select: text;
   overflow: auto;
   box-sizing: border-box;
-  border-radius: 4px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 #logPanel a.toggleBtn,
 #logPanel a.btn {
