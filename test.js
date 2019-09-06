@@ -1714,9 +1714,10 @@ class UI {
     doc.qSelAll('#cookieGardenHelper input').forEach((input) => {
       input.onclick = (event) => {
         if (input.type == 'number') {
-          console.log("onclick input id:" + input.id);
           let id = input.id;
-          
+          if(id !== undefined && id.length > 2 && id.slice(-2) == "ID" && Garden.selectedSeed > -1){
+            input.value = Garden.selectedSeed + 1;
+          }
         }
       };
     });
