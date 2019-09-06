@@ -1168,12 +1168,13 @@ class UI {
 .logText {
   width: calc(100% - 0.2em);
   height: calc(100% - 1.44em);
-  border: solid 1px;
+  border: solid 2px;
   padding: 0.2em;
   margin: 0 0.1em;
   user-select: text;
   overflow: auto;
   box-sizing: border-box;
+  border-radius: 4px;
 }
 #logPanel a.toggleBtn,
 #logPanel a.btn {
