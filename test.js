@@ -1357,10 +1357,6 @@ class UI {
         <p>
           ${this.button('saveButton', 'Save',
           'save')}
-          ${this.numberInput(
-            'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
-            config.logLevel
-          )}
         </p>
         <p>
           ${this.button('exportSaveButton', 'Export save',
@@ -1416,6 +1412,12 @@ class UI {
           ${this.numberInputWidth(
             'interval', 'Reload interval', 'input auto reload interval(ms)',
             config.interval, 3.5
+          )}
+        </p>
+        <p>
+          ${this.numberInput(
+            'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
+            config.logLevel
           )}
         </p>
       </div>
