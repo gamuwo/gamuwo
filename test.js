@@ -1411,6 +1411,7 @@ class UI {
           'quick load')}
           <span id="quickLoad2SaveTime">Not saved</span>
         </p>
+        <h3>Settings</h3>
         <p>
           ${this.button(
             'playSound', 'Sound',
