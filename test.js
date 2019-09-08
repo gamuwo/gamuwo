@@ -1191,6 +1191,9 @@ class UI {
   display: flex;
   align-items: center;
 }
+.flexLeft {
+  margin-right: auto;
+}
 .flexRight {
   margin-left: 5px;
 }
@@ -1722,7 +1725,7 @@ class UI {
   <style>${this.css}</style>
   <div class="flexPanel">
     <h2>
-      <span class="underline">Log</span>
+      <span class="underline flexLeft">Log</span>
     </h2>
     <p class="flexRight">
       ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
