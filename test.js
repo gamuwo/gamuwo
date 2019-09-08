@@ -77,6 +77,7 @@ class Config {
       lumpReloadReloads: 0,
       rightBottomDisplaySave: [],
       logHistory: [],
+      logFilterWord: "",
     };
   }
 
@@ -1297,6 +1298,11 @@ class UI {
   ${options.max !== undefined ? `max="${options.max}"` : ''} />
 <label for="${id}" title="${title}">${text}</label>`;
   }
+  
+  static textInputWidth(name, options, width) {
+    let id = this.makeId(name);
+    return `<input type="text" style="width: ${width}em;" name="${name}" id="${id}" value="${options}" />`;
+  }
 
   static button(name, text, title, toggle, active) {
     if (toggle) {
@@ -1709,6 +1715,8 @@ class UI {
     <span class="underline">Log</span>
     ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
     ${this.button('logResetButton', 'Reset', 'reset log')}
+    ${this.textInputWidth('logFilterWord', config.logFilterWord, 10)}
+    ${this.button('logFilterButton', 'Filter', 'filter log')}
   </h2>
   <div class="logBox">
     <h3>Level1</h3>
@@ -1748,6 +1756,8 @@ class UI {
           let max = config[input.name].max;
           if (min !== undefined && input.value < min) { input.value = min; }
           if (max !== undefined && input.value > max) { input.value = max; }
+          Main.handleChange(input.name, input.value);
+        } else if (input.type == 'text') {
           Main.handleChange(input.name, input.value);
         }
       };
