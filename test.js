@@ -847,7 +847,7 @@ class Garden {
           config.autoReload2Plants = targetPlants;
           this.writeLog(3, "auto reload2", false, "save:" + config.autoReload2Save.substr(0, 15) + "...");
           this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
-          this.writeLog(2, "auto reload2", false, "target plants:" + config.autoReload2Plants);
+          this.writeLog(2, "auto reload2", false, "target plants:" + config.autoReload2Plants.join("|"));
           
           //save other button state
           let buttonSave = [];
