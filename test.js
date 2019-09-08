@@ -1084,7 +1084,7 @@ class UI {
 }
 .boxPanel {
   display: inline-block;
-  min-width: 75%;
+  min-width: 20em;
   border-style: solid;
   border-width: 0 2px 2px 2px;
   padding: 0.4em;
@@ -1206,7 +1206,7 @@ class UI {
 }
 #cookieGardenHelper h3 {
   display: flex;
-  align-items: center;
+  align-items: left;
 }
 #cookieGardenHelper h3:before,
 #cookieGardenHelper h3:after {
