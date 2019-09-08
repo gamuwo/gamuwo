@@ -1440,8 +1440,8 @@ class UI {
         ${this.button('autoHarvest', '', '', true, config.autoHarvest)}
       </h2>
       <div class="boxPanel">
-        <div class="boxDashed" id="autoHarvestImmortalPanel">
-          <h3 class="underline">Immortal</h3>
+        <div id="autoHarvestImmortalPanel">
+          <h3>Immortal</h3>
           <p>
             ${this.button(
               'autoHarvestAvoidImmortals', 'Avoid immortals',
@@ -1450,8 +1450,8 @@ class UI {
             )}
           </p>
         </div>
-        <div class="boxDashed" id="autoHarvestYoungPanel">
-          <h3 class="underline">Young</h3>
+        <div id="autoHarvestYoungPanel">
+          <h3>Young</h3>
           <p>
             ${this.button(
               'autoHarvestWeeds', 'Remove weeds',
@@ -1467,8 +1467,8 @@ class UI {
             )}
           </p>
         </div>
-        <div class="boxDashed" id="autoHarvestMaturePanel">
-          <h3 class="underline">Mature</h3>
+        <div id="autoHarvestMaturePanel">
+          <h3>Mature</h3>
           <p>
             ${this.button(
               'autoHarvestNewSeeds', 'New seeds',
@@ -1490,7 +1490,7 @@ class UI {
           </p>
         </div>
         <div id="autoHarvestDyingPanel">
-          <h3 class="underline">Dying</h3>
+          <h3>Dying</h3>
           <p>
             ${this.button(
               'autoHarvestDying', 'Dying plants',
