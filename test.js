@@ -1204,9 +1204,6 @@ class UI {
   line-height: 1.5em;
 }
 #cookieGardenHelper h3 {
-  color: lightgrey;
-  font-style: italic;
-  line-height: 2em;
 }
 #cookieGardenHelper p {
   text-indent: 0;
@@ -1429,6 +1426,7 @@ class UI {
       </h2>
       <div class="boxPanel">
         <div class="boxDashed" id="autoHarvestImmortalPanel">
+          <h3>Immortal</h3>
           <p>
             ${this.button(
               'autoHarvestAvoidImmortals', '[i]Avoid immortals',
@@ -1438,6 +1436,7 @@ class UI {
           </p>
         </div>
         <div class="boxDashed" id="autoHarvestYoungPanel">
+          <h3>Young</h3>
           <p>
             ${this.button(
               'autoHarvestWeeds', '[y]Remove weeds',
@@ -1454,6 +1453,7 @@ class UI {
           </p>
         </div>
         <div class="boxDashed" id="autoHarvestMaturePanel">
+          <h3>Mature</h3>
           <p>
             ${this.button(
               'autoHarvestNewSeeds', '[m]New seeds',
@@ -1475,6 +1475,7 @@ class UI {
           </p>
         </div>
         <div id="autoHarvestDyingPanel">
+          <h3>Dying</h3>
           <p>
             ${this.button(
               'autoHarvestDying', '[d]Dying plants',
