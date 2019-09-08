@@ -1187,6 +1187,9 @@ class UI {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
 }
+.flexPanel {
+  display: flex;
+}
 #logPanel a.toggleBtn,
 #logPanel a.btn {
   padding-right: 4px;
@@ -1303,7 +1306,7 @@ class UI {
   static textInputWidth(name, text, title, options, width) {
     let id = this.makeId(name);
     return `<input type="text" style="width: ${width}em;" name="${name}" id="${id}" value="${options}" />
-<label for="${id}" title="${title}" style="font-size: 1em;">${text}</label>`;
+<label for="${id}" title="${title}">${text}</label>`;
   }
 
   static button(name, text, title, toggle, active) {
@@ -1713,12 +1716,16 @@ class UI {
 </div>
 <div id="logPanel">
   <style>${this.css}</style>
-  <h2>
-    <span class="underline">Log</span>
-    ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
-    ${this.button('logResetButton', 'Reset', 'reset log')}
-    ${this.textInputWidth('logFilterWord', 'Filter', 'log filter word', config.logFilterWord, 10)}
-  </h2>
+  <div class="flexPanel">
+    <h2>
+      <span class="underline">Log</span>
+    </h2>
+    <p>
+      ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
+      ${this.textInputWidth('logFilterWord', 'Filter', 'log filter word', config.logFilterWord, 10)}
+      ${this.button('logResetButton', 'Reset', 'reset log')}
+    </p>
+  </div>
   <div class="logBox">
     <h3>Level1</h3>
     <div class="logText" id="logLevel1">
