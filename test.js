@@ -896,7 +896,7 @@ class Garden {
         let checkNum = 0;
         let mustNum = 0;
         let mustGrows = 0;
-        let isPlay0 = (parseInt(config.autoReload2Play.value) = 0);
+        let isPlay0 = (parseInt(config.autoReload2Play.value) == 0);
         for(let i = 0; i < config.autoReload2Plants.length; i++){
           let targetPlant = config.autoReload2Plants[i];
           let isMust = (targetPlant[2] < upperAge);
