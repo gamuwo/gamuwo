@@ -1083,6 +1083,16 @@ class UI {
 .underline {
   text-decoration: underline;
 }
+.boxPanel {
+  display: inline-block;
+  border-style: solid;
+  border-width: 0 2px 2px 2px;
+  padding: 0.4em;
+  margin: 0 0.2em;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 #autoHarvestPanel { color: wheat; }
 #autoHarvestPanel a { color: wheat; }
@@ -1410,7 +1420,7 @@ class UI {
         )}
       </p>
     </div>
-    <div class="cookieGardenHelperPanel" id="autoHarvestPanel">
+    <div class="cookieGardenHelperPanel boxPanel" id="autoHarvestPanel">
       <h2>
         <span class="underline">Auto-harvest</span>
         ${this.button('autoHarvest', '', '', true, config.autoHarvest)}
