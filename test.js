@@ -1204,7 +1204,22 @@ class UI {
   line-height: 1.5em;
 }
 #cookieGardenHelper h3 {
+  display: flex;
+  align-items: center;
 }
+#cookieGardenHelper h3:before,
+#cookieGardenHelper h3:after {
+  border-top: 1px solid;
+  content: "";
+  flex-grow: 1;
+}
+#cookieGardenHelper h3:before {
+  margin-right: 0.5em;
+}
+#cookieGardenHelper h3:after {
+  margin-left: 0.5em;
+}
+
 #cookieGardenHelper p {
   text-indent: 0;
 }
@@ -1426,7 +1441,7 @@ class UI {
       </h2>
       <div class="boxPanel">
         <div class="boxDashed" id="autoHarvestImmortalPanel">
-          <h3><span class="underline">Immortal</span><hr style="display: inline;"></h3>
+          <h3 class="underline">Immortal</h3>
           <p>
             ${this.button(
               'autoHarvestAvoidImmortals', 'Avoid immortals',
