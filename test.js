@@ -956,7 +956,7 @@ class Garden {
             ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")/" + this.getPlant(config.autoReload2ID.value).mature;
           }
           document.getElementById("autoReload2Disp4").innerText = ageString;
-          this.writeLog(3, "auto reload2", false, "age:" + ageString);
+          this.writeLog(2, "auto reload2", false, "age:" + ageString);
           
           document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
           this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
