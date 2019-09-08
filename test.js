@@ -1206,7 +1206,7 @@ class UI {
 }
 #cookieGardenHelper h3 {
   display: flex;
-  align-items: left;
+  align-items: center;
 }
 #cookieGardenHelper h3:before,
 #cookieGardenHelper h3:after {
