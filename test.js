@@ -447,7 +447,7 @@ class Garden {
           
           if(!config.lumpReload){ Main.handleToggle('lumpReload'); }
           Main.save();
-          this.writeLog(3, "auto lump", false, "turn on lump reload");
+          this.writeLog(2, "auto lump", false, "turn on lump reload");
   			}
       } else {
         //restore other button state
@@ -741,7 +741,7 @@ class Garden {
             this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory[id]);
             let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReloadTryHistory[id]).toFixed(2) + "(" + config.autoReloadTryHistory[id].length + ")";
             document.getElementById("autoReloadDisp2").innerText = tryAverage;
-            this.writeLog(3, "auto reload", false, "try average:" + tryAverage);
+            this.writeLog(2, "auto reload", false, "try average:" + tryAverage);
             
             document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
             this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
@@ -790,7 +790,7 @@ class Garden {
             this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory[id]);
             let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReloadTryHistory[id]).toFixed(2) + "(" + config.autoReloadTryHistory[id].length + ")";
             document.getElementById("autoReloadDisp2").innerText = tryAverage;
-            this.writeLog(3, "auto reload", false, "try average:" + tryAverage);
+            this.writeLog(2, "auto reload", false, "try average:" + tryAverage);
             
             document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
             this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
@@ -847,7 +847,7 @@ class Garden {
           config.autoReload2Plants = targetPlants;
           this.writeLog(3, "auto reload2", false, "save:" + config.autoReload2Save.substr(0, 15) + "...");
           this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
-          this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
+          this.writeLog(2, "auto reload2", false, "target plants:" + config.autoReload2Plants);
           
           //save other button state
           let buttonSave = [];
@@ -941,7 +941,7 @@ class Garden {
           this.pushLimit(config.autoReload2Reloads, config.autoReload2TryHistory[id]);
           let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReload2TryHistory[id]).toFixed(2) + "(" + config.autoReload2TryHistory[id].length + ")";
           document.getElementById("autoReload2Disp3").innerText = tryAverage;
-          this.writeLog(3, "auto reload2", false, "try average:" + tryAverage);
+          this.writeLog(2, "auto reload2", false, "try average:" + tryAverage);
           //for max min age
           let ageArray = [];
           this.forEachTile((x, y) => {
