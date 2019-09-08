@@ -865,9 +865,9 @@ class Garden {
           Main.save();
           
           //display
-//          document.getElementById("rightBottomAutoReload").style.display = "none";
-//          document.getElementById("rightBottomAutoReload2").style.display = "block";
-//          document.getElementById("rightBottomLumpReload").style.display = "none";
+          document.getElementById("rightBottomAutoReload").style.display = "none";
+          document.getElementById("rightBottomAutoReload2").style.display = "block";
+          document.getElementById("rightBottomLumpReload").style.display = "none";
           
           //reset interval
           Main.restart(parseInt(config.interval.value));
@@ -912,13 +912,13 @@ class Garden {
           }
         }
         let growsString = grows + "/" +targetNumber + "(" + checkNum + ")";
-//        document.getElementById("autoReload2Disp2").innerText = growsString;
+        document.getElementById("autoReload2Disp2").innerText = growsString;
         this.writeLog(3, "auto reload2", false, "grows:" + growsString);
         
         if(grows < targetNumber){
           //reload
           config.autoReload2Reloads += 1;
-//          document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
+          document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
           this.writeLog(3, "auto reload2", false, "reload! try:" + config.autoReload2Reloads);
           Game.LoadSave(config.autoReload2Save);
         } else {
@@ -930,7 +930,7 @@ class Garden {
           if(!Array.isArray(config.autoReload2TryHistory[id])) config.autoReload2TryHistory[id] = [];
           this.pushLimit(config.autoReload2Reloads, config.autoReload2TryHistory[id]);
           let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReload2TryHistory[id]).toFixed(2) + "(" + config.autoReload2TryHistory[id].length + ")";
-//          document.getElementById("autoReload2Disp3").innerText = tryAverage;
+          document.getElementById("autoReload2Disp3").innerText = tryAverage;
           this.writeLog(3, "auto reload2", false, "try average:" + tryAverage);
           //for max min age
           let ageArray = [];
@@ -945,10 +945,10 @@ class Garden {
             ageArray.sort(function(a,b){return(a - b);});
             ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")/" + this.getPlant(config.autoReload2ID.value).mature;
           }
-//          document.getElementById("autoReload2Disp4").innerText = ageString;
+          document.getElementById("autoReload2Disp4").innerText = ageString;
           this.writeLog(3, "auto reload2", false, "age:" + ageString);
           
-//          document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
+          document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
           this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
           this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
           config.autoReload2Save = "";
@@ -1022,10 +1022,8 @@ class Garden {
     }
     
     let endTime = new Date();
-//    document.getElementById("intervalDisp").innerText = Main.timerInterval;
-//    document.getElementById("runtimeDisp").innerText = (endTime.getTime() - startTime.getTime());
-    
-    console.log((endTime.getTime() - startTime.getTime()));
+    document.getElementById("intervalDisp").innerText = Main.timerInterval;
+    document.getElementById("runtimeDisp").innerText = (endTime.getTime() - startTime.getTime());
     
   }
 }
