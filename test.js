@@ -1075,7 +1075,6 @@ class UI {
 }
 
 .boxDashed {
-  display: inline-block;
   border-bottom: dashed 1px;
   padding: 0em 0em 0.1em 0em;
   margin: 0em 0em 0.2em 0em;
@@ -1354,70 +1353,72 @@ class UI {
   <div id="cookieGardenHelperTools">
     <div class="cookieGardenHelperPanel" id="manualToolsPanel">
       <h2><span class="underline">Tools</span></h2>
-      <p>
-        ${this.button('saveButton', 'Save',
-        'save')}
-        ${this.numberInput(
-          'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
-          config.logLevel
-        )}
-      </p>
-      <p>
-        ${this.button('exportSaveButton', 'Export save',
-        'open export save window')}
-        ${this.button('importSaveButton', 'Import save',
-        'open import save window')}
-      </p>
-      <p>
-        ${this.button('fileSaveButton', 'Save to file',
-        'file save')}
-        <a class="btn option" style="position:relative;">
-          <input id="cookieGardenHelperFileLoadButton" type="file" 
-          style="cursor:pointer;opacity:0;position:absolute;left:0px;top:0px;width:100%;height:100%;" />
-          Load from file
-        </a>
-      </p>
-      <p>
-        ${this.button('quickLoad', 'Quick load',
-        'load before tick savedata')}
-        <span id="quickLoadSaveTime">Not saved</span>
-      </p>
-      <p>
-        ${this.button('quickSave2', 'QS2',
-        'quick save')}
-        ${this.button('quickLoad2', 'QL2',
-        'quick load')}
-        <span id="quickLoad2SaveTime">Not saved</span>
-      </p>
-      <p>
-        ${this.button(
-          'playSound', 'Sound',
-          'play beep sound before 10-15sec from tick', true,
-          config.playSound
-        )}
-        ${this.button(
-          'playSound2', 'Sound2',
-          'play beep sound after tick', true,
-          config.playSound2
-        )}
-      </p>
-      <p>
-        ${this.button(
-          'playSoundMature', 'Sound3',
-          'play beep sound after target plant is mature', true,
-          config.playSoundMature
-        )}
-        ${this.numberInput(
-          'playSoundMatureID', 'ID', 'input ID',
-          config.playSoundMatureID
-        )}
-      </p>
-      <p>
-        ${this.numberInputWidth(
-          'interval', 'Reload interval', 'input auto reload interval(ms)',
-          config.interval, 3.5
-        )}
-      </p>
+      <div class="boxPanel">
+        <p>
+          ${this.button('saveButton', 'Save',
+          'save')}
+          ${this.numberInput(
+            'logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)',
+            config.logLevel
+          )}
+        </p>
+        <p>
+          ${this.button('exportSaveButton', 'Export save',
+          'open export save window')}
+          ${this.button('importSaveButton', 'Import save',
+          'open import save window')}
+        </p>
+        <p>
+          ${this.button('fileSaveButton', 'Save to file',
+          'file save')}
+          <a class="btn option" style="position:relative;">
+            <input id="cookieGardenHelperFileLoadButton" type="file" 
+            style="cursor:pointer;opacity:0;position:absolute;left:0px;top:0px;width:100%;height:100%;" />
+            Load from file
+          </a>
+        </p>
+        <p>
+          ${this.button('quickLoad', 'Quick load',
+          'load before tick savedata')}
+          <span id="quickLoadSaveTime">Not saved</span>
+        </p>
+        <p>
+          ${this.button('quickSave2', 'QS2',
+          'quick save')}
+          ${this.button('quickLoad2', 'QL2',
+          'quick load')}
+          <span id="quickLoad2SaveTime">Not saved</span>
+        </p>
+        <p>
+          ${this.button(
+            'playSound', 'Sound',
+            'play beep sound before 10-15sec from tick', true,
+            config.playSound
+          )}
+          ${this.button(
+            'playSound2', 'Sound2',
+            'play beep sound after tick', true,
+            config.playSound2
+          )}
+        </p>
+        <p>
+          ${this.button(
+            'playSoundMature', 'Sound3',
+            'play beep sound after target plant is mature', true,
+            config.playSoundMature
+          )}
+          ${this.numberInput(
+            'playSoundMatureID', 'ID', 'input ID',
+            config.playSoundMatureID
+          )}
+        </p>
+        <p>
+          ${this.numberInputWidth(
+            'interval', 'Reload interval', 'input auto reload interval(ms)',
+            config.interval, 3.5
+          )}
+        </p>
+      </div>
     </div>
     <div class="cookieGardenHelperPanel" id="autoHarvestPanel">
       <h2>
@@ -1531,35 +1532,39 @@ class UI {
           <span class="underline">Auto-JQB</span>
           ${this.button('autoJQB', '', '', true, config.autoJQB)}
         </h2>
-        <p>
-          ${this.numberInput(
-            'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing 4:JQB+QB growing)',
-            config.autoJQBStage
-          )}
-        </p>
+        <div class="boxPanel">
+          <p>
+            ${this.numberInput(
+              'autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing 4:JQB+QB growing)',
+              config.autoJQBStage
+            )}
+          </p>
+        </div>
       </div>
       <div id="lumpReload">
         <h2>
           <span class="underline">Auto-lump</span>
           ${this.button('autoLump', '', '', true, config.autoLump)}
         </h2>
-        <p>
-          ${this.button(
-            'lumpReload', 'Lump reload',
-            'reload for sugar lump', true,
-            config.lumpReload
-          )}
-        </p>
-        <p>
-          ${this.numberInput(
-            'lumpReloadNum', 'Num', 'input number',
-            config.lumpReloadNum
-          )}
-          ${this.numberInput(
-            'lumpReloadType', 'Type', 'input suger lump type(0:normal 1:bifurcated 2:golden 3:meaty 4:caramelized)',
-            config.lumpReloadType
-          )}
-        </p>
+        <div class="boxPanel">
+          <p>
+            ${this.button(
+              'lumpReload', 'Lump reload',
+              'reload for sugar lump', true,
+              config.lumpReload
+            )}
+          </p>
+          <p>
+            ${this.numberInput(
+              'lumpReloadNum', 'Num', 'input number',
+              config.lumpReloadNum
+            )}
+            ${this.numberInput(
+              'lumpReloadType', 'Type', 'input suger lump type(0:normal 1:bifurcated 2:golden 3:meaty 4:caramelized)',
+              config.lumpReloadType
+            )}
+          </p>
+        </div>
       </div>
     </div>
     <div class="cookieGardenHelperPanel">
@@ -1568,39 +1573,41 @@ class UI {
           <span class="underline">Auto-reload</span>
           ${this.button('autoReload', '', '', true, config.autoReload)}
         </h2>
-        <div class="cookieGardenHelperAutoLeftPanel">
-          <p>
-            ${this.numberInput(
-              'autoReloadID', 'ID', 'input ID',
-              config.autoReloadID
-            )}
-          </p>
-          <p>
-            ${this.numberInput(
-              'autoReloadMax', 'Max', 'input max plants(if 0, use xy)',
-              config.autoReloadMax
-            )}
-          </p>
-        </div>
-        <div class="cookieGardenHelperAutoRightPanel">
-          <p>
-            ${this.numberInput(
-              'autoReloadX', 'X', 'input x(only works when max = 0)',
-              config.autoReloadX
-            )}
-          </p>
-          <p>
-            ${this.numberInput(
-              'autoReloadY', 'Y', 'input Y(only works when max = 0)',
-              config.autoReloadY
-            )}
-          </p>
-        </div>
-        <div class="cookieGardenHelperClearPanel">
-          <p>
-            ${this.button('autoReloadReset', 'Reset',
-            'reset data(use when it stucks)')}
-          </p>
+        <div class="boxPanel">
+          <div class="cookieGardenHelperAutoLeftPanel">
+            <p>
+              ${this.numberInput(
+                'autoReloadID', 'ID', 'input ID',
+                config.autoReloadID
+              )}
+            </p>
+            <p>
+              ${this.numberInput(
+                'autoReloadMax', 'Max', 'input max plants(if 0, use xy)',
+                config.autoReloadMax
+              )}
+            </p>
+          </div>
+          <div class="cookieGardenHelperAutoRightPanel">
+            <p>
+              ${this.numberInput(
+                'autoReloadX', 'X', 'input x(only works when max = 0)',
+                config.autoReloadX
+              )}
+            </p>
+            <p>
+              ${this.numberInput(
+                'autoReloadY', 'Y', 'input Y(only works when max = 0)',
+                config.autoReloadY
+              )}
+            </p>
+          </div>
+          <div class="cookieGardenHelperClearPanel">
+            <p>
+              ${this.button('autoReloadReset', 'Reset',
+              'reset data(use when it stucks)')}
+            </p>
+          </div>
         </div>
       </div>
       <div id="autoReload2">
@@ -1608,39 +1615,41 @@ class UI {
           <span class="underline">Auto-reload2</span>
           ${this.button('autoReload2', '', '', true, config.autoReload2)}
         </h2>
-        <div class="cookieGardenHelperAutoLeftPanel">
-          <p>
-            ${this.numberInput(
-              'autoReload2ID', 'ID', 'input target ID',
-              config.autoReload2ID
-            )}
-          </p>
-          <p>
-            ${this.numberInput(
-              'autoReload2Number', 'Num', 'input Number',
-              config.autoReload2Number
-            )}
-          </p>
-        </div>
-        <div class="cookieGardenHelperAutoRightPanel">
-          <p>
-            ${this.numberInput(
-              'autoReload2Grow', 'Grow', 'input Grow',
-              config.autoReload2Grow
-            )}
-          </p>
-          <p>
-            ${this.numberInput(
-              'autoReload2Play', 'Play', 'input Play',
-              config.autoReload2Play
-            )}
-          </p>
-        </div>
-        <div class="cookieGardenHelperClearPanel">
-          <p>
-            ${this.button('autoReload2Reset', 'Reset',
-            'reset data(use when it stucks)')}
-          </p>
+        <div class="boxPanel">
+          <div class="cookieGardenHelperAutoLeftPanel">
+            <p>
+              ${this.numberInput(
+                'autoReload2ID', 'ID', 'input target ID',
+                config.autoReload2ID
+              )}
+            </p>
+            <p>
+              ${this.numberInput(
+                'autoReload2Number', 'Num', 'input Number',
+                config.autoReload2Number
+              )}
+            </p>
+          </div>
+          <div class="cookieGardenHelperAutoRightPanel">
+            <p>
+              ${this.numberInput(
+                'autoReload2Grow', 'Grow', 'input Grow',
+                config.autoReload2Grow
+              )}
+            </p>
+            <p>
+              ${this.numberInput(
+                'autoReload2Play', 'Play', 'input Play',
+                config.autoReload2Play
+              )}
+            </p>
+          </div>
+          <div class="cookieGardenHelperClearPanel">
+            <p>
+              ${this.button('autoReload2Reset', 'Reset',
+              'reset data(use when it stucks)')}
+            </p>
+          </div>
         </div>
       </div>
     </div>
