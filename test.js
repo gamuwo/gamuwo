@@ -1420,7 +1420,7 @@ class UI {
         )}
       </p>
     </div>
-    <div class="cookieGardenHelperPanel boxPanel" id="autoHarvestPanel">
+    <div class="cookieGardenHelperPanel" id="autoHarvestPanel">
       <h2>
         <span class="underline">Auto-harvest</span>
         ${this.button('autoHarvest', '', '', true, config.autoHarvest)}
@@ -1500,28 +1500,30 @@ class UI {
           <span class="underline">Auto-plant</span>
           ${this.button('autoPlant', '', '', true, config.autoPlant)}
         </h2>
-        <p>
-          ${this.button(
-            'autoPlantCheckCpSMult', 'Plant',
-            'Check the CpS multiplier before planting (see below)', true,
-            config.autoPlantCheckCpSMult
-          )}
-          ${this.numberInput(
-            'autoPlantMaxiCpSMult', 'Max',
-            'Maximum CpS multiplier for the auto-plant to happen',
-            config.autoPlantMaxiCpSMult
-          )}
-        </p>
-        <p>
-          ${this.button('savePlot', 'Save plot',
-            'Save the current plot; these seeds will be replanted later')}
-          ${this.labelWithState('plotIsSaved', 'No saved plot', 'Plot saved',
-            Boolean(config.savedPlot.length))}
-        </p>
-        <p>
-          ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
-          'Plant the selected seed on all empty tiles')}
-        </p>
+        <div class="boxPanel">
+          <p>
+            ${this.button(
+              'autoPlantCheckCpSMult', 'Plant',
+              'Check the CpS multiplier before planting (see below)', true,
+              config.autoPlantCheckCpSMult
+            )}
+            ${this.numberInput(
+              'autoPlantMaxiCpSMult', 'Max',
+              'Maximum CpS multiplier for the auto-plant to happen',
+              config.autoPlantMaxiCpSMult
+            )}
+          </p>
+          <p>
+            ${this.button('savePlot', 'Save plot',
+              'Save the current plot; these seeds will be replanted later')}
+            ${this.labelWithState('plotIsSaved', 'No saved plot', 'Plot saved',
+              Boolean(config.savedPlot.length))}
+          </p>
+          <p>
+            ${this.button('fillGardenWithSelectedSeed', 'Plant selected seed',
+            'Plant the selected seed on all empty tiles')}
+          </p>
+        </div>
       </div>
       <div id="autoJQB">
         <h2>
