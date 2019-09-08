@@ -1189,6 +1189,7 @@ class UI {
 }
 .flexPanel {
   display: flex;
+  align-items: center;
 }
 .flexRight {
   margin-left: 5px;
