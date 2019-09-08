@@ -1420,11 +1420,11 @@ class UI {
       </p>
     </div>
     <div class="cookieGardenHelperPanel" id="autoHarvestPanel">
+      <h2>
+        <span class="underline">Auto-harvest</span>
+        ${this.button('autoHarvest', '', '', true, config.autoHarvest)}
+      </h2>
       <div class="boxPanel">
-        <h2>
-          <span class="underline">Auto-harvest</span>
-          ${this.button('autoHarvest', '', '', true, config.autoHarvest)}
-        </h2>
         <div class="boxDashed" id="autoHarvestImmortalPanel">
           <p>
             ${this.button(
