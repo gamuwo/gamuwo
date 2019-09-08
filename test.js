@@ -1190,6 +1190,9 @@ class UI {
 .flexPanel {
   display: flex;
 }
+.flexRight {
+  margin-left: 5px;
+}
 #logPanel a.toggleBtn,
 #logPanel a.btn {
   padding-right: 4px;
@@ -1720,7 +1723,7 @@ class UI {
     <h2>
       <span class="underline">Log</span>
     </h2>
-    <p>
+    <p class="flexRight">
       ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
       ${this.textInputWidth('logFilterWord', 'Filter', 'log filter word', config.logFilterWord, 10)}
       ${this.button('logResetButton', 'Reset', 'reset log')}
