@@ -1144,7 +1144,6 @@ class UI {
   display: none;
   padding: 1em;
   position: inherit;
-  height: 20em;
 }
 #logPanel.visible {
   display: block;
@@ -1163,11 +1162,10 @@ class UI {
 .logBox {
   float: left;
   width: calc(100% / 3);
-  height: calc(100% - 2.25em);
 }
 .logText {
   width: calc(100% - 0.4em);
-  height: calc(100% - 1.44em);
+  height: 15em;
   border: solid 2px;
   padding: 0.4em;
   margin: 0 0.2em;
