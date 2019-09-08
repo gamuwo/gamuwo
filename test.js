@@ -1426,44 +1426,44 @@ class UI {
       </h2>
       <div class="boxPanel">
         <div class="boxDashed" id="autoHarvestImmortalPanel">
-          <h3>Immortal</h3>
+          <h3 class="underline">Immortal</h3>
           <p>
             ${this.button(
-              'autoHarvestAvoidImmortals', '[i]Avoid immortals',
+              'autoHarvestAvoidImmortals', 'Avoid immortals',
               'Do not harvest immortal plants', true,
               config.autoHarvestAvoidImmortals
             )}
           </p>
         </div>
         <div class="boxDashed" id="autoHarvestYoungPanel">
-          <h3>Young</h3>
+          <h3 class="underline">Young</h3>
           <p>
             ${this.button(
-              'autoHarvestWeeds', '[y]Remove weeds',
+              'autoHarvestWeeds', 'Remove weeds',
               'Remove weeds as soon as they appear', true,
               config.autoHarvestWeeds
             )}
           </p>
           <p>
             ${this.button(
-              'autoHarvestCleanGarden', '[y]Clean garden',
+              'autoHarvestCleanGarden', 'Clean garden',
               'Only allow saved and unlocked seeds', true,
               config.autoHarvestCleanGarden
             )}
           </p>
         </div>
         <div class="boxDashed" id="autoHarvestMaturePanel">
-          <h3>Mature</h3>
+          <h3 class="underline">Mature</h3>
           <p>
             ${this.button(
-              'autoHarvestNewSeeds', '[m]New seeds',
+              'autoHarvestNewSeeds', 'New seeds',
               'Harvest new seeds as soon as they are mature', true,
               config.autoHarvestNewSeeds
             )}
           </p>
           <p>
             ${this.button(
-              'autoHarvestCheckCpSMult', '[m]Harvest',
+              'autoHarvestCheckCpSMult', 'Harvest',
               'Check the CpS multiplier before harvesting (see below)', true,
               config.autoHarvestCheckCpSMult
             )}
@@ -1475,10 +1475,10 @@ class UI {
           </p>
         </div>
         <div id="autoHarvestDyingPanel">
-          <h3>Dying</h3>
+          <h3 class="underline">Dying</h3>
           <p>
             ${this.button(
-              'autoHarvestDying', '[d]Dying plants',
+              'autoHarvestDying', 'Dying plants',
               `Harvest dying plants, ${config.autoHarvestDyingSeconds}s before `
               + `the new tick occurs`, true,
               config.autoHarvestDying
@@ -1486,7 +1486,7 @@ class UI {
           </p>
           <p>
             ${this.button(
-              'autoHarvestCheckCpSMultDying', '[d]Harvest',
+              'autoHarvestCheckCpSMultDying', 'Harvest',
               'Check the CpS multiplier before harvesting (see below)', true,
               config.autoHarvestCheckCpSMultDying
             )}
