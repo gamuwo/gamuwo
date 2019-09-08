@@ -230,10 +230,11 @@ class Garden {
   static displayLog(level) {
     if(Array.isArray(Main.config.logHistory[level])){
       let logText = "";
+      let filterRegexp = new RegExp(Main.config.logFilterWord, "i");
       for(let i = 0; i < Main.config.logHistory[level].length; i++){
-        logText = logText + Main.config.logHistory[level][i] + "\n";
+        if(filterRegexp.test(Main.config.logHistory[level][i])) logText = logText + Main.config.logHistory[level][i] + "\n";
       }
-      logText.slice(0, -2);
+      if(logText.length >= 2) logText.slice(0, -2);
       document.getElementById("logLevel" + level).innerText = logText;
     } else {
       document.getElementById("logLevel" + level).innerText = "";
@@ -1302,7 +1303,7 @@ class UI {
   static textInputWidth(name, text, title, options, width) {
     let id = this.makeId(name);
     return `<input type="text" style="width: ${width}em;" name="${name}" id="${id}" value="${options}" />
-<label for="${id}" title="${title}">${text}</label>`;
+<label for="${id}" title="${title}" style="font-size: 1em;>${text}</label>`;
   }
 
   static button(name, text, title, toggle, active) {
