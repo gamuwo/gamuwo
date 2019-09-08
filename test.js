@@ -1144,6 +1144,7 @@ class UI {
   display: none;
   padding: 1em;
   position: inherit;
+  overflow: auto;
 }
 #logPanel.visible {
   display: block;
