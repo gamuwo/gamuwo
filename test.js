@@ -1299,9 +1299,10 @@ class UI {
 <label for="${id}" title="${title}">${text}</label>`;
   }
   
-  static textInputWidth(name, options, width) {
+  static textInputWidth(name, text, title, options, width) {
     let id = this.makeId(name);
-    return `<input type="text" style="width: ${width}em;" name="${name}" id="${id}" value="${options}" />`;
+    return `<input type="text" style="width: ${width}em;" name="${name}" id="${id}" value="${options}" />
+<label for="${id}" title="${title}">${text}</label>`;
   }
 
   static button(name, text, title, toggle, active) {
@@ -1715,8 +1716,7 @@ class UI {
     <span class="underline">Log</span>
     ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
     ${this.button('logResetButton', 'Reset', 'reset log')}
-    ${this.textInputWidth('logFilterWord', config.logFilterWord, 10)}
-    ${this.button('logFilterButton', 'Filter', 'filter log')}
+    ${this.textInputWidth('logFilterWord', 'Filter', 'log filter word', config.logFilterWord, 10)}
   </h2>
   <div class="logBox">
     <h3>Level1</h3>
