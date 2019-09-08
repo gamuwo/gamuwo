@@ -1762,6 +1762,20 @@ class UI {
         }
       };
     });
+
+    doc.qSelAll('#logPanel input').forEach((input) => {
+      input.onchange = (event) => {
+        if (input.type == 'number') {
+          let min = config[input.name].min;
+          let max = config[input.name].max;
+          if (min !== undefined && input.value < min) { input.value = min; }
+          if (max !== undefined && input.value > max) { input.value = max; }
+          Main.handleChange(input.name, input.value);
+        } else if (input.type == 'text') {
+          Main.handleChange(input.name, input.value);
+        }
+      };
+    });
     
     doc.qSelAll('#cookieGardenHelper input').forEach((input) => {
       input.onclick = (event) => {
