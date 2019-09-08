@@ -1208,10 +1208,14 @@ class UI {
   display: flex;
   align-items: center;
 }
+#cookieGardenHelper h3:before,
 #cookieGardenHelper h3:after {
   border-top: 2px dashed;
   content: "";
   flex-grow: 1;
+}
+#cookieGardenHelper h3:before {
+  margin-right: 0.5em;
 }
 #cookieGardenHelper h3:after {
   margin-left: 0.5em;
