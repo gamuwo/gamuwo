@@ -894,30 +894,38 @@ class Garden {
         //check
         let grows = 0;
         let checkNum = 0;
+        let mustNum = 0;
+        let mustGrows = 0;
+        let isPlay0 = (parseInt(config.autoReload2Play.value) = 0);
         for(let i = 0; i < config.autoReload2Plants.length; i++){
           let targetPlant = config.autoReload2Plants[i];
+          let isMust = (targetPlant[2] < upperAge);
           if(parseInt(targetPlant[2]) > upperAge){
             //above upper age
             break;
           }
           checkNum += 1;
+          if(isMust) mustNum += 1;
           
           if(this.tileIsEmpty(targetPlant[0], targetPlant[1])){
             //target plant was harvested
             grows += 1;
+            if(isMust) mustGrows += 1;
             continue;
           }
           
           let tileAr2 = this.getTile(targetPlant[0], targetPlant[1]);
           if(parseInt(tileAr2.age) >= (parseInt(targetPlant[2]) + parseInt(config.autoReload2Grow.value))){
             grows += 1;
+            if(isMust) mustGrows += 1;
           }
         }
         let growsString = grows + "/" +targetNumber + "(" + checkNum + ")";
+        if(isPlay0) growsString = growsString + ", " + mustGrows + "/" + mustNum;
         document.getElementById("autoReload2Disp2").innerText = growsString;
         this.writeLog(3, "auto reload2", false, "grows:" + growsString);
         
-        if(grows < targetNumber){
+        if(grows < targetNumber || (isPlay0 && mustGrows < mustNum)){
           //reload
           config.autoReload2Reloads += 1;
           document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
