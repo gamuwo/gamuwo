@@ -1303,7 +1303,7 @@ class UI {
   static textInputWidth(name, text, title, options, width) {
     let id = this.makeId(name);
     return `<input type="text" style="width: ${width}em;" name="${name}" id="${id}" value="${options}" />
-<label for="${id}" title="${title}" style="font-size: 1em;>${text}</label>`;
+<label for="${id}" title="${title}" style="font-size: 1em;">${text}</label>`;
   }
 
   static button(name, text, title, toggle, active) {
