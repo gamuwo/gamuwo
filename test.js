@@ -1426,7 +1426,7 @@ class UI {
       </h2>
       <div class="boxPanel">
         <div class="boxDashed" id="autoHarvestImmortalPanel">
-          <h3><span class="underline">Immortal</span><hr></h3>
+          <h3><span class="underline">Immortal</span><span><hr></span></h3>
           <p>
             ${this.button(
               'autoHarvestAvoidImmortals', 'Avoid immortals',
