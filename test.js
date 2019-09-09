@@ -1204,15 +1204,15 @@ class UI {
 
 #cookieGardenHelperTitle {
   color: white;
-  font-size: 1.7rem;
+  font-size: 1.6rem;
   font-style: normal;
   margin-bottom: 0.2rem;
   margin-top: 0rem;
   text-align: center;
 }
 #cookieGardenHelper h2 {
-  font-size: 1.5em;
-  line-height: 1.5em;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
 }
 #cookieGardenHelper h3 {
   display: flex;
