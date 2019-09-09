@@ -1358,7 +1358,7 @@ class UI {
       selectContent = selectContent + '<option value="';
       selectContent = selectContent + (i + 1);
       selectContent = selectContent + '"';
-      if((i + 1) == options) selectContent = selectContent + ' selected';
+      if((i + 1) == options.value) selectContent = selectContent + ' selected';
       selectContent = selectContent + '>';
       selectContent = selectContent + (i + 1);
       selectContent = selectContent + ':';
