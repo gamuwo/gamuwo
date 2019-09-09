@@ -1267,7 +1267,7 @@ class UI {
 #cookieGardenHelper input[type=text],
 #logPanel input[type=text] {
   border: solid 1px white;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
