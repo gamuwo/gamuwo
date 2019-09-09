@@ -1235,7 +1235,7 @@ class UI {
   text-indent: 0;
 }
 #cookieGardenHelper input[type=number] {
-  width: 2.5rem;
+  width: 1.5rem;
   border-radius: 3px;
 }
 
@@ -1271,16 +1271,16 @@ class UI {
 }
 
 #cookieGardenHelper .warning {
-    padding: 1em;
-    font-size: 1.5em;
+    padding: 1rem;
+    font-size: 1.5rem;
     background-color: orange;
     color: white;
 }
 #cookieGardenHelper .warning .closeWarning {
     font-weight: bold;
     float: right;
-    font-size: 2em;
-    line-height: 0.25em;
+    font-size: 2rem;
+    line-height: 0.25rem;
     cursor: pointer;
     transition: 0.3s;
 }
@@ -1302,7 +1302,7 @@ class UI {
   static numberInputWidth(name, text, title, options, width) {
     let id = this.makeId(name);
     return `
-<input type="number" style="width: ${width}em;" name="${name}" id="${id}" value="${options.value}" step=1
+<input type="number" style="width: ${width}rem;" name="${name}" id="${id}" value="${options.value}" step=1
   ${options.min !== undefined ? `min="${options.min}"` : ''}
   ${options.max !== undefined ? `max="${options.max}"` : ''} />
 <label for="${id}" title="${title}">${text}</label>`;
@@ -1310,7 +1310,7 @@ class UI {
   
   static textInputWidth(name, text, title, options, width) {
     let id = this.makeId(name);
-    return `<input type="text" style="width: ${width}em;" name="${name}" id="${id}" value="${options}" />
+    return `<input type="text" style="width: ${width}rem;" name="${name}" id="${id}" value="${options}" />
 <label for="${id}" title="${title}">${text}</label>`;
   }
 
