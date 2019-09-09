@@ -1097,17 +1097,6 @@ class UI {
   float: left;
   width: 50%;
 }
-.cookieGardenHelperAutoLeftPanel {
-  float: left;
-  margin-right: 6px;
-}
-.cookieGardenHelperAutoRightPanel {
-  overflow: hidden;
-  zoom: 1;
-}
-.cookieGardenHelperClearPanel {
-  clear: both;
-}
 
 .underline {
   text-decoration: underline;
@@ -1583,27 +1572,17 @@ class UI {
           ${this.button('autoReload', '', '', true, config.autoReload)}
         </h2>
         <div class="boxPanel">
-          <div class="cookieGardenHelperAutoLeftPanel">
-            <p>
-              ${this.IDSelect('autoReloadID', 'ID', 'select ID', config.autoReloadID, 3)}
-            </p>
-            <p>
-              ${this.numberInput('autoReloadMax', 'Max', 'input max plants(if 0, use xy)', config.autoReloadMax)}
-            </p>
-          </div>
-          <div class="cookieGardenHelperAutoRightPanel">
-            <p>
-              ${this.numberInput('autoReloadX', 'X', 'input x(only works when max = 0)', config.autoReloadX)}
-            </p>
-            <p>
-              ${this.numberInput('autoReloadY', 'Y', 'input Y(only works when max = 0)', config.autoReloadY)}
-            </p>
-          </div>
-          <div class="cookieGardenHelperClearPanel">
-            <p>
-              ${this.button('autoReloadReset', 'Reset', 'reset data(use when it stucks)')}
-            </p>
-          </div>
+          <p>
+            ${this.IDSelect('autoReloadID', 'ID', 'select ID', config.autoReloadID, 7)}
+          </p>
+          <p>
+            ${this.numberInput('autoReloadMax', 'Max', 'input max plants(if 0, use xy)', config.autoReloadMax)}
+            ${this.numberInputWidth('autoReloadX', 'X', 'input x(only works when max = 0)', config.autoReloadX, 1.3)}
+            ${this.numberInputWidth('autoReloadY', 'Y', 'input Y(only works when max = 0)', config.autoReloadY, 1.3)}
+          </p>
+          <p>
+            ${this.button('autoReloadReset', 'Reset', 'reset data(use when it stucks)')}
+          </p>
         </div>
       </div>
       <div id="autoReload2">
@@ -1612,27 +1591,19 @@ class UI {
           ${this.button('autoReload2', '', '', true, config.autoReload2)}
         </h2>
         <div class="boxPanel">
-          <div class="cookieGardenHelperAutoLeftPanel">
-            <p>
-              ${this.IDSelect('autoReload2ID', 'ID', 'select ID', config.autoReload2ID, 3)}
-            </p>
-            <p>
-              ${this.numberInput('autoReload2Number', 'Num', 'input Number', config.autoReload2Number)}
-            </p>
-          </div>
-          <div class="cookieGardenHelperAutoRightPanel">
-            <p>
-              ${this.numberInput('autoReload2Grow', 'Grow', 'input Grow', config.autoReload2Grow)}
-            </p>
-            <p>
-              ${this.numberInput('autoReload2Play', 'Play', 'input Play', config.autoReload2Play)}
-            </p>
-          </div>
-          <div class="cookieGardenHelperClearPanel">
-            <p>
-              ${this.button('autoReload2Reset', 'Reset', 'reset data(use when it stucks)')}
-            </p>
-          </div>
+          <p>
+            ${this.IDSelect('autoReload2ID', 'ID', 'select ID', config.autoReload2ID, 7)}
+          </p>
+          <p>
+            ${this.numberInput('autoReload2Grow', 'Grow', 'input Grow', config.autoReload2Grow)}
+          </p>
+          <p>
+            ${this.numberInput('autoReload2Number', 'Num', 'input Number', config.autoReload2Number)}
+            ${this.numberInput('autoReload2Play', 'Play', 'input Play', config.autoReload2Play)}
+          </p>
+          <p>
+            ${this.button('autoReload2Reset', 'Reset', 'reset data(use when it stucks)')}
+          </p>
         </div>
       </div>
     </div>
