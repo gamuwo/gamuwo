@@ -1356,18 +1356,14 @@ class UI {
     let selectContent = "";
     for(i=0; i<Garden.minigame.plantsById.length; i++){
       selectContent = selectContent + '<option value="';
-      selectContent = selectContent + i;
-      selectContent = selectContent + '" title="';
-      selectContent = selectContent + i;
-      selectContent = selectContent + ':';
-      selectContent = selectContent + Garden.minigame.plantsById[i].name;
+      selectContent = selectContent + (i + 1);
       selectContent = selectContent + '">';
-      selectContent = selectContent + i;
+      selectContent = selectContent + (i + 1);
       selectContent = selectContent + ':';
       selectContent = selectContent + Garden.minigame.plantsById[i].name;
       selectContent = selectContent + '</option>';
     }
-    return `<select style="width: ${width}rem;" name="${name}" id="${id}" size="1">${selectContent}</select>
+    return `<select style="width: ${width}rem;" name="${name}" id="${id}" size="1" value="${options}">${selectContent}</select>
 <label for="${id}" title="${title}">${text}</label>`;
   }
 
@@ -1468,7 +1464,7 @@ class UI {
         <h3>Settings</h3>
         <p>
           ${this.button('playSound', 'Sound', 'play beep sound before 10-15sec from tick', true, config.playSound)}
-          ${this.IDSelect('testIDSelect', 'ID', '', '', 3)}
+          ${this.IDSelect('testIDSelect', 'ID', '', 22, 3)}
         </p>
         <p>
           ${this.button('playSound2', 'Sound2', 'play beep sound after tick', true, config.playSound2)}
