@@ -1143,8 +1143,8 @@ class UI {
   position:absolute;
   right: 0;
   bottom: 0;
-  padding: 0.5rem;
-  margin: 1rem;
+  padding: 0.1rem;
+  margin: 0.5rem;
   text-align: right;
   outline-width: 1px;
 }
@@ -1204,10 +1204,10 @@ class UI {
 
 #cookieGardenHelperTitle {
   color: white;
-  font-size: 1.7em;
+  font-size: 1.7rem;
   font-style: normal;
-  margin-bottom: 0.2em;
-  margin-top: 0em;
+  margin-bottom: 0.2rem;
+  margin-top: 0rem;
   text-align: center;
 }
 #cookieGardenHelper h2 {
