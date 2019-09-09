@@ -1048,7 +1048,7 @@ class UI {
 #cookieGardenHelper {
   background: #000 url(https://gamuwo.github.io/gamuwo/background.jpg);
   display: none;
-  padding: 1em;
+  padding: 1rem;
   position: inherit;
 }
 #cookieGardenHelper.visible {
@@ -1183,11 +1183,11 @@ class UI {
   width: calc(100% / 3);
 }
 .logText {
-  width: calc(100% - 0.4em);
+  width: calc(100% - 0.4rem);
   height: 15rem;
   border: solid 2px;
-  padding: 0.4em;
-  margin: 0 0.2em;
+  padding: 0.4rem;
+  margin: 0 0.2rem;
   user-select: text;
   overflow: auto;
   overflow-wrap: break-word;
