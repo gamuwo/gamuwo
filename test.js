@@ -1084,20 +1084,15 @@ class UI {
   clear: both;
 }
 
-.boxDashed {
-  border-bottom: dashed 1px;
-  padding: 0em 0em 0.1em 0em;
-  margin: 0em 0em 0.2em 0em;
-}
 .underline {
   text-decoration: underline;
 }
 .boxPanel {
   display: inline-block;
-  min-width: 12em;
+  min-width: 12rem;
   border-style: solid;
   border-width: 0 2px 2px 2px;
-  padding: 0.4em;
+  padding: 0.4rem;
   box-sizing: border-box;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
@@ -1148,8 +1143,8 @@ class UI {
   position:absolute;
   right: 0;
   bottom: 0;
-  margin-right: 1em;
-  margin-bottom: 0.5em;
+  padding: 0.5rem;
+  margin: 1rem;
   text-align: right;
   outline-width: 1px;
 }
