@@ -51,6 +51,7 @@ class Config {
       autoReloadNumber: 0,
       autoReloadButtonSave: [],
       autoReloadTryHistory: [],
+      autoReloadGetXY: false,
       autoReload2: false,
       autoReload2ID: { value: 0, min: 0 },
       autoReload2Grow: { value: 0, min: 0 },
@@ -1581,6 +1582,7 @@ class UI {
             ${this.numberInputWidth('autoReloadY', 'Y', 'input Y(only works when max = 0)', config.autoReloadY, 1.3)}
           </p>
           <p>
+            ${this.button('autoReloadGetXY', 'Get XY', 'get X/Y by clicking tile', true, config.autoReloadGetXY)}
             ${this.button('autoReloadReset', 'Reset', 'reset data(use when it stucks)')}
           </p>
         </div>
@@ -1737,7 +1739,18 @@ class UI {
     
     doc.qSelAll('#gardenPlot div.gardenTile').forEach((tile) => {
       tile.onclick = (event) => {
-        console.log("click tile:" + tile.id);
+        Garden.writeLog(3, "auto reload", false, "click tile:" + tile.id);
+        if(Main.config.autoReloadGetXY){
+          let splitted = tile.id.split("-");
+          if(splitted.length == 3){
+            Main.config.autoReloadX.value = splitted[1];
+            document.getElementById(UI.makeId("autoReloadX")).value = splitted[1];
+            Main.config.autoReloadY.value = splitted[2];
+            document.getElementById(UI.makeId("autoReloadY")).value = splitted[2];
+            Main.save();
+            Garden.writeLog(3, "auto reload", false, "set x/y:" + Main.config.autoReloadX.value + "/" + Main.config.autoReloadY.value);
+          }
+        }
       };
     });
 
