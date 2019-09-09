@@ -1164,10 +1164,10 @@ class UI {
   display: block;
 }
 #logPanel h2 {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 #logPanel h3 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   margin: 5px;
 }
 #logPanel p {
@@ -1211,8 +1211,8 @@ class UI {
   text-align: center;
 }
 #cookieGardenHelper h2 {
-  font-size: 1.3rem;
-  line-height: 1.5rem;
+  font-size: 1.2rem;
+  margin: 5px;
 }
 #cookieGardenHelper h3 {
   display: flex;
