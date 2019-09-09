@@ -1104,7 +1104,7 @@ class UI {
 }
 .boxPanel {
   display: inline-block;
-  min-width: 10rem;
+  min-width: 10.5rem;
   border-style: solid;
   border-width: 0 2px 2px 2px;
   padding: 0.1rem 0.4rem 0.3rem 0.4rem;
@@ -1374,6 +1374,25 @@ class UI {
     return `<select style="width: ${width}rem;" name="${name}" id="${id}" size="1">${selectContent}</select>
 <label for="${id}" title="${title}">${text}</label>`;
   }
+  
+  static lumpSelect(name, text, title, options, width) {
+    let id = this.makeId(name);
+    let lumpName = ["normal", "bifurcated", "golden", "meaty", "caramelized"];
+    let selectContent = "";
+    for(i=0; i<lumpName.length; i++){
+      selectContent = selectContent + '<option value="';
+      selectContent = selectContent + i;
+      selectContent = selectContent + '"';
+      if(i == options.value) selectContent = selectContent + ' selected';
+      selectContent = selectContent + '>';
+      selectContent = selectContent + i;
+      selectContent = selectContent + ':';
+      selectContent = selectContent + lumpName[i];
+      selectContent = selectContent + '</option>';
+    }
+    return `<select style="width: ${width}rem;" name="${name}" id="${id}" size="1">${selectContent}</select>
+<label for="${id}" title="${title}">${text}</label>`;
+  }
 
   static button(name, text, title, toggle, active) {
     if (toggle) {
@@ -1576,7 +1595,9 @@ class UI {
           </p>
           <p>
             ${this.numberInputDigits('lumpReloadNum', 'Num', 'input number', config.lumpReloadNum, 1)}
-            ${this.numberInputDigits('lumpReloadType', 'Type', 'input suger lump type(0:normal 1:bifurcated 2:golden 3:meaty 4:caramelized)', config.lumpReloadType, 1)}
+          </p>
+          <p>
+            ${this.lumpSelect('lumpReloadType', 'Type', 'select type', config.lumpReloadType, 5)}
           </p>
         </div>
       </div>
