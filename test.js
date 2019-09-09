@@ -236,8 +236,10 @@ class Garden {
       }
       if(logText.length >= 2) logText.slice(0, -2);
       document.getElementById("logLevel" + level).innerText = logText;
+      document.getElementById("logNumLevel" + level).innerText = Main.config.logHistory[level].length;
     } else {
       document.getElementById("logLevel" + level).innerText = "";
+      document.getElementById("logNumLevel" + level).innerText = "0";
     }
   }
   
@@ -1733,17 +1735,26 @@ class UI {
     </p>
   </div>
   <div class="logBox">
-    <h3>Level1</h3>
+    <h3>
+      Level1
+      (<span id="logNumLevel1">0</span>/1000)
+    </h3>
     <div class="logText" id="logLevel1">
     </div>
   </div>
   <div class="logBox">
-    <h3>Level2</h3>
+    <h3>
+      Level2
+      (<span id="logNumLevel2">0</span>/1000)
+    </h3>
     <div class="logText" id="logLevel2">
     </div>
   </div>
   <div class="logBox">
-    <h3>Level3</h3>
+    <h3>
+      Level3
+      (<span id="logNumLevel3">0</span>/1000)
+    </h3>
     <div class="logText" id="logLevel3">
     </div>
   </div>
