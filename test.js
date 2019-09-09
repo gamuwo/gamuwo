@@ -473,6 +473,13 @@ class Garden {
       //get parameter
       let parameter = config.autoJQBParam.split(",");
       if(parameter.length == 5){
+        //parameter check
+        this.writeLog(3, "auto JQB", false, "parameter[0]:" + parameter[0]);
+        this.writeLog(3, "auto JQB", false, "parameter[1]:" + parameter[1]);
+        this.writeLog(3, "auto JQB", false, "parameter[2]:" + parameter[2]);
+        this.writeLog(3, "auto JQB", false, "parameter[3]:" + parameter[3]);
+        this.writeLog(3, "auto JQB", false, "parameter[4]:" + parameter[4]);
+        
         //switch buttons
         if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
         if(!config.autoHarvestWeeds){ Main.handleToggle('autoHarvestWeeds'); }
