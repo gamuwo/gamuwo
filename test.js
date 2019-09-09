@@ -1271,7 +1271,7 @@ class UI {
   border-radius: 3px;
 }
 #cookieGardenHelper select {
-  padding: 2px 1px 2px 1px;
+  padding: 1px;
   -webkit-appearance: button;
   border: solid 1px white;
   border-radius: 3px;
