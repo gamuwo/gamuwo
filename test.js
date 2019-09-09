@@ -1348,13 +1348,13 @@ class UI {
   static IDSelect(name, text, title, options, width) {
     let id = this.makeId(name);
     let selectContent = "";
-    for(i=0; i<this.minigame.plantsById.length; i++){
+    for(i=0; i<Garden.minigame.plantsById.length; i++){
       selectContent = selectContent + '<option value="';
       selectContent = selectContent + i;
       selectContent = selectContent + '">';
       selectContent = selectContent + i;
       selectContent = selectContent + ':';
-      selectContent = selectContent + this.minigame.plantsById[i].name;
+      selectContent = selectContent + Garden.minigame.plantsById[i].name;
       selectContent = selectContent + '</option>';
     }
     return `<select style="width: ${width}rem;" name="${name}" id="${id}" size="1">${selectContent}</select>
