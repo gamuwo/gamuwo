@@ -1357,6 +1357,10 @@ class UI {
     for(i=0; i<Garden.minigame.plantsById.length; i++){
       selectContent = selectContent + '<option value="';
       selectContent = selectContent + i;
+      selectContent = selectContent + '" title="';
+      selectContent = selectContent + i;
+      selectContent = selectContent + ':';
+      selectContent = selectContent + Garden.minigame.plantsById[i].name;
       selectContent = selectContent + '">';
       selectContent = selectContent + i;
       selectContent = selectContent + ':';
