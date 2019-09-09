@@ -1109,7 +1109,7 @@ class UI {
   min-width: 10rem;
   border-style: solid;
   border-width: 0 2px 2px 2px;
-  padding: 0.4rem;
+  padding: 0.1rem 0.2rem 0.1rem 0.2rem;
   box-sizing: border-box;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
