@@ -1269,6 +1269,12 @@ class UI {
   border: solid 1px white;
   border-radius: 3px;
 }
+#cookieGardenHelper select {
+  padding: 2px 1px 2px 1px;
+  -webkit-appearance: button;
+  border: solid 1px white;
+  border-radius: 3px;
+}
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
 #cookieGardenHelper a.toggleBtn.off .toggleBtnOn {
@@ -1458,7 +1464,7 @@ class UI {
         <h3>Settings</h3>
         <p>
           ${this.button('playSound', 'Sound', 'play beep sound before 10-15sec from tick', true, config.playSound)}
-          ${this.IDSelect('testIDSelect', 'ID', '', '', 1.7)}
+          ${this.IDSelect('testIDSelect', 'ID', '', '', 3)}
         </p>
         <p>
           ${this.button('playSound2', 'Sound2', 'play beep sound after tick', true, config.playSound2)}
