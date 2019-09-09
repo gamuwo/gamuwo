@@ -1089,7 +1089,7 @@ class UI {
 }
 .boxPanel {
   display: inline-block;
-  min-width: 12rem;
+  min-width: 10rem;
   border-style: solid;
   border-width: 0 2px 2px 2px;
   padding: 0.4rem;
@@ -1235,7 +1235,7 @@ class UI {
   text-indent: 0;
 }
 #cookieGardenHelper input[type=number] {
-  width: 2rem;
+  width: 1.7rem;
   border-radius: 3px;
 }
 
