@@ -1229,7 +1229,7 @@ class UI {
 }
 #cookieGardenHelper h2 {
   font-size: 1.2rem;
-  margin: 3px;
+  margin: 3px 3px 2px 3px;
 }
 #cookieGardenHelper h3 {
   display: flex;
