@@ -1357,13 +1357,15 @@ class UI {
     for(i=0; i<Garden.minigame.plantsById.length; i++){
       selectContent = selectContent + '<option value="';
       selectContent = selectContent + (i + 1);
-      selectContent = selectContent + '">';
+      selectContent = selectContent + '"';
+      if((i + 1) == options) selectContent = selectContent + ' selected';
+      selectContent = selectContent + '>';
       selectContent = selectContent + (i + 1);
       selectContent = selectContent + ':';
       selectContent = selectContent + Garden.minigame.plantsById[i].name;
       selectContent = selectContent + '</option>';
     }
-    return `<select style="width: ${width}rem;" name="${name}" id="${id}" size="1" value="${options}">${selectContent}</select>
+    return `<select style="width: ${width}rem;" name="${name}" id="${id}" size="1">${selectContent}</select>
 <label for="${id}" title="${title}">${text}</label>`;
   }
 
