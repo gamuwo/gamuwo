@@ -1225,15 +1225,6 @@ class UI {
   padding-left: 4px;
   margin: 1px;
 }
-#logPanel input[type=number] {
-  width: 1.7rem;
-  border-style: solid;
-  border-radius: 3px;
-}
-#logPanel input[type=text] {
-  border-style: solid;
-  border-radius: 3px;
-}
 
 #cookieGardenHelperTitle {
   color: white;
@@ -1267,14 +1258,16 @@ class UI {
 #cookieGardenHelper p {
   text-indent: 0;
 }
-#cookieGardenHelper input[type=number] {
+#cookieGardenHelper input[type=number],
+#logPanel input[type=number] {
   width: 1.7rem;
-  border-style: solid;
-  border-radius: 3px;
 }
-#cookieGardenHelper input[type=text] {
-  border-style: solid;
-  border-radius: 3px;
+#cookieGardenHelper input[type=number],
+#logPanel input[type=number],
+#cookieGardenHelper input[type=text],
+#logPanel input[type=text] {
+  border: solid 1px white;
+  border-radius: 4px;
 }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
