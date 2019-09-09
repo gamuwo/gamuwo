@@ -1466,7 +1466,6 @@ class UI {
         <h3>Settings</h3>
         <p>
           ${this.button('playSound', 'Sound', 'play beep sound before 10-15sec from tick', true, config.playSound)}
-          ${this.IDSelect('testIDSelect', 'ID', '', 22, 3)}
         </p>
         <p>
           ${this.button('playSound2', 'Sound2', 'play beep sound after tick', true, config.playSound2)}
@@ -1474,7 +1473,7 @@ class UI {
         </p>
         <p>
           ${this.button('playSoundMature', 'Sound3', 'play beep sound after target plant is mature', true, config.playSoundMature)}
-          ${this.numberInput('playSoundMatureID', 'ID', 'input ID', config.playSoundMatureID)}
+          ${this.IDSelect('playSoundMatureID', 'ID', 'select ID', config.playSoundMatureID, 3)}
         </p>
         <p>
           ${this.numberInputWidth('interval', 'Reload interval', 'input auto reload interval(ms)', config.interval, 2.5)}
@@ -1744,6 +1743,12 @@ class UI {
         } else if (input.type == 'text') {
           Main.handleChange(input.name, input.value);
         }
+      };
+    });
+    
+    doc.qSelAll('#cookieGardenHelper select').forEach((input) => {
+      input.onchange = (event) => {
+        Main.handleChange(input.name, input.value);
       };
     });
     
