@@ -1168,7 +1168,7 @@ class UI {
 }
 #logPanel h3 {
   font-size: 1.1rem;
-  margin: 5px;
+  margin: 3px;
 }
 #logPanel p {
   text-indent: 0;
@@ -1212,7 +1212,7 @@ class UI {
 }
 #cookieGardenHelper h2 {
   font-size: 1.2rem;
-  margin: 5px;
+  margin: 3px;
 }
 #cookieGardenHelper h3 {
   display: flex;
@@ -1225,17 +1225,17 @@ class UI {
   flex-grow: 1;
 }
 #cookieGardenHelper h3:before {
-  margin-right: 0.5em;
+  margin-right: 0.5rem;
 }
 #cookieGardenHelper h3:after {
-  margin-left: 0.5em;
+  margin-left: 0.5rem;
 }
 
 #cookieGardenHelper p {
   text-indent: 0;
 }
 #cookieGardenHelper input[type=number] {
-  width: 2.5em;
+  width: 2.5rem;
   border-radius: 3px;
 }
 
