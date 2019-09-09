@@ -1161,7 +1161,7 @@ class UI {
 #logPanel {
   background: #000 url(https://gamuwo.github.io/gamuwo/logback.jpg);
   display: none;
-  padding: 1em;
+  padding: 1rem;
   position: inherit;
   overflow: auto;
 }
@@ -1169,12 +1169,11 @@ class UI {
   display: block;
 }
 #logPanel h2 {
-  font-size: 1.5em;
-  line-height: 1.5em;
+  font-size: 1.5rem;
 }
 #logPanel h3 {
-  font-size: 1.2em;
-  line-height: 1.2em;
+  font-size: 1.2rem;
+  margin: 5px;
 }
 #logPanel p {
   text-indent: 0;
@@ -1185,12 +1184,13 @@ class UI {
 }
 .logText {
   width: calc(100% - 0.4em);
-  height: 15em;
+  height: 15rem;
   border: solid 2px;
   padding: 0.4em;
   margin: 0 0.2em;
   user-select: text;
   overflow: auto;
+  overflow-wrap: break-word;
   box-sizing: border-box;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
