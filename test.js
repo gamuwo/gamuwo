@@ -1070,7 +1070,7 @@ class UI {
   display: none;
 }
 #cookieGardenHelper {
-  background: #000 url(https://gamuwo.github.io/gamuwo/background.jpg);
+  background: #000 url("https://gamuwo.github.io/gamuwo/background.jpg");
   display: none;
   padding: 1rem;
   position: inherit;
@@ -1178,7 +1178,7 @@ class UI {
 #rightBottomLumpReload { display: none }
 
 #logPanel {
-  background: #000 url(https://gamuwo.github.io/gamuwo/logback.jpg);
+  background: #000 url("https://gamuwo.github.io/gamuwo/logback.jpg");
   display: none;
   padding: 1rem;
   position: inherit;
@@ -1344,6 +1344,22 @@ class UI {
     return `<input type="text" style="width: ${width}rem;" name="${name}" id="${id}" value="${options}" />
 <label for="${id}" title="${title}">${text}</label>`;
   }
+  
+  static IDSelect(name, text, title, options, width) {
+    let id = this.makeId(name);
+    let selectContent = "";
+    for(i=0; i<this.minigame.plantsById.length; i++){
+      selectContent = selectContent + '<option value="';
+      selectContent = selectContent + i;
+      selectContent = selectContent + '">';
+      selectContent = selectContent + i;
+      selectContent = selectContent + ':';
+      selectContent = selectContent + this.minigame.plantsById[i].name;
+      selectContent = selectContent + '</option>';
+    }
+    return `<select style="width: ${width}rem;" name="${name}" id="${id}" size="1">${selectContent}</select>
+<label for="${id}" title="${title}">${text}</label>`;
+  }
 
   static button(name, text, title, toggle, active) {
     if (toggle) {
@@ -1442,6 +1458,7 @@ class UI {
         <h3>Settings</h3>
         <p>
           ${this.button('playSound', 'Sound', 'play beep sound before 10-15sec from tick', true, config.playSound)}
+          ${this.IDSelect('testIDSelect', 'ID', '', '', 1.7)}
         </p>
         <p>
           ${this.button('playSound2', 'Sound2', 'play beep sound after tick', true, config.playSound2)}
@@ -1785,7 +1802,7 @@ class UI {
       
       document.getElementById("cookieGardenHelperRightBottom").style.outlineStyle = "solid";
       document.getElementById("cookieGardenHelperRightBottom").style.zIndex = "1";
-      document.getElementById("cookieGardenHelperRightBottom").style.backgroundImage = "url(https://gamuwo.github.io/gamuwo/background.jpg)";
+      document.getElementById("cookieGardenHelperRightBottom").style.backgroundImage = 'url("https://gamuwo.github.io/gamuwo/background.jpg")';
     }
     
     doc.elId('cookieGardenHelperFileLoadButton').onchange = (event) => {
