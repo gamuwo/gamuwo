@@ -1191,7 +1191,7 @@ class UI {
   font-size: 1.2rem;
 }
 #logPanel h3 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   margin: 3px;
 }
 #logPanel p {
