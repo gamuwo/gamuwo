@@ -1467,7 +1467,7 @@ class UI {
         <h3>Settings</h3>
         <p>
           ${this.button('playSound', 'Sound', 'play beep sound before 10-15sec from tick', true, config.playSound)}
-          ${this.numberInput('playSoundSecond', 'Sec', 'input second', config.playSoundSecond)}
+          ${this.numberInputWidth('playSoundSecond', 'Sec', 'input second', config.playSoundSecond, 2.2)}
         </p>
         <p>
           ${this.button('playSound2', 'Sound2', 'play beep sound after tick', true, config.playSound2)}
