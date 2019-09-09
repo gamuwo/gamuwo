@@ -1235,7 +1235,7 @@ class UI {
   text-indent: 0;
 }
 #cookieGardenHelper input[type=number] {
-  width: 1.5rem;
+  width: 2rem;
   border-radius: 3px;
 }
 
@@ -1441,7 +1441,7 @@ class UI {
         <p>
           ${this.numberInputWidth(
             'interval', 'Reload interval', 'input auto reload interval(ms)',
-            config.interval, 3.5
+            config.interval, 2.5
           )}
         </p>
         <p>
