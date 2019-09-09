@@ -1583,7 +1583,7 @@ class UI {
         <div class="boxPanel">
           <div class="cookieGardenHelperAutoLeftPanel">
             <p>
-              ${this.numberInput('autoReloadID', 'ID', 'input ID', config.autoReloadID)}
+              ${this.IDSelect('autoReloadID', 'ID', 'select ID', config.autoReloadID, 3)}
             </p>
             <p>
               ${this.numberInput('autoReloadMax', 'Max', 'input max plants(if 0, use xy)', config.autoReloadMax)}
@@ -1612,7 +1612,7 @@ class UI {
         <div class="boxPanel">
           <div class="cookieGardenHelperAutoLeftPanel">
             <p>
-              ${this.numberInput('autoReload2ID', 'ID', 'input target ID', config.autoReload2ID)}
+              ${this.IDSelect('autoReload2ID', 'ID', 'select ID', config.autoReload2ID, 3)}
             </p>
             <p>
               ${this.numberInput('autoReload2Number', 'Num', 'input Number', config.autoReload2Number)}
@@ -1752,14 +1752,12 @@ class UI {
       };
     });
     
-    doc.qSelAll('#cookieGardenHelper input').forEach((input) => {
+    doc.qSelAll('#cookieGardenHelper select').forEach((input) => {
       input.onclick = (event) => {
-        if (input.type == 'number') {
-          let id = input.id;
-          if(id !== undefined && id.length > 2 && id.slice(-2) == "ID" && Garden.selectedSeed > -1){
-            input.value = Garden.selectedSeed + 1;
-            Main.handleChange(input.name, input.value);
-          }
+        let id = input.id;
+        if(id !== undefined && id.length > 2 && id.slice(-2) == "ID" && Garden.selectedSeed > -1){
+          input.value = (Garden.selectedSeed + 1);
+          Main.handleChange(input.name, input.value);
         }
       };
     });
