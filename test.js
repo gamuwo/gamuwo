@@ -1336,6 +1336,21 @@ class UI {
 <label for="${id}" title="${title}">${text}</label>`;
   }
   
+  static numberInputDigits(name, text, title, options, digits) {
+    let id = this.makeId(name);
+    let width = 1.8;
+    if(digits == 1) width = 1.3;
+    if(digits == 2) width = 1.8;
+    if(digits == 3) width = 2.3;
+    if(digits == 4) width = 2.7;
+    if(digits == 5) width = 3.1;
+    return `
+<input type="number" style="width: ${width}rem;" name="${name}" id="${id}" value="${options.value}" step=1
+  ${options.min !== undefined ? `min="${options.min}"` : ''}
+  ${options.max !== undefined ? `max="${options.max}"` : ''} />
+<label for="${id}" title="${title}">${text}</label>`;
+  }
+  
   static textInputWidth(name, text, title, options, width) {
     let id = this.makeId(name);
     return `<input type="text" style="width: ${width}rem;" name="${name}" id="${id}" value="${options}" />
@@ -1457,18 +1472,18 @@ class UI {
         <h3>Settings</h3>
         <p>
           ${this.button('playSound', 'Sound', 'play beep sound before 10-15sec from tick', true, config.playSound)}
-          ${this.numberInputWidth('playSoundSecond', 'Sec', 'input second', config.playSoundSecond, 2.2)}
+          ${this.numberInputDigits('playSoundSecond', 'Sec', 'input second', config.playSoundSecond, 3)}
         </p>
         <p>
           ${this.button('playSound2', 'Sound2', 'play beep sound after tick', true, config.playSound2)}
-          ${this.numberInput('playSound2Tick', 'Tick', 'input ticks', config.playSound2Tick)}
+          ${this.numberInputDigits('playSound2Tick', 'Tick', 'input ticks', config.playSound2Tick, 2)}
         </p>
         <p>
           ${this.button('playSoundMature', 'Sound3', 'play beep sound after target plant is mature', true, config.playSoundMature)}
           ${this.IDSelect('playSoundMatureID', 'ID', 'select ID', config.playSoundMatureID, 3)}
         </p>
         <p>
-          ${this.numberInputWidth('interval', 'Reload interval', 'input auto reload interval(ms)', config.interval, 2.5)}
+          ${this.numberInputDigits('interval', 'Reload interval', 'input auto reload interval(ms)', config.interval, 4)}
         </p>
       </div>
     </div>
@@ -1500,7 +1515,7 @@ class UI {
           </p>
           <p>
             ${this.button('autoHarvestCheckCpSMult', 'Harvest', 'Check the CpS multiplier before harvesting (see below)', true, config.autoHarvestCheckCpSMult)}
-            ${this.numberInput('autoHarvestMiniCpSMult', 'Min', 'Minimum CpS multiplier for the auto-harvest to happen', config.autoHarvestMiniCpSMult)}
+            ${this.numberInputDigits('autoHarvestMiniCpSMult', 'Min', 'Minimum CpS multiplier for the auto-harvest to happen', config.autoHarvestMiniCpSMult, 4)}
           </p>
         </div>
         <div id="autoHarvestDyingPanel">
@@ -1511,7 +1526,7 @@ class UI {
           </p>
           <p>
             ${this.button('autoHarvestCheckCpSMultDying', 'Harvest', 'Check the CpS multiplier before harvesting (see below)', true, config.autoHarvestCheckCpSMultDying)}
-            ${this.numberInput('autoHarvestMiniCpSMultDying', 'Min', 'Minimum CpS multiplier for the auto-harvest to happen', config.autoHarvestMiniCpSMultDying)}
+            ${this.numberInputDigits('autoHarvestMiniCpSMultDying', 'Min', 'Minimum CpS multiplier for the auto-harvest to happen', config.autoHarvestMiniCpSMultDying, 4)}
           </p>
         </div>
       </div>
@@ -1525,7 +1540,7 @@ class UI {
         <div class="boxPanel">
           <p>
             ${this.button('autoPlantCheckCpSMult', 'Plant', 'Check the CpS multiplier before planting (see below)', true, config.autoPlantCheckCpSMult)}
-            ${this.numberInput('autoPlantMaxiCpSMult', 'Max', 'Maximum CpS multiplier for the auto-plant to happen', config.autoPlantMaxiCpSMult)}
+            ${this.numberInputDigits('autoPlantMaxiCpSMult', 'Max', 'Maximum CpS multiplier for the auto-plant to happen', config.autoPlantMaxiCpSMult, 4)}
           </p>
           <p>
             ${this.button('savePlot', 'Save plot', 'Save the current plot; these seeds will be replanted later')}
@@ -1543,7 +1558,7 @@ class UI {
         </h2>
         <div class="boxPanel">
           <p>
-            ${this.numberInput('autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing 4:JQB+QB growing)', config.autoJQBStage)}
+            ${this.numberInputDigits('autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing 4:JQB+QB growing)', config.autoJQBStage, 1)}
           </p>
           <p>
             ${this.textInputWidth('autoJQBParam', 'Param', 'auto JQB parameter(QBnum,QBplay,JQBnum,JQBplay,JQBage)', config.autoJQBParam, 5)}
@@ -1560,8 +1575,8 @@ class UI {
             ${this.button('lumpReload', 'Lump reload', 'reload for sugar lump', true, config.lumpReload)}
           </p>
           <p>
-            ${this.numberInput('lumpReloadNum', 'Num', 'input number', config.lumpReloadNum)}
-            ${this.numberInput('lumpReloadType', 'Type', 'input suger lump type(0:normal 1:bifurcated 2:golden 3:meaty 4:caramelized)', config.lumpReloadType)}
+            ${this.numberInputDigits('lumpReloadNum', 'Num', 'input number', config.lumpReloadNum, 1)}
+            ${this.numberInputDigits('lumpReloadType', 'Type', 'input suger lump type(0:normal 1:bifurcated 2:golden 3:meaty 4:caramelized)', config.lumpReloadType, 1)}
           </p>
         </div>
       </div>
@@ -1577,9 +1592,9 @@ class UI {
             ${this.IDSelect('autoReloadID', 'ID', 'select ID', config.autoReloadID, 7)}
           </p>
           <p>
-            ${this.numberInput('autoReloadMax', 'Max', 'input max plants(if 0, use xy)', config.autoReloadMax)}
-            ${this.numberInputWidth('autoReloadX', 'X', 'input x(only works when max = 0)', config.autoReloadX, 1.3)}
-            ${this.numberInputWidth('autoReloadY', 'Y', 'input Y(only works when max = 0)', config.autoReloadY, 1.3)}
+            ${this.numberInputDigits('autoReloadMax', 'Max', 'input max plants(if 0, use xy)', config.autoReloadMax, 2)}
+            ${this.numberInputDigits('autoReloadX', 'X', 'input x(only works when max = 0)', config.autoReloadX, 1)}
+            ${this.numberInputDigits('autoReloadY', 'Y', 'input Y(only works when max = 0)', config.autoReloadY, 1)}
           </p>
           <p>
             ${this.button('autoReloadGetXY', 'Get XY', 'get X/Y by clicking tile', true, config.autoReloadGetXY)}
@@ -1597,11 +1612,11 @@ class UI {
             ${this.IDSelect('autoReload2ID', 'ID', 'select ID', config.autoReload2ID, 7)}
           </p>
           <p>
-            ${this.numberInput('autoReload2Grow', 'Grow', 'input Grow', config.autoReload2Grow)}
+            ${this.numberInputDigits('autoReload2Grow', 'Grow', 'input Grow', config.autoReload2Grow, 2)}
           </p>
           <p>
-            ${this.numberInput('autoReload2Number', 'Num', 'input Number', config.autoReload2Number)}
-            ${this.numberInput('autoReload2Play', 'Play', 'input Play', config.autoReload2Play)}
+            ${this.numberInputDigits('autoReload2Number', 'Num', 'input Number', config.autoReload2Number, 2)}
+            ${this.numberInputDigits('autoReload2Play', 'Play', 'input Play', config.autoReload2Play, 2)}
           </p>
           <p>
             ${this.button('autoReload2Reset', 'Reset', 'reset data(use when it stucks)')}
@@ -1649,7 +1664,7 @@ class UI {
     <p>
       ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
       ${this.textInputWidth('logFilterWord', 'Filter', 'log filter word', config.logFilterWord, 8)}
-      ${this.numberInput('logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)', config.logLevel)}
+      ${this.numberInputDigits('logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)', config.logLevel, 1)}
       ${this.button('logResetButton', 'Reset', 'reset log')}
     </p>
   </div>
