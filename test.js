@@ -373,7 +373,7 @@ class Garden {
     });
     
     //play sound
-    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= parseInt(config.playSoundSecond) && this.secondsBeforeNextTick >= (parseInt(config.playSoundSecond) - 2)){
+    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= parseInt(config.playSoundSecond.value) && this.secondsBeforeNextTick >= (parseInt(config.playSoundSecond.value) - 2)){
       this.playSound1();
       config.playSoundFlag = true;
       this.writeLog(3, "play sound", false, "sound!");
