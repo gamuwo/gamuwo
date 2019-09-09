@@ -32,6 +32,7 @@ class Config {
       savedPlot: [],
       playSound: false,
       playSoundFlag: false,
+      playSoundSecond: { value: 20, min: 0 },
       playSound2: false,
       playSound2Flag: false,
       playSound2Tick: { value: 0, min: 0 },
@@ -372,7 +373,7 @@ class Garden {
     });
     
     //play sound
-    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= 10 && this.secondsBeforeNextTick >= 8){
+    if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= parseInt(config.playSoundSecond) && this.secondsBeforeNextTick >= (parseInt(config.playSoundSecond) - 2)){
       this.playSound1();
       config.playSoundFlag = true;
       this.writeLog(3, "play sound", false, "sound!");
@@ -1466,10 +1467,11 @@ class UI {
         <h3>Settings</h3>
         <p>
           ${this.button('playSound', 'Sound', 'play beep sound before 10-15sec from tick', true, config.playSound)}
+          ${this.numberInput('playSoundSecond', 'Sec', 'input second', config.playSoundSecond)}
         </p>
         <p>
           ${this.button('playSound2', 'Sound2', 'play beep sound after tick', true, config.playSound2)}
-          ${this.numberInput('playSound2Tick', 'Tick', 'input Ticks', config.playSound2Tick)}
+          ${this.numberInput('playSound2Tick', 'Tick', 'input ticks', config.playSound2Tick)}
         </p>
         <p>
           ${this.button('playSoundMature', 'Sound3', 'play beep sound after target plant is mature', true, config.playSoundMature)}
