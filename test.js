@@ -1227,9 +1227,11 @@ class UI {
 }
 #logPanel input[type=number] {
   width: 1.7rem;
+  border-style: solid;
   border-radius: 3px;
 }
 #logPanel input[type=text] {
+  border-style: solid;
   border-radius: 3px;
 }
 
@@ -1267,9 +1269,11 @@ class UI {
 }
 #cookieGardenHelper input[type=number] {
   width: 1.7rem;
+  border-style: solid;
   border-radius: 3px;
 }
 #cookieGardenHelper input[type=text] {
+  border-style: solid;
   border-radius: 3px;
 }
 
