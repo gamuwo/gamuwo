@@ -1734,6 +1734,12 @@ class UI {
         }
       };
     });
+    
+    doc.qSelAll('#gardenPlot div.gardenTile').forEach((tile) => {
+      tile.onclick = (event) => {
+        console.log("click tile:" + tile.id);
+      };
+    });
 
     doc.qSelAll('#cookieGardenHelper a.toggleBtn').forEach((a) => {
       a.onclick = (event) => {
