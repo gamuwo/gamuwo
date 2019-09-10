@@ -538,7 +538,7 @@ class Garden {
             ageArray.push(tileForAge.age);
           }
         });
-        let ageString = "0-0/0";
+        let ageString = "0-0(0)/0";
         if(ageArray.length > 0){
           ageArray.sort(function(a,b){return(a - b);});
           ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")/" + this.getPlant(21).mature;
@@ -990,7 +990,7 @@ class Garden {
               ageArray.push(tileForAge.age);
             }
           });
-          let ageString = "0-0/0";
+          let ageString = "0-0(0)/0";
           if(ageArray.length > 0){
             ageArray.sort(function(a,b){return(a - b);});
             ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")/" + this.getPlant(config.autoReload2ID.value).mature;
