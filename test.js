@@ -1489,7 +1489,7 @@ class UI {
         </p>
         <p>
           ${this.button('playSoundMature', 'Sound3', 'play beep sound after target plant is mature', true, config.playSoundMature)}
-          ${this.fixedSelect('playSoundMatureID', makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.playSoundMatureID, 3)}
+          ${this.fixedSelect('playSoundMatureID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.playSoundMatureID, 3)}
         </p>
         <p>
           ${this.numberInputDigits('interval', 'Reload interval', 'input auto reload interval(ms)', config.interval, 4)}
@@ -1600,7 +1600,7 @@ class UI {
         </h2>
         <div class="boxPanel">
           <p>
-            ${this.fixedSelect('autoReloadID', makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.autoReloadID, 7)}
+            ${this.fixedSelect('autoReloadID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.autoReloadID, 7)}
           </p>
           <p>
             ${this.numberInputDigits('autoReloadMax', 'Max', 'input max plants(if 0, use xy)', config.autoReloadMax, 2)}
@@ -1620,7 +1620,7 @@ class UI {
         </h2>
         <div class="boxPanel">
           <p>
-            ${this.fixedSelect('autoReload2ID', makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.autoReload2ID, 7)}
+            ${this.fixedSelect('autoReload2ID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.autoReload2ID, 7)}
           </p>
           <p>
             ${this.numberInputDigits('autoReload2Grow', 'Grow', 'input Grow', config.autoReload2Grow, 2)}
