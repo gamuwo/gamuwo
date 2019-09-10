@@ -1748,7 +1748,7 @@ class UI {
       };
     });
     
-    doc.qSelAll('#cookieGardenHelper select').forEach((input) => {
+    doc.qSelAll('#cookieGardenHelper select, #logPanel select').forEach((input) => {
       input.onchange = (event) => {
         Main.handleChange(input.name, input.value);
       };
