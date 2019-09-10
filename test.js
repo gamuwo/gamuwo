@@ -1260,7 +1260,8 @@ class UI {
   border: solid 1px white;
   border-radius: 3px;
 }
-#cookieGardenHelper select {
+#cookieGardenHelper select,
+#logPanel select {
   padding: 1px;
   -webkit-appearance: button;
   border: solid 1px white;
