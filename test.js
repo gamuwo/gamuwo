@@ -530,6 +530,20 @@ class Garden {
           minJQBAge = JQBAge[0];
         }
         
+        //for max min age
+        let ageArray = [];
+        this.forEachTile((x, y) => {
+          let tileForAge = this.getTile(x, y);
+          if(tileForAge.seedId == 21){
+            ageArray.push(tileForAge.age);
+          }
+        });
+        let ageString = "0-0/0";
+        if(ageArray.length > 0){
+          ageArray.sort(function(a,b){return(a - b);});
+          ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")/" + this.getPlant(21).mature;
+        }
+        
         this.writeLog(3, "auto JQB", false, "numPlants:" + numPlants);
         this.writeLog(3, "auto JQB", false, "numMatureQB:" + numMatureQB);
         this.writeLog(3, "auto JQB", false, "numJQB:" + numJQB);
@@ -585,7 +599,7 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 2;
           //save config
           Main.save();
-          this.writeLog(1, "auto JQB", true, "stage:1->2");
+          this.writeLog(1, "auto JQB", true, "stage:1->2 QBage:" + ageString);
         }
         
         if(config.autoJQBStage.value == 2 && numJQB >= 4){
@@ -610,7 +624,7 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 3;
           //save config
           Main.save();
-          this.writeLog(1, "auto JQB", true, "stage:2->3");
+          this.writeLog(1, "auto JQB", true, "stage:2->3 QBage:" + ageString);
         }
         
         if(config.autoJQBStage.value == 3 && minJQBAge >= parameter[4]){
@@ -651,7 +665,7 @@ class Garden {
           document.getElementById(UI.makeId("autoJQBStage")).value = 1;
           //save config
           Main.save();
-          this.writeLog(1, "auto JQB", true, "stage:4->1" + " sugar:" + Game.lumps);
+          this.writeLog(1, "auto JQB", true, "stage:4->1" + " sugar:" + Game.lumps + " QBage:" + ageString);
         }
       
       } else {
