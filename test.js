@@ -1767,13 +1767,13 @@ class UI {
       Garden.goBottom("logLevel2");
       Garden.goBottom("logLevel3");
     };
-    doc.elId('logToggleLevel1').onclick = (event) => {
+    doc.elId('cookieGardenHelperLogToggleLevel1').onclick = (event) => {
       doc.elId('logBoxLevel1').classList.toggle('invisible');
     };
-    doc.elId('logToggleLevel2').onclick = (event) => {
+    doc.elId('cookieGardenHelperLogToggleLevel2').onclick = (event) => {
       doc.elId('logBoxLevel2').classList.toggle('invisible');
     };
-    doc.elId('logToggleLevel3').onclick = (event) => {
+    doc.elId('cookieGardenHelperLogToggleLevel3').onclick = (event) => {
       doc.elId('logBoxLevel3').classList.toggle('invisible');
     };
 
