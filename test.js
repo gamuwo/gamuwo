@@ -493,6 +493,8 @@ class Garden {
         if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
         if(!config.autoHarvestWeeds){ Main.handleToggle('autoHarvestWeeds'); }
         if(config.autoHarvestCleanGarden){ Main.handleToggle('autoHarvestCleanGarden'); }
+        if(!config.autoHarvestDying){ Main.handleToggle('autoHarvestDying'); }
+        if(!config.autoHarvestCheckCpSMultDying){ Main.handleToggle('autoHarvestCheckCpSMultDying'); }
         if(config.autoPlant){ Main.handleToggle('autoPlant'); }
         Main.save();
         
@@ -510,12 +512,14 @@ class Garden {
         let numJQB = 0;
         let JQBAge = [];
         let minJQBAge = 0;
+        let numQB = 0;
         
         this.forEachTile((x, y) => {
           if(!this.tileIsEmpty(x, y)){
             numPlants += 1;
             let tile = this.getTile(x, y);
             let stage = this.getPlantStage(tile);
+            if(tile.seedId == 21 && stage != "dying") numQB += 1;
             if(tile.seedId == 21 && stage == "mature"){
               numMatureQB += 1;
             } else if(tile.seedId == 22) {
@@ -548,6 +552,20 @@ class Garden {
         this.writeLog(3, "auto JQB", false, "numMatureQB:" + numMatureQB);
         this.writeLog(3, "auto JQB", false, "numJQB:" + numJQB);
         this.writeLog(3, "auto JQB", false, "minJQBAge:" + minJQBAge);
+        
+        //for unexpected QB harvest
+        if((config.autoJQBStage.value == 1 || config.autoJQBStage.value == 2) && numQB < 21){
+          //harvest all plants
+          this.forEachTile((x, y) => {
+            this.harvest(x, y);
+          });
+          //change stage
+          config.autoJQBStage.value = 0;
+          document.getElementById(UI.makeId("autoJQBStage")).value = 0;
+          //save config
+          Main.save();
+          this.writeLog(1, "auto JQB", true, "unexpected QB harvest! change stage to 0");
+        }
         
         if(config.autoJQBStage.value == 0 && numPlants == 0 && this.getPlant(21).unlocked){
           //if no plants, plant QB and turn on auto-reload2 for QB
