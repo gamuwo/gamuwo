@@ -1227,6 +1227,13 @@ class UI {
   display: flex;
 }
 .logBox {
+  flex: 1;
+  min-width: 0;
+}
+#logBoxLevel1.invisible,
+#logBoxLevel2.invisible,
+#logBoxLevel3.invisible {
+  display: none;
 }
 .logText {
   width: calc(100% - 0.4rem);
@@ -1710,6 +1717,9 @@ class UI {
       <span class="underline">Log</span>
     </h2>
     <p>
+      ${this.button('logToggleLevel1', 'Level1', 'toggle level1 log panel')}
+      ${this.button('logToggleLevel2', 'Level2', 'toggle level2 log panel')}
+      ${this.button('logToggleLevel3', 'Level3', 'toggle level3 log panel')}
       ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
       ${this.textInputWidth('logFilterWord', 'Filter', 'log filter word', config.logFilterWord, 8)}
       ${this.fixedSelect('logLevel', ["no log", "a little", "normal", "massive"], 0, 'Level', 'select log level', config.logLevel, 4)}
@@ -1717,7 +1727,7 @@ class UI {
     </p>
   </div>
   <div class="logBoxParent">
-    <div class="logBox">
+    <div class="logBox" id="logBoxLevel1">
       <h3>
         Level1
         (<span id="logNumLevel1">0</span>/1000)
@@ -1725,7 +1735,7 @@ class UI {
       <div class="logText" id="logLevel1">
       </div>
     </div>
-    <div class="logBox">
+    <div class="logBox" id="logBoxLevel2">
       <h3>
         Level2
         (<span id="logNumLevel2">0</span>/1000)
@@ -1733,7 +1743,7 @@ class UI {
       <div class="logText" id="logLevel2">
       </div>
     </div>
-    <div class="logBox">
+    <div class="logBox" id="logBoxLevel3">
       <h3>
         Level3
         (<span id="logNumLevel3">0</span>/1000)
@@ -1756,6 +1766,15 @@ class UI {
       Garden.goBottom("logLevel1");
       Garden.goBottom("logLevel2");
       Garden.goBottom("logLevel3");
+    };
+    doc.elId('logToggleLevel1').onclick = (event) => {
+      doc.elId('logBoxLevel1').classList.toggle('invisible');
+    };
+    doc.elId('logToggleLevel2').onclick = (event) => {
+      doc.elId('logBoxLevel2').classList.toggle('invisible');
+    };
+    doc.elId('logToggleLevel3').onclick = (event) => {
+      doc.elId('logBoxLevel3').classList.toggle('invisible');
     };
 
     doc.qSelAll('#cookieGardenHelper input, #logPanel input').forEach((input) => {
