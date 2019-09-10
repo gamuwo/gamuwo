@@ -1357,41 +1357,31 @@ class UI {
 <label for="${id}" title="${title}">${text}</label>`;
   }
   
-  static IDSelect(name, text, title, options, width) {
+  static fixedSelect(name, optionTextArray, startIndex, text, title, options, width) {
     let id = this.makeId(name);
     let selectContent = "";
-    for(i=0; i<Garden.minigame.plantsById.length; i++){
+    for(i=0; i<optionTextArray.length; i++){
+      let indexLabel = (i + startIndex);
       selectContent = selectContent + '<option value="';
-      selectContent = selectContent + (i + 1);
+      selectContent = selectContent + indexLabel;
       selectContent = selectContent + '"';
-      if((i + 1) == options.value) selectContent = selectContent + ' selected';
+      if(indexLabel == options.value) selectContent = selectContent + ' selected';
       selectContent = selectContent + '>';
-      selectContent = selectContent + (i + 1);
+      selectContent = selectContent + indexLabel;
       selectContent = selectContent + ':';
-      selectContent = selectContent + Garden.minigame.plantsById[i].name;
+      selectContent = selectContent + optionTextArray[i];
       selectContent = selectContent + '</option>';
     }
     return `<select style="width: ${width}rem;" name="${name}" id="${id}" size="1">${selectContent}</select>
 <label for="${id}" title="${title}">${text}</label>`;
   }
   
-  static lumpSelect(name, text, title, options, width) {
-    let id = this.makeId(name);
-    let lumpName = ["normal", "bifurcated", "golden", "meaty", "caramelized"];
-    let selectContent = "";
-    for(i=0; i<lumpName.length; i++){
-      selectContent = selectContent + '<option value="';
-      selectContent = selectContent + i;
-      selectContent = selectContent + '"';
-      if(i == options.value) selectContent = selectContent + ' selected';
-      selectContent = selectContent + '>';
-      selectContent = selectContent + i;
-      selectContent = selectContent + ':';
-      selectContent = selectContent + lumpName[i];
-      selectContent = selectContent + '</option>';
+  static makeNameArray(inputArray) {
+    let outputArray = [];
+    for(i=0; i<inputArray.length; i++){
+      outputArray[i] = inputArray[i].name;
     }
-    return `<select style="width: ${width}rem;" name="${name}" id="${id}" size="1">${selectContent}</select>
-<label for="${id}" title="${title}">${text}</label>`;
+    return outputArray;
   }
 
   static button(name, text, title, toggle, active) {
@@ -1499,7 +1489,7 @@ class UI {
         </p>
         <p>
           ${this.button('playSoundMature', 'Sound3', 'play beep sound after target plant is mature', true, config.playSoundMature)}
-          ${this.IDSelect('playSoundMatureID', 'ID', 'select ID', config.playSoundMatureID, 3)}
+          ${this.fixedSelect('playSoundMatureID', makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.playSoundMatureID, 3)}
         </p>
         <p>
           ${this.numberInputDigits('interval', 'Reload interval', 'input auto reload interval(ms)', config.interval, 4)}
@@ -1597,7 +1587,7 @@ class UI {
             ${this.numberInputDigits('lumpReloadNum', 'Num', 'input number', config.lumpReloadNum, 1)}
           </p>
           <p>
-            ${this.lumpSelect('lumpReloadType', 'Type', 'select type', config.lumpReloadType, 5)}
+            ${this.fixedSelect('lumpReloadType', ["normal", "bifurcated", "golden", "meaty", "caramelized"], 0, 'Type', 'select type', config.lumpReloadType, 5)}
           </p>
         </div>
       </div>
@@ -1610,7 +1600,7 @@ class UI {
         </h2>
         <div class="boxPanel">
           <p>
-            ${this.IDSelect('autoReloadID', 'ID', 'select ID', config.autoReloadID, 7)}
+            ${this.fixedSelect('autoReloadID', makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.autoReloadID, 7)}
           </p>
           <p>
             ${this.numberInputDigits('autoReloadMax', 'Max', 'input max plants(if 0, use xy)', config.autoReloadMax, 2)}
@@ -1630,7 +1620,7 @@ class UI {
         </h2>
         <div class="boxPanel">
           <p>
-            ${this.IDSelect('autoReload2ID', 'ID', 'select ID', config.autoReload2ID, 7)}
+            ${this.fixedSelect('autoReload2ID', makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.autoReload2ID, 7)}
           </p>
           <p>
             ${this.numberInputDigits('autoReload2Grow', 'Grow', 'input Grow', config.autoReload2Grow, 2)}
