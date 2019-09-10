@@ -1223,9 +1223,10 @@ class UI {
 #logPanel p {
   text-indent: 0;
 }
+.logBoxParent {
+  display: flex;
+}
 .logBox {
-  float: left;
-  width: calc(100% / 3);
 }
 .logText {
   width: calc(100% - 0.4rem);
@@ -1715,28 +1716,30 @@ class UI {
       ${this.button('logResetButton', 'Reset', 'reset log')}
     </p>
   </div>
-  <div class="logBox">
-    <h3>
-      Level1
-      (<span id="logNumLevel1">0</span>/1000)
-    </h3>
-    <div class="logText" id="logLevel1">
+  <div class="logBoxParent">
+    <div class="logBox">
+      <h3>
+        Level1
+        (<span id="logNumLevel1">0</span>/1000)
+      </h3>
+      <div class="logText" id="logLevel1">
+      </div>
     </div>
-  </div>
-  <div class="logBox">
-    <h3>
-      Level2
-      (<span id="logNumLevel2">0</span>/1000)
-    </h3>
-    <div class="logText" id="logLevel2">
+    <div class="logBox">
+      <h3>
+        Level2
+        (<span id="logNumLevel2">0</span>/1000)
+      </h3>
+      <div class="logText" id="logLevel2">
+      </div>
     </div>
-  </div>
-  <div class="logBox">
-    <h3>
-      Level3
-      (<span id="logNumLevel3">0</span>/1000)
-    </h3>
-    <div class="logText" id="logLevel3">
+    <div class="logBox">
+      <h3>
+        Level3
+        (<span id="logNumLevel3">0</span>/1000)
+      </h3>
+      <div class="logText" id="logLevel3">
+      </div>
     </div>
   </div>
 </div>`);
