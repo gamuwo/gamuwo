@@ -1310,6 +1310,16 @@ class UI {
   border: solid 1px white;
   border-radius: 3px;
 }
+#cookieGardenHelper meter {
+  width: 100px;
+  height: 6px;
+}
+#cookieGardenHelper meter::-webkit-meter-bar {
+  border-radius: 3px;
+}
+#cookieGardenHelper meter::-webkit-meter-optimum-value {
+  border-radius: 3px;
+}
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
 #cookieGardenHelper a.toggleBtn.off .toggleBtnOn {
@@ -1426,6 +1436,11 @@ class UI {
       outputArray[i] = inputArray[i].name;
     }
     return outputArray;
+  }
+  
+  static meter(name, low, high, optimum, value) {
+    let id = this.makeId(name);
+    return `<meter name="${name}" id="${id}" low="${low}" high="${high}" optimum="${optimum}" value="${value}" />`;
   }
 
   static button(name, text, title, toggle, active) {
@@ -1699,7 +1714,8 @@ class UI {
         Try:<span id="autoReload2Disp">0</span>
         Grow:<span id="autoReload2Disp2">0/0(0)</span><br>
         Ave:<span id="autoReload2Disp3">[0]0(0)</span><br>
-        Age:<span id="autoReload2Disp4">0-0(0)/0</span>
+        Age:<span id="autoReload2Disp4">0-0(0)/0</span><br>
+        ${this.meter('autoReload2Meter', 0.5, 0.9, 0.25, 0)}
       </p>
     </div>
     <div>
