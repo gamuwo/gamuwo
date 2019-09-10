@@ -1767,15 +1767,6 @@ class UI {
       Garden.goBottom("logLevel2");
       Garden.goBottom("logLevel3");
     };
-    doc.elId('cookieGardenHelperLogToggleLevel1').onclick = (event) => {
-      doc.elId('logBoxLevel1').classList.toggle('invisible');
-    };
-    doc.elId('cookieGardenHelperLogToggleLevel2').onclick = (event) => {
-      doc.elId('logBoxLevel2').classList.toggle('invisible');
-    };
-    doc.elId('cookieGardenHelperLogToggleLevel3').onclick = (event) => {
-      doc.elId('logBoxLevel3').classList.toggle('invisible');
-    };
 
     doc.qSelAll('#cookieGardenHelper input, #logPanel input').forEach((input) => {
       input.onchange = (event) => {
@@ -2024,6 +2015,12 @@ class Main {
       Garden.goBottom("logLevel1");
       Garden.goBottom("logLevel2");
       Garden.goBottom("logLevel3");
+    } else if (key == 'logToggleLevel1') {
+      doc.elId('logBoxLevel1').classList.toggle('invisible');
+    } else if (key == 'logToggleLevel2') {
+      doc.elId('logBoxLevel2').classList.toggle('invisible');
+    } else if (key == 'logToggleLevel3') {
+      doc.elId('logBoxLevel3').classList.toggle('invisible');
     }
     this.save();
   }
