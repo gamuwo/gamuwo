@@ -1567,7 +1567,7 @@ class UI {
         </h2>
         <div class="boxPanel">
           <p>
-            ${this.numberInputDigits('autoJQBStage', 'Stage', 'input stage(0:no plants 1:QB growing 2:waiting JQB 3:JQB growing 4:JQB+QB growing)', config.autoJQBStage, 1)}
+            ${this.fixedSelect('autoJQBStage', ["no plants", "QB growing", "waiting JQB", "JQB growing", "JQB+QB growing"], 0, 'Stage', 'select stage', config.autoJQBStage, 6)}
           </p>
           <p>
             ${this.textInputWidth('autoJQBParam', 'Param', 'auto JQB parameter(QBnum,QBplay,JQBnum,JQBplay,JQBage)', config.autoJQBParam, 5)}
