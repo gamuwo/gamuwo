@@ -1567,7 +1567,7 @@ class UI {
         </h2>
         <div class="boxPanel">
           <p>
-            ${this.fixedSelect('autoJQBStage', ["no plants", "QB growing", "waiting JQB", "JQB growing", "JQB+QB growing"], 0, 'Stage', 'select stage', config.autoJQBStage, 6)}
+            ${this.fixedSelect('autoJQBStage', ["no plants", "QB growing", "waiting JQB", "JQB growing", "JQB+QB growing"], 0, 'Stage', 'select stage', config.autoJQBStage, 7)}
           </p>
           <p>
             ${this.textInputWidth('autoJQBParam', 'Param', 'auto JQB parameter(QBnum,QBplay,JQBnum,JQBplay,JQBage)', config.autoJQBParam, 5)}
@@ -1675,7 +1675,7 @@ class UI {
     <p>
       ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
       ${this.textInputWidth('logFilterWord', 'Filter', 'log filter word', config.logFilterWord, 8)}
-      ${this.numberInputDigits('logLevel', 'Log level', 'input log level(0:no log 1:a little 2:normal 3:massive 4:debug)', config.logLevel, 1)}
+      ${this.fixedSelect('logLevel', ["no log", "a little", "normal", "massive"], 0, 'Level', 'select log level', config.logLevel, 4)}
       ${this.button('logResetButton', 'Reset', 'reset log')}
     </p>
   </div>
