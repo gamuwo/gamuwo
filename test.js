@@ -563,11 +563,11 @@ class Garden {
           if(config.autoReload){ Main.handleToggle('autoReload'); }
           if(config.autoReload2){ Main.handleToggle('autoReload2'); }
           //change stage
+          this.writeLog(1, "auto JQB", true, "unexpected QB harvest! stage:" + config.autoJQBStage.value + "->0");
           config.autoJQBStage.value = 0;
           document.getElementById(UI.makeId("autoJQBStage")).value = 0;
           //save config
           Main.save();
-          this.writeLog(1, "auto JQB", true, "unexpected QB harvest! change stage to 0");
         }
         
         if(config.autoJQBStage.value == 0 && numPlants == 0 && this.getPlant(21).unlocked){
