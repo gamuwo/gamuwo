@@ -1720,21 +1720,7 @@ class UI {
       Garden.goBottom("logLevel3");
     };
 
-    doc.qSelAll('#cookieGardenHelper input').forEach((input) => {
-      input.onchange = (event) => {
-        if (input.type == 'number') {
-          let min = config[input.name].min;
-          let max = config[input.name].max;
-          if (min !== undefined && input.value < min) { input.value = min; }
-          if (max !== undefined && input.value > max) { input.value = max; }
-          Main.handleChange(input.name, input.value);
-        } else if (input.type == 'text') {
-          Main.handleChange(input.name, input.value);
-        }
-      };
-    });
-
-    doc.qSelAll('#logPanel input').forEach((input) => {
+    doc.qSelAll('#cookieGardenHelper input, #logPanel input').forEach((input) => {
       input.onchange = (event) => {
         if (input.type == 'number') {
           let min = config[input.name].min;
@@ -1787,13 +1773,7 @@ class UI {
       };
     });
 
-    doc.qSelAll('#cookieGardenHelper a.btn').forEach((a) => {
-      a.onclick = (event) => {
-        Main.handleClick(a.name);
-      };
-    });
-    
-    doc.qSelAll('#logPanel a.btn').forEach((a) => {
+    doc.qSelAll('#cookieGardenHelper a.btn, #logPanel a.btn').forEach((a) => {
       a.onclick = (event) => {
         Main.handleClick(a.name);
       };
