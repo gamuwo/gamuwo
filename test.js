@@ -559,6 +559,9 @@ class Garden {
           this.forEachTile((x, y) => {
             this.harvest(x, y);
           });
+          //turn off auto-reload, auto-reload2
+          if(config.autoReload){ Main.handleToggle('autoReload'); }
+          if(config.autoReload2){ Main.handleToggle('autoReload2'); }
           //change stage
           config.autoJQBStage.value = 0;
           document.getElementById(UI.makeId("autoJQBStage")).value = 0;
