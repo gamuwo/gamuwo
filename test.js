@@ -1973,21 +1973,23 @@ class Main {
         Game.LoadSave(this.config.quickLoad2Save);
       }
     } else if (key == 'autoReloadReset') {
+      Main.restart(1000);
       this.config.autoReloadSave = "";
       this.config.autoReloadSaveSecond = 9999;
       this.config.autoReloadReloads = 0;
       this.config.autoReloadNumber = 0;
       this.config.autoReloadButtonSave = [];
       this.config.autoReloadTryHistory = [];
-      document.getElementById("autoReloadDisp2").innerText = "0(0)";
+      document.getElementById("autoReloadDisp2").innerText = "[0]0(0)";
     } else if (key == 'autoReload2Reset') {
+      Main.restart(1000);
       this.config.autoReload2Save = "";
       this.config.autoReload2SaveSecond = 9999;
       this.config.autoReload2Reloads = 0;
       this.config.autoReload2Plants = [];
       this.config.autoReload2ButtonSave = [];
       this.config.autoReload2TryHistory = [];
-      document.getElementById("autoReload2Disp3").innerText = "0(0)";
+      document.getElementById("autoReload2Disp3").innerText = "[0]0(0)";
     } else if (key == 'logResetButton') {
       this.config.logHistory = [];
       Garden.displayLog(1);
