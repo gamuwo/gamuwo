@@ -1311,14 +1311,15 @@ class UI {
   border-radius: 3px;
 }
 #cookieGardenHelper meter {
-  width: 100px;
-  height: 6px;
+  width: 120px;
+  height: 5px;
+  vertical-align: 0;
 }
 #cookieGardenHelper meter::-webkit-meter-bar {
-  border-radius: 3px;
+  border-radius: 2px;
 }
 #cookieGardenHelper meter::-webkit-meter-optimum-value {
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
