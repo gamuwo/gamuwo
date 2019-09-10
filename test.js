@@ -1720,9 +1720,15 @@ class UI {
       ${this.button('logToggleLevel1', 'Level1', 'toggle level1 log panel')}
       ${this.button('logToggleLevel2', 'Level2', 'toggle level2 log panel')}
       ${this.button('logToggleLevel3', 'Level3', 'toggle level3 log panel')}
+    </p>
+    <p>
       ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
       ${this.textInputWidth('logFilterWord', 'Filter', 'log filter word', config.logFilterWord, 8)}
+    </p>
+    <p>
       ${this.fixedSelect('logLevel', ["no log", "a little", "normal", "massive"], 0, 'Level', 'select log level', config.logLevel, 4)}
+    </p>
+    <p>
       ${this.button('logResetButton', 'Reset', 'reset log')}
     </p>
   </div>
