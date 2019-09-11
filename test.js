@@ -1344,7 +1344,7 @@ class UI {
 #cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value { background-color: red; }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-bar { background-color: red; }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: skyblue; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value { background-color: purple; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value { background-color: violet; }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value { background-color: hotpink; }
 #cookieGardenHelper meter.meterSecond { display: none; }
 
