@@ -1002,22 +1002,22 @@ class Garden {
         // for try meter
         let ave = config.autoReload2TryAverage[config.autoReload2ID.value];
         if(ave === undefined || ave == 0){
-          if( document.getElementById(UI.makeId("autoReload2Meter2")).display == "none" ){
-            document.getElementById(UI.makeId("autoReload2Meter")).display = "none";
-            document.getElementById(UI.makeId("autoReload2Meter2")).display = "inline-block";
+          if( document.getElementById(UI.makeId("autoReload2Meter2")).style.display == "none" ){
+            document.getElementById(UI.makeId("autoReload2Meter")).style.display = "none";
+            document.getElementById(UI.makeId("autoReload2Meter2")).style.display = "inline-block";
           }
           document.getElementById(UI.makeId("autoReload2Meter2")).value = 1;
         } else {
           if( (config.autoReload2Reloads / (ave * 2)) <= 1 ){
-            if( document.getElementById(UI.makeId("autoReload2Meter2")).display == "inline-block" ){
-              document.getElementById(UI.makeId("autoReload2Meter")).display = "inline-block";
-              document.getElementById(UI.makeId("autoReload2Meter2")).display = "none";
+            if( document.getElementById(UI.makeId("autoReload2Meter2")).style.display == "inline-block" ){
+              document.getElementById(UI.makeId("autoReload2Meter")).style.display = "inline-block";
+              document.getElementById(UI.makeId("autoReload2Meter2")).style.display = "none";
             }
             document.getElementById(UI.makeId("autoReload2Meter")).value = (config.autoReload2Reloads / (ave * 2));
           } else {
-            if( document.getElementById(UI.makeId("autoReload2Meter2")).display == "none" ){
-              document.getElementById(UI.makeId("autoReload2Meter")).display = "none";
-              document.getElementById(UI.makeId("autoReload2Meter2")).display = "inline-block";
+            if( document.getElementById(UI.makeId("autoReload2Meter2")).style.display == "none" ){
+              document.getElementById(UI.makeId("autoReload2Meter")).style.display = "none";
+              document.getElementById(UI.makeId("autoReload2Meter2")).style.display = "inline-block";
             }
             document.getElementById(UI.makeId("autoReload2Meter2")).value = (config.autoReload2Reloads / (ave * 10));
           }
