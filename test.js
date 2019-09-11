@@ -1739,7 +1739,7 @@ class UI {
         Grow:<span id="autoReload2Disp2">0/0(0)</span><br>
         Ave:<span id="autoReload2Disp3">[0]0(0)</span><br>
         Age:<span id="autoReload2Disp4">0-0(0)/0</span><br>
-        ${this.meter('autoReload2MeterGrow', 0.33, 0.66, 0.8, 0)}<br>
+        ${this.meter('autoReload2MeterGrow', 0.34, 0.67, 0.8, 0)}<br>
         ${this.meter('autoReload2Meter', 0.5, 0.9, 0.25, 0)}
       </p>
     </div>
