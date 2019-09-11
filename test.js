@@ -1142,18 +1142,14 @@ class UI {
   static makeId(id) { return moduleName + capitalize(id); }
   static get css() {
     return `
-#game.onMenu #cookieGardenHelper {
-  display: none;
-}
+#game.onMenu #cookieGardenHelper { display: none; }
 #cookieGardenHelper {
   background: #000 url("https://gamuwo.github.io/gamuwo/background.jpg");
   display: none;
   padding: 1rem;
   position: inherit;
 }
-#cookieGardenHelper.visible {
-  display: block;
-}
+#cookieGardenHelper.visible { display: block; }
 #cookieGardenHelperTools:after {
   content: "";
   display: table;
@@ -1173,9 +1169,7 @@ class UI {
   width: 50%;
 }
 
-.underline {
-  text-decoration: underline;
-}
+.underline { text-decoration: underline; }
 .boxPanel {
   display: inline-block;
   min-width: 10.5rem;
@@ -1224,9 +1218,7 @@ class UI {
 #autoJQB a:hover,
 #lumpReload a:hover { color: white; }
 
-#cookieGardenHelperUrl {
-  position:absolute;
-}
+#cookieGardenHelperUrl { position:absolute; }
 
 #cookieGardenHelperRightBottom {
   position:absolute;
@@ -1249,32 +1241,22 @@ class UI {
   position: inherit;
   overflow: auto;
 }
-#logPanel.visible {
-  display: block;
-}
-#logPanel h2 {
-  font-size: 1.2rem;
-}
+#logPanel.visible { display: block; }
+#logPanel h2 { font-size: 1.2rem; }
 #logPanel h3 {
   font-size: 1rem;
   margin: 3px;
 }
-#logPanel p {
-  text-indent: 0;
-}
-.logBoxParent {
-  display: flex;
-}
-.logBox {
+#logPanel p { text-indent: 0; }
+#logPanel .logBoxParent { display: flex; }
+#logPanel .logBox {
   flex: 1;
   min-width: 0;
 }
 #logBoxLevel1.invisible,
 #logBoxLevel2.invisible,
-#logBoxLevel3.invisible {
-  display: none;
-}
-.logText {
+#logBoxLevel3.invisible { display: none; }
+#logPanel .logText {
   width: calc(100% - 0.4rem);
   height: 15rem;
   border: solid 2px;
@@ -1287,11 +1269,13 @@ class UI {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
 }
-.flexPanel {
+#logPanel .flexPanel {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+#logPanel .flexItemGrowNormal { flex-grow: 1; }
+#logPanel .flexItemGrowWide { flex-grow: 5; }
 #logPanel a.toggleBtn,
 #logPanel a.btn {
   padding-right: 4px;
@@ -1321,20 +1305,12 @@ class UI {
   content: "";
   flex-grow: 1;
 }
-#cookieGardenHelper h3:before {
-  margin-right: 0.5rem;
-}
-#cookieGardenHelper h3:after {
-  margin-left: 0.5rem;
-}
+#cookieGardenHelper h3:before { margin-right: 0.5rem; }
+#cookieGardenHelper h3:after { margin-left: 0.5rem; }
 
-#cookieGardenHelper p {
-  text-indent: 0;
-}
+#cookieGardenHelper p { text-indent: 0; }
 #cookieGardenHelper input[type=number],
-#logPanel input[type=number] {
-  width: 1.7rem;
-}
+#logPanel input[type=number] { width: 1.7rem; }
 #cookieGardenHelper input[type=number],
 #logPanel input[type=number],
 #cookieGardenHelper input[type=text],
@@ -1349,9 +1325,7 @@ class UI {
   border: solid 1px white;
   border-radius: 3px;
 }
-#cookieGardenHelper div.meterDiv {
-  height: 7px;
-}
+#cookieGardenHelper div.meterDiv { height: 7px; }
 #cookieGardenHelper meter {
   width: 120px;
   height: 5px;
@@ -1364,38 +1338,18 @@ class UI {
   background-image: none;
   border-radius: 2px;
 }
-#cookieGardenHelper meter.meterFirst::-webkit-meter-bar {
-  background-color: darkslategray;
-}
-#cookieGardenHelper meter.meterFirst::-webkit-meter-optimum-value {
-  background-color: lime;
-}
-#cookieGardenHelper meter.meterFirst::-webkit-meter-suboptimum-value {
-  background-color: yellow;
-}
-#cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value {
-  background-color: red;
-}
-#cookieGardenHelper meter.meterSecond::-webkit-meter-bar {
-  background-color: red;
-}
-#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value {
-  background-color: purple;
-}
-#cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value {
-  background-color: hotpink;
-}
-#cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value {
-  background-color: hotpink;
-}
-#cookieGardenHelper meter.meterSecond {
-  display: none;
-}
+#cookieGardenHelper meter.meterFirst::-webkit-meter-bar { background-color: darkslategray; }
+#cookieGardenHelper meter.meterFirst::-webkit-meter-optimum-value { background-color: lime; }
+#cookieGardenHelper meter.meterFirst::-webkit-meter-suboptimum-value { background-color: yellow; }
+#cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value { background-color: red; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-bar { background-color: red; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: purple; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value { background-color: hotpink; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value { background-color: hotpink; }
+#cookieGardenHelper meter.meterSecond { display: none; }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
-#cookieGardenHelper a.toggleBtn.off .toggleBtnOn {
-  display: none;
-}
+#cookieGardenHelper a.toggleBtn.off .toggleBtnOn { display: none; }
 #cookieGardenHelper a.toggleBtn,
 #cookieGardenHelper a.btn {
   padding-right: 4px;
@@ -1403,43 +1357,33 @@ class UI {
   margin: 1px;
 }
 #cookieGardenHelper span.labelWithState:not(.active) .labelStateActive,
-#cookieGardenHelper span.labelWithState.active .labelStateNotActive {
-  display: none;
-}
+#cookieGardenHelper span.labelWithState.active .labelStateNotActive { display: none; }
 
-#cookieGardenHelperTooltip {
-  width: 300px;
-}
-#cookieGardenHelperTooltip .gardenTileRow {
-  height: 48px;
-}
+#cookieGardenHelperTooltip { width: 300px; }
+#cookieGardenHelperTooltip .gardenTileRow { height: 48px; }
 #cookieGardenHelperTooltip .tile {
   border: 1px inset dimgrey;
   display: inline-block;
   height: 48px;
   width: 48px;
 }
-#cookieGardenHelperTooltip .gardenTileIcon {
-  position: inherit;
-}
+#cookieGardenHelperTooltip .gardenTileIcon { position: inherit; }
 
 #cookieGardenHelper .warning {
-    padding: 1rem;
-    font-size: 1.5rem;
-    background-color: orange;
-    color: white;
+  padding: 1rem;
+  font-size: 1.5rem;
+  background-color: orange;
+  color: white;
 }
 #cookieGardenHelper .warning .closeWarning {
-    font-weight: bold;
-    float: right;
-    font-size: 2rem;
-    line-height: 0.25rem;
-    cursor: pointer;
-    transition: 0.3s;
+  font-weight: bold;
+  float: right;
+  font-size: 2rem;
+  line-height: 0.25rem;
+  cursor: pointer;
+  transition: 0.3s;
 }
-#cookieGardenHelper .warning .closeWarning:hover {
-    color: black;
-}
+#cookieGardenHelper .warning .closeWarning:hover { color: black; }
 `;
   }
 
@@ -1806,19 +1750,19 @@ class UI {
 <div id="logPanel">
   <style>${this.css}</style>
   <div class="flexPanel">
-    <h2>
+    <h2 class="flexItemGrowWide">
       <span class="underline">Log</span>
     </h2>
-    <p>
+    <p class="flexItemGrowNormal">
       ${this.button('logToggleLevel1', 'Level1', 'toggle level1 log panel')}
       ${this.button('logToggleLevel2', 'Level2', 'toggle level2 log panel')}
       ${this.button('logToggleLevel3', 'Level3', 'toggle level3 log panel')}
     </p>
-    <p>
+    <p class="flexItemGrowNormal">
       ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
       ${this.textInputWidth('logFilterWord', 'Filter', 'log filter word', config.logFilterWord, 8)}
     </p>
-    <p>
+    <p class="flexItemGrowNormal">
       ${this.fixedSelect('logLevel', ["no log", "a little", "normal", "massive"], 0, 'Level', 'select log level', config.logLevel, 4)}
     </p>
     <p>
