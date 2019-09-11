@@ -1349,7 +1349,7 @@ class UI {
   border: solid 1px white;
   border-radius: 3px;
 }
-#cookieGardenHelper .meterDiv {
+#cookieGardenHelper div.meterDiv {
   height: 7px;
 }
 #cookieGardenHelper meter {
@@ -1362,33 +1362,33 @@ class UI {
 #cookieGardenHelper meter::-webkit-meter-suboptimum-value ,
 #cookieGardenHelper meter::-webkit-meter-even-less-good-value {
   background-image: none;
-  border-radius: 10px;
+  border-radius: 2px;
 }
-#cookieGardenHelper meter::-webkit-meter-bar {
+#cookieGardenHelper meter.meterFirst::-webkit-meter-bar {
   background-color: darkslategray;
 }
-#cookieGardenHelper meter::-webkit-meter-optimum-value {
+#cookieGardenHelper meter.meterFirst::-webkit-meter-optimum-value {
   background-color: lime;
 }
-#cookieGardenHelper meter::-webkit-meter-suboptimum-value {
+#cookieGardenHelper meter.meterFirst::-webkit-meter-suboptimum-value {
   background-color: yellow;
 }
-#cookieGardenHelper meter::-webkit-meter-even-less-good-value {
+#cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value {
   background-color: red;
 }
-#cookieGardenHelperAutoReload2Meter2::-webkit-meter-bar {
-  background-color: red !important;
+#cookieGardenHelper meter.meterSecond::-webkit-meter-bar {
+  background-color: red;
 }
-#cookieGardenHelperAutoReload2Meter2::-webkit-meter-optimum-value {
-  background-color: purple !important;
+#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value {
+  background-color: purple;
 }
-#cookieGardenHelperAutoReload2Meter2::-webkit-meter-suboptimum-value {
-  background-color: black !important;
+#cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value {
+  background-color: black;
 }
-#cookieGardenHelperAutoReload2Meter2::-webkit-meter-even-less-good-value {
-  background-color: black !important;
+#cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value {
+  background-color: black;
 }
-#cookieGardenHelperAutoReload2Meter2 {
+#cookieGardenHelper meter.meterSecond {
   display: none;
 }
 
@@ -1509,9 +1509,9 @@ class UI {
     return outputArray;
   }
   
-  static meter(name, low, high, optimum, value) {
+  static meter(name, class, low, high, optimum, value) {
     let id = this.makeId(name);
-    return `<meter name="${name}" id="${id}" low="${low}" high="${high}" optimum="${optimum}" value="${value}"></meter>`;
+    return `<meter name="${name}" id="${id}" class="${class}" low="${low}" high="${high}" optimum="${optimum}" value="${value}"></meter>`;
   }
 
   static button(name, text, title, toggle, active) {
@@ -1788,11 +1788,11 @@ class UI {
         Age:<span id="autoReload2Disp4">0-0(0)/0</span>
       </p>
       <div class="meterDiv">
-        ${this.meter('autoReload2MeterGrow', 0, 0, 0.5, 0)}
+        ${this.meter('autoReload2MeterGrow', 'meterFirst', 0, 0, 0.5, 0)}
       </div>
       <div class="meterDiv">
-        ${this.meter('autoReload2Meter', 0.5, 0.9, 0.25, 0)}
-        ${this.meter('autoReload2Meter2', 0, 0.999, 0.5, 0)}
+        ${this.meter('autoReload2Meter', 'meterFirst', 0.5, 0.9, 0.25, 0)}
+        ${this.meter('autoReload2Meter2', 'meterSecond', 0, 0.999, 0.5, 0)}
       </div>
     </div>
     <div>
