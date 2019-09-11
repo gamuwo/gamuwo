@@ -1331,6 +1331,7 @@ class UI {
   height: 5px;
   vertical-align: 5px;
 }
+#cookieGardenHelper meter.meterSecond { display: none; }
 #cookieGardenHelper meter::-webkit-meter-bar ,
 #cookieGardenHelper meter::-webkit-meter-optimum-value ,
 #cookieGardenHelper meter::-webkit-meter-suboptimum-value ,
@@ -1340,13 +1341,12 @@ class UI {
 }
 #cookieGardenHelper meter.meterFirst::-webkit-meter-bar { background-color: darkslategray; }
 #cookieGardenHelper meter.meterFirst::-webkit-meter-optimum-value { background-color: lime; }
-#cookieGardenHelper meter.meterFirst::-webkit-meter-suboptimum-value { background-color: yellow; }
-#cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value { background-color: red; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-bar { background-color: red; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: skyblue; }
+#cookieGardenHelper meter.meterFirst::-webkit-meter-suboptimum-value { background-color: gold; }
+#cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value { background-color: crimson; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-bar { background-color: crimson; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: cornflowerblue; }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value { background-color: violet; }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value { background-color: hotpink; }
-#cookieGardenHelper meter.meterSecond { display: none; }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
 #cookieGardenHelper a.toggleBtn.off .toggleBtnOn { display: none; }
