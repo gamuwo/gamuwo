@@ -1351,6 +1351,9 @@ class UI {
 #cookieGardenHelper .meterDiv {
   height: 7px;
 }
+#cookieGardenHelperAutoReload2Meter2 {
+  display: none;
+}
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
 #cookieGardenHelper a.toggleBtn.off .toggleBtnOn {
@@ -1752,6 +1755,7 @@ class UI {
       </div>
       <div class="meterDiv">
         ${this.meter('autoReload2Meter', 0.5, 0.9, 0.25, 0)}
+        ${this.meter('autoReload2Meter2', 0.2, 0.9, 0.1, 0)}
       </div>
     </div>
     <div>
