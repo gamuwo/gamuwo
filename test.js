@@ -947,7 +947,7 @@ class Garden {
           upperAge = parseInt(config.autoReload2Plants[config.autoReload2Plants.length - 1][2]);
           targetNumber = parseInt(config.autoReload2Plants.length);
         } else {
-          upperAge = parseInt(config.autoReload2Plants[(parseInt(config.autoReload2Number.value) - 1)][2]) + parseInt(config.autoReload2Play.value);
+          if(config.autoReload2Number.value > 0) upperAge = parseInt(config.autoReload2Plants[(parseInt(config.autoReload2Number.value) - 1)][2]) + parseInt(config.autoReload2Play.value);
           targetNumber = parseInt(config.autoReload2Number.value);
         }
         this.writeLog(3, "auto reload2", false, "upperAge:" + upperAge);
@@ -1336,13 +1336,16 @@ class UI {
 #cookieGardenHelper meter {
   width: 120px;
   height: 5px;
-  vertical-align: 0;
+  vertical-align: 5px;
 }
 #cookieGardenHelper meter::-webkit-meter-bar ,
 #cookieGardenHelper meter::-webkit-meter-optimum-value ,
 #cookieGardenHelper meter::-webkit-meter-suboptimum-value ,
 #cookieGardenHelper meter::-webkit-meter-even-less-good-value {
   border-radius: 2px;
+}
+#cookieGardenHelper .meterDiv {
+  height: 7px;
 }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
@@ -1738,10 +1741,14 @@ class UI {
         Try:<span id="autoReload2Disp">0</span>
         Grow:<span id="autoReload2Disp2">0/0(0)</span><br>
         Ave:<span id="autoReload2Disp3">[0]0(0)</span><br>
-        Age:<span id="autoReload2Disp4">0-0(0)/0</span><br>
-        ${this.meter('autoReload2MeterGrow', 0.34, 0.67, 0.8, 0)}<br>
-        ${this.meter('autoReload2Meter', 0.5, 0.9, 0.25, 0)}
+        Age:<span id="autoReload2Disp4">0-0(0)/0</span>
       </p>
+      <div class="meterDiv">
+        ${this.meter('autoReload2MeterGrow', 0.34, 0.67, 0.8, 0)}
+      </div>
+      <div class="meterDiv">
+        ${this.meter('autoReload2Meter', 0.5, 0.9, 0.25, 0)}
+      </div>
     </div>
     <div>
       <p>
