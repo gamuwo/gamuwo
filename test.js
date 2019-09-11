@@ -1509,9 +1509,9 @@ class UI {
     return outputArray;
   }
   
-  static meter(name, class, low, high, optimum, value) {
+  static meter(name, cls, low, high, optimum, value) {
     let id = this.makeId(name);
-    return `<meter name="${name}" id="${id}" class="${class}" low="${low}" high="${high}" optimum="${optimum}" value="${value}"></meter>`;
+    return `<meter name="${name}" id="${id}" class="${cls}" low="${low}" high="${high}" optimum="${optimum}" value="${value}"></meter>`;
   }
 
   static button(name, text, title, toggle, active) {
