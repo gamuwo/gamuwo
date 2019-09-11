@@ -1464,7 +1464,7 @@ class UI {
   
   static meter(name, low, high, optimum, value) {
     let id = this.makeId(name);
-    return `<meter name="${name}" id="${id}" low="${low}" high="${high}" optimum="${optimum}" value="${value}" />`;
+    return `<meter name="${name}" id="${id}" low="${low}" high="${high}" optimum="${optimum}" value="${value}"></meter>`;
   }
 
   static button(name, text, title, toggle, active) {
