@@ -63,6 +63,7 @@ class Config {
       autoReload2Plants: [],
       autoReload2ButtonSave: [],
       autoReload2TryHistory: [],
+      autoReload2TryAverage: [],
       autoJQB: false,
       autoJQBStage: { value: 0, min: 0 },
       autoJQBFlag: false,
@@ -981,28 +982,43 @@ class Garden {
             if(isMust) mustGrows += 1;
           }
         }
+        
+        //for grows text
         let growsString = grows + "/" +targetNumber + "(" + checkNum + ")";
         if(isPlay0) growsString = growsString + ", " + mustGrows + "/" + mustNum;
         document.getElementById("autoReload2Disp2").innerText = growsString;
         this.writeLog(3, "auto reload2", false, "grows:" + growsString);
         
+        //for try text
+        document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
+        
+        // for meter
+        let ave = config.autoReload2TryAverage[config.autoReload2ID.value];
+        if(ave === undefined || ave == 0){
+          document.getElementById(UI.makeId("autoReload2Meter")).value = 1;
+        } else {
+          document.getElementById(UI.makeId("autoReload2Meter")).value = (config.autoReload2Reloads / (ave * 2));
+        }
+        
         if(grows < targetNumber || (isPlay0 && mustGrows < mustNum)){
           //reload
           config.autoReload2Reloads += 1;
-          document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
           this.writeLog(3, "auto reload2", false, "reload! try:" + config.autoReload2Reloads);
           Game.LoadSave(config.autoReload2Save);
         } else {
           //grow
           //reset interval
           Main.restart(1000);
+          
           //for average
           let id = config.autoReload2ID.value;
           if(!Array.isArray(config.autoReload2TryHistory[id])) config.autoReload2TryHistory[id] = [];
           this.pushLimit(config.autoReload2Reloads, config.autoReload2TryHistory[id]);
-          let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReload2TryHistory[id]).toFixed(2) + "(" + config.autoReload2TryHistory[id].length + ")";
+          config.autoReload2TryAverage[id] = this.arrayAverage(config.autoReload2TryHistory[id]);
+          let tryAverage = "[" + id + "]" + config.autoReload2TryAverage[id].toFixed(2) + "(" + config.autoReload2TryHistory[id].length + ")";
           document.getElementById("autoReload2Disp3").innerText = tryAverage;
           this.writeLog(2, "auto reload2", false, "try average:" + tryAverage);
+          
           //for max min age
           let ageArray = [];
           this.forEachTile((x, y) => {
@@ -1019,7 +1035,7 @@ class Garden {
           document.getElementById("autoReload2Disp4").innerText = ageString;
           this.writeLog(2, "auto reload2", false, "age:" + ageString);
           
-          document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
+          //reset data
           this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
           this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
           config.autoReload2Save = "";
@@ -2025,6 +2041,7 @@ class Main {
       this.config.autoReload2Plants = [];
       this.config.autoReload2ButtonSave = [];
       this.config.autoReload2TryHistory = [];
+      this.config.autoReload2TryAverage = [];
       document.getElementById("autoReload2Disp3").innerText = "[0]0(0)";
     } else if (key == 'logResetButton') {
       this.config.logHistory = [];
