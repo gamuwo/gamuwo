@@ -989,10 +989,17 @@ class Garden {
         document.getElementById("autoReload2Disp2").innerText = growsString;
         this.writeLog(3, "auto reload2", false, "grows:" + growsString);
         
+        //for grows meter
+        if(targetNumber == 0){
+          document.getElementById(UI.makeId("autoReload2MeterGrow")).value = 1;
+        } else {
+          document.getElementById(UI.makeId("autoReload2MeterGrow")).value = (grows / targetNumber);
+        }
+        
         //for try text
         document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
         
-        // for meter
+        // for try meter
         let ave = config.autoReload2TryAverage[config.autoReload2ID.value];
         if(ave === undefined || ave == 0){
           document.getElementById(UI.makeId("autoReload2Meter")).value = 1;
@@ -1732,6 +1739,7 @@ class UI {
         Grow:<span id="autoReload2Disp2">0/0(0)</span><br>
         Ave:<span id="autoReload2Disp3">[0]0(0)</span><br>
         Age:<span id="autoReload2Disp4">0-0(0)/0</span><br>
+        ${this.meter('autoReload2MeterGrow', 0.33, 0.66, 0.8, 0)}
         ${this.meter('autoReload2Meter', 0.5, 0.9, 0.25, 0)}
       </p>
     </div>
