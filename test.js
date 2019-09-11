@@ -1344,6 +1344,10 @@ class UI {
 #cookieGardenHelper meter::-webkit-meter-even-less-good-value {
   border-radius: 2px;
 }
+#cookieGardenHelper meter::-webkit-meter-bar {
+  background-image: none;
+  background-color: dimgray;
+}
 #cookieGardenHelper .meterDiv {
   height: 7px;
 }
@@ -1744,7 +1748,7 @@ class UI {
         Age:<span id="autoReload2Disp4">0-0(0)/0</span>
       </p>
       <div class="meterDiv">
-        ${this.meter('autoReload2MeterGrow', 0, 0, 0.5, 0)}
+        ${this.meter('autoReload2MeterGrow', 0.34, 0.67, 0.8, 0)}
       </div>
       <div class="meterDiv">
         ${this.meter('autoReload2Meter', 0.5, 0.9, 0.25, 0)}
