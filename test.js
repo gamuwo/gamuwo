@@ -1331,10 +1331,10 @@ class UI {
   height: 5px;
   vertical-align: 0;
 }
-#cookieGardenHelper meter::-webkit-meter-bar {
-  border-radius: 2px;
-}
-#cookieGardenHelper meter::-webkit-meter-optimum-value {
+#cookieGardenHelper meter::-webkit-meter-bar ,
+#cookieGardenHelper meter::-webkit-meter-optimum-value ,
+#cookieGardenHelper meter::-webkit-meter-suboptimum-value ,
+#cookieGardenHelper meter::-webkit-meter-even-less-good-value {
   border-radius: 2px;
 }
 
