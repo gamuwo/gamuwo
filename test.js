@@ -1002,9 +1002,25 @@ class Garden {
         // for try meter
         let ave = config.autoReload2TryAverage[config.autoReload2ID.value];
         if(ave === undefined || ave == 0){
-          document.getElementById(UI.makeId("autoReload2Meter")).value = 1;
+          if( document.getElementById(UI.makeId("autoReload2Meter2")).display == "none" ){
+            document.getElementById(UI.makeId("autoReload2Meter")).display = "none";
+            document.getElementById(UI.makeId("autoReload2Meter2")).display = "inline-block";
+          }
+          document.getElementById(UI.makeId("autoReload2Meter2")).value = 1;
         } else {
-          document.getElementById(UI.makeId("autoReload2Meter")).value = (config.autoReload2Reloads / (ave * 2));
+          if( (config.autoReload2Reloads / (ave * 2)) <= 1 ){
+            if( document.getElementById(UI.makeId("autoReload2Meter2")).display == "inline-block" ){
+              document.getElementById(UI.makeId("autoReload2Meter")).display = "inline-block";
+              document.getElementById(UI.makeId("autoReload2Meter2")).display = "none";
+            }
+            document.getElementById(UI.makeId("autoReload2Meter")).value = (config.autoReload2Reloads / (ave * 2));
+          } else {
+            if( document.getElementById(UI.makeId("autoReload2Meter2")).display == "none" ){
+              document.getElementById(UI.makeId("autoReload2Meter")).display = "none";
+              document.getElementById(UI.makeId("autoReload2Meter2")).display = "inline-block";
+            }
+            document.getElementById(UI.makeId("autoReload2Meter2")).value = (config.autoReload2Reloads / (ave * 10));
+          }
         }
         
         if(grows < targetNumber || (isPlay0 && mustGrows < mustNum)){
@@ -1333,6 +1349,9 @@ class UI {
   border: solid 1px white;
   border-radius: 3px;
 }
+#cookieGardenHelper .meterDiv {
+  height: 7px;
+}
 #cookieGardenHelper meter {
   width: 120px;
   height: 5px;
@@ -1342,14 +1361,32 @@ class UI {
 #cookieGardenHelper meter::-webkit-meter-optimum-value ,
 #cookieGardenHelper meter::-webkit-meter-suboptimum-value ,
 #cookieGardenHelper meter::-webkit-meter-even-less-good-value {
-  border-radius: 2px;
+  background-image: none;
+  border-radius: 10px;
 }
 #cookieGardenHelper meter::-webkit-meter-bar {
-  background-image: none;
-  background-color: dimgray;
+  background-color: darkslategray;
 }
-#cookieGardenHelper .meterDiv {
-  height: 7px;
+#cookieGardenHelper meter::-webkit-meter-optimum-value {
+  background-color: lime;
+}
+#cookieGardenHelper meter::-webkit-meter-suboptimum-value {
+  background-color: yellow;
+}
+#cookieGardenHelper meter::-webkit-meter-even-less-good-value {
+  background-color: red;
+}
+#cookieGardenHelperAutoReload2Meter2::-webkit-meter-bar {
+  background-color: red !important;
+}
+#cookieGardenHelperAutoReload2Meter2::-webkit-meter-optimum-value {
+  background-color: purple !important;
+}
+#cookieGardenHelperAutoReload2Meter2::-webkit-meter-suboptimum-value {
+  background-color: black !important;
+}
+#cookieGardenHelperAutoReload2Meter2::-webkit-meter-even-less-good-value {
+  background-color: black !important;
 }
 #cookieGardenHelperAutoReload2Meter2 {
   display: none;
@@ -1755,7 +1792,7 @@ class UI {
       </div>
       <div class="meterDiv">
         ${this.meter('autoReload2Meter', 0.5, 0.9, 0.25, 0)}
-        ${this.meter('autoReload2Meter2', 0.2, 0.9, 0.1, 0)}
+        ${this.meter('autoReload2Meter2', 0, 0.999, 0.5, 0)}
       </div>
     </div>
     <div>
