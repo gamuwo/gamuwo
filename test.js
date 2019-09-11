@@ -701,189 +701,117 @@ class Garden {
     if(config.autoReload){
       //2sec before tick
       if(this.secondsBeforeNextTick <= 2 && config.autoReloadSaveSecond == 9999){
-        if(parseInt(config.autoReloadMax.value) == 0){
-          //xy mode
-          if(this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value)){
-            //save
-            config.autoReloadSave = Game.WriteSave(1);
-            config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-            this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
-            this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
-            this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
-          
-            //save other button state
-            let buttonSave = [];
-            buttonSave[0] = config.autoHarvest;
-            buttonSave[1] = config.autoPlant;
-            buttonSave[2] = config.autoJQB;
-            buttonSave[3] = config.autoLump;
-            buttonSave[4] = config.autoReload2;
-            config.autoReloadButtonSave = buttonSave;
-            
-            //turn off other button
-            if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
-            if(config.autoPlant){ Main.handleToggle('autoPlant'); }
-            if(config.autoJQB){ Main.handleToggle('autoJQB'); }
-            if(config.autoLump){ Main.handleToggle('autoLump'); }
-            if(config.autoReload2){ Main.handleToggle('autoReload2'); }
-            Main.save();
-          
-            //display
-            document.getElementById("rightBottomAutoReload").style.display = "block";
-            document.getElementById("rightBottomAutoReload2").style.display = "none";
-            document.getElementById("rightBottomLumpReload").style.display = "none";
-          
-            //reset interval
-            Main.restart(parseInt(config.interval.value));
-            this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
-          }
-        } else {
-          //max mode
-          let targetNumber = 0;
+        let isMaxMode = (parseInt(config.autoReloadMax.value) > 0);
+        //for max mode
+        let targetNumber = 0;
+        if(isMaxMode){
           this.forEachTile((x, y) => {
             let tileAr = this.getTile(x, y);
             if(tileAr.seedId == config.autoReloadID.value){
               targetNumber += 1;
             }
           });
+        }
+        
+        //check
+        let xyModeCheck = this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value);
+        let maxModeCheck = (targetNumber < parseInt(config.autoReloadMax.value));
+        if( (!isMaxMode && xyModeCheck) || (isMaxMode && maxModeCheck) ){
+          //save
+          config.autoReloadSave = Game.WriteSave(1);
+          config.autoReloadSaveSecond = this.secondsBeforeNextTick;
+          if(isMaxMode) config.autoReloadNumber = targetNumber;
+          this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
+          this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
+          if(!isMaxMode) this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
+          if(isMaxMode) this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
+          if(isMaxMode) this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
+        
+          //save other button state
+          let buttonSave = [];
+          buttonSave[0] = config.autoHarvest;
+          buttonSave[1] = config.autoPlant;
+          buttonSave[2] = config.autoJQB;
+          buttonSave[3] = config.autoLump;
+          buttonSave[4] = config.autoReload2;
+          config.autoReloadButtonSave = buttonSave;
           
-          if(targetNumber < parseInt(config.autoReloadMax.value)){
-            //save
-            config.autoReloadSave = Game.WriteSave(1);
-            config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-            config.autoReloadNumber = targetNumber;
-            this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
-            this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
-            this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
-            this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
-          
-            //save other button state
-            let buttonSave = [];
-            buttonSave[0] = config.autoHarvest;
-            buttonSave[1] = config.autoPlant;
-            buttonSave[2] = config.autoJQB;
-            buttonSave[3] = config.autoLump;
-            buttonSave[4] = config.autoReload2;
-            config.autoReloadButtonSave = buttonSave;
-            
-            //turn off other button
-            if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
-            if(config.autoPlant){ Main.handleToggle('autoPlant'); }
-            if(config.autoJQB){ Main.handleToggle('autoJQB'); }
-            if(config.autoLump){ Main.handleToggle('autoLump'); }
-            if(config.autoReload2){ Main.handleToggle('autoReload2'); }
-            Main.save();
-          
-            //display
-            document.getElementById("rightBottomAutoReload").style.display = "block";
-            document.getElementById("rightBottomAutoReload2").style.display = "none";
-            document.getElementById("rightBottomLumpReload").style.display = "none";
-          
-            //reset interval
-            Main.restart(parseInt(config.interval.value));
-            this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
-          }
+          //turn off other button
+          if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
+          if(config.autoPlant){ Main.handleToggle('autoPlant'); }
+          if(config.autoJQB){ Main.handleToggle('autoJQB'); }
+          if(config.autoLump){ Main.handleToggle('autoLump'); }
+          if(config.autoReload2){ Main.handleToggle('autoReload2'); }
+          Main.save();
+        
+          //display
+          document.getElementById("rightBottomAutoReload").style.display = "block";
+          document.getElementById("rightBottomAutoReload2").style.display = "none";
+          document.getElementById("rightBottomLumpReload").style.display = "none";
+        
+          //reset interval
+          Main.restart(parseInt(config.interval.value));
+          this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
         }
       }
       
       //after tick
       if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
-        if(parseInt(config.autoReloadMax.value) == 0){
-          //xy mode
-          //get tile info
-          let tileAr = this.getTile(config.autoReloadX.value, config.autoReloadY.value);
-          //check
-          if(tileAr.seedId == config.autoReloadID.value){
-            //grow
-            //reset interval
-            Main.restart(1000);
-            //for average
-            let id = config.autoReloadID.value;
-            if(!Array.isArray(config.autoReloadTryHistory[id])) config.autoReloadTryHistory[id] = [];
-            this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory[id]);
-            let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReloadTryHistory[id]).toFixed(2) + "(" + config.autoReloadTryHistory[id].length + ")";
-            document.getElementById("autoReloadDisp2").innerText = tryAverage;
-            this.writeLog(2, "auto reload", false, "try average:" + tryAverage);
-            
-            document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-            this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
-            this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
-            //reset save
-            config.autoReloadSave = "";
-            config.autoReloadSaveSecond = 9999;
-            config.autoReloadReloads = 0;
-            this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
-            this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
-            this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
-          
-            //restore other button state
-            if(config.autoReloadButtonSave[0]){ Main.handleToggle('autoHarvest'); }
-            if(config.autoReloadButtonSave[1]){ Main.handleToggle('autoPlant'); }
-            if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
-            if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
-            if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
-            config.autoReloadButtonSave = [];
-            Main.save();
-            this.writeLog(3, "auto reload", false, "restore buttons");
-          } else {
-            //reload
-            config.autoReloadReloads += 1;
-            document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-            this.writeLog(3, "auto reload", false, "reload! try:" + config.autoReloadReloads);
-            Game.LoadSave(config.autoReloadSave);
-          }
-        } else {
-          //max mode
-          let targetNumber = 0;
+        let isMaxMode = (parseInt(config.autoReloadMax.value) > 0);
+        //for max mode
+        let targetNumber = 0;
+        if(isMaxMode){
           this.forEachTile((x, y) => {
             let tileAr = this.getTile(x, y);
             if(tileAr.seedId == config.autoReloadID.value){
               targetNumber += 1;
             }
           });
-          //check
-          if(targetNumber > parseInt(config.autoReloadNumber)){
-            //grow
-            //reset interval
-            Main.restart(1000);
-            //for average
-            let id = config.autoReloadID.value;
-            if(!Array.isArray(config.autoReloadTryHistory[id])) config.autoReloadTryHistory[id] = [];
-            this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory[id]);
-            let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReloadTryHistory[id]).toFixed(2) + "(" + config.autoReloadTryHistory[id].length + ")";
-            document.getElementById("autoReloadDisp2").innerText = tryAverage;
-            this.writeLog(2, "auto reload", false, "try average:" + tryAverage);
-            
-            document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-            this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
-            this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
-            this.writeLog(3, "auto reload", false, "target:" + targetNumber);
-            //reset save
-            config.autoReloadSave = "";
-            config.autoReloadSaveSecond = 9999;
-            config.autoReloadReloads = 0;
-            config.autoReloadNumber = 0;
-            this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
-            this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
-            this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
-            this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
+        }
+        //check
+        let xyModeCheck = (this.getTile(config.autoReloadX.value, config.autoReloadY.value).seedId == config.autoReloadID.value);
+        let maxModeCheck = (targetNumber > parseInt(config.autoReloadNumber));
+        if( (!isMaxMode && xyModeCheck) || (isMaxMode && maxModeCheck) ){
+          //grow
+          //reset interval
+          Main.restart(1000);
+          //for average
+          let id = config.autoReloadID.value;
+          if(!Array.isArray(config.autoReloadTryHistory[id])) config.autoReloadTryHistory[id] = [];
+          this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory[id]);
+          let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReloadTryHistory[id]).toFixed(2) + "(" + config.autoReloadTryHistory[id].length + ")";
+          document.getElementById("autoReloadDisp2").innerText = tryAverage;
+          this.writeLog(2, "auto reload", false, "try average:" + tryAverage);
           
-            //restore other button state
-            if(config.autoReloadButtonSave[0]){ Main.handleToggle('autoHarvest'); }
-            if(config.autoReloadButtonSave[1]){ Main.handleToggle('autoPlant'); }
-            if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
-            if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
-            if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
-            config.autoReloadButtonSave = [];
-            Main.save();
-            this.writeLog(3, "auto reload", false, "restore buttons");
-          } else {
-            //reload
-            config.autoReloadReloads += 1;
-            document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
-            this.writeLog(3, "auto reload", false, "reload! try:" + config.autoReloadReloads);
-            Game.LoadSave(config.autoReloadSave);
-          }
+          document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
+          this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
+          this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
+          if(isMaxMode) this.writeLog(3, "auto reload", false, "target:" + targetNumber);
+          //reset save
+          config.autoReloadSave = "";
+          config.autoReloadSaveSecond = 9999;
+          config.autoReloadReloads = 0;
+          if(isMaxMode) config.autoReloadNumber = 0;
+          this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
+          this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
+          this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
+          if(isMaxMode) this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
+        
+          //restore other button state
+          if(config.autoReloadButtonSave[0]){ Main.handleToggle('autoHarvest'); }
+          if(config.autoReloadButtonSave[1]){ Main.handleToggle('autoPlant'); }
+          if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
+          if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
+          if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
+          config.autoReloadButtonSave = [];
+          Main.save();
+          this.writeLog(3, "auto reload", false, "restore buttons");
+        } else {
+          //reload
+          config.autoReloadReloads += 1;
+          document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
+          this.writeLog(3, "auto reload", false, "reload! try:" + config.autoReloadReloads);
+          Game.LoadSave(config.autoReloadSave);
         }
       }
     }
