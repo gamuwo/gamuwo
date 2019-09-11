@@ -1383,10 +1383,10 @@ class UI {
   background-color: purple;
 }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value {
-  background-color: black;
+  background-color: hotpink;
 }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value {
-  background-color: black;
+  background-color: hotpink;
 }
 #cookieGardenHelper meter.meterSecond {
   display: none;
