@@ -1343,8 +1343,8 @@ class UI {
 #cookieGardenHelper meter.meterFirst::-webkit-meter-suboptimum-value { background-color: yellow; }
 #cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value { background-color: red; }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-bar { background-color: red; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: purple; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value { background-color: hotpink; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: skyblue; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value { background-color: purple; }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value { background-color: hotpink; }
 #cookieGardenHelper meter.meterSecond { display: none; }
 
@@ -1736,7 +1736,7 @@ class UI {
       </div>
       <div class="meterDiv">
         ${this.meter('autoReload2Meter', 'meterFirst', 0.5, 0.9, 0.25, 0)}
-        ${this.meter('autoReload2Meter2', 'meterSecond', 0, 0.999, 0.5, 0)}
+        ${this.meter('autoReload2Meter2', 'meterSecond', 0.5, 0.9, 0.25, 0)}
       </div>
     </div>
     <div>
