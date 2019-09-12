@@ -1102,7 +1102,7 @@ class Garden {
   
   static displayRunTime(startTime, endTime) {
     document.getElementById("intervalDisp").innerText = Main.timerInterval;
-    document.getElementById("runtimeDisp").innerText = (endTime - startTime);
+    document.getElementById("runtimeDisp").innerText = (endTime - startTime).toFixed(4);
   }
 
   static run(config) {
