@@ -388,7 +388,7 @@ class Garden {
           document.getElementById(secondID).style.display = "inline-block";
           document.getElementById(thirdID).style.display = "none";
         }
-        document.getElementById(secondID).value = (nowValue / (maxValue * 2));
+        document.getElementById(secondID).value = ((nowValue - maxValue) / maxValue);
       } else {
         //display third meter
         if( document.getElementById(thirdID).style.display == "" || document.getElementById(thirdID).style.display == "none" ){
@@ -1729,7 +1729,7 @@ class UI {
       <div class="meterDiv">
         ${this.meter('autoReload2Meter', 'meterFirst', 0, 0, 0.5, 0)}
         ${this.meter('autoReload2Meter2', 'meterSecond', 0, 0, 0.5, 0)}
-        ${this.meter('autoReload2Meter3', 'meterThird', 0, 0.9, 0.5, 0)}
+        ${this.meter('autoReload2Meter3', 'meterThird', 0, 0.99, 0.5, 0)}
       </div>
     </div>
     <div>
