@@ -363,6 +363,33 @@ class Garden {
     return sum/array.length;
   }
   
+  static displayMultiMeter(firstID, secondID, maxValue, nowValue) {
+    if(maxValue == 0){
+      //max=0, display second meter and set value=1
+      if( document.getElementById(secondID).style.display == "" || document.getElementById(secondID).style.display == "none" ){
+        document.getElementById(firstID).style.display = "none";
+        document.getElementById(secondID).style.display = "inline-block";
+      }
+      if(document.getElementById(secondID).value != 1) document.getElementById(secondID).value = 1;
+    } else {
+      if( (nowValue / (maxValue * 2)) <= 1 ){
+        //display first meter
+        if( document.getElementById(secondID).style.display == "inline-block" ){
+          document.getElementById(firstID).style.display = "inline-block";
+          document.getElementById(secondID).style.display = "none";
+        }
+        document.getElementById(firstID).value = (nowValue / (maxValue * 2));
+      } else {
+        //display second meter
+        if( document.getElementById(secondID).style.display == "" || document.getElementById(secondID).style.display == "none" ){
+          document.getElementById(firstID).style.display = "none";
+          document.getElementById(secondID).style.display = "inline-block";
+        }
+        document.getElementById(secondID).value = (nowValue / (maxValue * 10));
+      }
+    }
+  }
+  
   static resetOneTimeFlag(config) {
     if(this.secondsBeforeNextTick >= 179){
       config.playSoundFlag = false;
@@ -416,7 +443,7 @@ class Garden {
   }
   
   static handleQuickLoadSave(config) {
-    if(!config.quickLoadFlag && this.secondsBeforeNextTick <= 5){
+    if(!config.quickLoadFlag && this.secondsBeforeNextTick <= 5 && this.secondsBeforeNextTick >= 3){
       config.quickLoadSave = Game.WriteSave(1);
       document.getElementById("quickLoadSaveTime").innerText = this.saveDate();
       config.quickLoadFlag = true;
@@ -892,7 +919,7 @@ class Garden {
         this.writeLog(3, "auto reload2", false, "upperAge:" + upperAge);
         this.writeLog(3, "auto reload2", false, "targetNumber:" + targetNumber);
         
-        //check
+        //for check
         let grows = 0;
         let checkNum = 0;
         let mustNum = 0;
@@ -938,30 +965,12 @@ class Garden {
         //for try text
         document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
         
-        // for try meter
+        //for try meter
         let ave = config.autoReload2TryAverage[config.autoReload2ID.value];
-        if(ave === undefined || ave == 0){
-          if( document.getElementById(UI.makeId("autoReload2Meter2")).style.display == "" || document.getElementById(UI.makeId("autoReload2Meter2")).style.display == "none" ){
-            document.getElementById(UI.makeId("autoReload2Meter")).style.display = "none";
-            document.getElementById(UI.makeId("autoReload2Meter2")).style.display = "inline-block";
-          }
-          document.getElementById(UI.makeId("autoReload2Meter2")).value = 1;
-        } else {
-          if( (config.autoReload2Reloads / (ave * 2)) <= 1 ){
-            if( document.getElementById(UI.makeId("autoReload2Meter2")).style.display == "inline-block" ){
-              document.getElementById(UI.makeId("autoReload2Meter")).style.display = "inline-block";
-              document.getElementById(UI.makeId("autoReload2Meter2")).style.display = "none";
-            }
-            document.getElementById(UI.makeId("autoReload2Meter")).value = (config.autoReload2Reloads / (ave * 2));
-          } else {
-            if( document.getElementById(UI.makeId("autoReload2Meter2")).style.display == "" || document.getElementById(UI.makeId("autoReload2Meter2")).style.display == "none" ){
-              document.getElementById(UI.makeId("autoReload2Meter")).style.display = "none";
-              document.getElementById(UI.makeId("autoReload2Meter2")).style.display = "inline-block";
-            }
-            document.getElementById(UI.makeId("autoReload2Meter2")).value = (config.autoReload2Reloads / (ave * 10));
-          }
-        }
+        if(!isFinite(parseFloat(ave))) ave = 0;
+        this.displayMultiMeter(UI.makeId("autoReload2Meter"), UI.makeId("autoReload2Meter2"), ave, config.autoReload2Reloads);
         
+        //check
         if(grows < targetNumber || (isPlay0 && mustGrows < mustNum)){
           //reload
           config.autoReload2Reloads += 1;
