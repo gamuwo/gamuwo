@@ -493,8 +493,8 @@ class Garden {
     if(!config.lumpReload && config.autoLump && !config.autoLumpFlag && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
       if(config.autoLumpButtonSave.length == 0){
         //check suger lump is mature
-  			let lumpAge = Date.now() - Game.lumpT;
-  			if (lumpAge >= Game.lumpMatureAge) {
+        let lumpAge = Date.now() - Game.lumpT;
+        if (lumpAge >= Game.lumpMatureAge) {
           //turn off other buttons
           this.saveButtonStatusAndTurnOff(["autoHarvest", "autoPlant", "autoJQB", "autoReload", "autoReload2"], config.autoLumpButtonSave, config);
           
@@ -509,7 +509,7 @@ class Garden {
           this.changeButton("lumpReload", true, config);
           Main.save();
           this.writeLog(2, "auto lump", false, "turn on lump reload");
-  			}
+        }
       } else {
         //restore other buttons
         this.restoreButtonStatus(config.autoLumpButtonSave, config);
