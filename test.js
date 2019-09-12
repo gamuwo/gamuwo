@@ -374,7 +374,7 @@ class Garden {
     let startTime = new Date();
     
     //for one time events
-    resetOneTimeFlag();
+    this.resetOneTimeFlag();
       
     //original process
     this.forEachTile((x, y) => {
