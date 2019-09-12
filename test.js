@@ -1755,7 +1755,6 @@ class UI {
   </div>
 </div>
 <div id="logPanel">
-  <style>${this.css}</style>
   <div class="flexPanel">
     <h2 class="flexItemGrowWide">
       <span class="underline">Log</span>
