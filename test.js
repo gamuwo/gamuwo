@@ -363,29 +363,40 @@ class Garden {
     return sum/array.length;
   }
   
-  static displayMultiMeter(firstID, secondID, maxValue, nowValue) {
+  static displayMultiMeter(firstID, secondID, thirdID, maxValue, nowValue) {
     if(maxValue == 0){
-      //max=0, display second meter and set value=1
-      if( document.getElementById(secondID).style.display == "" || document.getElementById(secondID).style.display == "none" ){
+      //max=0, display third meter and set value=1
+      if( document.getElementById(thirdID).style.display == "" || document.getElementById(thirdID).style.display == "none" ){
         document.getElementById(firstID).style.display = "none";
-        document.getElementById(secondID).style.display = "inline-block";
+        document.getElementById(secondID).style.display = "none";
+        document.getElementById(thirdID).style.display = "inline-block";
       }
-      if(document.getElementById(secondID).value != 1) document.getElementById(secondID).value = 1;
+      if(document.getElementById(thirdID).value != 1) document.getElementById(secondID).value = 1;
     } else {
-      if( (nowValue / (maxValue * 2)) <= 1 ){
+      if( (nowValue / maxValue) <= 1 ){
         //display first meter
-        if( document.getElementById(secondID).style.display == "inline-block" ){
+        if( document.getElementById(firstID).style.display == "" || document.getElementById(firstID).style.display == "none" ){
           document.getElementById(firstID).style.display = "inline-block";
           document.getElementById(secondID).style.display = "none";
+          document.getElementById(thirdID).style.display = "none";
         }
-        document.getElementById(firstID).value = (nowValue / (maxValue * 2));
-      } else {
+        document.getElementById(firstID).value = (nowValue / maxValue);
+      } else if( (nowValue / (maxValue * 2)) <= 1 ){
         //display second meter
         if( document.getElementById(secondID).style.display == "" || document.getElementById(secondID).style.display == "none" ){
           document.getElementById(firstID).style.display = "none";
           document.getElementById(secondID).style.display = "inline-block";
+          document.getElementById(thirdID).style.display = "none";
         }
-        document.getElementById(secondID).value = (nowValue / (maxValue * 10));
+        document.getElementById(secondID).value = (nowValue / (maxValue * 2));
+      } else {
+        //display third meter
+        if( document.getElementById(thirdID).style.display == "" || document.getElementById(thirdID).style.display == "none" ){
+          document.getElementById(firstID).style.display = "none";
+          document.getElementById(secondID).style.display = "none";
+          document.getElementById(thirdID).style.display = "inline-block";
+        }
+        document.getElementById(thirdID).value = (nowValue / (maxValue * 10));
       }
     }
   }
@@ -968,7 +979,7 @@ class Garden {
         //for try meter
         let ave = config.autoReload2TryAverage[config.autoReload2ID.value];
         if(!isFinite(parseFloat(ave))) ave = 0;
-        this.displayMultiMeter(UI.makeId("autoReload2Meter"), UI.makeId("autoReload2Meter2"), ave, config.autoReload2Reloads);
+        this.displayMultiMeter(UI.makeId("autoReload2Meter"), UI.makeId("autoReload2Meter2"), UI.makeId("autoReload2Meter3"), ave, config.autoReload2Reloads);
         
         //check
         if(grows < targetNumber || (isPlay0 && mustGrows < mustNum)){
@@ -1307,7 +1318,8 @@ class UI {
   height: 5px;
   vertical-align: 5px;
 }
-#cookieGardenHelper meter.meterSecond { display: none; }
+#cookieGardenHelper meter.meterSecond,
+#cookieGardenHelper meter.meterThird { display: none; }
 #cookieGardenHelper meter::-webkit-meter-bar ,
 #cookieGardenHelper meter::-webkit-meter-optimum-value ,
 #cookieGardenHelper meter::-webkit-meter-suboptimum-value ,
@@ -1317,12 +1329,16 @@ class UI {
 }
 #cookieGardenHelper meter.meterFirst::-webkit-meter-bar { background-color: darkslategray; }
 #cookieGardenHelper meter.meterFirst::-webkit-meter-optimum-value { background-color: lime; }
-#cookieGardenHelper meter.meterFirst::-webkit-meter-suboptimum-value { background-color: gold; }
-#cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value { background-color: crimson; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-bar { background-color: crimson; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: cornflowerblue; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value { background-color: violet; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value { background-color: hotpink; }
+#cookieGardenHelper meter.meterFirst::-webkit-meter-suboptimum-value { background-color: black; }
+#cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value { background-color: black; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-bar { background-color: lime; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: gold; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value { background-color: black; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value { background-color: black; }
+#cookieGardenHelper meter.meterThird::-webkit-meter-bar { background-color: gold; }
+#cookieGardenHelper meter.meterThird::-webkit-meter-optimum-value { background-color: crimson; }
+#cookieGardenHelper meter.meterThird::-webkit-meter-suboptimum-value { background-color: hotpink; }
+#cookieGardenHelper meter.meterThird::-webkit-meter-even-less-good-value { background-color: black; }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
 #cookieGardenHelper a.toggleBtn.off .toggleBtnOn { display: none; }
@@ -1711,8 +1727,9 @@ class UI {
         ${this.meter('autoReload2MeterGrow', 'meterFirst', 0, 0, 0.5, 0)}
       </div>
       <div class="meterDiv">
-        ${this.meter('autoReload2Meter', 'meterFirst', 0.5, 0.9, 0.25, 0)}
-        ${this.meter('autoReload2Meter2', 'meterSecond', 0.5, 0.9, 0.25, 0)}
+        ${this.meter('autoReload2Meter', 'meterFirst', 0, 0, 0.5, 0)}
+        ${this.meter('autoReload2Meter2', 'meterSecond', 0, 0, 0.5, 0)}
+        ${this.meter('autoReload2Meter3', 'meterThird', 0, 0.9, 0.5, 0)}
       </div>
     </div>
     <div>
