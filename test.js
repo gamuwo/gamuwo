@@ -51,6 +51,7 @@ class Config {
       autoReloadNumber: 0,
       autoReloadButtonSave: [],
       autoReloadTryHistory: [],
+      autoReloadTryAverage: [],
       autoReloadGetXY: false,
       autoReload2: false,
       autoReload2ID: { value: 0, min: 0 },
@@ -816,6 +817,15 @@ class Garden {
             }
           });
         }
+        
+        //for try text
+        document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
+        
+        //for try meter
+        let ave = config.autoReloadTryAverage[config.autoReloadID.value];
+        if(!isFinite(parseFloat(ave))) ave = 0;
+        this.displayMultiMeter(UI.makeId("autoReloadMeter"), UI.makeId("autoReloadMeter2"), UI.makeId("autoReloadMeter3"), ave, config.autoReloadReloads);
+        
         //check
         let xyModeCheck = (this.getTile(config.autoReloadX.value, config.autoReloadY.value).seedId == config.autoReloadID.value);
         let maxModeCheck = (targetNumber > parseInt(config.autoReloadNumber));
@@ -827,11 +837,11 @@ class Garden {
           let id = config.autoReloadID.value;
           if(!Array.isArray(config.autoReloadTryHistory[id])) config.autoReloadTryHistory[id] = [];
           this.pushLimit(config.autoReloadReloads, config.autoReloadTryHistory[id]);
-          let tryAverage = "[" + id + "]" + this.arrayAverage(config.autoReloadTryHistory[id]).toFixed(2) + "(" + config.autoReloadTryHistory[id].length + ")";
+          config.autoReloadTryAverage[id] = this.arrayAverage(config.autoReloadTryHistory[id]);
+          let tryAverage = "[" + id + "]" + config.autoReloadTryAverage[id].toFixed(2) + "(" + config.autoReloadTryHistory[id].length + ")";
           document.getElementById("autoReloadDisp2").innerText = tryAverage;
           this.writeLog(2, "auto reload", false, "try average:" + tryAverage);
           
-          document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
           this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
           this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
           if(isMaxMode) this.writeLog(3, "auto reload", false, "target:" + targetNumber);
@@ -857,7 +867,6 @@ class Garden {
         } else {
           //reload
           config.autoReloadReloads += 1;
-          document.getElementById("autoReloadDisp").innerText = config.autoReloadReloads;
           this.writeLog(3, "auto reload", false, "reload! try:" + config.autoReloadReloads);
           Game.LoadSave(config.autoReloadSave);
         }
@@ -1328,15 +1337,15 @@ class UI {
   border-radius: 2px;
 }
 #cookieGardenHelper meter.meterFirst::-webkit-meter-bar { background-color: darkslategray; }
-#cookieGardenHelper meter.meterFirst::-webkit-meter-optimum-value { background-color: lime; }
+#cookieGardenHelper meter.meterFirst::-webkit-meter-optimum-value { background-color: greenyellow; }
 #cookieGardenHelper meter.meterFirst::-webkit-meter-suboptimum-value { background-color: black; }
 #cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value { background-color: black; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-bar { background-color: lime; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: gold; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-bar { background-color: greenyellow; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: cornflowerblue; }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value { background-color: black; }
 #cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value { background-color: black; }
-#cookieGardenHelper meter.meterThird::-webkit-meter-bar { background-color: gold; }
-#cookieGardenHelper meter.meterThird::-webkit-meter-optimum-value { background-color: crimson; }
+#cookieGardenHelper meter.meterThird::-webkit-meter-bar { background-color: cornflowerblue; }
+#cookieGardenHelper meter.meterThird::-webkit-meter-optimum-value { background-color: orange; }
 #cookieGardenHelper meter.meterThird::-webkit-meter-suboptimum-value { background-color: hotpink; }
 #cookieGardenHelper meter.meterThird::-webkit-meter-even-less-good-value { background-color: black; }
 
@@ -1715,6 +1724,11 @@ class UI {
         Try:<span id="autoReloadDisp">0</span>
         Ave:<span id="autoReloadDisp2">[0]0(0)</span>
       </p>
+      <div class="meterDiv">
+        ${this.meter('autoReloadMeter', 'meterFirst', 0, 0, 0.5, 0)}
+        ${this.meter('autoReloadMeter2', 'meterSecond', 0, 0, 0.5, 0)}
+        ${this.meter('autoReloadMeter3', 'meterThird', 0, 0.99, 0.5, 0)}
+      </div>
     </div>
     <div id="rightBottomAutoReload2">
       <p>
@@ -2029,6 +2043,7 @@ class Main {
       this.config.autoReloadNumber = 0;
       this.config.autoReloadButtonSave = [];
       this.config.autoReloadTryHistory = [];
+      this.config.autoReloadTryAverage = [];
       document.getElementById("autoReloadDisp2").innerText = "[0]0(0)";
     } else if (key == 'autoReload2Reset') {
       Main.restart(1000);
