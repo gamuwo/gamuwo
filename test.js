@@ -414,30 +414,17 @@ class Garden {
       config.playSoundMatureFlag = true;
     }
   }
-
-  static run(config) {
-    let startTime = new Date();
-    
-    //for one time events
-    this.resetOneTimeFlag(config);
-      
-    //original process
-    this.handleAutoHarvestAndPlant(config);
-    
-    //play sound
-    this.handlePlaySound1(config);
-    this.handlePlaySound2(config);
-    this.handlePlaySoundMature(config);
-    
-    //for quick load
+  
+  static handleQuickLoadSave(config) {
     if(!config.quickLoadFlag && this.secondsBeforeNextTick <= 5){
       config.quickLoadSave = Game.WriteSave(1);
       document.getElementById("quickLoadSaveTime").innerText = this.saveDate();
       config.quickLoadFlag = true;
       this.writeLog(3, "quick load", false, "save!");
     }
-    
-    //auto lump
+  }
+  
+  static handleAutoLump(config) {
     if(!config.lumpReload && config.autoLump && !config.autoLumpFlag && this.secondsBeforeNextTick <= 15 && this.secondsBeforeNextTick >= 13){
       if(config.autoLumpButtonSave.length == 0){
         //check suger lump is mature
@@ -498,6 +485,28 @@ class Garden {
       config.autoLumpFlag = true;
       this.writeLog(3, "auto lump", false, "check!");
     }
+  }
+
+  static run(config) {
+    //for run time
+    let startTime = new Date();
+    
+    //for one time events
+    this.resetOneTimeFlag(config);
+      
+    //original process
+    this.handleAutoHarvestAndPlant(config);
+    
+    //play sound
+    this.handlePlaySound1(config);
+    this.handlePlaySound2(config);
+    this.handlePlaySoundMature(config);
+    
+    //for quick load
+    this.handleQuickLoadSave(config);
+    
+    //auto lump
+    this.handleAutoLump(config);
             
     //auto JQB
     if(config.autoJQB && !config.autoJQBFlag && this.secondsBeforeNextTick <= 10 && this.secondsBeforeNextTick >= 8){
@@ -1080,6 +1089,7 @@ class Garden {
       
     }
     
+    //display run time
     let endTime = new Date();
     document.getElementById("intervalDisp").innerText = Main.timerInterval;
     document.getElementById("runtimeDisp").innerText = (endTime.getTime() - startTime.getTime());
