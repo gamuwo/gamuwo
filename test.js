@@ -425,6 +425,23 @@ class Garden {
     document.getElementById(UI.makeId(inputName)).value = num; 
   }
   
+  static saveButtonStatusAndTurnOff(targetArray, saveArray, config) {
+    let save = [];
+    for(let i = 0; i < targetArray.length, i++){
+      save[i] = [];
+      save[i][0] = targetArray[i];
+      save[i][1] = config[targetArray[i]];
+      this.changeButton(targetArray[i], false, config);
+    }
+    saveArray = save;
+  }
+  
+  static restoreButtonStatus(saveArray, config) {
+    for(let i = 0; i < saveArray.length, i++){
+      this.changeButton(saveArray[i][0], saveArray[i][1], config);
+    }
+  }
+  
   static handlePlaySound1(config) {
     if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= parseInt(config.playSoundSecond.value) && this.secondsBeforeNextTick >= (parseInt(config.playSoundSecond.value) - 2)){
       this.playSound1();
@@ -480,54 +497,24 @@ class Garden {
         //check suger lump is mature
   			let lumpAge = Date.now() - Game.lumpT;
   			if (lumpAge >= Game.lumpMatureAge) {
-          //save other button state
-          let buttonSave = [];
-          buttonSave[0] = config.autoHarvest;
-          buttonSave[1] = config.autoPlant;
-          buttonSave[2] = config.autoJQB;
-          buttonSave[3] = config.autoReload;
-          buttonSave[4] = config.autoReload2;
-          config.autoLumpButtonSave = buttonSave;
-          
-          //turn off other button
-          if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
-          if(config.autoPlant){ Main.handleToggle('autoPlant'); }
-          if(config.autoJQB){ Main.handleToggle('autoJQB'); }
-          if(config.autoReload){ Main.handleToggle('autoReload'); }
-          if(config.autoReload2){ Main.handleToggle('autoReload2'); }
+          //turn off other buttons
+          this.saveButtonStatusAndTurnOff(["autoHarvest", "autoPlant", "autoJQB", "autoReload", "autoReload2"], config.autoLumpButtonSave, config);
           
           //turn on lump reload
-          if(Game.lumpCurrentType == 0){
-            config.lumpReloadNum.value = 1;
-            document.getElementById(UI.makeId("lumpReloadNum")).value = 1;
-          } else if(Game.lumpCurrentType == 1){
-            config.lumpReloadNum.value = 2;
-            document.getElementById(UI.makeId("lumpReloadNum")).value = 2;
-          } else if(Game.lumpCurrentType == 2){
-            config.lumpReloadNum.value = 7;
-            document.getElementById(UI.makeId("lumpReloadNum")).value = 7;
-          } else if(Game.lumpCurrentType == 3){
-            config.lumpReloadNum.value = 2;
-            document.getElementById(UI.makeId("lumpReloadNum")).value = 2;
-          } else if(Game.lumpCurrentType == 4){
-            config.lumpReloadNum.value = 3;
-            document.getElementById(UI.makeId("lumpReloadNum")).value = 3;
-          }
-          config.lumpReloadType.value = 2;
-          document.getElementById(UI.makeId("lumpReloadType")).value = 2;
+          if(Game.lumpCurrentType == 0) this.changeNumber("lumpReloadNum", 1, config);
+          if(Game.lumpCurrentType == 1) this.changeNumber("lumpReloadNum", 2, config);
+          if(Game.lumpCurrentType == 2) this.changeNumber("lumpReloadNum", 7, config);
+          if(Game.lumpCurrentType == 3) this.changeNumber("lumpReloadNum", 2, config);
+          if(Game.lumpCurrentType == 4) this.changeNumber("lumpReloadNum", 3, config);
+          this.changeNumber("lumpReloadType", 2, config);
           
-          if(!config.lumpReload){ Main.handleToggle('lumpReload'); }
+          this.changeButton("lumpReload", true, config);
           Main.save();
           this.writeLog(2, "auto lump", false, "turn on lump reload");
   			}
       } else {
-        //restore other button state
-        if(config.autoLumpButtonSave[0]){ Main.handleToggle('autoHarvest'); }
-        if(config.autoLumpButtonSave[1]){ Main.handleToggle('autoPlant'); }
-        if(config.autoLumpButtonSave[2]){ Main.handleToggle('autoJQB'); }
-        if(config.autoLumpButtonSave[3]){ Main.handleToggle('autoReload'); }
-        if(config.autoLumpButtonSave[4]){ Main.handleToggle('autoReload2'); }
-        
+        //restore other buttons
+        this.restoreButtonStatus(config.autoLumpButtonSave, config);
         config.autoLumpButtonSave = [];
         Main.save();
         this.writeLog(3, "auto lump", false, "restore buttons");
