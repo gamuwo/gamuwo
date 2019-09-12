@@ -719,9 +719,7 @@ class Garden {
         if(isMaxMode){
           this.forEachTile((x, y) => {
             let tileAr = this.getTile(x, y);
-            if(tileAr.seedId == config.autoReloadID.value){
-              targetNumber += 1;
-            }
+            if(tileAr.seedId == config.autoReloadID.value) targetNumber += 1;
           });
         }
         
@@ -739,21 +737,8 @@ class Garden {
           if(isMaxMode) this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
           if(isMaxMode) this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
         
-          //save other button state
-          let buttonSave = [];
-          buttonSave[0] = config.autoHarvest;
-          buttonSave[1] = config.autoPlant;
-          buttonSave[2] = config.autoJQB;
-          buttonSave[3] = config.autoLump;
-          buttonSave[4] = config.autoReload2;
-          config.autoReloadButtonSave = buttonSave;
-          
-          //turn off other button
-          if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
-          if(config.autoPlant){ Main.handleToggle('autoPlant'); }
-          if(config.autoJQB){ Main.handleToggle('autoJQB'); }
-          if(config.autoLump){ Main.handleToggle('autoLump'); }
-          if(config.autoReload2){ Main.handleToggle('autoReload2'); }
+          //turn off other buttons
+          this.saveButtonStatusAndTurnOff(["autoHarvest", "autoPlant", "autoJQB", "autoLump", "autoReload2"], config.autoReloadButtonSave, config);
           Main.save();
         
           //display
@@ -775,9 +760,7 @@ class Garden {
         if(isMaxMode){
           this.forEachTile((x, y) => {
             let tileAr = this.getTile(x, y);
-            if(tileAr.seedId == config.autoReloadID.value){
-              targetNumber += 1;
-            }
+            if(tileAr.seedId == config.autoReloadID.value) targetNumber += 1;
           });
         }
         
@@ -819,11 +802,7 @@ class Garden {
           if(isMaxMode) this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
         
           //restore other button state
-          if(config.autoReloadButtonSave[0]){ Main.handleToggle('autoHarvest'); }
-          if(config.autoReloadButtonSave[1]){ Main.handleToggle('autoPlant'); }
-          if(config.autoReloadButtonSave[2]){ Main.handleToggle('autoJQB'); }
-          if(config.autoReloadButtonSave[3]){ Main.handleToggle('autoLump'); }
-          if(config.autoReloadButtonSave[4]){ Main.handleToggle('autoReload2'); }
+          this.restoreButtonStatus(config.autoReloadButtonSave, config);
           config.autoReloadButtonSave = [];
           Main.save();
           this.writeLog(3, "auto reload", false, "restore buttons");
