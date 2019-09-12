@@ -440,8 +440,7 @@ class Garden {
         this.writeLog(3, "play sound2", false, "sound!");
       } else {
         let nextTick = (parseInt(config.playSound2Tick.value) - 1);
-        config.playSound2Tick.value = nextTick;
-        document.getElementById(UI.makeId("playSound2Tick")).value = nextTick;
+        this.changeNumber("playSound2Tick", nextTick, config);
       }
       config.playSound2Flag = true;
     }
@@ -464,6 +463,8 @@ class Garden {
       }
       config.playSoundMatureFlag = true;
     }
+    
+    throw new Error("test error");
   }
   
   static handleQuickLoadSave(config) {
@@ -1083,34 +1084,44 @@ class Garden {
     document.getElementById("intervalDisp").innerText = Main.timerInterval;
     document.getElementById("runtimeDisp").innerText = (endTime - startTime).toFixed(2);
   }
+  
+  static handleError(e) {
+    document.getElementById("cookieGardenHelperRightBottom").style.backgroundColor = "red";
+    throw e;
+  }
 
   static run(config) {
-    //for run time
-    let startTime = performance.now();
-    //for one time events
-    this.resetOneTimeFlag(config);
-    //original process
-    this.handleAutoHarvestAndPlant(config);
-    //play sound
-    this.handlePlaySound1(config);
-    this.handlePlaySound2(config);
-    this.handlePlaySoundMature(config);
-    //for quick load
-    this.handleQuickLoadSave(config);
-    //auto lump
-    this.handleAutoLump(config);
-    //auto JQB
-    this.handleAutoJQB(config);
-    //auto reload
-    this.handleAutoReload(config);
-    //auto reload2
-    this.handleAutoReload2(config);
-    //lump reload
-    this.handleLumpReload(config);
-    //display run time
-    let endTime = performance.now();
-    this.displayRunTime(startTime, endTime);
+    try {
+      //for run time
+      let startTime = performance.now();
+      //for one time events
+      this.resetOneTimeFlag(config);
+      //original process
+      this.handleAutoHarvestAndPlant(config);
+      //play sound
+      this.handlePlaySound1(config);
+      this.handlePlaySound2(config);
+      this.handlePlaySoundMature(config);
+      //for quick load
+      this.handleQuickLoadSave(config);
+      //auto lump
+      this.handleAutoLump(config);
+      //auto JQB
+      this.handleAutoJQB(config);
+      //auto reload
+      this.handleAutoReload(config);
+      //auto reload2
+      this.handleAutoReload2(config);
+      //lump reload
+      this.handleLumpReload(config);
+      //display run time
+      let endTime = performance.now();
+      this.displayRunTime(startTime, endTime);
+    } catch(e) {
+      this.handleError(e);
+    }
   }
+
 }
 
 class UI {
