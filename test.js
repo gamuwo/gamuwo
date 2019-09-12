@@ -1,6 +1,5 @@
 {
 
-
 const moduleName = 'cookieGardenHelper';
 
 const capitalize = (word) => word.charAt(0).toUpperCase() + word.slice(1);
@@ -557,11 +556,13 @@ class Garden {
         
         //harvest mature JQB, dying QB, all plants without QB and JQB
         this.forEachTile((x, y) => {
-          let tile = this.getTile(x, y);
-          let stage = this.getPlantStage(tile);
-          if(tile.seedId == 21 && stage == "dying") this.harvest(x, y);
-          if(tile.seedId == 22 && stage == "mature") this.harvest(x, y);
-          if(tile.seedId != 21 && tile.seedId != 22) this.harvest(x, y);
+          if(!this.tileIsEmpty(x, y)){
+            let tile = this.getTile(x, y);
+            let stage = this.getPlantStage(tile);
+            if(tile.seedId == 21 && stage == "dying") this.harvest(x, y);
+            if(tile.seedId == 22 && stage == "mature") this.harvest(x, y);
+            if(tile.seedId != 21 && tile.seedId != 22) this.harvest(x, y);
+          }
         });
         
         //check num of plants
