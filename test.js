@@ -433,7 +433,10 @@ class Garden {
       save[i][1] = config[targetArray[i]];
       this.changeButton(targetArray[i], false, config);
     }
+    console.log("save:" + save)
     saveArray = save;
+    
+    console.log("saveArray:" + saveArray)
   }
   
   static restoreButtonStatus(saveArray, config) {
@@ -499,6 +502,8 @@ class Garden {
   			if (lumpAge >= Game.lumpMatureAge) {
           //turn off other buttons
           this.saveButtonStatusAndTurnOff(["autoHarvest", "autoPlant", "autoJQB", "autoReload", "autoReload2"], config.autoLumpButtonSave, config);
+          
+          console.log("config.autoLumpButtonSave:" + config.autoLumpButtonSave)
           
           //turn on lump reload
           if(Game.lumpCurrentType == 0) this.changeNumber("lumpReloadNum", 1, config);
