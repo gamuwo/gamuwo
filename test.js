@@ -413,6 +413,14 @@ class Garden {
     }
   }
   
+  static changeButton(buttonName, status, config) {
+    if(status){
+      if(!config[buttonName]) Main.handleToggle(buttonName);
+    } else {
+      if(config[buttonName]) Main.handleToggle(buttonName);
+    }
+  }
+  
   static handlePlaySound1(config) {
     if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= parseInt(config.playSoundSecond.value) && this.secondsBeforeNextTick >= (parseInt(config.playSoundSecond.value) - 2)){
       this.playSound1();
@@ -539,13 +547,12 @@ class Garden {
         this.writeLog(3, "auto JQB", false, "parameter[4]:" + parameter[4]);
         
         //switch buttons
-        if(!config.autoHarvest){ Main.handleToggle('autoHarvest'); }
-        if(!config.autoHarvestWeeds){ Main.handleToggle('autoHarvestWeeds'); }
-        if(config.autoHarvestCleanGarden){ Main.handleToggle('autoHarvestCleanGarden'); }
-        if(!config.autoHarvestDying){ Main.handleToggle('autoHarvestDying'); }
-        if(!config.autoHarvestCheckCpSMultDying){ Main.handleToggle('autoHarvestCheckCpSMultDying'); }
-        if(config.autoPlant){ Main.handleToggle('autoPlant'); }
-        Main.save();
+        this.changeButton("autoHarvest", true, config);
+        this.changeButton("autoHarvestWeeds", true, config);
+        this.changeButton("autoHarvestCleanGarden", false, config);
+        this.changeButton("autoHarvestDying", true, config);
+        this.changeButton("autoHarvestCheckCpSMultDying", true, config);
+        this.changeButton("autoPlant", false, config);
         
         //harvest all plants without QB and JQB
         this.forEachTile((x, y) => {
@@ -615,8 +622,6 @@ class Garden {
           this.writeLog(1, "auto JQB", true, "unexpected QB harvest! stage:" + config.autoJQBStage.value + "->0");
           config.autoJQBStage.value = 0;
           document.getElementById(UI.makeId("autoJQBStage")).value = 0;
-          //save config
-          Main.save();
         }
         
         if(config.autoJQBStage.value == 0 && numPlants == 0 && this.getPlant(21).unlocked){
@@ -646,8 +651,6 @@ class Garden {
           //change stage
           config.autoJQBStage.value = 1;
           document.getElementById(UI.makeId("autoJQBStage")).value = 1;
-          //save config
-          Main.save();
           this.writeLog(1, "auto JQB", true, "stage:0->1");
         }
         
@@ -667,8 +670,6 @@ class Garden {
           //change stage
           config.autoJQBStage.value = 2;
           document.getElementById(UI.makeId("autoJQBStage")).value = 2;
-          //save config
-          Main.save();
           this.writeLog(1, "auto JQB", true, "stage:1->2 QBage:" + ageString);
         }
         
@@ -692,8 +693,6 @@ class Garden {
           //change stage
           config.autoJQBStage.value = 3;
           document.getElementById(UI.makeId("autoJQBStage")).value = 3;
-          //save config
-          Main.save();
           this.writeLog(1, "auto JQB", true, "stage:2->3 QBage:" + ageString);
         }
         
@@ -708,8 +707,6 @@ class Garden {
           //change stage
           config.autoJQBStage.value = 4;
           document.getElementById(UI.makeId("autoJQBStage")).value = 4;
-          //save config
-          Main.save();
           this.writeLog(1, "auto JQB", true, "stage:3->4");
         }
         
@@ -733,10 +730,11 @@ class Garden {
           //change stage
           config.autoJQBStage.value = 1;
           document.getElementById(UI.makeId("autoJQBStage")).value = 1;
-          //save config
-          Main.save();
           this.writeLog(1, "auto JQB", true, "stage:4->1" + " sugar:" + Game.lumps + " QBage:" + ageString);
         }
+        
+        //save config
+        Main.save();
       
       } else {
         this.writeLog(2, "auto JQB", false, "parameter error!");
