@@ -320,7 +320,7 @@ class Garden {
     return sum/array.length;
   }
   
-  static resetOneTimeFlag() {
+  static resetOneTimeFlag(config) {
     if(this.secondsBeforeNextTick >= 179){
       config.playSoundFlag = false;
       config.playSound2Flag = false;
@@ -331,14 +331,14 @@ class Garden {
     }
   }
   
-  static handlePlaySound1() {
+  static handlePlaySound1(config) {
     if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= parseInt(config.playSoundSecond.value) && this.secondsBeforeNextTick >= (parseInt(config.playSoundSecond.value) - 2)){
       this.playSound1();
       config.playSoundFlag = true;
       this.writeLog(3, "play sound", false, "sound!");
     }
   }
-  static handlePlaySound2() {
+  static handlePlaySound2(config) {
     if(config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= 178 && this.secondsBeforeNextTick >= 176){
       if(config.playSound2Tick.value == 0){
         this.playSound2();
@@ -351,7 +351,7 @@ class Garden {
       config.playSound2Flag = true;
     }
   }
-  static handlePlaySoundMature() {
+  static handlePlaySoundMature(config) {
     if(config.playSoundMature && !config.playSoundMatureFlag && this.secondsBeforeNextTick <= 176 && this.secondsBeforeNextTick >= 174){
       let isMature = false;
       this.forEachTile((x, y) => {
@@ -374,7 +374,7 @@ class Garden {
     let startTime = new Date();
     
     //for one time events
-    this.resetOneTimeFlag();
+    this.resetOneTimeFlag(config);
       
     //original process
     this.forEachTile((x, y) => {
@@ -417,9 +417,9 @@ class Garden {
     });
     
     //play sound
-    this.handlePlaySound1();
-    this.handlePlaySound2();
-    this.handlePlaySoundMature();
+    this.handlePlaySound1(config);
+    this.handlePlaySound2(config);
+    this.handlePlaySoundMature(config);
     
     //for quick load
     if(!config.quickLoadFlag && this.secondsBeforeNextTick <= 5){
