@@ -552,19 +552,16 @@ class Garden {
         this.writeLog(3, "auto JQB", false, "parameter[4]:" + parameter[4]);
         
         //switch buttons
-        this.changeButton("autoHarvest", true, config);
-        this.changeButton("autoHarvestWeeds", true, config);
-        this.changeButton("autoHarvestCleanGarden", false, config);
-        this.changeButton("autoHarvestDying", true, config);
-        this.changeButton("autoHarvestCheckCpSMultDying", true, config);
+        this.changeButton("autoHarvest", false, config);
         this.changeButton("autoPlant", false, config);
         
-        //harvest all plants without QB and JQB
+        //harvest mature JQB, dying QB, all plants without QB and JQB
         this.forEachTile((x, y) => {
           let tile = this.getTile(x, y);
-          if(tile.seedId != 21 && tile.seedId != 22){
-            this.harvest(x, y);
-          }
+          let stage = this.getPlantStage(tile);
+          if(tile.seedId == 21 && stage == "dying") this.harvest(x, y);
+          if(tile.seedId == 22 && stage == "mature") this.harvest(x, y);
+          if(tile.seedId != 21 && tile.seedId != 22) this.harvest(x, y);
         });
         
         //check num of plants
@@ -632,13 +629,11 @@ class Garden {
           //if no plants, plant QB and turn on auto-reload2 for QB
           //plant QB
           this.forEachTile((x, y) => {
-            if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
+            if((x==0 || x==2 || x==4 || y==0 || y==2 || y==4) && x != 5 && y != 5){
               this.plantSeed((21 - 1), x, y);
             }
           });
           
-          //turn off autoHarvestCheckCpSMult
-          this.changeButton("autoHarvestCheckCpSMult", false, config);
           //turn off auto-reload
           this.changeButton("autoReload", false, config);
           //turn on auto-reload2 for QB
@@ -655,8 +650,6 @@ class Garden {
         
         if(config.autoJQBStage.value == 1 && numMatureQB >= 21){
           //if 21QB mature, turn on auto-reload1 for JQB
-          //turn off autoHarvestCheckCpSMult
-          this.changeButton("autoHarvestCheckCpSMult", false, config);
           //turn off auto-reload2
           this.changeButton("autoReload2", false, config);
           //turn on auto-reload for JQB
@@ -671,8 +664,12 @@ class Garden {
         
         if(config.autoJQBStage.value == 2 && numJQB >= 4){
           //if 4JQB is exist, harvest all QB and turn on auto-reload2 for JQB
-          //turn on autoHarvestCheckCpSMult
-          this.changeButton("autoHarvestCheckCpSMult", true, config);
+          //harvest all QB
+          this.forEachTile((x, y) => {
+            let tile = this.getTile(x, y);
+            if(tile.seedId == 21) this.harvest(x, y);
+          });
+        
           //turn off auto-reload
           this.changeButton("autoReload", false, config);
           //turn on auto-reload2 for JQB
@@ -690,7 +687,7 @@ class Garden {
         if(config.autoJQBStage.value == 3 && minJQBAge >= parameter[4]){
           //if youngest JQB's age >= parameter[4], plant QB
           this.forEachTile((x, y) => {
-            if((x==1 || x==3 || x==5 || y==1 || y==3 || y==5) && x != 0 && y != 0){
+            if((x==0 || x==2 || x==4 || y==0 || y==2 || y==4) && x != 5 && y != 5){
               this.plantSeed((21 - 1), x, y);
             }
           });
@@ -702,8 +699,6 @@ class Garden {
         
         if(config.autoJQBStage.value == 4 && numJQB == 0){
           //if all JQB harvested, change stage to 1
-          //turn off autoHarvestCheckCpSMult
-          this.changeButton("autoHarvestCheckCpSMult", false, config);
           //turn off auto-reload
           this.changeButton("autoReload", false, config);
           //turn on auto-reload2 for QB
