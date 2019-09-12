@@ -427,7 +427,7 @@ class Garden {
   
   static saveButtonStatusAndTurnOff(targetArray, saveArray, config) {
     let save = [];
-    for(let i = 0; i < targetArray.length, i++){
+    for(let i = 0; i < targetArray.length; i++){
       save[i] = [];
       save[i][0] = targetArray[i];
       save[i][1] = config[targetArray[i]];
@@ -437,7 +437,7 @@ class Garden {
   }
   
   static restoreButtonStatus(saveArray, config) {
-    for(let i = 0; i < saveArray.length, i++){
+    for(let i = 0; i < saveArray.length; i++){
       this.changeButton(saveArray[i][0], saveArray[i][1], config);
     }
   }
