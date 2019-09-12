@@ -486,6 +486,59 @@ class Garden {
       this.writeLog(3, "auto lump", false, "check!");
     }
   }
+  
+  static handleLumpReload(config) {
+    if(config.lumpReload){
+      let numBefore = Game.lumps;
+      let lumpTBefore = Game.lumpT;
+      this.writeLog(3, "lump reload", false, "Game.lumps(before click):" + Game.lumps);
+      this.writeLog(3, "lump reload", false, "Game.lumpT(before click):" + Game.lumpT);
+      
+      Game.clickLump();
+      this.writeLog(3, "lump reload", false, "Game.lumps(after click):" + Game.lumps);
+      this.writeLog(3, "lump reload", false, "Game.lumpT(after click):" + Game.lumpT);
+      this.writeLog(3, "lump reload", false, "type:" + Game.lumpCurrentType);
+      
+      if(lumpTBefore == Game.lumpT){
+        //not mature
+        config.lumpReloadSave = "";
+        this.writeLog(2, "lump reload", false, "not mature");
+        //reset interval
+        Main.restart(1000);
+        this.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
+        
+        if(config.lumpReload){ Main.handleToggle('lumpReload'); }
+      } else {
+        if(Game.lumps >= (numBefore + parseInt(config.lumpReloadNum.value)) && Game.lumpCurrentType == config.lumpReloadType.value) {
+          //grow
+          config.lumpReloadSave = "";
+          document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
+          document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
+          document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
+          this.writeLog(1, "lump reload", true, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads + " gain:" + (Game.lumps - numBefore) + " sugar:" + Game.lumps);
+          config.lumpReloadReloads = 0;
+          //reset interval
+          Main.restart(1000);
+          this.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
+          
+          if(config.lumpReload){ Main.handleToggle('lumpReload'); }
+        } else {
+          //reload
+          config.lumpReloadReloads += 1;
+          document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
+          document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
+          document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
+          this.writeLog(3, "lump reload", false, "reload! try:" + config.lumpReloadReloads);
+          Game.LoadSave(config.lumpReloadSave);
+        }
+      }
+    }
+  }
+  
+  static displayRunTime(startTime, endTime) {
+    document.getElementById("intervalDisp").innerText = Main.timerInterval;
+    document.getElementById("runtimeDisp").innerText = (endTime.getTime() - startTime.getTime());
+  }
 
   static run(config) {
     //for run time
@@ -1042,58 +1095,11 @@ class Garden {
     }
 
     //lump reload
-    if(config.lumpReload){
-      let numBefore = Game.lumps;
-      let lumpTBefore = Game.lumpT;
-      this.writeLog(3, "lump reload", false, "Game.lumps(before click):" + Game.lumps);
-      this.writeLog(3, "lump reload", false, "Game.lumpT(before click):" + Game.lumpT);
-      
-      Game.clickLump();
-      this.writeLog(3, "lump reload", false, "Game.lumps(after click):" + Game.lumps);
-      this.writeLog(3, "lump reload", false, "Game.lumpT(after click):" + Game.lumpT);
-      this.writeLog(3, "lump reload", false, "type:" + Game.lumpCurrentType);
-      
-      if(lumpTBefore == Game.lumpT){
-        //not mature
-        config.lumpReloadSave = "";
-        this.writeLog(2, "lump reload", false, "not mature");
-        //reset interval
-        Main.restart(1000);
-        this.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
-        
-        if(config.lumpReload){ Main.handleToggle('lumpReload'); }
-      } else {
-        if(Game.lumps >= (numBefore + parseInt(config.lumpReloadNum.value)) && Game.lumpCurrentType == config.lumpReloadType.value) {
-          //grow
-          config.lumpReloadSave = "";
-          document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
-          document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
-          document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
-          this.writeLog(1, "lump reload", true, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads + " gain:" + (Game.lumps - numBefore) + " sugar:" + Game.lumps);
-          config.lumpReloadReloads = 0;
-          //reset interval
-          Main.restart(1000);
-          this.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
-          
-          if(config.lumpReload){ Main.handleToggle('lumpReload'); }
-        } else {
-          //reload
-          config.lumpReloadReloads += 1;
-          document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
-          document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
-          document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
-          this.writeLog(3, "lump reload", false, "reload! try:" + config.lumpReloadReloads);
-          Game.LoadSave(config.lumpReloadSave);
-        }
-      }
-      
-    }
+    this.handleLumpReload(config);
     
     //display run time
     let endTime = new Date();
-    document.getElementById("intervalDisp").innerText = Main.timerInterval;
-    document.getElementById("runtimeDisp").innerText = (endTime.getTime() - startTime.getTime());
-    
+    this.displayRunTime(startTime, endTime);
   }
 }
 
