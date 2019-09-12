@@ -463,8 +463,6 @@ class Garden {
       }
       config.playSoundMatureFlag = true;
     }
-    
-    throw new Error("test error");
   }
   
   static handleQuickLoadSave(config) {
