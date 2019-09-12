@@ -421,6 +421,11 @@ class Garden {
     }
   }
   
+  static changeNumber(inputName, num, config) {
+    config[inputName].value = num;
+    document.getElementById(UI.makeId(inputName)).value = num; 
+  }
+  
   static handlePlaySound1(config) {
     if(config.playSound && !config.playSoundFlag && this.secondsBeforeNextTick <= parseInt(config.playSoundSecond.value) && this.secondsBeforeNextTick >= (parseInt(config.playSoundSecond.value) - 2)){
       this.playSound1();
@@ -616,12 +621,11 @@ class Garden {
             this.harvest(x, y);
           });
           //turn off auto-reload, auto-reload2
-          if(config.autoReload){ Main.handleToggle('autoReload'); }
-          if(config.autoReload2){ Main.handleToggle('autoReload2'); }
+          this.changeButton("autoReload", false, config);
+          this.changeButton("autoReload2", false, config);
           //change stage
+          this.changeNumber("autoJQBStage", 0, config);
           this.writeLog(1, "auto JQB", true, "unexpected QB harvest! stage:" + config.autoJQBStage.value + "->0");
-          config.autoJQBStage.value = 0;
-          document.getElementById(UI.makeId("autoJQBStage")).value = 0;
         }
         
         if(config.autoJQBStage.value == 0 && numPlants == 0 && this.getPlant(21).unlocked){
@@ -634,23 +638,18 @@ class Garden {
           });
           
           //turn off autoHarvestCheckCpSMult
-          if(config.autoHarvestCheckCpSMult){ Main.handleToggle('autoHarvestCheckCpSMult'); }
+          this.changeButton("autoHarvestCheckCpSMult", false, config);
           //turn off auto-reload
-          if(config.autoReload){ Main.handleToggle('autoReload'); }
+          this.changeButton("autoReload", false, config);
           //turn on auto-reload2 for QB
-          if(!config.autoReload2){ Main.handleToggle('autoReload2'); }
-          config.autoReload2ID.value = 21;
-          document.getElementById(UI.makeId("autoReload2ID")).value = 21;
-          config.autoReload2Grow.value = 2;
-          document.getElementById(UI.makeId("autoReload2Grow")).value = 2;
-          config.autoReload2Number.value = parameter[0];
-          document.getElementById(UI.makeId("autoReload2Number")).value = parameter[0];
-          config.autoReload2Play.value = parameter[1];
-          document.getElementById(UI.makeId("autoReload2Play")).value = parameter[1];
+          this.changeButton("autoReload2", true, config);
+          this.changeNumber("autoReload2ID", 21, config);
+          this.changeNumber("autoReload2Grow", 2, config);
+          this.changeNumber("autoReload2Number", parameter[0], config);
+          this.changeNumber("autoReload2Play", parameter[1], config);
           
           //change stage
-          config.autoJQBStage.value = 1;
-          document.getElementById(UI.makeId("autoJQBStage")).value = 1;
+          this.changeNumber("autoJQBStage", 1, config);
           this.writeLog(1, "auto JQB", true, "stage:0->1");
         }
         
