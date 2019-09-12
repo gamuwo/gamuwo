@@ -436,6 +436,7 @@ class Garden {
     console.log("save:" + save)
     saveArray = save;
     
+    console.log("config.autoLumpButtonSave:" + config.autoLumpButtonSave)
     console.log("saveArray:" + saveArray)
   }
   
