@@ -372,7 +372,7 @@ class Garden {
         document.getElementById(secondID).style.display = "none";
         document.getElementById(thirdID).style.display = "inline-block";
       }
-      if(document.getElementById(thirdID).value != 1) document.getElementById(secondID).value = 1;
+      if(document.getElementById(thirdID).value != 1) document.getElementById(thirdID).value = 1;
     } else {
       if( (nowValue / maxValue) <= 1 ){
         //display first meter
