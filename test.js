@@ -1107,7 +1107,7 @@ class Garden {
 
   static run(config) {
     //for run time
-    let startTime = new Date();
+    let startTime = performance.now();
     //for one time events
     this.resetOneTimeFlag(config);
     //original process
@@ -1129,7 +1129,7 @@ class Garden {
     //lump reload
     this.handleLumpReload(config);
     //display run time
-    let endTime = new Date();
+    let endTime = performance.now();
     this.displayRunTime(startTime, endTime);
   }
 }
