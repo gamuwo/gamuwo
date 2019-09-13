@@ -1945,6 +1945,7 @@ class Main {
       this.config.autoReload2ButtonSave = [];
       Garden.writeLog(2, "auto reload2", false, "force termination! reset data");
     }
+    this.save();
     
   }
 
