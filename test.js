@@ -457,7 +457,7 @@ class Garden {
   
   static hideOverTile() {
     doc.qSelAll('#gardenPlot div.cookieGardenHelperOverTile').forEach((overTile) => {
-      overTile.style.display = none;
+      overTile.style.display = "none";
     });
   }
   
