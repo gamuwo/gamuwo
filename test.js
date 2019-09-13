@@ -1203,12 +1203,6 @@ class UI {
 }
 #logPanel .flexItemGrowNormal { flex-grow: 1; }
 #logPanel .flexItemGrowWide { flex-grow: 5; }
-#logPanel a.toggleBtn,
-#logPanel a.btn {
-  padding-right: 4px;
-  padding-left: 4px;
-  margin: 1px;
-}
 
 #cookieGardenHelperTitle {
   color: white;
@@ -1278,10 +1272,13 @@ class UI {
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
 #cookieGardenHelper a.toggleBtn.off .toggleBtnOn { display: none; }
 #cookieGardenHelper a.toggleBtn,
-#cookieGardenHelper a.btn {
+#cookieGardenHelper a.btn,
+#logPanel a.toggleBtn,
+#logPanel a.btn {
   padding-right: 4px;
   padding-left: 4px;
   margin: 1px;
+  border-radius: 5px;
 }
 #cookieGardenHelper span.labelWithState:not(.active) .labelStateActive,
 #cookieGardenHelper span.labelWithState.active .labelStateNotActive { display: none; }
