@@ -1825,8 +1825,8 @@ class UI {
       
       //build div over garden tile
       let idSplitted = tile.id.split("-");
-      if(splitted.length == 3){
-        let idNew = "overTile-" + splitted[1] + "-" + splitted[2];
+      if(idSplitted.length == 3){
+        let idNew = "overTile-" + idSplitted[1] + "-" + idSplitted[2];
         tile.insertAdjacentHTML("beforeend", `<div id="` + idNew + `" class="cookieGardenHelperOverTile"></div>`);
       }
       
