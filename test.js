@@ -631,16 +631,38 @@ class Garden {
         
         //for unexpected QB harvest
         if((config.autoJQBStage.value == 1 || config.autoJQBStage.value == 2) && numQB < 21){
-          //harvest all plants
-          this.forEachTile((x, y) => {
-            this.harvest(x, y);
-          });
-          //turn off auto-reload, auto-reload2
-          this.changeButton("autoReload", false, config);
-          this.changeButton("autoReload2", false, config);
-          //change stage
-          this.changeNumber("autoJQBStage", 0, config);
-          this.writeLog(1, "auto JQB", true, "unexpected QB harvest! stage:" + config.autoJQBStage.value + "->0");
+          if(numJQB == 0){
+            //if no JQB, change stage to 0
+            //harvest all plants
+            this.forEachTile((x, y) => {
+              this.harvest(x, y);
+            });
+            //turn off auto-reload, auto-reload2
+            this.changeButton("autoReload", false, config);
+            this.changeButton("autoReload2", false, config);
+            //change stage
+            this.changeNumber("autoJQBStage", 0, config);
+            this.writeLog(1, "auto JQB", true, "unexpected QB harvest! stage:" + config.autoJQBStage.value + "->0");
+          } else {
+            //if JQB is exist, change stage to 3
+            //harvest all QB
+            this.forEachTile((x, y) => {
+              let tile = this.getTile(x, y);
+              if(tile.seedId == 21) this.harvest(x, y);
+            });
+            //turn off auto-reload
+            this.changeButton("autoReload", false, config);
+            //turn on auto-reload2 for JQB
+            this.changeButton("autoReload2", true, config);
+            this.changeNumber("autoReload2ID", 22, config);
+            this.changeNumber("autoReload2Grow", 1, config);
+            this.changeNumber("autoReload2Number", parameter[2], config);
+            this.changeNumber("autoReload2Play", parameter[3], config);
+            
+            //change stage
+            this.changeNumber("autoJQBStage", 3, config);
+            this.writeLog(1, "auto JQB", true, "unexpected QB harvest! stage:2->3 QBage:" + ageString + " numJQB:" + numJQB);
+          }
         }
         
         if(config.autoJQBStage.value == 0 && numPlants == 0 && this.getPlant(21).unlocked){
