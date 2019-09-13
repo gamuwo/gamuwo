@@ -86,6 +86,8 @@ class Config {
       logHistory: [],
       logFilterWord: "",
       hideOverTileFlag: false,
+      overTile: false,
+      overTileHideTime: { value: 170, min: 0 },
     };
   }
 
@@ -444,14 +446,16 @@ class Garden {
     }
   }
   
-  static displayOverTile(isDisplay, x, y, text) {
-    let id = "overTile-" + x + "-" + y;
-    if(isDisplay) {
-      document.getElementById(id).style.display = "flex";
-      document.getElementById(id).innerText = text;
-    } else {
-      document.getElementById(id).style.display = "none";
-      document.getElementById(id).innerText = "";
+  static displayOverTile(isDisplay, x, y, text, config) {
+    if(config.overTile){
+      let id = "overTile-" + x + "-" + y;
+      if(isDisplay) {
+        document.getElementById(id).style.display = "flex";
+        document.getElementById(id).innerText = text;
+      } else {
+        document.getElementById(id).style.display = "none";
+        document.getElementById(id).innerText = "";
+      }
     }
   }
   
@@ -462,7 +466,7 @@ class Garden {
   }
   
   static handleHideOverTile(config) {
-    if(!config.hideOverTileFlag && this.secondsBeforeNextTick <= 170 && this.secondsBeforeNextTick >= 168){
+    if(!config.hideOverTileFlag && this.secondsBeforeNextTick <= parseInt(config.overTileHideTime.value) && this.secondsBeforeNextTick >= (parseInt(config.overTileHideTime.value) - 2)){
       this.hideOverTile();
       config.hideOverTileFlag = true;
       this.writeLog(3, "over tile", false, "hide over tile");
@@ -751,7 +755,7 @@ class Garden {
             if(tileAr.seedId == config.autoReloadID.value){
               targetNumber += 1;
               //display over tile
-              this.displayOverTile(true, x, y, "");
+              this.displayOverTile(true, x, y, "", config);
             }
           });
         }
@@ -780,7 +784,7 @@ class Garden {
           document.getElementById("rightBottomLumpReload").style.display = "none";
           
           //display over tile
-          if(!isMaxMode) this.displayOverTile(true, config.autoReloadX.value, config.autoReloadY.value, "");
+          if(!isMaxMode) this.displayOverTile(true, config.autoReloadX.value, config.autoReloadY.value, "", config);
         
           //reset interval
           Main.restart(parseInt(config.interval.value));
@@ -828,7 +832,7 @@ class Garden {
           if(isMaxMode){
             this.forEachTile((x, y) => {
               let tileAr = this.getTile(x, y);
-              if(tileAr.seedId == config.autoReloadID.value) this.displayOverTile(true, x, y, "");
+              if(tileAr.seedId == config.autoReloadID.value) this.displayOverTile(true, x, y, "", config);
             });
           }
           
@@ -870,7 +874,7 @@ class Garden {
           if(tileAr2.seedId == config.autoReload2ID.value){
             targetPlants.push([x, y, tileAr2.age]);
             //display over tile
-            this.displayOverTile(true, x, y, tileAr2.age);
+            this.displayOverTile(true, x, y, tileAr2.age, config);
           }
         });
         
@@ -992,7 +996,7 @@ class Garden {
             if(tileForAge.seedId == config.autoReload2ID.value){
               ageArray.push(tileForAge.age);
               //display over tile
-              this.displayOverTile(true, x, y, tileForAge.age);
+              this.displayOverTile(true, x, y, tileForAge.age, config);
             }
           });
           let ageString = "0-0(0)/0";
@@ -1572,6 +1576,10 @@ class UI {
         <p>
           ${this.button('playSoundMature', 'Sound3', 'play beep sound after target plant is mature', true, config.playSoundMature)}
           ${this.fixedSelect('playSoundMatureID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.playSoundMatureID, 3)}
+        </p>
+        <p>
+          ${this.button('overTile', 'Over tile', 'display over tile', true, config.overTile)}
+          ${this.numberInputDigits('overTileHideTime', 'Hide', 'input over tile hide time(sec)', config.overTileHideTime, 3)}
         </p>
         <p>
           ${this.numberInputDigits('interval', 'Reload interval', 'input auto reload interval(ms)', config.interval, 4)}
