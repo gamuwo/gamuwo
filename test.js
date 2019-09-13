@@ -85,6 +85,7 @@ class Config {
       rightBottomDisplaySave: [],
       logHistory: [],
       logFilterWord: "",
+      hideOverTileFlag: false,
     };
   }
 
@@ -411,6 +412,7 @@ class Garden {
       config.quickLoadFlag = false;
       config.autoJQBFlag = false;
       config.autoLumpFlag = false;
+      config.hideOverTileFlag = false;
     }
   }
   
@@ -439,6 +441,31 @@ class Garden {
   static restoreButtonStatus(saveArray, config) {
     for(let i = 0; i < saveArray.length; i++){
       this.changeButton(saveArray[i][0], saveArray[i][1], config);
+    }
+  }
+  
+  static displayOverTile(isDisplay, x, y, text) {
+    let id = "overTile-" + x + "-" + y;
+    if(isDisplay) {
+      document.getElementById(id).style.display = "flex";
+      document.getElementById(id).innerText = text;
+    } else {
+      document.getElementById(id).style.display = "none";
+      document.getElementById(id).innerText = "";
+    }
+  }
+  
+  static hideOverTile() {
+    doc.qSelAll('#gardenPlot div.cookieGardenHelperOverTile').forEach((overTile) => {
+      overTile.style.display = none;
+    });
+  }
+  
+  static handleHideOverTile(config) {
+    if(!config.hideOverTileFlag && this.secondsBeforeNextTick <= 175 && this.secondsBeforeNextTick >= 173){
+      this.hideOverTile();
+      config.hideOverTileFlag = true;
+      this.writeLog(3, "over tile", false, "hide over tile");
     }
   }
   
@@ -747,6 +774,9 @@ class Garden {
           document.getElementById("rightBottomAutoReload").style.display = "block";
           document.getElementById("rightBottomAutoReload2").style.display = "none";
           document.getElementById("rightBottomLumpReload").style.display = "none";
+          
+          //display over tile
+          if(isMaxMode) this.displayOverTile(true, config.autoReloadX.value, config.autoReloadY.value, "");
         
           //reset interval
           Main.restart(parseInt(config.interval.value));
@@ -1071,6 +1101,8 @@ class Garden {
       this.handlePlaySound1(config);
       this.handlePlaySound2(config);
       this.handlePlaySoundMature(config);
+      //hide over tile
+      this.handleHideOverTile(config);
       //for quick load
       this.handleQuickLoadSave(config);
       //auto lump
@@ -1192,15 +1224,15 @@ class UI {
 #gardenPlot .cookieGardenHelperOverTile {
   display: none;
   position: absolute;
-  height: calc(100% - 10px);
-  width: calc(100% - 10px);
-  margin: 5px;
+  height: calc(100% - 6px);
+  width: calc(100% - 6px);
+  margin: 3px;
   box-sizing: border-box;
   border: dotted 3px rgba(255, 165, 0, 0.8);
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
-  align-items: center;  
+  align-items: center; 
 }
 
 #logPanel {
