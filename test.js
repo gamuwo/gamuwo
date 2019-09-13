@@ -80,6 +80,8 @@ class Config {
       lumpReloadType: { value: 0, min: 0 },
       lumpReloadSave: "",
       lumpReloadReloads: 0,
+      lumpReloadTryHistory: [],
+      lumpReloadTryAverage: [],
       rightBottomDisplaySave: [],
       logHistory: [],
       logFilterWord: "",
@@ -995,25 +997,51 @@ class Garden {
         
         this.changeButton("lumpReload", false, config);
       } else {
+        //for text
+        let gain = Game.lumps - numBefore;
+        document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
+        document.getElementById("lumpReloadDisp2").innerText = gain;
+        document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
+        
+        //for gain meter
+        if(config.lumpReloadNum.value == 0){
+          document.getElementById(UI.makeId("lumpReloadMeterGain")).value = 1;
+        } else {
+          document.getElementById(UI.makeId("lumpReloadMeterGain")).value = (gain / config.lumpReloadNum.value);
+        }
+        
+        //for try meter
+        let ave = config.lumpReloadTryAverage[config.lumpReloadType.value];
+        if(!isFinite(parseFloat(ave))) ave = 0;
+        this.displayMultiMeter(UI.makeId("lumpReloadMeter"), UI.makeId("lumpReloadMeter2"), UI.makeId("lumpReloadMeter3"), ave, config.lumpReloadReloads);
+          
+        //check
         if(Game.lumps >= (numBefore + parseInt(config.lumpReloadNum.value)) && Game.lumpCurrentType == config.lumpReloadType.value) {
           //grow
+          //for average
+          let type = config.lumpReloadType.value;
+          if(!Array.isArray(config.lumpReloadTryHistory[type])) config.lumpReloadTryHistory[type] = [];
+          this.pushLimit(config.lumpReloadReloads, config.lumpReloadTryHistory[type]);
+          config.lumpReloadTryAverage[type] = this.arrayAverage(config.lumpReloadTryHistory[type]);
+          let tryAverage = "[" + type + "]" + config.lumpReloadTryAverage[type].toFixed(2) + "(" + config.lumpReloadTryHistory[type].length + ")";
+          document.getElementById("lumpReloadDisp4").innerText = tryAverage;
+          this.writeLog(2, "lump reload", false, "try average:" + tryAverage);
+          
+          //reset save
           config.lumpReloadSave = "";
-          document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
-          document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
-          document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
-          this.writeLog(1, "lump reload", true, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads + " gain:" + (Game.lumps - numBefore) + " sugar:" + Game.lumps);
           config.lumpReloadReloads = 0;
+          Main.save();
+          this.writeLog(1, "lump reload", true, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads + " gain:" + (Game.lumps - numBefore) + " sugar:" + Game.lumps);
+          
           //reset interval
           Main.restart(1000);
           this.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
           
+          //turn off lump reload
           this.changeButton("lumpReload", false, config);
         } else {
           //reload
           config.lumpReloadReloads += 1;
-          document.getElementById("lumpReloadDisp").innerText = config.lumpReloadReloads;
-          document.getElementById("lumpReloadDisp2").innerText = Game.lumps - numBefore;
-          document.getElementById("lumpReloadDisp3").innerText = Game.lumpCurrentType;
           this.writeLog(3, "lump reload", false, "reload! try:" + config.lumpReloadReloads);
           Game.LoadSave(config.lumpReloadSave);
         }
@@ -1567,6 +1595,7 @@ class UI {
         <div class="boxPanel">
           <p>
             ${this.button('lumpReload', 'Lump reload', 'reload for sugar lump', true, config.lumpReload)}
+            ${this.button('lumpReloadReset', 'Reset', 'reset history data')}
           </p>
           <p>
             ${this.numberInputDigits('lumpReloadNum', 'Num', 'input number', config.lumpReloadNum, 1)}
@@ -1594,7 +1623,7 @@ class UI {
           </p>
           <p>
             ${this.button('autoReloadGetXY', 'Get XY', 'get X/Y by clicking tile', true, config.autoReloadGetXY)}
-            ${this.button('autoReloadReset', 'Reset', 'reset data(use when it stucks)')}
+            ${this.button('autoReloadReset', 'Reset', 'reset history data')}
           </p>
         </div>
       </div>
@@ -1615,7 +1644,7 @@ class UI {
             ${this.numberInputDigits('autoReload2Play', 'Play', 'input Play', config.autoReload2Play, 2)}
           </p>
           <p>
-            ${this.button('autoReload2Reset', 'Reset', 'reset data(use when it stucks)')}
+            ${this.button('autoReload2Reset', 'Reset', 'reset history data')}
           </p>
         </div>
       </div>
@@ -1626,8 +1655,17 @@ class UI {
       <p>
         Try:<span id="lumpReloadDisp">0</span>
         Gain:<span id="lumpReloadDisp2">0</span>
-        Type:<span id="lumpReloadDisp3">0</span>
+        Type:<span id="lumpReloadDisp3">0</span><br>
+        Ave:<span id="lumpReloadDisp4">[0]0(0)</span>
       </p>
+      <div class="meterDiv">
+        ${this.meter('lumpReloadMeterGain', 'meterFirst', 0, 0, 0.5, 0)}
+      </div>
+      <div class="meterDiv">
+        ${this.meter('lumpReloadMeter', 'meterFirst', 0, 0, 0.5, 0)}
+        ${this.meter('lumpReloadMeter2', 'meterSecond', 0, 0, 0.5, 0)}
+        ${this.meter('lumpReloadMeter3', 'meterThird', 0, 0.99, 0.5, 0)}
+      </div>
     </div>
     <div id="rightBottomAutoReload">
       <p>
@@ -1979,6 +2017,10 @@ class Main {
       this.config.autoReload2TryHistory = [];
       this.config.autoReload2TryAverage = [];
       document.getElementById("autoReload2Disp3").innerText = "[0]0(0)";
+    } else if (key == 'lumpReloadReset') {
+      this.config.lumpReloadTryHistory = [];
+      this.config.lumpReloadTryAverage = [];
+      document.getElementById("lumpReloadDisp4").innerText = "[0]0(0)";
     } else if (key == 'logResetButton') {
       this.config.logHistory = [];
       Garden.displayLog(1);
