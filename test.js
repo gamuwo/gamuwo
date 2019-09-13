@@ -1102,12 +1102,12 @@ class Garden {
           let tryAverage = "[" + type + "]" + config.lumpReloadTryAverage[type].toFixed(2) + "(" + config.lumpReloadTryHistory[type].length + ")";
           document.getElementById("lumpReloadDisp4").innerText = tryAverage;
           this.writeLog(2, "lump reload", false, "try average:" + tryAverage);
+          this.writeLog(1, "lump reload", true, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads + " gain:" + (Game.lumps - numBefore) + " sugar:" + Game.lumps);
           
           //reset save
           config.lumpReloadSave = "";
           config.lumpReloadReloads = 0;
           Main.save();
-          this.writeLog(1, "lump reload", true, "grow! type:" + Game.lumpCurrentType + " reloads:" + config.lumpReloadReloads + " gain:" + (Game.lumps - numBefore) + " sugar:" + Game.lumps);
           
           //reset interval
           Main.restart(1000);
