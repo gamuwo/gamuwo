@@ -1197,8 +1197,10 @@ class UI {
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-  border: solid 2px orange;
-  border-radius: 10px;
+  border: solid 4px rgba(255, 165, 0, 0.8);
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  text-align: center;
 }
 
 #logPanel {
