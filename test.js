@@ -1235,7 +1235,7 @@ class UI {
   align-items: center; 
 }
 #gardenPlot .cookieGardenHelperOverTile:empty {
-  background-color: none;
+  background: none;
 }
 
 #logPanel {
