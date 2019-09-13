@@ -450,11 +450,11 @@ class Garden {
     if(config.overTile){
       let id = "overTile-" + x + "-" + y;
       if(isDisplay) {
-        document.getElementById(id).style.display = "flex";
-        document.getElementById(id).innerText = text;
+        if(document.getElementById(id).style.display != "flex") document.getElementById(id).style.display = "flex";
+        if(document.getElementById(id).innerText != text) document.getElementById(id).innerText = text;
       } else {
-        document.getElementById(id).style.display = "none";
-        document.getElementById(id).innerText = "";
+        if(document.getElementById(id).style.display != "none") document.getElementById(id).style.display = "none";
+        if(document.getElementById(id).innerText != "") document.getElementById(id).innerText = "";
       }
     }
   }
