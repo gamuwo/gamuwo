@@ -1189,6 +1189,18 @@ class UI {
 #rightBottomAutoReload2,
 #rightBottomLumpReload { display: none }
 
+#gardenPlot .cookieGardenHelperOverTile {
+  display: block;
+  position:absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  border: solid 2px orange;
+  border-radius: 10px;
+}
+
 #logPanel {
   background: #000 url("https://gamuwo.github.io/gamuwo/logback.jpg");
   display: none;
@@ -1810,6 +1822,14 @@ class UI {
           }
         }
       };
+      
+      //build div over garden tile
+      let idSplitted = tile.id.split("-");
+      if(splitted.length == 3){
+        let idNew = "overTile-" + splitted[1] + "-" + splitted[2];
+        tile.insertAdjacentHTML("beforeend", `<div id="` + idNew + `" class="cookieGardenHelperOverTile"></div>`);
+      }
+      
     });
 
     doc.qSelAll('#cookieGardenHelper a.toggleBtn').forEach((a) => {
