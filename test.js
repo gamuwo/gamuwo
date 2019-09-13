@@ -1542,10 +1542,8 @@ class UI {
         <h3>Save&Load</h3>
         <p>
           ${this.button('saveButton', 'Save', 'save')}
-        </p>
-        <p>
-          ${this.button('exportSaveButton', 'Export save', 'open export save window')}
-          ${this.button('importSaveButton', 'Import save', 'open import save window')}
+          ${this.button('exportSaveButton', 'Export', 'open export save window')}
+          ${this.button('importSaveButton', 'Import', 'open import save window')}
         </p>
         <p>
           ${this.button('fileSaveButton', 'Save to file', 'file save')}
