@@ -969,12 +969,6 @@ class Garden {
         if(!isFinite(parseFloat(ave))) ave = 0;
         this.displayMultiMeter(UI.makeId("autoReload2Meter"), UI.makeId("autoReload2Meter2"), UI.makeId("autoReload2Meter3"), ave, config.autoReload2Reloads);
         
-        //display over tile(test)
-        this.forEachTile((x, y) => {
-          let tile = this.getTile(x, y);
-          if(tile.seedId == config.autoReload2ID.value) this.displayOverTile(true, x, y, tile.age, config);
-        });
-        
         //check
         if(grows < targetNumber || (isPlay0 && mustGrows < mustNum)){
           //reload
