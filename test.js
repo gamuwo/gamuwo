@@ -748,7 +748,11 @@ class Garden {
         if(isMaxMode){
           this.forEachTile((x, y) => {
             let tileAr = this.getTile(x, y);
-            if(tileAr.seedId == config.autoReloadID.value) targetNumber += 1;
+            if(tileAr.seedId == config.autoReloadID.value){
+              targetNumber += 1;
+              //display over tile
+              this.displayOverTile(true, x, y, "");
+            }
           });
         }
         
@@ -819,6 +823,14 @@ class Garden {
           let tryAverage = "[" + id + "]" + config.autoReloadTryAverage[id].toFixed(2) + "(" + config.autoReloadTryHistory[id].length + ")";
           document.getElementById("autoReloadDisp2").innerText = tryAverage;
           this.writeLog(2, "auto reload", false, "try average:" + tryAverage);
+          
+          //display over tile
+          if(isMaxMode){
+            this.forEachTile((x, y) => {
+              let tileAr = this.getTile(x, y);
+              if(tileAr.seedId == config.autoReloadID.value) this.displayOverTile(true, x, y, "");
+            });
+          }
           
           this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
           this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
