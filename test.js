@@ -641,8 +641,8 @@ class Garden {
             this.changeButton("autoReload", false, config);
             this.changeButton("autoReload2", false, config);
             //change stage
-            this.changeNumber("autoJQBStage", 0, config);
             this.writeLog(1, "auto JQB", true, "unexpected QB harvest! stage:" + config.autoJQBStage.value + "->0");
+            this.changeNumber("autoJQBStage", 0, config);
           } else {
             //if JQB is exist, change stage to 3
             //harvest all QB
