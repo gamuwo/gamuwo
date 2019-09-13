@@ -1980,6 +1980,13 @@ class Main {
       this.config.autoReload2ButtonSave = [];
       Garden.writeLog(2, "auto reload2", false, "force termination! reset data");
     }
+    if(key=="lumpReload" && !this.config[key] && this.config.lumpReloadSave != ""){
+      //lump reload forced termination
+      Main.restart(1000);
+      this.config.lumpReloadSave = "";
+      this.config.lumpReloadReloads = 0;
+      Garden.writeLog(2, "lump reload", false, "force termination! reset data");
+    }
     this.save();
     
   }
