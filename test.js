@@ -462,7 +462,7 @@ class Garden {
   }
   
   static handleHideOverTile(config) {
-    if(!config.hideOverTileFlag && this.secondsBeforeNextTick <= 175 && this.secondsBeforeNextTick >= 173){
+    if(!config.hideOverTileFlag && this.secondsBeforeNextTick <= 170 && this.secondsBeforeNextTick >= 168){
       this.hideOverTile();
       config.hideOverTileFlag = true;
       this.writeLog(3, "over tile", false, "hide over tile");
