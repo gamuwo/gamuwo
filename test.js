@@ -855,7 +855,11 @@ class Garden {
         let targetPlants = [];
         this.forEachTile((x, y) => {
           let tileAr2 = this.getTile(x, y);
-          if(tileAr2.seedId == config.autoReload2ID.value) targetPlants.push([x, y, tileAr2.age]);
+          if(tileAr2.seedId == config.autoReload2ID.value){
+            targetPlants.push([x, y, tileAr2.age]);
+            //display over tile
+            this.displayOverTile(true, x, y, tileAr2.age);
+          }
         });
         
         if(targetPlants.length > 0){
@@ -973,7 +977,11 @@ class Garden {
           let ageArray = [];
           this.forEachTile((x, y) => {
             let tileForAge = this.getTile(x, y);
-            if(tileForAge.seedId == config.autoReload2ID.value) ageArray.push(tileForAge.age);
+            if(tileForAge.seedId == config.autoReload2ID.value){
+              ageArray.push(tileForAge.age);
+              //display over tile
+              this.displayOverTile(true, x, y, tileForAge.age);
+            }
           });
           let ageString = "0-0(0)/0";
           if(ageArray.length > 0){
