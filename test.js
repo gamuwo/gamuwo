@@ -993,7 +993,7 @@ class Garden {
         Main.restart(1000);
         this.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
         
-        if(config.lumpReload){ Main.handleToggle('lumpReload'); }
+        this.changeButton("lumpReload", false, config);
       } else {
         if(Game.lumps >= (numBefore + parseInt(config.lumpReloadNum.value)) && Game.lumpCurrentType == config.lumpReloadType.value) {
           //grow
@@ -1007,7 +1007,7 @@ class Garden {
           Main.restart(1000);
           this.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
           
-          if(config.lumpReload){ Main.handleToggle('lumpReload'); }
+          this.changeButton("lumpReload", false, config);
         } else {
           //reload
           config.lumpReloadReloads += 1;
