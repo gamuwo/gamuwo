@@ -823,9 +823,7 @@ class Garden {
         let targetPlants = [];
         this.forEachTile((x, y) => {
           let tileAr2 = this.getTile(x, y);
-          if(tileAr2.seedId == config.autoReload2ID.value){
-            targetPlants.push([x, y, tileAr2.age]);
-          }
+          if(tileAr2.seedId == config.autoReload2ID.value) targetPlants.push([x, y, tileAr2.age]);
         });
         
         if(targetPlants.length > 0){
@@ -839,21 +837,8 @@ class Garden {
           this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
           this.writeLog(2, "auto reload2", false, "target plants:" + config.autoReload2Plants.join("|"));
           
-          //save other button state
-          let buttonSave = [];
-          buttonSave[0] = config.autoHarvest;
-          buttonSave[1] = config.autoPlant;
-          buttonSave[2] = config.autoJQB;
-          buttonSave[3] = config.autoLump;
-          buttonSave[4] = config.autoReload;
-          config.autoReload2ButtonSave = buttonSave;
-          
-          //turn off other button
-          if(config.autoHarvest){ Main.handleToggle('autoHarvest'); }
-          if(config.autoPlant){ Main.handleToggle('autoPlant'); }
-          if(config.autoJQB){ Main.handleToggle('autoJQB'); }
-          if(config.autoLump){ Main.handleToggle('autoLump'); }
-          if(config.autoReload){ Main.handleToggle('autoReload'); }
+          //turn off other buttons
+          this.saveButtonStatusAndTurnOff(["autoHarvest", "autoPlant", "autoJQB", "autoLump", "autoReload"], config.autoReload2ButtonSave, config);
           Main.save();
           
           //display
@@ -956,9 +941,7 @@ class Garden {
           let ageArray = [];
           this.forEachTile((x, y) => {
             let tileForAge = this.getTile(x, y);
-            if(tileForAge.seedId == config.autoReload2ID.value){
-              ageArray.push(tileForAge.age);
-            }
+            if(tileForAge.seedId == config.autoReload2ID.value) ageArray.push(tileForAge.age);
           });
           let ageString = "0-0(0)/0";
           if(ageArray.length > 0){
@@ -981,11 +964,7 @@ class Garden {
           this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
           
           //restore other button state
-          if(config.autoReload2ButtonSave[0]){ Main.handleToggle('autoHarvest'); }
-          if(config.autoReload2ButtonSave[1]){ Main.handleToggle('autoPlant'); }
-          if(config.autoReload2ButtonSave[2]){ Main.handleToggle('autoJQB'); }
-          if(config.autoReload2ButtonSave[3]){ Main.handleToggle('autoLump'); }
-          if(config.autoReload2ButtonSave[4]){ Main.handleToggle('autoReload'); }
+          this.restoreButtonStatus(config.autoReload2ButtonSave, config);
           config.autoReload2ButtonSave = [];
           Main.save();
           this.writeLog(3, "auto reload2", false, "restore buttons");
