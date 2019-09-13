@@ -776,7 +776,7 @@ class Garden {
           document.getElementById("rightBottomLumpReload").style.display = "none";
           
           //display over tile
-          if(isMaxMode) this.displayOverTile(true, config.autoReloadX.value, config.autoReloadY.value, "");
+          if(!isMaxMode) this.displayOverTile(true, config.autoReloadX.value, config.autoReloadY.value, "");
         
           //reset interval
           Main.restart(parseInt(config.interval.value));
@@ -1233,6 +1233,9 @@ class UI {
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center; 
+}
+#gardenPlot .cookieGardenHelperOverTile:empty {
+  background-color: none;
 }
 
 #logPanel {
