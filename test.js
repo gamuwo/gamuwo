@@ -1924,6 +1924,28 @@ class Main {
       this.restart(parseInt(this.config.interval.value));
       Garden.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
     }
+    
+    if(key=="autoReload" && !this.config[key] && this.config.autoReloadSaveSecond != 9999){
+      //auto reload forced termination
+      Main.restart(1000);
+      this.config.autoReloadSave = "";
+      this.config.autoReloadSaveSecond = 9999;
+      this.config.autoReloadReloads = 0;
+      this.config.autoReloadNumber = 0;
+      this.config.autoReloadButtonSave = [];
+      Garden.writeLog(2, "auto reload", false, "force termination! reset data");
+    }
+    if(key=="autoReload2" && !this.config[key] && this.config.autoReload2SaveSecond != 9999){
+      //auto reload2 forced termination
+      Main.restart(1000);
+      this.config.autoReload2Save = "";
+      this.config.autoReload2SaveSecond = 9999;
+      this.config.autoReload2Reloads = 0;
+      this.config.autoReload2Plants = [];
+      this.config.autoReload2ButtonSave = [];
+      Garden.writeLog(2, "auto reload2", false, "force termination! reset data");
+    }
+    
   }
 
   static handleClick(key) {
@@ -1952,22 +1974,10 @@ class Main {
         Game.LoadSave(this.config.quickLoad2Save);
       }
     } else if (key == 'autoReloadReset') {
-      Main.restart(1000);
-      this.config.autoReloadSave = "";
-      this.config.autoReloadSaveSecond = 9999;
-      this.config.autoReloadReloads = 0;
-      this.config.autoReloadNumber = 0;
-      this.config.autoReloadButtonSave = [];
       this.config.autoReloadTryHistory = [];
       this.config.autoReloadTryAverage = [];
       document.getElementById("autoReloadDisp2").innerText = "[0]0(0)";
     } else if (key == 'autoReload2Reset') {
-      Main.restart(1000);
-      this.config.autoReload2Save = "";
-      this.config.autoReload2SaveSecond = 9999;
-      this.config.autoReload2Reloads = 0;
-      this.config.autoReload2Plants = [];
-      this.config.autoReload2ButtonSave = [];
       this.config.autoReload2TryHistory = [];
       this.config.autoReload2TryAverage = [];
       document.getElementById("autoReload2Disp3").innerText = "[0]0(0)";
@@ -2012,6 +2022,5 @@ if (Garden.isActive) {
   console.log(msg);
   UI.createWarning(msg);
 }
-
 
 }
