@@ -1268,17 +1268,12 @@ class UI {
   border-radius: 2px;
 }
 #cookieGardenHelper meter.meterFirst::-webkit-meter-bar { background-color: darkslategray; }
-#cookieGardenHelper meter.meterFirst::-webkit-meter-optimum-value { background-color: greenyellow; }
-#cookieGardenHelper meter.meterFirst::-webkit-meter-suboptimum-value { background-color: black; }
-#cookieGardenHelper meter.meterFirst::-webkit-meter-even-less-good-value { background-color: black; }
+#cookieGardenHelper meter.meterFirst::-webkit-meter-optimum-value,
 #cookieGardenHelper meter.meterSecond::-webkit-meter-bar { background-color: greenyellow; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value { background-color: cornflowerblue; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-suboptimum-value { background-color: black; }
-#cookieGardenHelper meter.meterSecond::-webkit-meter-even-less-good-value { background-color: black; }
+#cookieGardenHelper meter.meterSecond::-webkit-meter-optimum-value,
 #cookieGardenHelper meter.meterThird::-webkit-meter-bar { background-color: cornflowerblue; }
 #cookieGardenHelper meter.meterThird::-webkit-meter-optimum-value { background-color: orange; }
 #cookieGardenHelper meter.meterThird::-webkit-meter-suboptimum-value { background-color: hotpink; }
-#cookieGardenHelper meter.meterThird::-webkit-meter-even-less-good-value { background-color: black; }
 
 #cookieGardenHelper a.toggleBtn:not(.off) .toggleBtnOff,
 #cookieGardenHelper a.toggleBtn.off .toggleBtnOn { display: none; }
@@ -1318,15 +1313,6 @@ class UI {
 #cookieGardenHelper .warning .closeWarning:hover { color: black; }
 `;
   }
-
-  static numberInput(name, text, title, options) {
-    let id = this.makeId(name);
-    return `
-<input type="number" name="${name}" id="${id}" value="${options.value}" step=1
-  ${options.min !== undefined ? `min="${options.min}"` : ''}
-  ${options.max !== undefined ? `max="${options.max}"` : ''} />
-<label for="${id}" title="${title}">${text}</label>`;
-  }
   
   static numberInputWidth(name, text, title, options, width) {
     let id = this.makeId(name);
@@ -1345,11 +1331,7 @@ class UI {
     if(digits == 3) width = 2.3;
     if(digits == 4) width = 2.7;
     if(digits == 5) width = 3.1;
-    return `
-<input type="number" style="width: ${width}rem;" name="${name}" id="${id}" value="${options.value}" step=1
-  ${options.min !== undefined ? `min="${options.min}"` : ''}
-  ${options.max !== undefined ? `max="${options.max}"` : ''} />
-<label for="${id}" title="${title}">${text}</label>`;
+    return this.numberInputWidth(name, text, title, options, width);
   }
   
   static textInputWidth(name, text, title, options, width) {
@@ -1883,8 +1865,12 @@ class Main {
     Garden.minigame.convert = () => {
       this.config.savedPlot = [];
       UI.labelToggleState('plotIsSaved', false);
-      if(this.config.autoHarvest){ Main.handleToggle('autoHarvest'); }
-      if(this.config.autoPlant){ Main.handleToggle('autoPlant'); }
+      this.changeButton("autoHarvest", false, config);
+      this.changeButton("autoPlant", false, config);
+      this.changeButton("autoJQB", false, config);
+      this.changeButton("autoLump", false, config);
+      this.changeButton("autoReload", false, config);
+      this.changeButton("autoReload2", false, config);
       this.save();
       oldConvert();
     }
