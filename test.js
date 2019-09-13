@@ -1190,17 +1190,17 @@ class UI {
 #rightBottomLumpReload { display: none }
 
 #gardenPlot .cookieGardenHelperOverTile {
-  display: block;
-  position:absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
+  display: none;
+  position: absolute;
+  height: calc(100% - 10px);
+  width: calc(100% - 10px);
+  margin: 5px;
   box-sizing: border-box;
-  border: solid 4px rgba(255, 165, 0, 0.8);
+  border: dotted 3px rgba(255, 165, 0, 0.8);
   border-radius: 20px;
   background-color: rgba(0, 0, 0, 0.5);
-  text-align: center;
+  justify-content: center;
+  align-items: center;  
 }
 
 #logPanel {
