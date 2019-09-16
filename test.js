@@ -2226,11 +2226,12 @@ Garden.minigame.tileTooltip = function() {
         result = result + `<div style="margin:6px 0px;font-size:11px;">`;
         result = result + `<b>Mutations : </b>`;
         for(let i in mutations){
-          result = result + mutations[0];
+          result = result + mutations[i][0];
           result = result + `(`;
-          result = result + mutations[1];
-          result = result + `)`;
+          result = result + mutations[i][1];
+          result = result + `) / `;
         }
+        if(mutations.length > 0) result.slice(0, -3);
         result = result + `</div>`;
         result = result + `</div>`; //append original </div>
       }
