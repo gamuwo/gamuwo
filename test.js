@@ -2220,20 +2220,35 @@ Garden.minigame.tileTooltip = function() {
       tempLet=Garden.minigame.getTile(x+1,y+1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
       if (anyNum>0){
         let mutations=Garden.minigame.getMuts(plantsNum, maturesNum);
-        if(mutations.length > 0){
+        let mutationsMature=Garden.minigame.getMuts(plantsNum, plantsNum);
+        if(mutations.length > 0 || mutationsMature.length > 0){
           result = result.slice(0, -6); //delete original </div>
           result = result + `<div class="line"></div>`;
           result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
-          result = result + `<div style="margin:6px 0px;font-size:11px;">`;
-          result = result + `<b>Mutations : </b>`;
-          for(let i in mutations){
-            result = result + mutations[i][0];
-            result = result + `(`;
-            result = result + mutations[i][1];
-            result = result + `), `;
+          if(mutations.length > 0){
+            result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+            result = result + `<b>Mutations : </b>`;
+            for(let i in mutations){
+              result = result + mutations[i][0];
+              result = result + `(`;
+              result = result + mutations[i][1];
+              result = result + `), `;
+            }
+            result = result.slice(0, -2);
+            result = result + `</div>`;
           }
-          result = result.slice(0, -2);
-          result = result + `</div>`;
+          if(mutationsMature.length > 0){
+            result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+            result = result + `<b>Mutations(if all plants are mature) : </b>`;
+            for(let i in mutationsMature){
+              result = result + mutationsMature[i][0];
+              result = result + `(`;
+              result = result + mutationsMature[i][1];
+              result = result + `), `;
+            }
+            result = result.slice(0, -2);
+            result = result + `</div>`;
+          }
           result = result + `</div>`; //append original </div>
         }
       }
