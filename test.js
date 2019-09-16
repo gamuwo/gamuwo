@@ -2219,7 +2219,7 @@ Game.lumpTooltip = function() {
   result = result.slice(0, -6); //delete original </div>
   result = result + `<div class="line"></div>`;
   result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
-  result = result + `Type :`;
+  result = result + `Type : `;
   result = result + `<b>`;
   result = result + ["normal", "bifurcated", "golden", "meaty", "caramelized"][Game.lumpCurrentType];
   result = result + `</b>`;
