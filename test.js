@@ -2179,11 +2179,11 @@ if (Garden.isActive) {
 let tileTooltipOrigin = Garden.minigame.tileTooltip;
 Garden.minigame.tileTooltip = function() {
   //original tooptip
-  let result = tileTooltipOrigin.apply(null, arguments);
-  //add age data
-  console.log(result);
   let x = arguments[0];
   let y = arguments[1];
+  let result = tileTooltipOrigin(x, y);
+  //add age data
+  console.log(result);
   if(!Garden.tileIsEmpty(x, y)){
     let tile = Garden.getTile(x, y);
     result = result.slice(0, -6);
