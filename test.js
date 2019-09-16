@@ -2178,14 +2178,13 @@ if (Garden.isActive) {
 //garden tile tooptip hack
 let tileTooltipOrigin = Garden.minigame.tileTooltip;
 Garden.minigame.tileTooltip = function() {
+  let x = arguments[0];
+  let y = arguments[1];
   let funcOrigin = tileTooltipOrigin.apply(null, arguments);
   func = function() {
     //original tooptip
     let result = funcOrigin.apply(null, arguments);
     //add age data
-    console.log(arguments);
-    let x = arguments[0];
-    let y = arguments[1];
     if(!Garden.tileIsEmpty(x, y)){
       let tile = Garden.getTile(x, y);
       result = result.slice(0, -6);
@@ -2195,7 +2194,6 @@ Garden.minigame.tileTooltip = function() {
       result = result + ` / `;
       result = result + Garden.getPlant(tile.seedId).mature;
       result = result + `</div></div>`;
-      console.log(result);
     }
     return result;
   }
