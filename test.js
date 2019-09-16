@@ -2253,6 +2253,7 @@ Garden.minigame.tileTooltip = function() {
         }
       }
     }
+    console.log(result);
     return result;
   }
   return func;
