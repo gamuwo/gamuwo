@@ -2181,21 +2181,20 @@ Garden.minigame.tileTooltip = function() {
   //original tooptip
   let result = tileTooltipOrigin.apply(null, arguments);
   //add age data
-  let newResult = "";
-  newResult = newResult + result;
+  console.log(result);
   let x = arguments[0];
   let y = arguments[1];
   if(!Garden.tileIsEmpty(x, y)){
     let tile = Garden.getTile(x, y);
-    newResult = newResult.slice(0, -6);
-    newResult = newResult + `<div class="line"></div>`;
-    newResult = newResult + `<div style="margin:6px 0px;font-size:11px;"><b>Age :</b>`;
-    newResult = newResult + tile.age;
-    newResult = newResult + ` / `;
-    newResult = newResult + Garden.getPlant(tile.seedId).mature;
-    newResult = newResult + `</div></div>`;
+    result = result.slice(0, -6);
+    result = result + `<div class="line"></div>`;
+    result = result + `<div style="margin:6px 0px;font-size:11px;"><b>Age :</b>`;
+    result = result + tile.age;
+    result = result + ` / `;
+    result = result + Garden.getPlant(tile.seedId).mature;
+    result = result + `</div></div>`;
   }
-  return newResult;
+  return result;
 }
 
 }
