@@ -2182,6 +2182,7 @@ Garden.minigame.tileTooltip = function() {
   let y = arguments[1];
   let funcOrigin = tileTooltipOrigin.apply(null, arguments);
   func = function() {
+    if(Game.keys[16]) return "";
     //original tooptip
     let result = funcOrigin.apply(null, arguments);
     //add age data
