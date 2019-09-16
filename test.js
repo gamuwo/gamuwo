@@ -2230,9 +2230,9 @@ Garden.minigame.tileTooltip = function() {
             result = result + mutations[i][0];
             result = result + `(`;
             result = result + mutations[i][1];
-            result = result + `) / `;
+            result = result + `), `;
           }
-          result.slice(0, -3);
+          result = result.slice(0, -2);
           result = result + `</div>`;
           result = result + `</div>`; //append original </div>
         }
