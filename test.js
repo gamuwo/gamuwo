@@ -2188,9 +2188,10 @@ Garden.minigame.tileTooltip = function() {
     if(!Garden.tileIsEmpty(x, y)){
       let tile = Garden.getTile(x, y);
       result = result.slice(0, -6); //delete original </div>
-      result = result + `<div class="description">`;
       result = result + `<div class="line"></div>`;
-      result = result + `<div style="margin:6px 0px;font-size:11px;"><b>Age :</b>`;
+      result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
+      result = result + `<div class="description">`;
+      result = result + `<div style="margin:6px 0px;font-size:11px;"><b>Age : </b>`;
       result = result + tile.age;
       result = result + ` / `;
       result = result + Garden.getPlant(tile.seedId).mature;
