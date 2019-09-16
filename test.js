@@ -2175,4 +2175,11 @@ if (Garden.isActive) {
   UI.createWarning(msg);
 }
 
+let tileTooltipOrigin = Garden.minigame.tileTooltip;
+Garden.minigame.tileTooltip = function() {
+  console.log(arguments);
+  let result = tileTooltipOrigin.apply(null, arguments);
+  return result;
+}
+
 }
