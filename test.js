@@ -2226,10 +2226,10 @@ Garden.minigame.tileTooltip = function() {
           result = result + `<div class="line"></div>`;
           result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
           if(mutations.length > 0){
-            result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+            result = result + `<div style="margin:6px 0px;font-size:11px;text-align:left;">`;
             result = result + `<b>Mutations : </b>`;
             for(let i in mutations){
-              result = result + mutations[i][0];
+              result = result + Garden.minigame.plants[mutations[i][0]].name;
               result = result + `(`;
               result = result + mutations[i][1];
               result = result + `), `;
@@ -2238,10 +2238,10 @@ Garden.minigame.tileTooltip = function() {
             result = result + `</div>`;
           }
           if(mutationsMature.length > 0){
-            result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+            result = result + `<div style="margin:6px 0px;font-size:11px;text-align:left;">`;
             result = result + `<b>Mutations(if all plants are mature) : </b>`;
             for(let i in mutationsMature){
-              result = result + mutationsMature[i][0];
+              result = result + Garden.minigame.plants[mutations[i][0]].name;
               result = result + `(`;
               result = result + mutationsMature[i][1];
               result = result + `), `;
