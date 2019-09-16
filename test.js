@@ -2179,11 +2179,15 @@ if (Garden.isActive) {
 let tileTooltipOrigin = Garden.minigame.tileTooltip;
 Garden.minigame.tileTooltip = function() {
   //original tooptip
-  let x = arguments[0];
-  let y = arguments[1];
-  let result = tileTooltipOrigin(x, y);
+  let resultOrigin = tileTooltipOrigin.apply(null, arguments);
+  result = function() {
+    let str = resultOrigin.apply(null, arguments);
+    console.log(str);
+    return str;
+  }
   //add age data
-  console.log(result);
+/*  let x = arguments[0];
+  let y = arguments[1];
   if(!Garden.tileIsEmpty(x, y)){
     let tile = Garden.getTile(x, y);
     result = result.slice(0, -6);
@@ -2193,7 +2197,7 @@ Garden.minigame.tileTooltip = function() {
     result = result + ` / `;
     result = result + Garden.getPlant(tile.seedId).mature;
     result = result + `</div></div>`;
-  }
+  }*/
   return result;
 }
 
