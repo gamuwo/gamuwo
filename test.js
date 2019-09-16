@@ -2191,17 +2191,15 @@ Garden.minigame.tileTooltip = function() {
       result = result.slice(0, -6); //delete original </div>
       result = result + `<div class="line"></div>`;
       result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
-      result = result + `<div style="display: flex;" class="description">`;
-      result = result + `<div style="margin:6px 6px;font-size:11px;"><b>Age : </b>`;
+      result = result + `<div class="description">`;
+      result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+      result = result + `<b>Age : </b>`;
       result = result + tile.age;
-      result = result + `</div>`;
-      result = result + `<div style="margin:6px 6px;font-size:11px;"><b>Mature : </b>`;
+      result = result + `<b> Mature : </b>`;
       result = result + plant.mature;
-      result = result + `</div>`;
-      result = result + `<div style="margin:6px 6px;font-size:11px;"><b>AgeTick : </b>`;
+      result = result + `<b> AgeTick : </b>`;
       result = result + plant.ageTick;
-      result = result + `</div>`;
-      result = result + `<div style="margin:6px 6px;font-size:11px;"><b>AgeTickR : </b>`;
+      result = result + `<b> AgeTickR : </b>`;
       result = result + plant.ageTickR;
       result = result + `</div>`;
       result = result + `</div>`;
