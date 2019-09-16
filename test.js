@@ -2205,21 +2205,21 @@ Garden.minigame.tileTooltip = function() {
       result = result + `</div>`; //append original </div>
     } else {
       //if tile is empty, display possible mutations
-			let any=0;
-			let neighs={};  //all surrounding plants
-			let neighsM={}; //all surrounding mature plants
-			for (let i in Garden.minigame.plants){neighs[i]=0;}
-			for (let i in Garden.minigame.plants){neighsM[i]=0;}
-			let neigh=Garden.minigame.getTile(x,y-1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighs[neigh.key]++;if (age>=neigh.mature){neighsM[neigh.key]++;}}
-			let neigh=Garden.minigame.getTile(x,y+1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighs[neigh.key]++;if (age>=neigh.mature){neighsM[neigh.key]++;}}
-			let neigh=Garden.minigame.getTile(x-1,y);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighs[neigh.key]++;if (age>=neigh.mature){neighsM[neigh.key]++;}}
-			let neigh=Garden.minigame.getTile(x+1,y);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighs[neigh.key]++;if (age>=neigh.mature){neighsM[neigh.key]++;}}
-			let neigh=Garden.minigame.getTile(x-1,y-1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighs[neigh.key]++;if (age>=neigh.mature){neighsM[neigh.key]++;}}
-			let neigh=Garden.minigame.getTile(x-1,y+1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighs[neigh.key]++;if (age>=neigh.mature){neighsM[neigh.key]++;}}
-			let neigh=Garden.minigame.getTile(x+1,y-1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighs[neigh.key]++;if (age>=neigh.mature){neighsM[neigh.key]++;}}
-			let neigh=Garden.minigame.getTile(x+1,y+1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighs[neigh.key]++;if (age>=neigh.mature){neighsM[neigh.key]++;}}
-			if (any>0){
-			  let muts=Garden.minigame.getMuts(neighs,neighsM);
+      let any=0;
+      let neighsCGH={};  //all surrounding plants
+      let neighsCGHM={}; //all surrounding mature plants
+      for (let i in Garden.minigame.plants){neighsCGH[i]=0;}
+      for (let i in Garden.minigame.plants){neighsCGHM[i]=0;}
+      let neigh=Garden.minigame.getTile(x,y-1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighsCGH[neigh.key]++;if (age>=neigh.mature){neighsCGHM[neigh.key]++;}}
+      let neigh=Garden.minigame.getTile(x,y+1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighsCGH[neigh.key]++;if (age>=neigh.mature){neighsCGHM[neigh.key]++;}}
+      let neigh=Garden.minigame.getTile(x-1,y);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighsCGH[neigh.key]++;if (age>=neigh.mature){neighsCGHM[neigh.key]++;}}
+      let neigh=Garden.minigame.getTile(x+1,y);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighsCGH[neigh.key]++;if (age>=neigh.mature){neighsCGHM[neigh.key]++;}}
+      let neigh=Garden.minigame.getTile(x-1,y-1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighsCGH[neigh.key]++;if (age>=neigh.mature){neighsCGHM[neigh.key]++;}}
+      let neigh=Garden.minigame.getTile(x-1,y+1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighsCGH[neigh.key]++;if (age>=neigh.mature){neighsCGHM[neigh.key]++;}}
+      let neigh=Garden.minigame.getTile(x+1,y-1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighsCGH[neigh.key]++;if (age>=neigh.mature){neighsCGHM[neigh.key]++;}}
+      let neigh=Garden.minigame.getTile(x+1,y+1);if (neigh[0]>0){let age=neigh[1];neigh=Garden.minigame.plantsById[neigh[0]-1];any++;neighsCGH[neigh.key]++;if (age>=neigh.mature){neighsCGHM[neigh.key]++;}}
+      if (any>0){
+        let muts=Garden.minigame.getMuts(neighsCGH,neighsCGHM);
         result = result.slice(0, -6); //delete original </div>
         result = result + `<div class="line"></div>`;
         result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
@@ -2233,7 +2233,7 @@ Garden.minigame.tileTooltip = function() {
         }
         result = result + `</div>`;
         result = result + `</div>`; //append original </div>
-			}
+      }
     }
     return result;
   }
