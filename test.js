@@ -2178,27 +2178,26 @@ if (Garden.isActive) {
 //garden tile tooptip hack
 let tileTooltipOrigin = Garden.minigame.tileTooltip;
 Garden.minigame.tileTooltip = function() {
-  //original tooptip
-  let resultOrigin = tileTooltipOrigin.apply(null, arguments);
-  result = function() {
-    let str = resultOrigin.apply(null, arguments);
-    console.log(str);
-    return str;
+  let funcOrigin = tileTooltipOrigin.apply(null, arguments);
+  func = function() {
+    //original tooptip
+    let result = funcOrigin.apply(null, arguments);
+    //add age data
+    let x = arguments[0];
+    let y = arguments[1];
+    if(!Garden.tileIsEmpty(x, y)){
+      let tile = Garden.getTile(x, y);
+      result = result.slice(0, -6);
+      result = result + `<div class="line"></div>`;
+      result = result + `<div style="margin:6px 0px;font-size:11px;"><b>Age :</b>`;
+      result = result + tile.age;
+      result = result + ` / `;
+      result = result + Garden.getPlant(tile.seedId).mature;
+      result = result + `</div></div>`;
+    }
+    return result;
   }
-  //add age data
-/*  let x = arguments[0];
-  let y = arguments[1];
-  if(!Garden.tileIsEmpty(x, y)){
-    let tile = Garden.getTile(x, y);
-    result = result.slice(0, -6);
-    result = result + `<div class="line"></div>`;
-    result = result + `<div style="margin:6px 0px;font-size:11px;"><b>Age :</b>`;
-    result = result + tile.age;
-    result = result + ` / `;
-    result = result + Garden.getPlant(tile.seedId).mature;
-    result = result + `</div></div>`;
-  }*/
-  return result;
+  return func;
 }
 
 }
