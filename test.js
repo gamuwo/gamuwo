@@ -2194,8 +2194,8 @@ Garden.minigame.tileTooltip = function() {
       result = result + ` / `;
       result = result + Garden.getPlant(tile.seedId).mature;
       result = result + `</div></div>`;
+      console.log(result);
     }
-    console.log(result);
     return result;
   }
   return func;
