@@ -2005,12 +2005,12 @@ class Main {
     Garden.minigame.convert = () => {
       this.config.savedPlot = [];
       UI.labelToggleState('plotIsSaved', false);
-      this.changeButton("autoHarvest", false, this.config);
-      this.changeButton("autoPlant", false, this.config);
-      this.changeButton("autoJQB", false, this.config);
-      this.changeButton("autoLump", false, this.config);
-      this.changeButton("autoReload", false, this.config);
-      this.changeButton("autoReload2", false, this.config);
+      Garden.changeButton("autoHarvest", false, this.config);
+      Garden.changeButton("autoPlant", false, this.config);
+      Garden.changeButton("autoJQB", false, this.config);
+      Garden.changeButton("autoLump", false, this.config);
+      Garden.changeButton("autoReload", false, this.config);
+      Garden.changeButton("autoReload2", false, this.config);
       this.save();
       oldConvert();
     }
