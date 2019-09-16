@@ -2187,15 +2187,17 @@ Garden.minigame.tileTooltip = function() {
     //add age data
     if(!Garden.tileIsEmpty(x, y)){
       let tile = Garden.getTile(x, y);
-      result = result.slice(0, -6);
+      result = result.slice(0, -6); //delete original </div>
+      result = result + `<div class="description">`;
       result = result + `<div class="line"></div>`;
       result = result + `<div style="margin:6px 0px;font-size:11px;"><b>Age :</b>`;
       result = result + tile.age;
       result = result + ` / `;
       result = result + Garden.getPlant(tile.seedId).mature;
-      result = result + `</div></div>`;
+      result = result + `</div>`;
+      result = result + `</div>`;
+      result = result + `</div>`; //append original</div>
     }
-    console.log(result);
     return result;
   }
   return func;
