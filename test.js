@@ -1205,9 +1205,11 @@ class Garden {
     beforeTickDisp.innerText = this.secondsBeforeNextTick.toFixed(2);
     if(this.secondsBeforeNextTick <= config.playSoundSecond.value){
       if(beforeTickDisp.style.color != "black") beforeTickDisp.style.color = "black";
+      if(beforeTickDisp.style.fontWeight != "bold") beforeTickDisp.style.fontWeight = "bold";
       if(cookieGardenHelperRightTop.style.backgroundColor != "orange") cookieGardenHelperRightTop.style.backgroundColor = "orange";
     } else {
       if(beforeTickDisp.style.color != "white") beforeTickDisp.style.color = "white";
+      if(beforeTickDisp.style.fontWeight != "normal") beforeTickDisp.style.fontWeight = "normal";
       if(cookieGardenHelperRightTop.style.backgroundColor != "transparent") cookieGardenHelperRightTop.style.backgroundColor = "transparent";
     }
   }
@@ -1359,7 +1361,6 @@ class UI {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 1.2rem;
-  font-weight: bold;
 }
 
 #rightBottomAutoReload,
