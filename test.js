@@ -1210,7 +1210,7 @@ class Garden {
     } else {
       if(beforeTickDisp.style.color != "white") beforeTickDisp.style.color = "white";
       if(beforeTickDisp.style.fontWeight != "normal") beforeTickDisp.style.fontWeight = "normal";
-      if(cookieGardenHelperRightTop.style.backgroundColor != "transparent") cookieGardenHelperRightTop.style.backgroundColor = "transparent";
+      if(cookieGardenHelperRightTop.style.backgroundColor != "rgba(0, 0, 0, 0.5)") cookieGardenHelperRightTop.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     }
   }
   
@@ -1353,9 +1353,10 @@ class UI {
   position: absolute;
   right: 0;
   top: 0;
-  min-width: 4.5rem;
+  min-width: 5rem;
   height: 2rem;
   margin: 0.5rem;
+  padding: 0.3rem;
   box-sizing: border-box;
   border: solid 2px white;
   border-radius: 5px;
