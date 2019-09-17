@@ -2358,10 +2358,9 @@ Garden.minigame.tileTooltip = function() {
             result = result + Garden.minigame.plants[mutations[i][0]].name;
             result = result + `(`;
             result = result + mutations[i][1];
-            result = result + `), `;
+            result = result + `)`;
             result = result + `</div>`;
           }
-          result = result.slice(0, -2);
           result = result + `</div>`;
         }
         if(mutationsMature.length > 0){
@@ -2375,10 +2374,9 @@ Garden.minigame.tileTooltip = function() {
             result = result + Garden.minigame.plants[mutationsMature[i][0]].name;
             result = result + `(`;
             result = result + mutationsMature[i][1];
-            result = result + `), `;
+            result = result + `)`;
             result = result + `</div>`;
           }
-          result = result.slice(0, -2);
           result = result + `</div>`;
         }
         result = result + `</div>`; //append original </div>
