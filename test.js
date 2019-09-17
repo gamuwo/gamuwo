@@ -819,8 +819,6 @@ class Garden {
             let tileAr = this.getTile(x, y);
             if(tileAr.seedId == config.autoReloadID.value){
               targetNumber += 1;
-              //display over tile
-              this.displayOverTile(true, x, y, "", config);
             }
           });
         }
@@ -828,22 +826,28 @@ class Garden {
         let isMutation = false;
         if(isMaxMode){
           this.forEachTile((x, y) => {
-            if(!isMutation && this.tileIsEmpty(x, y)){
+            if(this.tileIsEmpty(x, y)){
               let mutations = this.getMutsCustom(x, y, false);
               for(let i in mutations){
                 if(this.getPlant(config.autoReloadID.value).key == mutations[i][0]) {
                   isMutation = true;
+                  this.displayOverTile(true, x, y, "", config);
                   break;
                 }
               }
             }
           }); 
         } else {
-          let mutations = this.getMutsCustom(parseInt(config.autoReloadX.value), parseInt(config.autoReloadY.value), false);
-          for(let i in mutations){
-            if(this.getPlant(config.autoReloadID.value).key == mutations[i][0]) {
-              isMutation = true;
-              break;
+          let x = parseInt(config.autoReloadX.value);
+          let y = parseInt(config.autoReloadY.value);
+          if(this.tileIsEmpty(x, y)){
+            let mutations = this.getMutsCustom(x, y, false);
+            for(let i in mutations){
+              if(this.getPlant(config.autoReloadID.value).key == mutations[i][0]) {
+                isMutation = true;
+                this.displayOverTile(true, x, y, "", config);
+                break;
+              }
             }
           }
         }
@@ -870,9 +874,6 @@ class Garden {
           document.getElementById("rightBottomAutoReload").style.display = "block";
           document.getElementById("rightBottomAutoReload2").style.display = "none";
           document.getElementById("rightBottomLumpReload").style.display = "none";
-          
-          //display over tile
-          if(!isMaxMode) this.displayOverTile(true, config.autoReloadX.value, config.autoReloadY.value, "", config);
         
           //reset interval
           Main.restart(parseInt(config.interval.value));
@@ -920,7 +921,7 @@ class Garden {
           if(isMaxMode){
             this.forEachTile((x, y) => {
               let tileAr = this.getTile(x, y);
-              if(tileAr.seedId == config.autoReloadID.value) this.displayOverTile(true, x, y, "", config);
+              if(tileAr.seedId != config.autoReloadID.value) this.displayOverTile(false, x, y, "", config);
             });
           }
           
