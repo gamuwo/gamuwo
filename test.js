@@ -1208,7 +1208,7 @@ class Garden {
       if(cookieGardenHelperRightTop.style.backgroundColor != "orange") cookieGardenHelperRightTop.style.backgroundColor = "orange";
     } else {
       if(beforeTickDisp.style.color != "white") beforeTickDisp.style.color = "white";
-      if(cookieGardenHelperRightTop.style.backgroundColor != "none") cookieGardenHelperRightTop.style.backgroundColor = "none";
+      if(cookieGardenHelperRightTop.style.backgroundColor != "transparent") cookieGardenHelperRightTop.style.backgroundColor = "transparent";
     }
   }
   
@@ -1359,6 +1359,7 @@ class UI {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 1.2rem;
+  font-weight: bold;
 }
 
 #rightBottomAutoReload,
