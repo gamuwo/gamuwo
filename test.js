@@ -1197,7 +1197,7 @@ class Garden {
     }
   }
   
-  static displayRunTime(startTime, endTime) {
+  static displayRunTime(startTime, endTime, config) {
     document.getElementById("intervalDisp").innerText = Main.timerInterval;
     document.getElementById("runtimeDisp").innerText = (endTime - startTime).toFixed(2);
     let beforeTickDisp = document.getElementById("beforeTickDisp");
@@ -1242,7 +1242,7 @@ class Garden {
       this.handleLumpReload(config);
       //display run time
       let endTime = performance.now();
-      this.displayRunTime(startTime, endTime);
+      this.displayRunTime(startTime, endTime, config);
     } catch(e) {
       this.handleError(e);
     }
