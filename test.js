@@ -827,16 +827,20 @@ class Garden {
         //for possible mutation check
         let isMutation = false;
         if(isMaxMode){
-          
+          this.forEachTile((x, y) => {
+            if(!isMutation && this.tileIsEmpty(x, y)){
+              let mutations = this.getMutsCustom(x, y, false);
+              for(let i in mutations){
+                if(this.getPlant(config.autoReloadID.value).key == mutations[i][0]) {
+                  isMutation = true;
+                  break;
+                }
+              }
+            }
+          }); 
         } else {
-          console.log("else isMaxMode");
-          console.log("config.autoReloadX.value:" + config.autoReloadX.value);
-          console.log("config.autoReloadY.value:" + config.autoReloadY.value);
           let mutations = this.getMutsCustom(parseInt(config.autoReloadX.value), parseInt(config.autoReloadY.value), false);
-          console.log("mutations.length:" + mutations.length);
           for(let i in mutations){
-            console.log("this.getPlant(config.autoReloadID.value).key:" + this.getPlant(config.autoReloadID.value).key);
-            console.log("mutations[i][0]:" + mutations[i][0]);
             if(this.getPlant(config.autoReloadID.value).key == mutations[i][0]) {
               isMutation = true;
               break;
