@@ -2054,11 +2054,6 @@ class Main {
     this.config = Config.load();
     UI.build(this.config);
     
-    //delete quick load save
-    this.config.quickLoadSave = "";
-    this.config.quickLoad2Save = "";
-    this.save();
-    
     //log invisible set
     if(this.config.logInvisibleLevel1) doc.elId('logBoxLevel1').classList.toggle('invisible');
     if(this.config.logInvisibleLevel2) doc.elId('logBoxLevel2').classList.toggle('invisible');
