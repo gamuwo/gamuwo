@@ -1301,14 +1301,15 @@ class UI {
 #logPanel .logBoxParent { display: flex; }
 #logPanel .logBox {
   flex: 1;
-  min-width: 0;
+  min-width: 50%;
 }
 #logBoxLevel1.invisible,
 #logBoxLevel2.invisible,
-#logBoxLevel3.invisible { display: none; }
+#logBoxLevel3.invisible,
+#logBoxLevel4.invisible { display: none; }
 #logPanel .logText {
   width: calc(100% - 0.4rem);
-  height: 15rem;
+  height: 10rem;
   border: solid 2px;
   padding: 0.4rem;
   margin: 0 0.2rem;
@@ -1808,13 +1809,14 @@ class UI {
       ${this.button('logToggleLevel1', 'Level1', 'toggle level1 log panel')}
       ${this.button('logToggleLevel2', 'Level2', 'toggle level2 log panel')}
       ${this.button('logToggleLevel3', 'Level3', 'toggle level3 log panel')}
+      ${this.button('logToggleLevel4', 'Level4', 'toggle level4 log panel')}
     </p>
     <p class="flexItemGrowNormal">
       ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
       ${this.textInputWidth('logFilterWord', 'Filter', 'log filter word', config.logFilterWord, 8)}
     </p>
     <p class="flexItemGrowNormal">
-      ${this.fixedSelect('logLevel', ["no log", "a little", "normal", "massive"], 0, 'Level', 'select log level', config.logLevel, 4)}
+      ${this.fixedSelect('logLevel', ["no log", "a little", "normal", "massive", "debug"], 0, 'Level', 'select log level', config.logLevel, 4)}
     </p>
     <p>
       ${this.button('logResetButton', 'Reset', 'reset log')}
@@ -1845,6 +1847,14 @@ class UI {
       <div class="logText" id="logLevel3">
       </div>
     </div>
+    <div class="logBox" id="logBoxLevel4">
+      <h3>
+        Level4
+        (<span id="logNumLevel4">0</span>/1000)
+      </h3>
+      <div class="logText" id="logLevel4">
+      </div>
+    </div>
   </div>
 </div>`);
 
@@ -1856,10 +1866,12 @@ class UI {
       Garden.displayLog(1);
       Garden.displayLog(2);
       Garden.displayLog(3);
+      Garden.displayLog(4);
       doc.elId('logPanel').classList.toggle('visible');
       Garden.goBottom("logLevel1");
       Garden.goBottom("logLevel2");
       Garden.goBottom("logLevel3");
+      Garden.goBottom("logLevel4");
     };
 
     doc.qSelAll('#cookieGardenHelper input, #logPanel input').forEach((input) => {
@@ -2138,19 +2150,24 @@ class Main {
       Garden.displayLog(1);
       Garden.displayLog(2);
       Garden.displayLog(3);
+      Garden.displayLog(4);
     } else if (key == 'logRefreshButton') {
       Garden.displayLog(1);
       Garden.displayLog(2);
       Garden.displayLog(3);
+      Garden.displayLog(4);
       Garden.goBottom("logLevel1");
       Garden.goBottom("logLevel2");
       Garden.goBottom("logLevel3");
+      Garden.goBottom("logLevel4");
     } else if (key == 'logToggleLevel1') {
       doc.elId('logBoxLevel1').classList.toggle('invisible');
     } else if (key == 'logToggleLevel2') {
       doc.elId('logBoxLevel2').classList.toggle('invisible');
     } else if (key == 'logToggleLevel3') {
       doc.elId('logBoxLevel3').classList.toggle('invisible');
+    } else if (key == 'logToggleLevel4') {
+      doc.elId('logBoxLevel4').classList.toggle('invisible');
     }
     this.save();
   }
@@ -2254,6 +2271,7 @@ Garden.minigame.tileTooltip = function() {
         }
       }
     }
+    Garden.writeLog(4, "tooltip hack", false, result);
     return result;
   }
   return func;
@@ -2273,6 +2291,7 @@ Game.lumpTooltip = function() {
   result = result + ["normal", "bifurcated", "golden", "meaty", "caramelized"][Game.lumpCurrentType];
   result = result + `</b>`;
   result = result + `</div>`; //append original </div>
+  Garden.writeLog(4, "tooltip hack", false, result);
   return result;
 }
 
