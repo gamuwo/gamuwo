@@ -481,22 +481,27 @@ class Garden {
   }
   
   static getMutsCustom(x, y, ifMature) {
-    let anyNum=0;
-    let plantsNum={};     //all surrounding plants
-    let maturesNum={};  //all surrounding mature plants
-    for (let i in Garden.minigame.plants){plantsNum[i]=0;}
-    for (let i in Garden.minigame.plants){maturesNum[i]=0;}
-    let tempLet=Garden.minigame.getTile(x,y-1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-    tempLet=Garden.minigame.getTile(x,y+1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-    tempLet=Garden.minigame.getTile(x-1,y);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-    tempLet=Garden.minigame.getTile(x+1,y);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-    tempLet=Garden.minigame.getTile(x-1,y-1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-    tempLet=Garden.minigame.getTile(x-1,y+1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-    tempLet=Garden.minigame.getTile(x+1,y-1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-    tempLet=Garden.minigame.getTile(x+1,y+1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-    if (anyNum>0){
-      let mutations=Garden.minigame.getMuts(plantsNum, maturesNum);
-      let mutationsMature=Garden.minigame.getMuts(plantsNum, plantsNum);
+    let anyNum = 0;
+    let plantsNum = {};
+    let maturesNum = {};
+    for(let i in this.minigame.plants){
+      plantsNum[i] = 0;
+      maturesNum[i] = 0;
+    }
+    for(let xx = x - 1; xx < x + 2; xx++){
+      for(let yy = y - 1; yy < y + 2; yy++){
+        if(xx == x && yy == y) continue;
+        if(this.tileIsEmpty(xx, yy)) continue;
+        let tile = this.getTile(xx, yy);
+        let plant = this.getPlant(tile.seedId);
+        anyNum += 1;
+        plantsNum[plant.key] += 1;
+        if(this.getPlantStage(tile) == "mature") maturesNum[plant.key] += 1;
+      }
+    }
+    if(anyNum > 0){
+      let mutations = this.minigame.getMuts(plantsNum, maturesNum);
+      let mutationsMature = this.minigame.getMuts(plantsNum, plantsNum);
       if(ifMature){
         return mutationsMature;
       } else {
