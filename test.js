@@ -85,6 +85,10 @@ class Config {
       rightBottomDisplaySave: [],
       logHistory: [],
       logFilterWord: "",
+      logInvisibleLevel1: false,
+      logInvisibleLevel2: false,
+      logInvisibleLevel3: false,
+      logInvisibleLevel4: false,
       hideOverTileFlag: false,
       overTile: false,
       overTileHideTime: { value: 170, min: 0 },
@@ -2014,6 +2018,12 @@ class Main {
     this.config.quickLoadSave = "";
     this.config.quickLoad2Save = "";
     this.save();
+    
+    //log invisible set
+    if(this.config.logInvisibleLevel1) doc.elId('logBoxLevel1').classList.toggle('invisible');
+    if(this.config.logInvisibleLevel2) doc.elId('logBoxLevel2').classList.toggle('invisible');
+    if(this.config.logInvisibleLevel3) doc.elId('logBoxLevel3').classList.toggle('invisible');
+    if(this.config.logInvisibleLevel4) doc.elId('logBoxLevel4').classList.toggle('invisible');
 
     // sacrifice garden
     let oldConvert = Garden.minigame.convert;
@@ -2165,12 +2175,16 @@ class Main {
       Garden.goBottom("logLevel4");
     } else if (key == 'logToggleLevel1') {
       doc.elId('logBoxLevel1').classList.toggle('invisible');
+      this.config.logInvisibleLevel1 = !this.config.logInvisibleLevel1;
     } else if (key == 'logToggleLevel2') {
       doc.elId('logBoxLevel2').classList.toggle('invisible');
+      this.config.logInvisibleLevel2 = !this.config.logInvisibleLevel2;
     } else if (key == 'logToggleLevel3') {
       doc.elId('logBoxLevel3').classList.toggle('invisible');
+      this.config.logInvisibleLevel3 = !this.config.logInvisibleLevel3;
     } else if (key == 'logToggleLevel4') {
       doc.elId('logBoxLevel4').classList.toggle('invisible');
+      this.config.logInvisibleLevel4 = !this.config.logInvisibleLevel4;
     }
     this.save();
   }
