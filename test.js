@@ -1200,6 +1200,7 @@ class Garden {
   static displayRunTime(startTime, endTime) {
     document.getElementById("intervalDisp").innerText = Main.timerInterval;
     document.getElementById("runtimeDisp").innerText = (endTime - startTime).toFixed(2);
+    document.getElementById("beforeTickDisp").innerText = this.secondsBeforeNextTick;
   }
   
   static handleError(e) {
@@ -1326,13 +1327,29 @@ class UI {
 #cookieGardenHelperUrl { position:absolute; }
 
 #cookieGardenHelperRightBottom {
-  position:absolute;
+  position: absolute;
   right: 0;
   bottom: 0;
   padding: 0.1rem;
   margin: 0.5rem;
   text-align: right;
   outline-width: 1px;
+}
+#cookieGardenHelperRightTop {
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 3rem;
+  height: 2rem;
+  margin: 0.5rem;
+  box-sizing: border-box;
+  border: solid 2px white;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  font-size: 1.2rem;
 }
 
 #rightBottomAutoReload,
@@ -1828,6 +1845,9 @@ class UI {
         </div>
       </div>
     </div>
+  </div>
+  <div id="cookieGardenHelperRightTop">
+    <span id="beforeTickDisp">0</span>
   </div>
   <div id="cookieGardenHelperRightBottom">
     <div id="rightBottomLumpReload">
