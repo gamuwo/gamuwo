@@ -1337,6 +1337,7 @@ class UI {
 #gardenPlot .cookieGardenHelperOverTile {
   display: none;
   position: absolute;
+  z-index: 1;
   height: calc(100% - 6px);
   width: calc(100% - 6px);
   margin: 3px;
