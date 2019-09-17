@@ -2351,7 +2351,7 @@ Garden.minigame.tileTooltip = function() {
           result = result + `<div style="margin:6px 0px;font-size:11px;text-align:left;">`;
           result = result + `<b>Mutations : </b>`;
           for(let i in mutations){
-            result = result + `<div style="display: inline-block;">`;
+            result = result + `<div style="display: inline-block; margin: 0 4px">`;
             result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
             result = result + (Garden.minigame.plants[mutations[i][0]].icon * 48);
             result = result + `px;"></div>`;
@@ -2367,7 +2367,7 @@ Garden.minigame.tileTooltip = function() {
           result = result + `<div style="margin:6px 0px;font-size:11px;text-align:left;">`;
           result = result + `<b>Mutations(if all plants are mature) : </b>`;
           for(let i in mutationsMature){
-            result = result + `<div style="display: inline-block;">`;
+            result = result + `<div style="display: inline-block; margin: 0 4px">`;
             result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
             result = result + (Garden.minigame.plants[mutationsMature[i][0]].icon * 48);
             result = result + `px;"></div>`;
