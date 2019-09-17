@@ -1201,11 +1201,14 @@ class Garden {
     document.getElementById("intervalDisp").innerText = Main.timerInterval;
     document.getElementById("runtimeDisp").innerText = (endTime - startTime).toFixed(2);
     let beforeTickDisp = document.getElementById("beforeTickDisp");
-    beforeTickDisp.innerText = this.secondsBeforeNextTick;
+    let cookieGardenHelperRightTop = document.getElementById("cookieGardenHelperRightTop");
+    beforeTickDisp.innerText = this.secondsBeforeNextTick.toFixed(2);
     if(this.secondsBeforeNextTick <= config.playSoundSecond.value){
-      if(beforeTickDisp.style.color != "orange") beforeTickDisp.style.color = "orange";
+      if(beforeTickDisp.style.color != "black") beforeTickDisp.style.color = "black";
+      if(cookieGardenHelperRightTop.style.backgroundColor != "orange") cookieGardenHelperRightTop.style.backgroundColor = "orange";
     } else {
       if(beforeTickDisp.style.color != "white") beforeTickDisp.style.color = "white";
+      if(cookieGardenHelperRightTop.style.backgroundColor != "none") cookieGardenHelperRightTop.style.backgroundColor = "none";
     }
   }
   
@@ -1348,9 +1351,9 @@ class UI {
   position: absolute;
   right: 0;
   top: 0;
-  width: 5rem;
+  width: 4.5rem;
   height: 2rem;
-  margin: 1rem;
+  margin: 0.5rem;
   box-sizing: border-box;
   border: solid 2px white;
   border-radius: 5px;
