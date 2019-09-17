@@ -2297,7 +2297,7 @@ Game.lumpTooltip = function() {
   result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
   result = result + `<div style="display: flex; align-items: center; justify-content: center;">`;
   result = result + `Type : `;
-  result = result + `<div class="usesIcon" style="transform:scale(0.5,0.5);margin:-16px -12px;display:inline-block;width:48px;height:48px;background-position: -`;
+  result = result + `<div class="usesIcon" style="transform: scale(0.5,0.5); margin: -12px -12px; display: inline-block; width: 48px; height: 48px; background-position: -`;
   result = result + (29 * 48);
   result = result + `px -`;
   result = result + ([14, 15, 16, 17, 27][Game.lumpCurrentType] * 48);
