@@ -70,7 +70,9 @@ class Config {
       autoJQBParam: "3,0,2,0,50",
       quickLoadSave: "",
       quickLoadFlag: false,
+      quickLoadSaveTime: "",
       quickLoad2Save: "",
+      quickLoad2SaveTime: "",
       interval: { value: 1000, min: 0 },
       autoLump: false,
       autoLumpFlag: false,
@@ -346,13 +348,17 @@ class Garden {
   
   static saveDate() {
     let logNow = new Date();
+    let logMonth = logNow.getMonth() + 1;
+    logMonth = ("0" + logMonth).slice(-2);
+    let logDay = logNow.getDate();
+    logDay = ("0" + logDay).slice(-2);
     let logHour = logNow.getHours();
     logHour = ("0" + logHour).slice(-2);
     let logMinute = logNow.getMinutes();
     logMinute = ("0" + logMinute).slice(-2);
     let logSecond = logNow.getSeconds();
     logSecond = ("0" + logSecond).slice(-2);
-    return logHour + ":" + logMinute + ":" + logSecond;
+    return logMonth + "/" + logDay + " " + logHour + ":" + logMinute + ":" + logSecond;
   }
   
   static pushLimit(input, array) {
@@ -433,6 +439,11 @@ class Garden {
   static changeNumber(inputName, num, config) {
     config[inputName].value = num;
     document.getElementById(UI.makeId(inputName)).value = num; 
+  }
+  
+  static changeSpan(spanName, text, config) {
+    config[spanName].value = text;
+    document.getElementById(UI.makeId(spanName)).innerText = text; 
   }
   
   static saveButtonStatusAndTurnOff(targetArray, saveArray, config) {
@@ -547,8 +558,9 @@ class Garden {
   static handleQuickLoadSave(config) {
     if(!config.quickLoadFlag && this.secondsBeforeNextTick <= 5 && this.secondsBeforeNextTick >= 3){
       config.quickLoadSave = Game.WriteSave(1);
-      document.getElementById("quickLoadSaveTime").innerText = this.saveDate();
+      this.changeSpan("quickLoadSaveTime", this.saveDate(), config);
       config.quickLoadFlag = true;
+      Main.save();
       this.writeLog(3, "quick load", false, "save!");
     }
   }
@@ -1539,6 +1551,11 @@ class UI {
     let id = this.makeId(name);
     return `<meter name="${name}" id="${id}" class="${cls}" low="${low}" high="${high}" optimum="${optimum}" value="${value}"></meter>`;
   }
+  
+  static spanMemory(name, options) {
+    let id = this.makeId(name);
+    return `<span name="${name}" id="${id}">${options}</span>`;
+  }
 
   static button(name, text, title, toggle, active) {
     if (toggle) {
@@ -1625,12 +1642,12 @@ class UI {
         </p>
         <p>
           ${this.button('quickLoad', 'Quick load', 'load before tick savedata')}
-          <span id="quickLoadSaveTime">Not saved</span>
+          ${this.spanMemory('quickLoadSaveTime', config.quickLoadSaveTime)}
         </p>
         <p>
           ${this.button('quickSave2', 'QS2', 'quick save')}
           ${this.button('quickLoad2', 'QL2', 'quick load')}
-          <span id="quickLoad2SaveTime">Not saved</span>
+          ${this.spanMemory('quickLoad2SaveTime', config.quickLoad2SaveTime)}
         </p>
         <h3>Settings</h3>
         <p>
@@ -2176,7 +2193,7 @@ class Main {
       }
     } else if (key == 'quickSave2') {
       this.config.quickLoad2Save = Game.WriteSave(1);
-      document.getElementById("quickLoad2SaveTime").innerText = Garden.saveDate();
+      Garden.changeSpan("quickLoad2SaveTime", Garden.saveDate(), this.config);
     } else if (key == 'quickLoad2') {
       if(this.config.quickLoad2Save != "") {
         Game.LoadSave(this.config.quickLoad2Save);
