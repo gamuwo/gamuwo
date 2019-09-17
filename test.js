@@ -442,7 +442,7 @@ class Garden {
   }
   
   static changeSpan(spanName, text, config) {
-    config[spanName].value = text;
+    config[spanName] = text;
     document.getElementById(UI.makeId(spanName)).innerText = text; 
   }
   
