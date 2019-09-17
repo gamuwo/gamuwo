@@ -1200,7 +1200,13 @@ class Garden {
   static displayRunTime(startTime, endTime) {
     document.getElementById("intervalDisp").innerText = Main.timerInterval;
     document.getElementById("runtimeDisp").innerText = (endTime - startTime).toFixed(2);
-    document.getElementById("beforeTickDisp").innerText = this.secondsBeforeNextTick;
+    let beforeTickDisp = document.getElementById("beforeTickDisp");
+    beforeTickDisp.innerText = this.secondsBeforeNextTick;
+    if(this.secondsBeforeNextTick <= config.playSoundSecond.value){
+      if(beforeTickDisp.style.color != "orange") beforeTickDisp.style.color = "orange";
+    } else {
+      if(beforeTickDisp.style.color != "white") beforeTickDisp.style.color = "white";
+    }
   }
   
   static handleError(e) {
@@ -1342,9 +1348,9 @@ class UI {
   position: absolute;
   right: 0;
   top: 0;
-  width: 3rem;
+  width: 5rem;
   height: 2rem;
-  margin: 0.5rem;
+  margin: 1rem;
   box-sizing: border-box;
   border: solid 2px white;
   border-radius: 5px;
