@@ -2267,8 +2267,8 @@ Garden.minigame.tileTooltip = function() {
       result = result + `</div>`; //append original </div>
     } else {
       //if tile is empty, display possible mutations
-      let mutations = getMutsCustom(x, y, false);
-      let mutationsMature = getMutsCustom(x, y, true);
+      let mutations = Garden.getMutsCustom(x, y, false);
+      let mutationsMature = Garden.getMutsCustom(x, y, true);
       if(mutations.length > 0 || mutationsMature.length > 0){
         result = result.slice(0, -6); //delete original </div>
         result = result + `<div class="line"></div>`;
