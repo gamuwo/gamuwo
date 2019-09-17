@@ -832,7 +832,7 @@ class Garden {
           console.log("else isMaxMode");
           console.log("config.autoReloadX.value:" + config.autoReloadX.value);
           console.log("config.autoReloadY.value:" + config.autoReloadY.value);
-          let mutations = this.getMutsCustom(config.autoReloadX.value, config.autoReloadY.value, false);
+          let mutations = this.getMutsCustom(parseInt(config.autoReloadX.value), parseInt(config.autoReloadY.value), false);
           console.log("mutations.length:" + mutations.length);
           for(let i in mutations){
             console.log("this.getPlant(config.autoReloadID.value).key:" + this.getPlant(config.autoReloadID.value).key);
