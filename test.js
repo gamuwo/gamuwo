@@ -1298,7 +1298,10 @@ class UI {
   margin: 3px;
 }
 #logPanel p { text-indent: 0; }
-#logPanel .logBoxParent { display: flex; }
+#logPanel .logBoxParent {
+  display: flex;
+  flex-wrap: wrap;
+}
 #logPanel .logBox {
   flex: 1;
   min-width: 50%;
