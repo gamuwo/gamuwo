@@ -812,11 +812,24 @@ class Garden {
             }
           });
         }
+        //for possible mutation check
+        let isMutation = false;
+        if(isMaxMode){
+          
+        } else {
+          let mutations = this.getMutsCustom(config.autoReloadX.value, config.autoReloadY.value, false);
+          for(let i in mutations){
+            if(this.getPlant(config.autoReloadID.value).key == mutations[i][0]) {
+              isMutation = true;
+              break;
+            }
+          }
+        }
         
         //check
         let xyModeCheck = this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value);
         let maxModeCheck = (targetNumber < parseInt(config.autoReloadMax.value));
-        if( (!isMaxMode && xyModeCheck) || (isMaxMode && maxModeCheck) ){
+        if( (!isMaxMode && xyModeCheck && isMutation) || (isMaxMode && maxModeCheck && isMutation) ){
           //save
           config.autoReloadSave = Game.WriteSave(1);
           config.autoReloadSaveSecond = this.secondsBeforeNextTick;
