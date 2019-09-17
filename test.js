@@ -469,6 +469,33 @@ class Garden {
     });
   }
   
+  static getMutsCustom(x, y, ifMature) {
+    let anyNum=0;
+    let plantsNum={};     //all surrounding plants
+    let maturesNum={};  //all surrounding mature plants
+    for (let i in Garden.minigame.plants){plantsNum[i]=0;}
+    for (let i in Garden.minigame.plants){maturesNum[i]=0;}
+    let tempLet=Garden.minigame.getTile(x,y-1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
+    tempLet=Garden.minigame.getTile(x,y+1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
+    tempLet=Garden.minigame.getTile(x-1,y);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
+    tempLet=Garden.minigame.getTile(x+1,y);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
+    tempLet=Garden.minigame.getTile(x-1,y-1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
+    tempLet=Garden.minigame.getTile(x-1,y+1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
+    tempLet=Garden.minigame.getTile(x+1,y-1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
+    tempLet=Garden.minigame.getTile(x+1,y+1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
+    if (anyNum>0){
+      let mutations=Garden.minigame.getMuts(plantsNum, maturesNum);
+      let mutationsMature=Garden.minigame.getMuts(plantsNum, plantsNum);
+      if(ifMature){
+        return mutationsMature;
+      } else {
+        return mutations;
+      }
+    } else {
+      return [];
+    }
+  }
+  
   static handleHideOverTile(config) {
     if(!config.hideOverTileFlag && this.secondsBeforeNextTick <= parseInt(config.overTileHideTime.value) && this.secondsBeforeNextTick >= (parseInt(config.overTileHideTime.value) - 2)){
       this.hideOverTile();
@@ -2240,58 +2267,43 @@ Garden.minigame.tileTooltip = function() {
       result = result + `</div>`; //append original </div>
     } else {
       //if tile is empty, display possible mutations
-      let anyNum=0;
-      let plantsNum={};//all surrounding plants
-      let maturesNum={};//all surrounding mature plants
-      for (let i in Garden.minigame.plants){plantsNum[i]=0;}
-      for (let i in Garden.minigame.plants){maturesNum[i]=0;}
-      let tempLet=Garden.minigame.getTile(x,y-1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-      tempLet=Garden.minigame.getTile(x,y+1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-      tempLet=Garden.minigame.getTile(x-1,y);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-      tempLet=Garden.minigame.getTile(x+1,y);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-      tempLet=Garden.minigame.getTile(x-1,y-1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-      tempLet=Garden.minigame.getTile(x-1,y+1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-      tempLet=Garden.minigame.getTile(x+1,y-1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-      tempLet=Garden.minigame.getTile(x+1,y+1);if (tempLet[0]>0){let age=tempLet[1];tempLet=Garden.minigame.plantsById[tempLet[0]-1];anyNum++;plantsNum[tempLet.key]++;if (age>=tempLet.mature){maturesNum[tempLet.key]++;}}
-      if (anyNum>0){
-        let mutations=Garden.minigame.getMuts(plantsNum, maturesNum);
-        let mutationsMature=Garden.minigame.getMuts(plantsNum, plantsNum);
-        if(mutations.length > 0 || mutationsMature.length > 0){
-          result = result.slice(0, -6); //delete original </div>
-          result = result + `<div class="line"></div>`;
-          result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
-          if(mutations.length > 0){
-            result = result + `<div style="margin:6px 0px;font-size:11px;text-align:left;">`;
-            result = result + `<b>Mutations : </b>`;
-            for(let i in mutations){
-              result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
-              result = result + (Garden.minigame.plants[mutations[i][0]].icon * 48);
-              result = result + `px;"></div>`;
-              result = result + Garden.minigame.plants[mutations[i][0]].name;
-              result = result + `(`;
-              result = result + mutations[i][1];
-              result = result + `), `;
-            }
-            result = result.slice(0, -2);
-            result = result + `</div>`;
+      let mutations = getMutsCustom(x, y, false);
+      let mutationsMature = getMutsCustom(x, y, true);
+      if(mutations.length > 0 || mutationsMature.length > 0){
+        result = result.slice(0, -6); //delete original </div>
+        result = result + `<div class="line"></div>`;
+        result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
+        if(mutations.length > 0){
+          result = result + `<div style="margin:6px 0px;font-size:11px;text-align:left;">`;
+          result = result + `<b>Mutations : </b>`;
+          for(let i in mutations){
+            result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
+            result = result + (Garden.minigame.plants[mutations[i][0]].icon * 48);
+            result = result + `px;"></div>`;
+            result = result + Garden.minigame.plants[mutations[i][0]].name;
+            result = result + `(`;
+            result = result + mutations[i][1];
+            result = result + `), `;
           }
-          if(mutationsMature.length > 0){
-            result = result + `<div style="margin:6px 0px;font-size:11px;text-align:left;">`;
-            result = result + `<b>Mutations(if all plants are mature) : </b>`;
-            for(let i in mutationsMature){
-              result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
-              result = result + (Garden.minigame.plants[mutationsMature[i][0]].icon * 48);
-              result = result + `px;"></div>`;
-              result = result + Garden.minigame.plants[mutationsMature[i][0]].name;
-              result = result + `(`;
-              result = result + mutationsMature[i][1];
-              result = result + `), `;
-            }
-            result = result.slice(0, -2);
-            result = result + `</div>`;
-          }
-          result = result + `</div>`; //append original </div>
+          result = result.slice(0, -2);
+          result = result + `</div>`;
         }
+        if(mutationsMature.length > 0){
+          result = result + `<div style="margin:6px 0px;font-size:11px;text-align:left;">`;
+          result = result + `<b>Mutations(if all plants are mature) : </b>`;
+          for(let i in mutationsMature){
+            result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
+            result = result + (Garden.minigame.plants[mutationsMature[i][0]].icon * 48);
+            result = result + `px;"></div>`;
+            result = result + Garden.minigame.plants[mutationsMature[i][0]].name;
+            result = result + `(`;
+            result = result + mutationsMature[i][1];
+            result = result + `), `;
+          }
+          result = result.slice(0, -2);
+          result = result + `</div>`;
+        }
+        result = result + `</div>`; //append original </div>
       }
     }
     Garden.writeLog(4, "tooltip hack", false, result);
