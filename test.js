@@ -2073,7 +2073,7 @@ class UI {
     }
     doc.elId('cookieGardenHelperQuickLoadSaveTime').onmouseover = (event) => {
       if (Main.config.quickLoadSavedPlot.length > 0) {
-        let content = UI.buildSavedPlot(Main.config.quickLoadSavedPlot);
+        let content = UI.buildSavedPlot(Main.config.quickLoadSavedPlot, false);
         Game.tooltip.draw(this, window.escape(content));
       }
     }
@@ -2083,7 +2083,7 @@ class UI {
     }
     doc.elId('cookieGardenHelperQuickLoad2SaveTime').onmouseover = (event) => {
       if (Main.config.quickLoad2SavedPlot.length > 0) {
-        let content = UI.buildSavedPlot(Main.config.quickLoad2SavedPlot);
+        let content = UI.buildSavedPlot(Main.config.quickLoad2SavedPlot, false);
         Game.tooltip.draw(this, window.escape(content));
       }
     }
@@ -2124,16 +2124,34 @@ class UI {
     
   }
 
+  static getSeedIconX(seedId, age, isSeed) {
+    let mature = Garden.getPlant(seedId).mature;
+    let stage = 0;
+    if(age >= mature){
+      stage = 4;
+    } else if(age >= (mature * 0.666)) {
+      stage = 3;
+    } else if(age >= (mature * 0.333)) {
+      stage = 2;
+    } else {
+      stage = 1;
+    }
+    if(isSeed){
+      return 0;
+    } else {
+      return stage * -48;
+    }
+  }
   static getSeedIconY(seedId) {
     return Garden.getPlant(seedId).icon * -48;
   }
 
-  static buildSavedPlot(savedPlot) {
+  static buildSavedPlot(savedPlot, isSeed) {
     return `<div id="cookieGardenHelperTooltip">
       ${savedPlot.map((row) => `<div class="gardenTileRow">
         ${row.map((tile) => `<div class="tile">
           ${(tile[0] - 1) < 0 ? '' : `<div class="gardenTileIcon"
-            style="background-position: 0 ${this.getSeedIconY(tile[0])}px;">
+            style="background-position: ${this.getSeedIconX(tile[0], tile[1], isSeed)}px ${this.getSeedIconY(tile[0])}px;">
           </div>`}
         </div>`).join('')}
       </div>`).join('')}
@@ -2324,7 +2342,7 @@ class Main {
 
   static handleMouseoverPlotIsSaved(element) {
     if (this.config.savedPlot.length > 0) {
-      let content = UI.buildSavedPlot(this.config.savedPlot);
+      let content = UI.buildSavedPlot(this.config.savedPlot, true);
       Game.tooltip.draw(element, window.escape(content));
     }
   }
