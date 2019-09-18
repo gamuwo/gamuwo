@@ -1388,6 +1388,7 @@ class UI {
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center; 
+  transition: all 500ms 0s ease;
 }
 #gardenPlot .cookieGardenHelperOverTile:empty {
   background: none;
