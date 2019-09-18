@@ -2442,9 +2442,10 @@ Garden.minigame.tileTooltip = function() {
     let result = funcOrigin.apply(null, arguments);
     //add age data
     if(!Garden.tileIsEmpty(x, y)){
-      //if plant exist, display plant age
+      //if plant exist, display plant data
       let tile = Garden.getTile(x, y);
       let plant = Garden.getPlant(tile.seedId);
+      //for parents
       let parents = [];
       for(let i in Garden.minigame.plants){
         for(let j of Garden.minigame.plants[i].children){
@@ -2454,13 +2455,33 @@ Garden.minigame.tileTooltip = function() {
           }
         }
       }
+      //for max min age
+      let ageArray = [];
+      Garden.forEachTile((x, y) => {
+        let tileForAge = Garden.getTile(x, y);
+        if(tileForAge.seedId == tile.seedId){
+          ageArray.push(tileForAge.age);
+        }
+      });
+      let ageString = "";
+      if(ageArray.length > 0){
+        ageArray.sort(function(a,b){return(a - b);});
+        ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")";
+      }
+      //modify tooltip
       result = result.slice(0, -6); //delete original </div>
       result = result + `<div class="line"></div>`;
       result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
       result = result + `<div style="margin:6px 0px;font-size:11px;">`;
       result = result + `<b>Age : </b>`;
       result = result + tile.age;
-      result = result + `<b> Mature : </b>`;
+      if(ageString != ""){
+        result = result + `<b> Same kind age : </b>`;
+        result = result + ageString;
+      }
+      result = result + `</div>`;
+      result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+      result = result + `<b>Mature : </b>`;
       result = result + plant.mature;
       result = result + `<b> AgeTick : </b>`;
       result = result + plant.ageTick;
