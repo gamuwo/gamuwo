@@ -1353,7 +1353,6 @@ class UI {
   margin: 0.5rem;
   text-align: right;
   outline-width: 1px;
-  transition: all 500ms 0s ease;
 }
 #cookieGardenHelperRightTop {
   display: flex;
