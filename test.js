@@ -2319,7 +2319,7 @@ Garden.minigame.seedTooltip = function() {
     //original tooptip
     let result = funcOrigin.apply(null, arguments);
     //display plant data
-    let plant = Garden.getPlant(id);
+    let plant = Garden.getPlant(id + 1);
     result = result.slice(0, -6); //delete original </div>
     result = result + `<div class="line"></div>`;
     result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
