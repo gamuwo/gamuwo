@@ -173,6 +173,13 @@ class Garden {
     }
   }
   
+  static isMatureNow(tile) {
+    let plant = this.getPlant(tile.seedId);
+    let result = false;
+    if (tile.age >= plant.mature && tile.age < 100) result = true;
+    return result;
+  }
+  
   static isMatureNext(tile) {
     let plant = this.getPlant(tile.seedId);
     let nextAgeMin = (tile.age + Math.floor(plant.ageTick));
@@ -505,15 +512,20 @@ class Garden {
       plantsNum[i] = 0;
       maturesNum[i] = 0;
     }
-    for(let xx = x - 1; xx < x + 2; xx++){
-      for(let yy = y - 1; yy < y + 2; yy++){
-        if(xx == x && yy == y) continue;
+    let afterMe = false;
+    for(let yy = y - 1; yy < y + 2; yy++){
+      for(let xx = x - 1; xx < x + 2; xx++){
+        if(xx == x && yy == y){
+          afterMe = true;
+          continue;
+        }
         if(this.tileIsEmpty(xx, yy)) continue;
         let tile = this.getTile(xx, yy);
         let plant = this.getPlant(tile.seedId);
         anyNum += 1;
         plantsNum[plant.key] += 1;
-        if(this.isMatureNext(tile)) maturesNum[plant.key] += 1;
+        if(!afterMe && this.isMatureNext(tile)) maturesNum[plant.key] += 1;
+        if(afterMe && this.isMatureNow(tile)) maturesNum[plant.key] += 1;
       }
     }
     if(anyNum > 0){
