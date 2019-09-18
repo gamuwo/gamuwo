@@ -1519,10 +1519,14 @@ class UI {
 #cookieGardenHelper span.labelWithState:not(.active) .labelStateActive,
 #cookieGardenHelper span.labelWithState.active .labelStateNotActive { display: none; }
 
-#cookieGardenHelperTooltip { width: 300px; }
+#cookieGardenHelperTooltip {
+  width:300px;
+  margin: 10px 5px;
+}
 #cookieGardenHelperTooltip .gardenTileRow { height: 48px; }
 #cookieGardenHelperTooltip .tile {
-  border: 1px inset dimgrey;
+  border: 1px solid dimgrey;
+  border-radius: 10px;
   display: inline-block;
   height: 48px;
   width: 48px;
