@@ -2323,8 +2323,10 @@ Garden.minigame.seedTooltip = function() {
     let parents = [];
     for(let i in Garden.minigame.plants){
       for(let j of Garden.minigame.plants[i].children){
-        if(j == plant.key) parents.push({name: Garden.minigame.plants[i].name, icon: Garden.minigame.plants[i].icon});
-        break;
+        if(j == plant.key){
+          parents.push({name: Garden.minigame.plants[i].name, icon: Garden.minigame.plants[i].icon});
+          break;
+        }
       }
     }
     //display plant data
