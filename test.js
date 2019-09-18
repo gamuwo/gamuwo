@@ -1525,8 +1525,8 @@ class UI {
 }
 #cookieGardenHelperTooltip .gardenTileRow { display: flex; }
 #cookieGardenHelperTooltip .tile {
-  border: 1px solid dimgrey;
-  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 24px;
   display: inline-block;
   height: 48px;
   width: 48px;
