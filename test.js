@@ -2354,6 +2354,19 @@ Garden.minigame.seedTooltip = function() {
       }
       result = result + `</div>`;
     }
+    if(plant.children.length > 0){
+      result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+      result = result + `<b>Children : </b>`;
+      for(let i of plant.children){
+        result = result + `<div style="display: inline-block; margin: 0px 4px 0px 0px;">`;
+        result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
+        result = result + (Garden.minigame.plants[i].icon * 48);
+        result = result + `px;"></div>`;
+        result = result + Garden.minigame.plants[i].name;
+        result = result + `</div>`;
+      }
+      result = result + `</div>`;
+    }
     result = result + `</div>`; //append original </div>
     Garden.writeLog(4, "tooltip hack", false, result);
     return result;
