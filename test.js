@@ -185,8 +185,7 @@ class Garden {
     let nextAgeMin = (tile.age + Math.floor(plant.ageTick));
     let nextAgeMax = (tile.age + Math.ceil(plant.ageTick + plant.ageTickR));
     let result = false;
-    if (nextAgeMin >= plant.mature && nextAgeMin < 100) result = true;
-    if (nextAgeMax >= plant.mature && nextAgeMin < 100) result = true;
+    if (nextAgeMin < 100 && nextAgeMax >= plant.mature) result = true;
     return result;
   }
 
