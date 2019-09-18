@@ -2342,12 +2342,12 @@ Garden.minigame.seedTooltip = function() {
     if(parents.length > 0){
       result = result + `<div style="margin:6px 0px;font-size:11px;">`;
       result = result + `<b>Parents : </b>`;
-      for(let i in parents){
+      for(let i of parents){
         result = result + `<div style="display: inline-block; margin: 0px 4px 0px 0px;">`;
         result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
-        result = result + (parents[i].icon * 48);
+        result = result + (i.icon * 48);
         result = result + `px;"></div>`;
-        result = result + parents[i].name;
+        result = result + i.name;
         result = result + `</div>`;
       }
       result = result + `</div>`;
