@@ -2074,7 +2074,7 @@ class UI {
     doc.elId('cookieGardenHelperQuickLoadSaveTime').onmouseover = (event) => {
       if (Main.config.quickLoadSavedPlot.length > 0) {
         let content = UI.buildSavedPlot(Main.config.quickLoadSavedPlot);
-        Game.tooltip.draw(element, window.escape(content));
+        Game.tooltip.draw(this, window.escape(content));
       }
     }
 
@@ -2084,7 +2084,7 @@ class UI {
     doc.elId('cookieGardenHelperQuickLoad2SaveTime').onmouseover = (event) => {
       if (Main.config.quickLoad2SavedPlot.length > 0) {
         let content = UI.buildSavedPlot(Main.config.quickLoad2SavedPlot);
-        Game.tooltip.draw(element, window.escape(content));
+        Game.tooltip.draw(this, window.escape(content));
       }
     }
     
