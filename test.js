@@ -2072,8 +2072,8 @@ class UI {
       Game.tooltip.shouldHide=1;
     }
     doc.elId('cookieGardenHelperQuickLoadSaveTime').onmouseover = (event) => {
-      if (this.config.quickLoadSavedPlot.length > 0) {
-        let content = UI.buildSavedPlot(this.config.quickLoadSavedPlot);
+      if (Main.config.quickLoadSavedPlot.length > 0) {
+        let content = UI.buildSavedPlot(Main.config.quickLoadSavedPlot);
         Game.tooltip.draw(element, window.escape(content));
       }
     }
@@ -2082,8 +2082,8 @@ class UI {
       Game.tooltip.shouldHide=1;
     }
     doc.elId('cookieGardenHelperQuickLoad2SaveTime').onmouseover = (event) => {
-      if (this.config.quickLoad2SavedPlot.length > 0) {
-        let content = UI.buildSavedPlot(this.config.quickLoad2SavedPlot);
+      if (Main.config.quickLoad2SavedPlot.length > 0) {
+        let content = UI.buildSavedPlot(Main.config.quickLoad2SavedPlot);
         Game.tooltip.draw(element, window.escape(content));
       }
     }
