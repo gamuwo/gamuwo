@@ -174,12 +174,12 @@ class Garden {
   }
   
   static isMatureNext(tile) {
-    let mature = this.getPlant(tile.seedId).mature;
+    let plant = this.getPlant(tile.seedId);
     let nextAgeMin = (tile.age + Math.floor(plant.ageTick));
     let nextAgeMax = (tile.age + Math.ceil(plant.ageTick + plant.ageTickR));
     let result = false;
-    if (nextAgeMin >= mature && nextAgeMin < 100) result = true;
-    if (nextAgeMax >= mature && nextAgeMin < 100) result = true;
+    if (nextAgeMin >= plant.mature && nextAgeMin < 100) result = true;
+    if (nextAgeMax >= plant.mature && nextAgeMin < 100) result = true;
     return result;
   }
 
