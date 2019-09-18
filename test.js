@@ -1353,6 +1353,7 @@ class UI {
   margin: 0.5rem;
   text-align: right;
   outline-width: 1px;
+  transition: all 500ms 0s ease;
 }
 #cookieGardenHelperRightTop {
   display: flex;
@@ -1370,6 +1371,7 @@ class UI {
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
   font-size: 1.2rem;
+  transition: all 500ms 0s ease;
 }
 
 #rightBottomAutoReload,
