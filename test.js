@@ -1520,6 +1520,7 @@ class UI {
 #cookieGardenHelper span.labelWithState.active .labelStateNotActive { display: none; }
 
 #cookieGardenHelperTooltip {
+  background: #000 url("img/BGgarden.jpg");
   width:300px;
   margin: 10px 5px;
 }
