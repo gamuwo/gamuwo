@@ -172,6 +172,16 @@ class Garden {
       }
     }
   }
+  
+  static isMatureNext(tile) {
+    let mature = this.getPlant(tile.seedId).mature;
+    let nextAgeMin = (tile.age + Math.floor(plant.ageTick));
+    let nextAgeMax = (tile.age + Math.ceil(plant.ageTick + plant.ageTickR));
+    let result = false;
+    if (nextAgeMin >= mature && nextAgeMin < 100) result = true;
+    if (nextAgeMax >= mature && nextAgeMin < 100) result = true;
+    return result;
+  }
 
   static tileIsEmpty(x, y) { return this.getTile(x, y).seedId == 0; }
 
@@ -503,7 +513,7 @@ class Garden {
         let plant = this.getPlant(tile.seedId);
         anyNum += 1;
         plantsNum[plant.key] += 1;
-        if(this.getPlantStage(tile) == "mature") maturesNum[plant.key] += 1;
+        if(this.isMatureNext(tile)) maturesNum[plant.key] += 1;
       }
     }
     if(anyNum > 0){
