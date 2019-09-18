@@ -2389,6 +2389,15 @@ Garden.minigame.tileTooltip = function() {
       //if plant exist, display plant age
       let tile = Garden.getTile(x, y);
       let plant = Garden.getPlant(tile.seedId);
+      let parents = [];
+      for(let i in Garden.minigame.plants){
+        for(let j of Garden.minigame.plants[i].children){
+          if(j == plant.key){
+            parents.push({name: Garden.minigame.plants[i].name, icon: Garden.minigame.plants[i].icon});
+            break;
+          }
+        }
+      }
       result = result.slice(0, -6); //delete original </div>
       result = result + `<div class="line"></div>`;
       result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
@@ -2402,6 +2411,32 @@ Garden.minigame.tileTooltip = function() {
       result = result + `<b> AgeTickR : </b>`;
       result = result + plant.ageTickR;
       result = result + `</div>`;
+      if(parents.length > 0){
+        result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+        result = result + `<b>Parents : </b>`;
+        for(let i of parents){
+          result = result + `<div style="display: inline-block; margin: 0px 4px 0px 0px;">`;
+          result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
+          result = result + (i.icon * 48);
+          result = result + `px;"></div>`;
+          result = result + i.name;
+          result = result + `</div>`;
+        }
+        result = result + `</div>`;
+      }
+      if(plant.children.length > 0){
+        result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+        result = result + `<b>Children : </b>`;
+        for(let i of plant.children){
+          result = result + `<div style="display: inline-block; margin: 0px 4px 0px 0px;">`;
+          result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
+          result = result + (Garden.minigame.plants[i].icon * 48);
+          result = result + `px;"></div>`;
+          result = result + Garden.minigame.plants[i].name;
+          result = result + `</div>`;
+        }
+        result = result + `</div>`;
+      }
       result = result + `</div>`; //append original </div>
     } else {
       //if tile is empty, display possible mutations
