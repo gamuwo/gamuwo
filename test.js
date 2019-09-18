@@ -2158,7 +2158,7 @@ class UI {
   }
 
   static buildSavedPlot(savedPlot, isSeed) {
-    return `<div id="cookieGardenHelperTooltip">
+    let plotHtml =  `<div id="cookieGardenHelperTooltip">
       ${savedPlot.map((row) => `<div class="gardenTileRow">
         ${row.map((tile) => `<div class="tile">
           ${(tile[0] - 1) < 0 ? '' : `<div class="gardenTileIcon"
@@ -2167,6 +2167,8 @@ class UI {
         </div>`).join('')}
       </div>`).join('')}
     </div>`;
+    Garden.writeLog(4, "saved plot", false, plotHtml);
+    return plotHtml;
   }
 }
 
