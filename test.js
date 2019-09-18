@@ -2310,7 +2310,7 @@ if (Garden.isActive) {
   UI.createWarning(msg);
 }
 
-//garden tile tooptip hack
+//garden seed tooptip hack
 let seedTooltipOrigin = Garden.minigame.seedTooltip;
 Garden.minigame.seedTooltip = function() {
   let id = arguments[0];
@@ -2318,19 +2318,40 @@ Garden.minigame.seedTooltip = function() {
   func = function() {
     //original tooptip
     let result = funcOrigin.apply(null, arguments);
-    //display plant data
+    //get parents data
     let plant = Garden.getPlant(id + 1);
+    let parents = [];
+    for(let i in Garden.minigame.plants){
+      for(let j in Garden.minigame.plants[i].children){
+        if(Garden.minigame.plants[i].children[j] == plant.key) parents.push({name: Garden.minigame.plants[i].name, icon: Garden.minigame.plants[i].icon});
+        break;
+      }
+    }
+    //display plant data
     result = result.slice(0, -6); //delete original </div>
     result = result + `<div class="line"></div>`;
     result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
     result = result + `<div style="margin:6px 0px;font-size:11px;">`;
     result = result + `<b>Mature : </b>`;
     result = result + plant.mature;
-    result = result + `<b>  AgeTick : </b>`;
+    result = result + `<b> AgeTick : </b>`;
     result = result + plant.ageTick;
-    result = result + `<b>  AgeTickR : </b>`;
+    result = result + `<b> AgeTickR : </b>`;
     result = result + plant.ageTickR;
     result = result + `</div>`;
+    if(parents.length > 0){
+      result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+      result = result + `<b>Parents : </b>`;
+      for(let i in parents){
+        result = result + `<div style="display: inline-block; margin: 0px 4px 0px 0px;">`;
+        result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
+        result = result + (parents[i].icon * 48);
+        result = result + `px;"></div>`;
+        result = result + parents[i].name;
+        result = result + `</div>`;
+      }
+      result = result + `</div>`;
+    }
     result = result + `</div>`; //append original </div>
     Garden.writeLog(4, "tooltip hack", false, result);
     return result;
@@ -2338,6 +2359,7 @@ Garden.minigame.seedTooltip = function() {
   return func;
 }
 
+//garden tile tooltip hack
 let tileTooltipOrigin = Garden.minigame.tileTooltip;
 Garden.minigame.tileTooltip = function() {
   let x = arguments[0];
@@ -2358,11 +2380,11 @@ Garden.minigame.tileTooltip = function() {
       result = result + `<div style="margin:6px 0px;font-size:11px;">`;
       result = result + `<b>Age : </b>`;
       result = result + tile.age;
-      result = result + `<b>  Mature : </b>`;
+      result = result + `<b> Mature : </b>`;
       result = result + plant.mature;
-      result = result + `<b>  AgeTick : </b>`;
+      result = result + `<b> AgeTick : </b>`;
       result = result + plant.ageTick;
-      result = result + `<b>  AgeTickR : </b>`;
+      result = result + `<b> AgeTickR : </b>`;
       result = result + plant.ageTickR;
       result = result + `</div>`;
       result = result + `</div>`; //append original </div>
