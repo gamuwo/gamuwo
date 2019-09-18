@@ -1522,7 +1522,7 @@ class UI {
 #cookieGardenHelperTooltip {
   background: #000 url("img/BGgarden.jpg");
   padding: 10px;
-  margin: 5px 0;
+  margin: 4px 0;
 }
 #cookieGardenHelperTooltip .gardenTileRow { display: flex; }
 #cookieGardenHelperTooltip .tile {
