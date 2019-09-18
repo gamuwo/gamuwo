@@ -833,8 +833,8 @@ class Garden {
           this.forEachTile((x, y) => {
             if(this.tileIsEmpty(x, y)){
               let mutations = this.getMutsCustom(x, y, false);
-              for(let i in mutations){
-                if(this.getPlant(config.autoReloadID.value).key == mutations[i][0]) {
+              for(let i of mutations){
+                if(this.getPlant(config.autoReloadID.value).key == i[0]) {
                   isMutation = true;
                   this.displayOverTile(true, x, y, "", config);
                   break;
@@ -847,8 +847,8 @@ class Garden {
           let y = parseInt(config.autoReloadY.value);
           if(this.tileIsEmpty(x, y)){
             let mutations = this.getMutsCustom(x, y, false);
-            for(let i in mutations){
-              if(this.getPlant(config.autoReloadID.value).key == mutations[i][0]) {
+            for(let i of mutations){
+              if(this.getPlant(config.autoReloadID.value).key == i[0]) {
                 isMutation = true;
                 this.displayOverTile(true, x, y, "", config);
                 break;
@@ -2401,14 +2401,14 @@ Garden.minigame.tileTooltip = function() {
         if(mutations.length > 0){
           result = result + `<div style="margin:6px 0px;font-size:11px;text-align:left;">`;
           result = result + `<b>Mutations : </b>`;
-          for(let i in mutations){
+          for(let i of mutations){
             result = result + `<div style="display: inline-block; margin: 0px 4px 0px 0px;">`;
             result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
-            result = result + (Garden.minigame.plants[mutations[i][0]].icon * 48);
+            result = result + (Garden.minigame.plants[i[0]].icon * 48);
             result = result + `px;"></div>`;
-            result = result + Garden.minigame.plants[mutations[i][0]].name;
+            result = result + Garden.minigame.plants[i[0]].name;
             result = result + `(`;
-            result = result + mutations[i][1];
+            result = result + i[1];
             result = result + `)`;
             result = result + `</div>`;
           }
@@ -2417,14 +2417,14 @@ Garden.minigame.tileTooltip = function() {
         if(mutationsMature.length > 0){
           result = result + `<div style="margin:6px 0px;font-size:11px;text-align:left;">`;
           result = result + `<b>Mutations(if all plants are mature) : </b>`;
-          for(let i in mutationsMature){
+          for(let i of mutationsMature){
             result = result + `<div style="display: inline-block; margin: 0px 4px 0px 0px;">`;
             result = result + `<div class="gardenSeedTiny" style="background-position:0px -`;
-            result = result + (Garden.minigame.plants[mutationsMature[i][0]].icon * 48);
+            result = result + (Garden.minigame.plants[i[0]].icon * 48);
             result = result + `px;"></div>`;
-            result = result + Garden.minigame.plants[mutationsMature[i][0]].name;
+            result = result + Garden.minigame.plants[i[0]].name;
             result = result + `(`;
-            result = result + mutationsMature[i][1];
+            result = result + i[1];
             result = result + `)`;
             result = result + `</div>`;
           }
