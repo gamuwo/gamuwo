@@ -471,10 +471,10 @@ class Garden {
     if(config.overTile){
       let id = "overTile-" + x + "-" + y;
       if(isDisplay) {
-        if(document.getElementById(id).style.display != "flex") document.getElementById(id).style.display = "flex";
+        if(document.getElementById(id).style.opacity != "1") document.getElementById(id).style.opacity = "1";
         if(document.getElementById(id).innerText != text) document.getElementById(id).innerText = text;
       } else {
-        if(document.getElementById(id).style.display != "none") document.getElementById(id).style.display = "none";
+        if(document.getElementById(id).style.opacity != "0") document.getElementById(id).style.opacity = "0";
         if(document.getElementById(id).innerText != "") document.getElementById(id).innerText = "";
       }
     }
@@ -482,7 +482,8 @@ class Garden {
   
   static hideOverTile() {
     doc.qSelAll('#gardenPlot div.cookieGardenHelperOverTile').forEach((overTile) => {
-      overTile.style.display = "none";
+      overTile.style.opacity = "0";
+      overTile.style.innerText = "";
     });
   }
   
@@ -1376,7 +1377,8 @@ class UI {
 #rightBottomLumpReload { display: none }
 
 #gardenPlot .cookieGardenHelperOverTile {
-  display: none;
+  display: flex;
+  opacity: 0;
   position: absolute;
   z-index: 1;
   height: calc(100% - 6px);
