@@ -71,8 +71,10 @@ class Config {
       quickLoadSave: "",
       quickLoadFlag: false,
       quickLoadSaveTime: "",
+      quickLoadSavedPlot: [],
       quickLoad2Save: "",
       quickLoad2SaveTime: "",
+      quickLoad2SavedPlot: [],
       interval: { value: 1000, min: 0 },
       autoLump: false,
       autoLumpFlag: false,
@@ -146,6 +148,10 @@ class Garden {
       }
     }
     return plot;
+  }
+
+  static clonePlotAll() {
+    return clone(this.minigame.plot);
   }
 
   static getPlant(id) { return this.minigame.plantsById[id - 1]; }
@@ -563,6 +569,7 @@ class Garden {
   static handleQuickLoadSave(config) {
     if(!config.quickLoadFlag && this.secondsBeforeNextTick <= 5 && this.secondsBeforeNextTick >= 3){
       config.quickLoadSave = Game.WriteSave(1);
+      config.quickLoadSavedPlot = Garden.clonePlotAll();
       this.changeSpan("quickLoadSaveTime", this.saveDate(), config);
       config.quickLoadFlag = true;
       Main.save();
@@ -2060,6 +2067,26 @@ class UI {
     doc.elId('cookieGardenHelperPlotIsSaved').onmouseover = (event) => {
       Main.handleMouseoverPlotIsSaved(this);
     }
+
+    doc.elId('cookieGardenHelperQuickLoadSaveTime').onmouseout = (event) => {
+      Game.tooltip.shouldHide=1;
+    }
+    doc.elId('cookieGardenHelperQuickLoadSaveTime').onmouseover = (event) => {
+      if (this.config.quickLoadSavedPlot.length > 0) {
+        let content = UI.buildSavedPlot(this.config.quickLoadSavedPlot);
+        Game.tooltip.draw(element, window.escape(content));
+      }
+    }
+
+    doc.elId('cookieGardenHelperQuickLoad2SaveTime').onmouseout = (event) => {
+      Game.tooltip.shouldHide=1;
+    }
+    doc.elId('cookieGardenHelperQuickLoad2SaveTime').onmouseover = (event) => {
+      if (this.config.quickLoad2SavedPlot.length > 0) {
+        let content = UI.buildSavedPlot(this.config.quickLoad2SavedPlot);
+        Game.tooltip.draw(element, window.escape(content));
+      }
+    }
     
     doc.elId('cookieGardenHelperRightBottom').onmouseout = (event) => {
       if(Main.config.rightBottomDisplaySave.length == 3){
@@ -2242,6 +2269,7 @@ class Main {
       }
     } else if (key == 'quickSave2') {
       this.config.quickLoad2Save = Game.WriteSave(1);
+      this.config.quickLoad2SavedPlot = Garden.clonePlotAll();
       Garden.changeSpan("quickLoad2SaveTime", Garden.saveDate(), this.config);
     } else if (key == 'quickLoad2') {
       if(this.config.quickLoad2Save != "") {
