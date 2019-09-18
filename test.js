@@ -2484,6 +2484,9 @@ Garden.minigame.tileTooltip = function() {
           }
         }
       }
+      //for next age
+      let nextAgeMin = (tile.age + Math.floor(plant.ageTick));
+      let nextAgeMax = (tile.age + Math.ceil(plant.ageTick + plant.ageTickR));
       //for max min age
       let ageArray = [];
       Garden.forEachTile((x, y) => {
@@ -2504,6 +2507,10 @@ Garden.minigame.tileTooltip = function() {
       result = result + `<div style="margin:6px 0px;font-size:11px;">`;
       result = result + `<b>Age : </b>`;
       result = result + tile.age;
+      result = result + `<b> Next age : </b>`;
+      result = result + nextAgeMin;
+      result = result + `-`;
+      result = result + nextAgeMax;
       if(ageString != ""){
         result = result + `<b> Same kind age : </b>`;
         result = result + ageString;
