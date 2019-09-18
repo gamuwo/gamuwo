@@ -2149,13 +2149,19 @@ class UI {
   static getSeedIconY(seedId) {
     return Garden.getPlant(seedId).icon * -48;
   }
+  static getOpacity(seedId, age, isSeed) {
+    let stage = Garden.getPlantStage({seedId: seedId, age: age});
+    let opacity = 1;
+    if(!isSeed && stage=="dying") opacity = 0.5;
+    return opacity;
+  }
 
   static buildSavedPlot(savedPlot, isSeed) {
     return `<div id="cookieGardenHelperTooltip">
       ${savedPlot.map((row) => `<div class="gardenTileRow">
         ${row.map((tile) => `<div class="tile">
           ${(tile[0] - 1) < 0 ? '' : `<div class="gardenTileIcon"
-            style="background-position: ${this.getSeedIconX(tile[0], tile[1], isSeed)}px ${this.getSeedIconY(tile[0])}px;">
+            style="background-position: ${this.getSeedIconX(tile[0], tile[1], isSeed)}px ${this.getSeedIconY(tile[0])}px; opacity: ${this.getOpacity(tile[0], tile[1], isSeed)};">
           </div>`}
         </div>`).join('')}
       </div>`).join('')}
