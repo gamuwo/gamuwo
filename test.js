@@ -2153,6 +2153,9 @@ class UI {
       document.getElementById("cookieGardenHelperFileLoadButton").value = "";
     }
     
+    //hack tooltips
+    this.hackLumpTooltip();
+    
   }
 
   static getSeedIconX(seedId, age, isSeed) {
