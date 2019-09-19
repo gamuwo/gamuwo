@@ -638,7 +638,7 @@ class Garden {
       let parameter = config.autoJQBParam.split(",");
       if(parameter.length == 5){
         //parameter check
-        this.writeLog(3, "auto JQB", false, "parameter[0]:" + parameter[0] + " [1]:" + parameter[1] + " [2]:" + parameter[2] + " [3]:" + parameter[3] + " [4]:" + parameter[4] + " [5]:" + parameter[5]);
+        this.writeLog(3, "auto JQB", false, "parameter[0]:" + parameter[0] + " [1]:" + parameter[1] + " [2]:" + parameter[2] + " [3]:" + parameter[3] + " [4]:" + parameter[4]);
         
         //switch buttons
         this.changeButton("autoHarvest", false, config);
