@@ -2042,6 +2042,12 @@ class UI {
     doc.qSelAll('#cookieGardenHelper select, #logPanel select').forEach((input) => {
       input.onchange = (event) => {
         Main.handleChange(input.name, input.value);
+        if(input.name == "autoReload2ID"){
+          let plant = Garden.getPlant(config.autoReload2ID.value);
+          let maxGrow = Math.ceil(plant.ageTick + plant.ageTickR);
+          Garden.changeNumber("autoReload2Grow", maxGrow, config);
+          Main.save();
+        }
       };
     });
     
@@ -2058,15 +2064,13 @@ class UI {
     doc.qSelAll('#gardenPlot div.gardenTile').forEach((tile) => {
       tile.onclick = (event) => {
         Garden.writeLog(3, "auto reload", false, "click tile:" + tile.id);
-        if(Main.config.autoReloadGetXY){
+        if(config.autoReloadGetXY){
           let splitted = tile.id.split("-");
           if(splitted.length == 3){
-            Main.config.autoReloadX.value = splitted[1];
-            document.getElementById(UI.makeId("autoReloadX")).value = splitted[1];
-            Main.config.autoReloadY.value = splitted[2];
-            document.getElementById(UI.makeId("autoReloadY")).value = splitted[2];
+            Garden.changeNumber("autoReloadX", splitted[1], config);
+            Garden.changeNumber("autoReloadY", splitted[2], config);
             Main.save();
-            Garden.writeLog(3, "auto reload", false, "set x/y:" + Main.config.autoReloadX.value + "/" + Main.config.autoReloadY.value);
+            Garden.writeLog(3, "auto reload", false, "set x/y:" + config.autoReloadX.value + "/" + config.autoReloadY.value);
           }
         }
       };
@@ -2103,8 +2107,8 @@ class UI {
       Game.tooltip.shouldHide=1;
     }
     doc.elId('cookieGardenHelperQuickLoadSaveTime').onmouseover = (event) => {
-      if (Main.config.quickLoadSavedPlot.length > 0) {
-        let content = UI.buildSavedPlot(Main.config.quickLoadSavedPlot, false);
+      if (config.quickLoadSavedPlot.length > 0) {
+        let content = UI.buildSavedPlot(config.quickLoadSavedPlot, false);
         Game.tooltip.draw(this, window.escape(content));
       }
     }
@@ -2113,18 +2117,18 @@ class UI {
       Game.tooltip.shouldHide=1;
     }
     doc.elId('cookieGardenHelperQuickLoad2SaveTime').onmouseover = (event) => {
-      if (Main.config.quickLoad2SavedPlot.length > 0) {
-        let content = UI.buildSavedPlot(Main.config.quickLoad2SavedPlot, false);
+      if (config.quickLoad2SavedPlot.length > 0) {
+        let content = UI.buildSavedPlot(config.quickLoad2SavedPlot, false);
         Game.tooltip.draw(this, window.escape(content));
       }
     }
     
     doc.elId('cookieGardenHelperRightBottom').onmouseout = (event) => {
-      if(Main.config.rightBottomDisplaySave.length == 3){
-        document.getElementById("rightBottomAutoReload").style.display = Main.config.rightBottomDisplaySave[0];
-        document.getElementById("rightBottomAutoReload2").style.display = Main.config.rightBottomDisplaySave[1];
-        document.getElementById("rightBottomLumpReload").style.display = Main.config.rightBottomDisplaySave[2];
-        Main.config.rightBottomDisplaySave = [];
+      if(config.rightBottomDisplaySave.length == 3){
+        document.getElementById("rightBottomAutoReload").style.display = config.rightBottomDisplaySave[0];
+        document.getElementById("rightBottomAutoReload2").style.display = config.rightBottomDisplaySave[1];
+        document.getElementById("rightBottomLumpReload").style.display = config.rightBottomDisplaySave[2];
+        config.rightBottomDisplaySave = [];
         Main.save();
       }
       document.getElementById("cookieGardenHelperRightBottom").style.outlineStyle = "none";
@@ -2136,7 +2140,7 @@ class UI {
       displaySave[0] = document.getElementById("rightBottomAutoReload").style.display;
       displaySave[1] = document.getElementById("rightBottomAutoReload2").style.display;
       displaySave[2] = document.getElementById("rightBottomLumpReload").style.display;
-      Main.config.rightBottomDisplaySave = displaySave;
+      config.rightBottomDisplaySave = displaySave;
       Main.save();
       
       document.getElementById("rightBottomAutoReload").style.display = "block";
