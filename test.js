@@ -2414,8 +2414,8 @@ class UI {
         let result = funcOrigin.apply(null, arguments);
         //add plant data
         result = result.slice(0, -6); //delete original </div>
-        result = result + makeTooltipTitleHTML();
-        result = result + makePlantDataHTML(id + 1);
+        result = result + this.makeTooltipTitleHTML();
+        result = result + this.makePlantDataHTML(id + 1);
         result = result + `</div>`;  //append original </div>
         Garden.writeLog(4, "tooltip hack", false, result);
         return result;
