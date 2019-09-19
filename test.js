@@ -2209,7 +2209,7 @@ class UI {
       let x = arguments[0];
       let y = arguments[1];
       let funcOrigin = tileTooltipOrigin.apply(null, arguments);
-      func = function() {
+      let func = function() {
         if(Game.keys[16]) return "";
         //original tooptip
         let result = funcOrigin.apply(null, arguments);
@@ -2351,7 +2351,7 @@ class UI {
     Garden.minigame.seedTooltip = function() {
       let id = arguments[0];
       let funcOrigin = seedTooltipOrigin.apply(null, arguments);
-      func = function() {
+      let func = function() {
         //original tooptip
         let result = funcOrigin.apply(null, arguments);
         //get parents data
