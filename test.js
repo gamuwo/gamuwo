@@ -1540,6 +1540,7 @@ class UI {
   padding-left: 4px;
   margin: 1px;
   border-radius: 5px;
+  transition: all 100ms 0s ease;
 }
 #cookieGardenHelper span.labelWithState:not(.active) .labelStateActive,
 #cookieGardenHelper span.labelWithState.active .labelStateNotActive { display: none; }
