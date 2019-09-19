@@ -2196,6 +2196,34 @@ class UI {
     Garden.writeLog(4, "saved plot", false, plotHtml);
     return plotHtml;
   }
+  
+  static hackLumpTooltip() {
+    //suger lump tooptip hack
+    let lumpTooltipOrigin = Game.lumpTooltip;
+    Game.lumpTooltip = function() {
+      //original tooptip
+      let result = lumpTooltipOrigin.apply(null, arguments);
+      //add lump data
+      result = result.slice(0, -6); //delete original </div>
+      result = result + `<div class="line"></div>`;
+      result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
+      result = result + `<div style="display: flex; align-items: center; justify-content: center;">`;
+      result = result + `Type : `;
+      result = result + `<div class="usesIcon" style="transform: scale(0.5,0.5); margin: -12px -12px; display: inline-block; width: 48px; height: 48px; background-position: -`;
+      result = result + (29 * 48);
+      result = result + `px -`;
+      result = result + ([14, 15, 16, 17, 27][Game.lumpCurrentType] * 48);
+      result = result + `px;"></div>`;
+      result = result + `<b>`;
+      result = result + ["normal", "bifurcated", "golden", "meaty", "caramelized"][Game.lumpCurrentType];
+      result = result + `</b>`;
+      result = result + `</div>`;
+      result = result + `</div>`; //append original </div>
+      Garden.writeLog(4, "tooltip hack", false, result);
+      return result;
+    }
+  }
+  
 }
 
 class Main {
@@ -2414,7 +2442,7 @@ Garden.minigame.seedTooltip = function() {
         }
       }
     }
-    //display plant data
+    //add plant data
     result = result.slice(0, -6); //delete original </div>
     result = result + `<div class="line"></div>`;
     result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
@@ -2469,7 +2497,7 @@ Garden.minigame.tileTooltip = function() {
     if(Game.keys[16]) return "";
     //original tooptip
     let result = funcOrigin.apply(null, arguments);
-    //add age data
+    //add plant data
     if(!Garden.tileIsEmpty(x, y)){
       //if plant exist, display plant data
       let tile = Garden.getTile(x, y);
@@ -2598,31 +2626,6 @@ Garden.minigame.tileTooltip = function() {
     return result;
   }
   return func;
-}
-
-//suger lump tooptip hack
-let lumpTooltipOrigin = Game.lumpTooltip;
-Game.lumpTooltip = function() {
-  //original tooptip
-  let result = lumpTooltipOrigin.apply(null, arguments);
-  //add lump data
-  result = result.slice(0, -6); //delete original </div>
-  result = result + `<div class="line"></div>`;
-  result = result + `<div style="text-align:center;">Cookie Garden Helper Mod</div>`;
-  result = result + `<div style="display: flex; align-items: center; justify-content: center;">`;
-  result = result + `Type : `;
-  result = result + `<div class="usesIcon" style="transform: scale(0.5,0.5); margin: -12px -12px; display: inline-block; width: 48px; height: 48px; background-position: -`;
-  result = result + (29 * 48);
-  result = result + `px -`;
-  result = result + ([14, 15, 16, 17, 27][Game.lumpCurrentType] * 48);
-  result = result + `px;"></div>`;
-  result = result + `<b>`;
-  result = result + ["normal", "bifurcated", "golden", "meaty", "caramelized"][Game.lumpCurrentType];
-  result = result + `</b>`;
-  result = result + `</div>`;
-  result = result + `</div>`; //append original </div>
-  Garden.writeLog(4, "tooltip hack", false, result);
-  return result;
 }
 
 }
