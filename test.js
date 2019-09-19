@@ -2012,6 +2012,7 @@ class UI {
     doc.elId('cookieGardenHelperProductButton').onclick = (event) => {
       let panel = doc.elId('cookieGardenHelper');
       panel.classList.toggle('visible');
+      console.log("panel.classList.contains('visible'):"+panel.classList.contains('visible'));
       UI.hackDragArea(panel.classList.contains('visible'));
     };
     
@@ -2406,6 +2407,7 @@ class UI {
     if(isOpen){
       let panel = document.getElementById("cookieGardenHelper");
       let height = panel.getBoundingClientRect().height;
+      console.log("height:"+height);
       dragArea.style.bottom = (height * -1);
     } else {
       dragArea.style.bottom = 0;
