@@ -2408,9 +2408,12 @@ class UI {
       let panel = document.getElementById("cookieGardenHelper");
       let height = panel.getBoundingClientRect().height;
       console.log("height:"+height);
+      console.log("(height * -1):"+(height * -1));
       dragArea.style.bottom = (height * -1);
+      console.log("dragArea.style.bottom:"+dragArea.style.bottom);
     } else {
       dragArea.style.bottom = 0;
+      console.log("dragArea.style.bottom:"+dragArea.style.bottom);
     }
   }
   
