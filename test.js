@@ -2010,7 +2010,9 @@ class UI {
 </div>`);
 
     doc.elId('cookieGardenHelperProductButton').onclick = (event) => {
-      doc.elId('cookieGardenHelper').classList.toggle('visible');
+      let panel = doc.elId('cookieGardenHelper');
+      panel.classList.toggle('visible');
+      UI.hackDragArea(panel.classList.contains('visible'));
     };
     
     doc.elId('cookieGardenHelperLogButton').onclick = (event) => {
@@ -2161,7 +2163,6 @@ class UI {
     this.hackTileTooltip();
     this.hackSeedTooltip();
     this.hackLumpTooltip();
-    
   }
 
   static getSeedIconX(seedId, age, isSeed) {
@@ -2397,6 +2398,17 @@ class UI {
       result = result + `</div>`; //append original </div>
       Garden.writeLog(4, "tooltip hack", false, result);
       return result;
+    }
+  }
+  
+  static hackDragArea(isOpen) {
+    let dragArea = document.getElementById("gardenDrag");
+    if(isOpen){
+      let panel = document.getElementById("cookieGardenHelper");
+      let height = panel.getBoundingClientRect().height;
+      dragArea.style.bottom = (height * -1);
+    } else {
+      dragArea.style.bottom = 0;
     }
   }
   
