@@ -638,11 +638,7 @@ class Garden {
       let parameter = config.autoJQBParam.split(",");
       if(parameter.length == 5){
         //parameter check
-        this.writeLog(3, "auto JQB", false, "parameter[0]:" + parameter[0]);
-        this.writeLog(3, "auto JQB", false, "parameter[1]:" + parameter[1]);
-        this.writeLog(3, "auto JQB", false, "parameter[2]:" + parameter[2]);
-        this.writeLog(3, "auto JQB", false, "parameter[3]:" + parameter[3]);
-        this.writeLog(3, "auto JQB", false, "parameter[4]:" + parameter[4]);
+        this.writeLog(3, "auto JQB", false, "parameter[0]:" + parameter[0] + " [1]:" + parameter[1] + " [2]:" + parameter[2] + " [3]:" + parameter[3] + " [4]:" + parameter[4] + " [5]:" + parameter[5]);
         
         //switch buttons
         this.changeButton("autoHarvest", false, config);
@@ -661,11 +657,11 @@ class Garden {
         
         //check num of plants
         let numPlants = 0;
-        let numMatureQB = 0;
         let numJQB = 0;
         let JQBAge = [];
         let minJQBAge = 0;
         let numQB = 0;
+        let mutationJQBTiles = 0;
         
         this.forEachTile((x, y) => {
           if(!this.tileIsEmpty(x, y)){
@@ -673,11 +669,17 @@ class Garden {
             let tile = this.getTile(x, y);
             let stage = this.getPlantStage(tile);
             if(tile.seedId == 21 && stage != "dying") numQB += 1;
-            if(tile.seedId == 21 && stage == "mature"){
-              numMatureQB += 1;
-            } else if(tile.seedId == 22) {
+            if(tile.seedId == 22) {
               numJQB += 1;
               JQBAge.push(tile.age);
+            }
+          } else {
+            let mutations = this.getMutsCustom(x, y, false);
+            for(let i of mutations){
+              if(this.getPlant(22).key == i[0]){
+                mutationJQBTiles += 1;
+                break;
+              }
             }
           }
         });
@@ -701,10 +703,7 @@ class Garden {
           ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")/" + this.getPlant(21).mature;
         }
         
-        this.writeLog(3, "auto JQB", false, "numPlants:" + numPlants);
-        this.writeLog(3, "auto JQB", false, "numMatureQB:" + numMatureQB);
-        this.writeLog(3, "auto JQB", false, "numJQB:" + numJQB);
-        this.writeLog(3, "auto JQB", false, "minJQBAge:" + minJQBAge);
+        this.writeLog(3, "auto JQB", false, "numPlants:" + numPlants + " numJQB:" + numJQB + " minJQBAge:" + minJQBAge + " numQB:" + numQB + " mutationJQBTiles:" + mutationJQBTiles);
         
         //for unexpected QB harvest
         if((config.autoJQBStage.value == 1 || config.autoJQBStage.value == 2) && numQB < 21){
@@ -765,8 +764,8 @@ class Garden {
           this.writeLog(1, "auto JQB", true, "stage:0->1");
         }
         
-        if(config.autoJQBStage.value == 1 && numMatureQB >= 21){
-          //if 21QB mature, turn on auto-reload1 for JQB
+        if(config.autoJQBStage.value == 1 && mutationJQBTiles >= 4){
+          //if 4JQB possible mutation, turn on auto-reload1 for JQB
           //turn off auto-reload2
           this.changeButton("autoReload2", false, config);
           //turn on auto-reload for JQB
