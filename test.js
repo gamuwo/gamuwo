@@ -764,7 +764,7 @@ class Garden {
           this.writeLog(1, "auto JQB", true, "stage:0->1");
         }
         
-        if(config.autoJQBStage.value == 1 && mutationJQBTiles >= 4){
+        if(config.autoJQBStage.value == 1 && mutationJQBTiles >= 1){
           //if 4JQB possible mutation, turn on auto-reload1 for JQB
           //turn off auto-reload2
           this.changeButton("autoReload2", false, config);
