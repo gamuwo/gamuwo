@@ -2012,7 +2012,6 @@ class UI {
     doc.elId('cookieGardenHelperProductButton').onclick = (event) => {
       let panel = doc.elId('cookieGardenHelper');
       panel.classList.toggle('visible');
-      console.log("panel.classList.contains('visible'):"+panel.classList.contains('visible'));
       UI.hackDragArea(panel.classList.contains('visible'));
     };
     
@@ -2407,14 +2406,11 @@ class UI {
     if(isOpen){
       let panel = document.getElementById("cookieGardenHelper");
       let height = panel.getBoundingClientRect().height;
-      console.log("height:"+height);
-      console.log("(height * -1):"+(height * -1));
-      dragArea.style.bottom = (height * -1);
-      console.log("dragArea.style.bottom:"+dragArea.style.bottom);
+      dragArea.style.bottom = (height * -1) + "px";
     } else {
       dragArea.style.bottom = 0;
-      console.log("dragArea.style.bottom:"+dragArea.style.bottom);
     }
+    Garden.writeLog(4, "drag area hack", false, "dragArea.style.bottom:" + dragArea.style.bottom);
   }
   
 }
