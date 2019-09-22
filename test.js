@@ -710,7 +710,7 @@ class Garden {
           ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")/" + this.getPlant(21).mature;
         }
         
-        this.writeLog(3, "auto JQB", false, "numPlants:" + numPlants + " numJQB:" + numJQB + " minJQBAge:" + minJQBAge + " numQB:" + numQB + " mutationJQBTiles:" + mutationJQBTiles);
+        this.writeLog(2, "auto JQB", false, "numPlants:" + numPlants + " numJQB:" + numJQB + " minJQBAge:" + minJQBAge + " numQB:" + numQB + " mutationJQBTiles:" + mutationJQBTiles);
         
         //for unexpected QB harvest
         if((config.autoJQBStage.value == 1 || config.autoJQBStage.value == 2) && numQB < 21){
