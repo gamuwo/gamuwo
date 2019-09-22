@@ -1440,9 +1440,6 @@ class UI {
   transition: all 500ms 0s ease;
   font-size: 1rem;
 }
-#gardenPlot .cookieGardenHelperOverTile:empty {
-  background: none;
-}
 
 #logPanel {
   background: #000 url("https://gamuwo.github.io/gamuwo/logback.jpg");
