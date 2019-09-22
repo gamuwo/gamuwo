@@ -490,7 +490,11 @@ class Garden {
         document.getElementById(id).style.opacity = "1";
         document.getElementById(id).innerText = text;
         if(color == ""){
-          document.getElementById(id).style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+          if(text == ""){
+            document.getElementById(id).style.background = "none";
+          } else {
+            document.getElementById(id).style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+          }
         } else {
           document.getElementById(id).style.backgroundColor = color;
         }
