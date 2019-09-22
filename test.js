@@ -489,7 +489,11 @@ class Garden {
       if(isDisplay) {
         if(document.getElementById(id).style.opacity != "1") document.getElementById(id).style.opacity = "1";
         if(document.getElementById(id).innerText != text) document.getElementById(id).innerText = text;
-        if(color != "" && document.getElementById(id).style.backgroundColor != color) document.getElementById(id).style.backgroundColor = color;
+        if(color == ""){
+          if(document.getElementById(id).style.backgroundColor != "rgba(0, 0, 0, 0.5)") document.getElementById(id).style.backgroundColor = "rgba(0, 0, 0, 0.5)";
+        } else {
+          if(document.getElementById(id).style.backgroundColor != color) document.getElementById(id).style.backgroundColor = color;
+        }
       } else {
         if(document.getElementById(id).style.opacity != "0") document.getElementById(id).style.opacity = "0";
         if(document.getElementById(id).innerText != "") document.getElementById(id).innerText = "";
