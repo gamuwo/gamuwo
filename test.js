@@ -1431,7 +1431,6 @@ class UI {
   align-items: center; 
   transition: all 500ms 0s ease;
   font-size: 1rem;
-  -webkit-text-stroke: 1px black;
 }
 #gardenPlot .cookieGardenHelperOverTile:empty {
   background: none;
