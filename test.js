@@ -483,15 +483,17 @@ class Garden {
     }
   }
   
-  static displayOverTile(isDisplay, x, y, text, config) {
+  static displayOverTile(isDisplay, x, y, text, color, config) {
     if(config.overTile){
       let id = "overTile-" + x + "-" + y;
       if(isDisplay) {
         if(document.getElementById(id).style.opacity != "1") document.getElementById(id).style.opacity = "1";
         if(document.getElementById(id).innerText != text) document.getElementById(id).innerText = text;
+        if(color != "" && document.getElementById(id).style.backgroundColor != color) document.getElementById(id).style.backgroundColor = color;
       } else {
         if(document.getElementById(id).style.opacity != "0") document.getElementById(id).style.opacity = "0";
         if(document.getElementById(id).innerText != "") document.getElementById(id).innerText = "";
+        if(document.getElementById(id).style.background != "none") document.getElementById(id).style.background = "none";
       }
     }
   }
@@ -500,6 +502,7 @@ class Garden {
     doc.qSelAll('#gardenPlot div.cookieGardenHelperOverTile').forEach((overTile) => {
       overTile.style.opacity = "0";
       overTile.style.innerText = "";
+      overTile.style.background = "none";
     });
   }
   
@@ -864,7 +867,7 @@ class Garden {
               for(let i of mutations){
                 if(this.getPlant(config.autoReloadID.value).key == i[0]) {
                   isMutation = true;
-                  this.displayOverTile(true, x, y, "", config);
+                  this.displayOverTile(true, x, y, "", "", config);
                   break;
                 }
               }
@@ -878,7 +881,7 @@ class Garden {
             for(let i of mutations){
               if(this.getPlant(config.autoReloadID.value).key == i[0]) {
                 isMutation = true;
-                this.displayOverTile(true, x, y, "", config);
+                this.displayOverTile(true, x, y, "", "", config);
                 break;
               }
             }
@@ -954,7 +957,7 @@ class Garden {
           if(isMaxMode){
             this.forEachTile((x, y) => {
               let tileAr = this.getTile(x, y);
-              if(tileAr.seedId != config.autoReloadID.value) this.displayOverTile(false, x, y, "", config);
+              if(tileAr.seedId != config.autoReloadID.value) this.displayOverTile(false, x, y, "", "", config);
             });
           }
           
@@ -996,7 +999,7 @@ class Garden {
           if(tileAr2.seedId == config.autoReload2ID.value){
             targetPlants.push([x, y, tileAr2.age]);
             //display over tile
-            this.displayOverTile(true, x, y, (tileAr2.age + ""), config);
+            this.displayOverTile(true, x, y, (tileAr2.age + ""), "", config);
           }
         });
         
@@ -1117,8 +1120,6 @@ class Garden {
             let tileForAge = this.getTile(x, y);
             if(tileForAge.seedId == config.autoReload2ID.value){
               ageArray.push(tileForAge.age);
-              //display over tile
-              this.displayOverTile(true, x, y, (tileForAge.age + ""), config);
             }
           });
           let ageString = "0-0(0)/0";
@@ -1128,6 +1129,19 @@ class Garden {
           }
           document.getElementById("autoReload2Disp4").innerText = ageString;
           this.writeLog(2, "auto reload2", false, "age:" + ageString);
+          
+          //for overtile
+          for(let targetPlant of config.autoReload2Plants){
+            let x = targetPlant[0];
+            let y = targetPlant[1];
+            let age = targetPlant[2];
+            let isGrow = false;
+            if(this.tileIsEmpty(x, y)) isGrow = true;
+            let tile = this.getTile(x, y);
+            if(parseInt(tile.age) >= (parseInt(age) + parseInt(config.autoReload2Grow.value))) isGrow = true;
+            //display over tile
+            if(isGrow) this.displayOverTile(true, x, y, (tile.age + ""), "rgba(65, 105, 225, 0.5)", config);
+          }
           
           //reset data
           this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
