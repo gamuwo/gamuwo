@@ -1144,7 +1144,7 @@ class Garden {
             let tile = this.getTile(x, y);
             if(parseInt(tile.age) >= (parseInt(age) + parseInt(config.autoReload2Grow.value))) isGrow = true;
             //display over tile
-            if(isGrow) this.displayOverTile(true, x, y, (tile.age + ""), "rgba(144, 238, 144, 0.5)", config);
+            if(isGrow) this.displayOverTile(true, x, y, (tile.age + ""), "rgba(34, 139, 34, 0.5)", config);
           }
           
           //reset data
