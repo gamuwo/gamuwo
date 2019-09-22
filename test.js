@@ -1144,7 +1144,7 @@ class Garden {
             let tile = this.getTile(x, y);
             if(parseInt(tile.age) >= (parseInt(age) + parseInt(config.autoReload2Grow.value))) isGrow = true;
             //display over tile
-            if(isGrow) this.displayOverTile(true, x, y, (tile.age + ""), "rgba(65, 105, 225, 0.5)", config);
+            if(isGrow) this.displayOverTile(true, x, y, (tile.age + ""), "rgba(144, 238, 144, 0.5)", config);
           }
           
           //reset data
@@ -2077,6 +2077,7 @@ class UI {
         if(id !== undefined && id.length > 2 && id.slice(-2) == "ID" && Garden.selectedSeed > -1){
           input.value = (Garden.selectedSeed + 1);
           input.onchange();
+          Game.SparkleAt(Game.mouseX, Game.mouseY);
         }
       };
     });
