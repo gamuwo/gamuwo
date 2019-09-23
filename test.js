@@ -2201,7 +2201,7 @@ class UI {
       document.getElementById("cookieGardenHelperFileLoadButton").value = "";
     }
     
-    doc.elId('gardenContent').keydown = (event) => {
+    window.keydown = (event) => {
       console.log("event.keyCode:" + event.keyCode);
       console.log("event.ctrlKey:" + event.ctrlKey);
     }
