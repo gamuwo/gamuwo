@@ -2527,7 +2527,6 @@ class Main {
 
   static handleToggle(key) {
     this.config[key] = !this.config[key];
-    this.save();
     UI.toggleButton(key);
     
     if(key == "lumpReload" && this.config[key]){
@@ -2543,6 +2542,12 @@ class Main {
       Garden.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
     }
     
+    if(key=="autoReload" && this.config[key]){
+      Garden.changeButton("autoReload2", false, this.config);
+    }
+    if(key=="autoReload2" && this.config[key]){
+      Garden.changeButton("autoReload", false, this.config);
+    }
     if(key=="autoReload" && !this.config[key] && this.config.autoReloadSaveSecond != 9999){
       //auto reload forced termination
       Main.restart(1000);
