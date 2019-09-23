@@ -2201,6 +2201,10 @@ class UI {
       document.getElementById("cookieGardenHelperFileLoadButton").value = "";
     }
     
+    doc.elId('gardenContent').keydown = (event) => {
+      console.log(event.key);
+    }
+    
     //hack tooltips
     this.hackTileTooltip();
     this.hackSeedTooltip();
