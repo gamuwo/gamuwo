@@ -1066,8 +1066,8 @@ class Garden {
       //reload
       config.autoReload2Reloads += 1;
       this.writeLog(3, "auto reload2", false, "reload! try:" + config.autoReload2Reloads);
-      Game.LoadSave(config.autoReload2Save);
-      this.autoReload2Recursive(config);
+      let result = Game.LoadSave(config.autoReload2Save);
+      if(result) this.autoReload2Recursive(config);
     } else {
       //grow
       //for average
