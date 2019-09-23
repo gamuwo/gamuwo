@@ -2113,6 +2113,7 @@ class UI {
           if(splitted.length == 3){
             Garden.changeNumber("autoReloadX", splitted[1], config);
             Garden.changeNumber("autoReloadY", splitted[2], config);
+            Garden.changeButton("autoReloadGetXY", false, config);
             Main.save();
             Garden.writeLog(3, "auto reload", false, "set x/y:" + config.autoReloadX.value + "/" + config.autoReloadY.value);
           }
