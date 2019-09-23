@@ -2202,8 +2202,12 @@ class UI {
     }
     
     window.onkeydown = (event) => {
-      console.log("event.keyCode:" + event.keyCode);
-      console.log("event.ctrlKey:" + event.ctrlKey);
+      if(event.ctrlKey && event.keyCode == 49){
+        if(config.quickLoadSave != "") Game.LoadSave(config.quickLoadSave);
+      }
+      if(event.ctrlKey && event.keyCode == 50){
+        if(config.quickLoad2Save != "") Game.LoadSave(config.quickLoad2Save);
+      }
     }
     
     //hack tooltips
