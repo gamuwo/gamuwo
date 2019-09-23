@@ -1006,14 +1006,32 @@ class Garden {
           let tileAr2 = this.getTile(x, y);
           if(tileAr2.seedId == config.autoReload2ID.value){
             targetPlants.push([x, y, tileAr2.age]);
-            //display over tile
-            this.displayOverTile(true, x, y, (tileAr2.age + ""), "", config);
           }
         });
         
         if(targetPlants.length > 0){
           //sort by age
           targetPlants.sort(function(a,b){return(a[2] - b[2]);});
+          
+          //display over tile
+          let num = parseInt(config.autoReload2Number.value);
+          let play = parseInt(config.autoReload2Play.value);
+          let upperAge = 0;
+          if(num > targetPlants.length){
+            upperAge = targetPlants[targetPlants.length - 1][2];
+          } else {
+            if(num > 0) upperAge = (targetPlants[(num - 1)][2] + play);
+          }
+          for(let i of targetPlants){
+            let x = i[0];
+            let y = i[1];
+            let age = i[2];
+            if(age > upperAge) this.displayOverTile(true, x, y, (age + ""), "", config);
+            if(age == upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(0, 0, 205, 0.5)", config);
+            if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(0, 0, 205, 0.5)", config);
+            if(play == 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(139, 0, 0, 0.5)", config);
+          }
+          
           //save
           config.autoReload2Save = Game.WriteSave(1);
           config.autoReload2SaveSecond = this.secondsBeforeNextTick;
