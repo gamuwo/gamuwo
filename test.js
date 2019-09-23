@@ -997,6 +997,144 @@ class Garden {
     }
   }
   
+  static autoReload2Recursive(config) {
+    let upperAge = 0;
+    let targetNumber = 0;
+    if(parseInt(config.autoReload2Number.value) > config.autoReload2Plants.length){
+      upperAge = parseInt(config.autoReload2Plants[config.autoReload2Plants.length - 1][2]);
+      targetNumber = parseInt(config.autoReload2Plants.length);
+    } else {
+      if(config.autoReload2Number.value > 0) upperAge = parseInt(config.autoReload2Plants[(parseInt(config.autoReload2Number.value) - 1)][2]) + parseInt(config.autoReload2Play.value);
+      targetNumber = parseInt(config.autoReload2Number.value);
+    }
+    this.writeLog(3, "auto reload2", false, "upperAge:" + upperAge);
+    this.writeLog(3, "auto reload2", false, "targetNumber:" + targetNumber);
+    
+    //for check
+    let grows = 0;
+    let checkNum = 0;
+    let mustNum = 0;
+    let mustGrows = 0;
+    let isPlay0 = (parseInt(config.autoReload2Play.value) == 0);
+    for(let i = 0; i < config.autoReload2Plants.length; i++){
+      let targetPlant = config.autoReload2Plants[i];
+      let isMust = (targetPlant[2] < upperAge);
+      if(parseInt(targetPlant[2]) > upperAge){
+        //above upper age
+        break;
+      }
+      checkNum += 1;
+      if(isMust) mustNum += 1;
+      
+      if(this.tileIsEmpty(targetPlant[0], targetPlant[1])){
+        //target plant was harvested
+        grows += 1;
+        if(isMust) mustGrows += 1;
+        continue;
+      }
+      
+      let tileAr2 = this.getTile(targetPlant[0], targetPlant[1]);
+      if(parseInt(tileAr2.age) >= (parseInt(targetPlant[2]) + parseInt(config.autoReload2Grow.value))){
+        grows += 1;
+        if(isMust) mustGrows += 1;
+      }
+    }
+    
+    //for grows text
+    let growsString = grows + "/" +targetNumber + "(" + checkNum + ")";
+    if(isPlay0) growsString = growsString + ", " + mustGrows + "/" + mustNum;
+    document.getElementById("autoReload2Disp2").innerText = growsString;
+    this.writeLog(3, "auto reload2", false, "grows:" + growsString);
+    
+    //for grows meter
+    if(targetNumber == 0){
+      document.getElementById(UI.makeId("autoReload2MeterGrow")).value = 1;
+    } else {
+      document.getElementById(UI.makeId("autoReload2MeterGrow")).value = (grows / targetNumber);
+    }
+    
+    //for try text
+    document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
+    
+    //for try meter
+    let ave = config.autoReload2TryAverage[config.autoReload2ID.value];
+    if(!isFinite(parseFloat(ave))) ave = 0;
+    this.displayMultiMeter(UI.makeId("autoReload2Meter"), UI.makeId("autoReload2Meter2"), UI.makeId("autoReload2Meter3"), ave, config.autoReload2Reloads);
+    
+    //check
+    if(grows < targetNumber || (isPlay0 && mustGrows < mustNum)){
+      //reload
+      config.autoReload2Reloads += 1;
+      this.writeLog(3, "auto reload2", false, "reload! try:" + config.autoReload2Reloads);
+      Game.LoadSave(config.autoReload2Save);
+      this.autoReload2Recursive(config);
+    } else {
+      //grow
+      //for average
+      let id = config.autoReload2ID.value;
+      if(!Array.isArray(config.autoReload2TryHistory[id])) config.autoReload2TryHistory[id] = [];
+      this.pushLimit(config.autoReload2Reloads, config.autoReload2TryHistory[id]);
+      config.autoReload2TryAverage[id] = this.arrayAverage(config.autoReload2TryHistory[id]);
+      let tryAverage = "[" + id + "]" + config.autoReload2TryAverage[id].toFixed(2) + "(" + config.autoReload2TryHistory[id].length + ")";
+      document.getElementById("autoReload2Disp3").innerText = tryAverage;
+      this.writeLog(2, "auto reload2", false, "try average:" + tryAverage);
+      
+      //for max min age
+      let ageArray = [];
+      this.forEachTile((x, y) => {
+        let tileForAge = this.getTile(x, y);
+        if(tileForAge.seedId == config.autoReload2ID.value){
+          ageArray.push(tileForAge.age);
+        }
+      });
+      let ageString = "0-0(0)/0";
+      if(ageArray.length > 0){
+        ageArray.sort(function(a,b){return(a - b);});
+        ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")/" + this.getPlant(config.autoReload2ID.value).mature;
+      }
+      document.getElementById("autoReload2Disp4").innerText = ageString;
+      this.writeLog(2, "auto reload2", false, "age:" + ageString);
+      
+      //for overtile
+      for(let targetPlant of config.autoReload2Plants){
+        let x = targetPlant[0];
+        let y = targetPlant[1];
+        let age = targetPlant[2];
+        let isGrow = false;
+        if(this.tileIsEmpty(x, y)) isGrow = true;
+        let tile = this.getTile(x, y);
+        if(parseInt(tile.age) >= (parseInt(age) + parseInt(config.autoReload2Grow.value))) isGrow = true;
+        //display over tile
+        if(isGrow){
+          this.displayOverTile(true, x, y, (tile.age + ""), "rgba(34, 139, 34, 0.5)", config);
+        } else {
+          this.displayOverTile(true, x, y, (tile.age + ""), "", config);
+        }
+      }
+      
+      //reset data
+      this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
+      config.autoReload2Save = "";
+      config.autoReload2SaveSecond = 9999;
+      config.autoReload2Reloads = 0;
+      config.autoReload2Plants = [];
+      this.writeLog(3, "auto reload2", false, "reset:" + config.autoReload2Save);
+      this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
+      this.writeLog(3, "auto reload2", false, "reloads:" + config.autoReload2Reloads);
+      this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
+      
+      //restore other button state
+      this.restoreButtonStatus(config.autoReload2ButtonSave, config);
+      config.autoReload2ButtonSave = [];
+      Main.save();
+      this.writeLog(3, "auto reload2", false, "restore buttons");
+      
+      //timer start
+      this.writeLog(3, "auto reload2", false, "timer start! interval:" + Main.timerInterval);
+      Main.start();
+    }
+  }
+  
   static handleAutoReload2(config) {
     if(config.autoReload2){
       //2sec before tick
@@ -1048,149 +1186,16 @@ class Garden {
           document.getElementById("rightBottomAutoReload").style.display = "none";
           document.getElementById("rightBottomAutoReload2").style.display = "block";
           document.getElementById("rightBottomLumpReload").style.display = "none";
-          
-          //reset interval
-          Main.restart(parseInt(config.interval.value));
-          this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
         }
       }
       
       //after tick
       if(this.secondsBeforeNextTick >= config.autoReload2SaveSecond + 10){
-        let upperAge = 0;
-        let targetNumber = 0;
-        if(parseInt(config.autoReload2Number.value) > config.autoReload2Plants.length){
-          upperAge = parseInt(config.autoReload2Plants[config.autoReload2Plants.length - 1][2]);
-          targetNumber = parseInt(config.autoReload2Plants.length);
-        } else {
-          if(config.autoReload2Number.value > 0) upperAge = parseInt(config.autoReload2Plants[(parseInt(config.autoReload2Number.value) - 1)][2]) + parseInt(config.autoReload2Play.value);
-          targetNumber = parseInt(config.autoReload2Number.value);
-        }
-        this.writeLog(3, "auto reload2", false, "upperAge:" + upperAge);
-        this.writeLog(3, "auto reload2", false, "targetNumber:" + targetNumber);
-        
-        //for check
-        let grows = 0;
-        let checkNum = 0;
-        let mustNum = 0;
-        let mustGrows = 0;
-        let isPlay0 = (parseInt(config.autoReload2Play.value) == 0);
-        for(let i = 0; i < config.autoReload2Plants.length; i++){
-          let targetPlant = config.autoReload2Plants[i];
-          let isMust = (targetPlant[2] < upperAge);
-          if(parseInt(targetPlant[2]) > upperAge){
-            //above upper age
-            break;
-          }
-          checkNum += 1;
-          if(isMust) mustNum += 1;
-          
-          if(this.tileIsEmpty(targetPlant[0], targetPlant[1])){
-            //target plant was harvested
-            grows += 1;
-            if(isMust) mustGrows += 1;
-            continue;
-          }
-          
-          let tileAr2 = this.getTile(targetPlant[0], targetPlant[1]);
-          if(parseInt(tileAr2.age) >= (parseInt(targetPlant[2]) + parseInt(config.autoReload2Grow.value))){
-            grows += 1;
-            if(isMust) mustGrows += 1;
-          }
-        }
-        
-        //for grows text
-        let growsString = grows + "/" +targetNumber + "(" + checkNum + ")";
-        if(isPlay0) growsString = growsString + ", " + mustGrows + "/" + mustNum;
-        document.getElementById("autoReload2Disp2").innerText = growsString;
-        this.writeLog(3, "auto reload2", false, "grows:" + growsString);
-        
-        //for grows meter
-        if(targetNumber == 0){
-          document.getElementById(UI.makeId("autoReload2MeterGrow")).value = 1;
-        } else {
-          document.getElementById(UI.makeId("autoReload2MeterGrow")).value = (grows / targetNumber);
-        }
-        
-        //for try text
-        document.getElementById("autoReload2Disp").innerText = config.autoReload2Reloads;
-        
-        //for try meter
-        let ave = config.autoReload2TryAverage[config.autoReload2ID.value];
-        if(!isFinite(parseFloat(ave))) ave = 0;
-        this.displayMultiMeter(UI.makeId("autoReload2Meter"), UI.makeId("autoReload2Meter2"), UI.makeId("autoReload2Meter3"), ave, config.autoReload2Reloads);
-        
-        //check
-        if(grows < targetNumber || (isPlay0 && mustGrows < mustNum)){
-          //reload
-          config.autoReload2Reloads += 1;
-          this.writeLog(3, "auto reload2", false, "reload! try:" + config.autoReload2Reloads);
-          Game.LoadSave(config.autoReload2Save);
-        } else {
-          //grow
-          //reset interval
-          Main.restart(1000);
-          
-          //for average
-          let id = config.autoReload2ID.value;
-          if(!Array.isArray(config.autoReload2TryHistory[id])) config.autoReload2TryHistory[id] = [];
-          this.pushLimit(config.autoReload2Reloads, config.autoReload2TryHistory[id]);
-          config.autoReload2TryAverage[id] = this.arrayAverage(config.autoReload2TryHistory[id]);
-          let tryAverage = "[" + id + "]" + config.autoReload2TryAverage[id].toFixed(2) + "(" + config.autoReload2TryHistory[id].length + ")";
-          document.getElementById("autoReload2Disp3").innerText = tryAverage;
-          this.writeLog(2, "auto reload2", false, "try average:" + tryAverage);
-          
-          //for max min age
-          let ageArray = [];
-          this.forEachTile((x, y) => {
-            let tileForAge = this.getTile(x, y);
-            if(tileForAge.seedId == config.autoReload2ID.value){
-              ageArray.push(tileForAge.age);
-            }
-          });
-          let ageString = "0-0(0)/0";
-          if(ageArray.length > 0){
-            ageArray.sort(function(a,b){return(a - b);});
-            ageString = ageArray[0] + "-" + ageArray[ageArray.length - 1] + "(" + (ageArray[ageArray.length - 1] - ageArray[0]) + ")/" + this.getPlant(config.autoReload2ID.value).mature;
-          }
-          document.getElementById("autoReload2Disp4").innerText = ageString;
-          this.writeLog(2, "auto reload2", false, "age:" + ageString);
-          
-          //for overtile
-          for(let targetPlant of config.autoReload2Plants){
-            let x = targetPlant[0];
-            let y = targetPlant[1];
-            let age = targetPlant[2];
-            let isGrow = false;
-            if(this.tileIsEmpty(x, y)) isGrow = true;
-            let tile = this.getTile(x, y);
-            if(parseInt(tile.age) >= (parseInt(age) + parseInt(config.autoReload2Grow.value))) isGrow = true;
-            //display over tile
-            if(isGrow){
-              this.displayOverTile(true, x, y, (tile.age + ""), "rgba(34, 139, 34, 0.5)", config);
-            } else {
-              this.displayOverTile(true, x, y, (tile.age + ""), "", config);
-            }
-          }
-          
-          //reset data
-          this.writeLog(2, "auto reload2", false, "grow! reloads:" + config.autoReload2Reloads);
-          this.writeLog(3, "auto reload2", false, "reset interval:" + Main.timerInterval);
-          config.autoReload2Save = "";
-          config.autoReload2SaveSecond = 9999;
-          config.autoReload2Reloads = 0;
-          config.autoReload2Plants = [];
-          this.writeLog(3, "auto reload2", false, "reset:" + config.autoReload2Save);
-          this.writeLog(3, "auto reload2", false, "second:" + config.autoReload2SaveSecond);
-          this.writeLog(3, "auto reload2", false, "reloads:" + config.autoReload2Reloads);
-          this.writeLog(3, "auto reload2", false, "target plants:" + config.autoReload2Plants);
-          
-          //restore other button state
-          this.restoreButtonStatus(config.autoReload2ButtonSave, config);
-          config.autoReload2ButtonSave = [];
-          Main.save();
-          this.writeLog(3, "auto reload2", false, "restore buttons");
-        }
+        //timer stop
+        Main.stop();
+        this.writeLog(3, "auto reload2", false, "timer stop!");
+        //recursive start
+        this.autoReload2Recursive(config);
       }
     }
   }
