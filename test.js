@@ -2202,7 +2202,8 @@ class UI {
     }
     
     doc.elId('gardenContent').keydown = (event) => {
-      console.log(event.key);
+      console.log("event.keyCode:" + event.keyCode);
+      console.log("event.ctrlKey:" + event.ctrlKey);
     }
     
     //hack tooltips
