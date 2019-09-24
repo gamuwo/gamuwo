@@ -528,7 +528,7 @@ class Garden {
   
   static compareAge(plot, config) {
     this.forEachTile((x, y) => {
-      console.log("----------------------------");
+      console.log("--------------" + this.secondsBeforeNextTick + "--------------");
       console.log("x:" + x + " y:" + y);
       let plotId = plot[x][y][0];
       console.log("plotId:" + plotId);
@@ -547,11 +547,11 @@ class Garden {
           let growMin = Math.floor(plant.ageTick);
           let growMax = Math.ceil(plant.ageTick + plant.ageTickR);
           if(grow == growMax){
-            this.flashOverTile(x, y, (age + ""), "rgba(34, 139, 34, 0.5)", 100, config);
+            this.flashOverTile(x, y, (age + ""), "rgba(34, 139, 34, 0.5)", 1000, config);
           } else if(grow == growMin){
-            this.flashOverTile(x, y, (age + ""), "rgba(139, 0, 0, 0.5)", 100, config);
+            this.flashOverTile(x, y, (age + ""), "rgba(139, 0, 0, 0.5)", 1000, config);
           } else {
-            this.flashOverTile(x, y, (age + ""), "", 100, config);
+            this.flashOverTile(x, y, (age + ""), "", 1000, config);
           }
         }
       }
@@ -2587,7 +2587,9 @@ class Main {
   static handleQuickLoad(save, plot) {
     if(save != "") {
       Game.LoadSave(save);
-      Garden.compareAge(plot, this.config);
+      window.setTimeout(() => {
+        Garden.compareAge(plot, this.config);
+      }, 100);
     }
   }
 
