@@ -526,7 +526,7 @@ class Garden {
     });
   }
   
-  static compareAge(plot) {
+  static compareAge(plot, config) {
     this.forEachTile((x, y) => {
       let plotId = plot[x][y][0];
       if( plotId > 0 && !this.tileIsEmpty(x, y) ){
@@ -536,6 +536,16 @@ class Garden {
           let plotAge = plot[x][y][1];
           let age = tile.age;
           let plant = this.getPlant(id);
+          let grow = (age - plotAge);
+          let growMin = Math.floor(plant.ageTick);
+          let growMax = Math.ceil(plant.ageTick + plant.ageTickR);
+          if(grow == growMax){
+            this.displayOverTile(true, x, y, (age + ""), "rgba(34, 139, 34, 0.5)", config);
+          } else if(grow == growMin){
+            this.displayOverTile(true, x, y, (age + ""), "rgba(139, 0, 0, 0.5)", config);
+          } else {
+            this.displayOverTile(true, x, y, (age + ""), "", config);
+          }
         }
       }
     });
@@ -2570,7 +2580,7 @@ class Main {
   static handleQuickLoad(save, plot) {
     if(save != "") {
       Game.LoadSave(save);
-      Garden.compareAge(plot);
+      Garden.compareAge(plot, this.config);
     }
   }
 
