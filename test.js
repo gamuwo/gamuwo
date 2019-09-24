@@ -1638,7 +1638,10 @@ class UI {
 }
 #cookieGardenHelperTooltip .gardenTileIcon { position: inherit; }
 #cookieGardenHelperTooltip .gardenTileAge {
-  opacity: 1;
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
   border-radius: 3px;
   display: inline-block;
   background-color: rgba(0, 0, 0, 0.5);
@@ -2296,9 +2299,8 @@ class UI {
     let plotHtml =  `<div id="cookieGardenHelperTooltip">
       ${savedPlot.map((row) => `<div class="gardenTileRow">
         ${row.map((tile) => `<div class="tile">
-          ${(tile[0] - 1) < 0 ? '' : `<div class="gardenTileIcon" style="background-position: ${this.getSeedIconX(tile[0], tile[1], isSeed)}px ${this.getSeedIconY(tile[0])}px; opacity: ${this.getOpacity(tile[0], tile[1], isSeed)};">
-            ${isSeed ? '' : `<div class="gardenTileAge">${tile[1]}</div>`}
-          </div>`}
+          ${(tile[0] - 1) < 0 ? '' : `<div class="gardenTileIcon" style="background-position: ${this.getSeedIconX(tile[0], tile[1], isSeed)}px ${this.getSeedIconY(tile[0])}px; opacity: ${this.getOpacity(tile[0], tile[1], isSeed)};"></div>`}
+          ${(tile[0] - 1) < 0 || isSeed ? '' : `<div class="gardenTileAge">${tile[1]}</div>`}
         </div>`).join('')}
       </div>`).join('')}
     </div>`;
