@@ -528,6 +528,7 @@ class Garden {
   
   static compareAge(plot, config) {
     this.forEachTile((x, y) => {
+      let isDisplay = false;
       let plotId = plot[y][x][0];
       if( plotId > 0 && !this.tileIsEmpty(x, y) ){
         let tile = this.getTile(x, y);
@@ -546,8 +547,10 @@ class Garden {
           } else {
             this.displayOverTile(true, x, y, (age + ""), "", config);
           }
+          isDisplay = true;
         }
       }
+      if(!isDisplay) this.displayOverTile(false, x, y, "", "", config);
     });
   }
   
