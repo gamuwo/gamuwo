@@ -1834,7 +1834,7 @@ class UI {
         </p>
         <h3>Settings</h3>
         <p>
-          ${this.button('playSound', 'Sound', 'play beep sound before 10-15sec from tick', true, config.playSound)}
+          ${this.button('playSound', 'Sound', 'play beep sound before tick', true, config.playSound)}
           ${this.numberInputDigits('playSoundSecond', 'Sec', 'input second', config.playSoundSecond, 3)}
         </p>
         <p>
@@ -1851,7 +1851,7 @@ class UI {
         </p>
         <p>
           <span id="cookieGardenHelperPlotMouseOver" class="borderLabel">Plot</span>
-          ${this.numberInputDigits('interval', 'Reload interval', 'input auto reload interval(ms)', config.interval, 4)}
+          ${this.numberInputDigits('interval', 'Interval', 'input auto reload interval(ms)', config.interval, 4)}
         </p>
       </div>
     </div>
