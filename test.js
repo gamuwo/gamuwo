@@ -1638,10 +1638,11 @@ class UI {
 }
 #cookieGardenHelperTooltip .gardenTileIcon { position: inherit; }
 #cookieGardenHelperTooltip .gardenTileAge {
+  opacity: 1;
   border-radius: 3px;
   display: inline-block;
   background-color: rgba(0, 0, 0, 0.5);
-  padding: 3px;
+  padding: 2px;
 }
 
 #cookieGardenHelper .warning {
