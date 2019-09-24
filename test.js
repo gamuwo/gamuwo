@@ -2290,9 +2290,13 @@ class UI {
     result = result + `</div>`;
     if( (plant.noContam !== undefined && plant.noContam) || plant.contam !== undefined ){
       result = result + `<div style="margin:6px 0px;font-size:11px;">`;
-      if(plant.noContam !== undefined && plant.noContam) result = result + `<div class="green"><b>NoContam </b></div>`;
+      if(plant.noContam !== undefined && plant.noContam){
+        result = result + `<div class="green" style="display: inline-block;">`;
+        result = result + `<b>NoContam </b>`;
+        result = result + `</div>`;
+      }
       if(plant.contam !== undefined){
-        result = result + `<div class="red">`;
+        result = result + `<div class="red" style="display: inline-block;">`;
         result = result + `<b>Contam : </b>`;
         result = result + plant.contam;
         result = result + `</div>`;
