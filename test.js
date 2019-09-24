@@ -506,6 +506,16 @@ class Garden {
     }
   }
   
+  static flashOverTile(x, y, text, color, config) {
+    if(config.overTile){
+      let id = "overTile-" + x + "-" + y;
+      document.getElementById(id).style.transition = "none";
+      this.displayOverTile(true, x, y, text, color, config);
+      document.getElementById(id).style.transition = "all 500ms 0s ease";
+      this.displayOverTile(false, x, y, text, color, config);
+    }
+  }
+  
   static hideOverTile() {
     doc.qSelAll('#gardenPlot div.cookieGardenHelperOverTile').forEach((overTile) => {
       overTile.style.opacity = "0";
@@ -2111,10 +2121,13 @@ class UI {
         if(config.autoReloadGetXY){
           let splitted = tile.id.split("-");
           if(splitted.length == 3){
-            Garden.changeNumber("autoReloadX", splitted[1], config);
-            Garden.changeNumber("autoReloadY", splitted[2], config);
+            let x = splitted[1];
+            let y = splitted[2];
+            Garden.changeNumber("autoReloadX", x, config);
+            Garden.changeNumber("autoReloadY", y, config);
             Garden.changeButton("autoReloadGetXY", false, config);
             Main.save();
+            Garden.flashOverTile(x, y, "", "", config);
             Garden.writeLog(3, "auto reload", false, "set x/y:" + config.autoReloadX.value + "/" + config.autoReloadY.value);
           }
         }
