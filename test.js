@@ -2580,10 +2580,9 @@ class Main {
   static handleQuickLoad(save, plot) {
     if(save != "") {
       Game.LoadSave(save);
-      Garden.compareAge(plot, this.config);
-//       window.setTimeout(() => {
-//         Garden.compareAge(plot, this.config);
-//       }, 100);
+      window.setTimeout(() => {
+        Garden.compareAge(plot, this.config);
+      }, 100);
     }
   }
 
