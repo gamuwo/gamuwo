@@ -1630,6 +1630,7 @@ class UI {
 }
 #cookieGardenHelperTooltip .gardenTileRow { display: flex; }
 #cookieGardenHelperTooltip .tile {
+  position: relative;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 24px;
   display: inline-block;
