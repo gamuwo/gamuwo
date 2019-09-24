@@ -526,6 +526,23 @@ class Garden {
     });
   }
   
+  static compareAge(plot) {
+    this.forEachTile((x, y) => {
+      let plotId = plot[x][y][1];
+      console.log("plotId:" + plotId);
+      if( plotId > 0 && !this.tileIsEmpty(x, y) ){
+        let tile = this.getTile(x, y);
+        let id = tile.seedId;
+        console.log("id:" + id);
+        if(plotId == id){
+          let plotAge = plot[x][y][0];
+          let age = tile.age;
+          let plant = this.getPlant(id);
+        }
+      }
+    });
+  }
+  
   static getMutsCustom(x, y, ifMature) {
     let anyNum = 0;
     let plantsNum = {};
@@ -2219,10 +2236,10 @@ class UI {
     
     window.onkeydown = (event) => {
       if(event.ctrlKey && event.keyCode == 49){
-        if(config.quickLoadSave != "") Game.LoadSave(config.quickLoadSave);
+        Main.handleQuickLoad(config.quickLoadSave, config.quickLoadSavedPlot);
       }
       if(event.ctrlKey && event.keyCode == 50){
-        if(config.quickLoad2Save != "") Game.LoadSave(config.quickLoad2Save);
+        Main.handleQuickLoad(config.quickLoad2Save, config.quickLoad2SavedPlot);
       }
     }
     
@@ -2551,6 +2568,13 @@ class Main {
   static stop() { window.clearInterval(this.timerId); }
 
   static save() { Config.save(this.config); }
+  
+  static handleQuickLoad(save, plot) {
+    if(save != "") {
+      Game.LoadSave(save);
+      Garden.compareAge(plot);
+    }
+  }
 
   static handleChange(key, value) {
     if (this.config[key].value !== undefined) {
@@ -2634,17 +2658,13 @@ class Main {
     } else if (key == 'fileSaveButton') {
       Game.FileSave();
     } else if (key == 'quickLoad') {
-      if(this.config.quickLoadSave != "") {
-        Game.LoadSave(this.config.quickLoadSave);
-      }
+      this.handleQuickLoad(this.config.quickLoadSave, this.config.quickLoadSavedPlot);
     } else if (key == 'quickSave2') {
       this.config.quickLoad2Save = Game.WriteSave(1);
       this.config.quickLoad2SavedPlot = Garden.clonePlotAll();
       Garden.changeSpan("quickLoad2SaveTime", Garden.saveDate(), this.config);
     } else if (key == 'quickLoad2') {
-      if(this.config.quickLoad2Save != "") {
-        Game.LoadSave(this.config.quickLoad2Save);
-      }
+      this.handleQuickLoad(this.config.quickLoad2Save, this.config.quickLoad2SavedPlot);
     } else if (key == 'autoReloadReset') {
       this.config.autoReloadTryHistory = [];
       this.config.autoReloadTryAverage = [];
