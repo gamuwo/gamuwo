@@ -2288,12 +2288,9 @@ class UI {
     result = result + `<b> AgeTickR : </b>`;
     result = result + plant.ageTickR;
     result = result + `</div>`;
-    console.log("plant.noContam:" + plant.noContam);
-    console.log("plant.noContam == true:" + (plant.noContam == true));
-    console.log('plant.noContam == "true":' + (plant.noContam == "true"));
     if( (plant.noContam !== undefined && plant.noContam) || plant.contam !== undefined ){
       result = result + `<div style="margin:6px 0px;font-size:11px;">`;
-      if(plant.noContam !== undefined && plant.noContam) `<div class="green"><b>NoContam </b></div>`
+      if(plant.noContam !== undefined && plant.noContam) result = result + `<div class="green"><b>NoContam </b></div>`;
       if(plant.contam !== undefined){
         result = result + `<div class="red">`;
         result = result + `<b>Contam : </b>`;
