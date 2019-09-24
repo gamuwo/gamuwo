@@ -528,6 +528,8 @@ class Garden {
   
   static compareAge(plot) {
     this.forEachTile((x, y) => {
+      console.log("---------------------");
+      console.log("x:" + x + " y:" + y);
       let plotId = plot[x][y][0];
       console.log("plotId:" + plotId);
       if( plotId > 0 && !this.tileIsEmpty(x, y) ){
