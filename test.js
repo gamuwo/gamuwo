@@ -528,6 +528,7 @@ class Garden {
   
   static compareAge(plot, config) {
     this.forEachTile((x, y) => {
+      console.log("this.secondsBeforeNextTick:" + this.secondsBeforeNextTick);
       let plotId = plot[x][y][0];
       if( plotId > 0 && !this.tileIsEmpty(x, y) ){
         let tile = this.getTile(x, y);
@@ -540,11 +541,11 @@ class Garden {
           let growMin = Math.floor(plant.ageTick);
           let growMax = Math.ceil(plant.ageTick + plant.ageTickR);
           if(grow == growMax){
-            this.displayOverTile(true, x, y, (age + ""), "rgba(34, 139, 34, 0.5)", config);
+            this.flashOverTile(x, y, (age + ""), "rgba(34, 139, 34, 0.5)", 100, config);
           } else if(grow == growMin){
-            this.displayOverTile(true, x, y, (age + ""), "rgba(139, 0, 0, 0.5)", config);
+            this.flashOverTile(x, y, (age + ""), "rgba(139, 0, 0, 0.5)", 100, config);
           } else {
-            this.displayOverTile(true, x, y, (age + ""), "", config);
+            this.flashOverTile(x, y, (age + ""), "", 100, config);
           }
         }
       }
