@@ -556,6 +556,7 @@ class Garden {
         }
       }
     });
+    console:log(plot);
   }
   
   static getMutsCustom(x, y, ifMature) {
