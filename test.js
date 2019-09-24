@@ -506,7 +506,7 @@ class Garden {
     }
   }
   
-  static flashOverTile(x, y, text, color, config) {
+  static flashOverTile(x, y, text, color, time, config) {
     if(config.overTile){
       let id = "overTile-" + x + "-" + y;
       document.getElementById(id).style.transition = "none";
@@ -514,7 +514,7 @@ class Garden {
       window.setTimeout(() => {
         document.getElementById(id).style.transition = "all 500ms 0s ease";
         this.displayOverTile(false, x, y, text, color, config);
-      }, 1000);
+      }, time);
     }
   }
   
@@ -2129,7 +2129,7 @@ class UI {
             Garden.changeNumber("autoReloadY", y, config);
             Garden.changeButton("autoReloadGetXY", false, config);
             Main.save();
-            Garden.flashOverTile(x, y, "", "", config);
+            Garden.flashOverTile(x, y, "", "", 5000, config);
             Garden.writeLog(3, "auto reload", false, "set x/y:" + config.autoReloadX.value + "/" + config.autoReloadY.value);
           }
         }
