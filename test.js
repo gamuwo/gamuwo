@@ -530,15 +530,15 @@ class Garden {
     this.forEachTile((x, y) => {
       console.log("--------------" + this.secondsBeforeNextTick + "--------------");
       console.log("x:" + x + " y:" + y);
-      console.log("plot[x][y]:" + plot[x][y]);
-      let plotId = plot[x][y][0];
+      console.log("plot[y][x]:" + plot[y][x]);
+      let plotId = plot[y][x][0];
       console.log("plotId:" + plotId);
       if( plotId > 0 && !this.tileIsEmpty(x, y) ){
         let tile = this.getTile(x, y);
         let id = tile.seedId;
         console.log("id:" + id);
         if(plotId == id){
-          let plotAge = plot[x][y][1];
+          let plotAge = plot[y][x][1];
           console.log("plotAge:" + plotAge);
           let age = tile.age;
           console.log("age:" + age);
