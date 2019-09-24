@@ -2582,7 +2582,7 @@ class Main {
       Game.LoadSave(save);
       window.setTimeout(() => {
         Garden.compareAge(plot, this.config);
-      }, 100);
+      }, parseInt(this.config.interval.value));
     }
   }
 
