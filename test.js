@@ -2559,6 +2559,10 @@ class Main {
       this.config[key] = value;
     }
     this.save();
+    
+    if(key == "autoReloadX" || key == "autoReloadY"){
+      Garden.flashOverTile(this.config.autoReloadX.value, this.config.autoReloadY.value, "", "", 1000, this.config);
+    }
   }
 
   static handleToggle(key) {
