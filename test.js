@@ -2288,8 +2288,13 @@ class UI {
     result = result + `<b> AgeTickR : </b>`;
     result = result + plant.ageTickR;
     result = result + `</div>`;
-    if( (plant.noContam !== undefined && plant.noContam) || plant.contam !== undefined ){
+    if( (plant.plantable !== undefined && !plant.plantable) || (plant.noContam !== undefined && plant.noContam) || plant.contam !== undefined ){
       result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+      if(plant.plantable !== undefined && !plant.plantable){
+        result = result + `<div class="red" style="display: inline-block; margin-right: 5px;">`;
+        result = result + `<b>Not plantable</b>`;
+        result = result + `</div>`;
+      }
       if(plant.noContam !== undefined && plant.noContam){
         result = result + `<div class="green" style="display: inline-block; margin-right: 5px;">`;
         result = result + `<b>NoContam</b>`;
