@@ -1843,6 +1843,7 @@ class UI {
           ${this.numberInputDigits('overTileHideTime', 'Hide', 'input over tile hide time(sec)', config.overTileHideTime, 3)}
         </p>
         <p>
+          <span id="cookieGardenHelperPlotMouseOver">Plot</span>
           ${this.numberInputDigits('interval', 'Reload interval', 'input auto reload interval(ms)', config.interval, 4)}
         </p>
       </div>
@@ -2194,6 +2195,15 @@ class UI {
         Main.handleClick(a.name);
       };
     });
+
+    doc.elId('cookieGardenHelperPlotMouseOver').onmouseout = (event) => {
+      Game.tooltip.shouldHide=1;
+    }
+    doc.elId('cookieGardenHelperPlotMouseOver').onmouseover = (event) => {
+      let plot = Garden.clonePlotAll();
+      let content = UI.buildSavedPlot(plot, false);
+      Game.tooltip.draw(this, window.escape(content));
+    }
 
     doc.elId('cookieGardenHelperPlotIsSaved').onmouseout = (event) => {
       Main.handleMouseoutPlotIsSaved(this);
