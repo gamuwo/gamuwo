@@ -511,8 +511,10 @@ class Garden {
       let id = "overTile-" + x + "-" + y;
       document.getElementById(id).style.transition = "none";
       this.displayOverTile(true, x, y, text, color, config);
-      document.getElementById(id).style.transition = "all 500ms 0s ease";
-      this.displayOverTile(false, x, y, text, color, config);
+      window.setTimeout(() => {
+        document.getElementById(id).style.transition = "all 500ms 0s ease";
+        this.displayOverTile(false, x, y, text, color, config);
+      }, 1000);
     }
   }
   
