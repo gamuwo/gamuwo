@@ -530,12 +530,16 @@ class Garden {
     this.forEachTile((x, y) => {
       console.log("this.secondsBeforeNextTick:" + this.secondsBeforeNextTick);
       let plotId = plot[x][y][0];
+      console.log("plotId:" + plotId);
       if( plotId > 0 && !this.tileIsEmpty(x, y) ){
         let tile = this.getTile(x, y);
         let id = tile.seedId;
+        console.log("id:" + id);
         if(plotId == id){
           let plotAge = plot[x][y][1];
+          console.log("plotAge:" + plotAge);
           let age = tile.age;
+          console.log("age:" + age);
           let plant = this.getPlant(id);
           let grow = (age - plotAge);
           let growMin = Math.floor(plant.ageTick);
