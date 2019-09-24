@@ -1637,6 +1637,12 @@ class UI {
   width: 48px;
 }
 #cookieGardenHelperTooltip .gardenTileIcon { position: inherit; }
+#cookieGardenHelperTooltip .gardenTileAge {
+  border-radius: 3px;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 3px;
+}
 
 #cookieGardenHelper .warning {
   padding: 1rem;
@@ -2290,7 +2296,7 @@ class UI {
       ${savedPlot.map((row) => `<div class="gardenTileRow">
         ${row.map((tile) => `<div class="tile">
           ${(tile[0] - 1) < 0 ? '' : `<div class="gardenTileIcon" style="background-position: ${this.getSeedIconX(tile[0], tile[1], isSeed)}px ${this.getSeedIconY(tile[0])}px; opacity: ${this.getOpacity(tile[0], tile[1], isSeed)};">
-            ${isSeed ? '' : tile[1]}
+            ${isSeed ? '' : `<div class="gardenTileAge">${tile[1]}</div>`}
           </div>`}
         </div>`).join('')}
       </div>`).join('')}
