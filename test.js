@@ -2302,7 +2302,7 @@ class UI {
         </div>`).join('')}
       </div>`).join('')}
     </div>`;
-    Garden.writeLog(4, "saved plot", false, plotHtml);
+    Garden.writeLog(4, "saved plot", false, plotHtml.replace(/\r?\n/g, ""));
     return plotHtml;
   }
   
