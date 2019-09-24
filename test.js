@@ -2129,7 +2129,7 @@ class UI {
             Garden.changeNumber("autoReloadY", y, config);
             Garden.changeButton("autoReloadGetXY", false, config);
             Main.save();
-            Garden.flashOverTile(x, y, "", "", 5000, config);
+            Garden.flashOverTile(x, y, "", "", 100, config);
             Garden.writeLog(3, "auto reload", false, "set x/y:" + config.autoReloadX.value + "/" + config.autoReloadY.value);
           }
         }
@@ -2561,7 +2561,7 @@ class Main {
     this.save();
     
     if(key == "autoReloadX" || key == "autoReloadY"){
-      Garden.flashOverTile(this.config.autoReloadX.value, this.config.autoReloadY.value, "", "", 1000, this.config);
+      Garden.flashOverTile(this.config.autoReloadX.value, this.config.autoReloadY.value, "", "", 100, this.config);
     }
   }
 
