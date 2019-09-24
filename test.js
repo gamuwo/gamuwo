@@ -528,35 +528,27 @@ class Garden {
   
   static compareAge(plot, config) {
     this.forEachTile((x, y) => {
-      console.log("--------------" + this.secondsBeforeNextTick + "--------------");
-      console.log("x:" + x + " y:" + y);
-      console.log("plot[y][x]:" + plot[y][x]);
       let plotId = plot[y][x][0];
-      console.log("plotId:" + plotId);
       if( plotId > 0 && !this.tileIsEmpty(x, y) ){
         let tile = this.getTile(x, y);
         let id = tile.seedId;
-        console.log("id:" + id);
         if(plotId == id){
           let plotAge = plot[y][x][1];
-          console.log("plotAge:" + plotAge);
           let age = tile.age;
-          console.log("age:" + age);
           let plant = this.getPlant(id);
           let grow = (age - plotAge);
           let growMin = Math.floor(plant.ageTick);
           let growMax = Math.ceil(plant.ageTick + plant.ageTickR);
           if(grow == growMax){
-            this.flashOverTile(x, y, (age + ""), "rgba(34, 139, 34, 0.5)", 1000, config);
+            this.displayOverTile(true, x, y, (age + ""), "rgba(34, 139, 34, 0.5)", config);
           } else if(grow == growMin){
-            this.flashOverTile(x, y, (age + ""), "rgba(139, 0, 0, 0.5)", 1000, config);
+            this.displayOverTile(true, x, y, (age + ""), "rgba(139, 0, 0, 0.5)", config);
           } else {
-            this.flashOverTile(x, y, (age + ""), "", 1000, config);
+            this.displayOverTile(true, x, y, (age + ""), "", config);
           }
         }
       }
     });
-    console.log(plot);
   }
   
   static getMutsCustom(x, y, ifMature) {
@@ -2588,9 +2580,10 @@ class Main {
   static handleQuickLoad(save, plot) {
     if(save != "") {
       Game.LoadSave(save);
-      window.setTimeout(() => {
-        Garden.compareAge(plot, this.config);
-      }, 100);
+      Garden.compareAge(plot, this.config);
+//       window.setTimeout(() => {
+//         Garden.compareAge(plot, this.config);
+//       }, 100);
     }
   }
 
