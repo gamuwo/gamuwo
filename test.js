@@ -1637,7 +1637,7 @@ class UI {
   height: 48px;
   width: 48px;
 }
-#cookieGardenHelperTooltip .gardenTileIcon { position: inherit; }
+#cookieGardenHelperTooltip .gardenTileIcon { position: static; }
 #cookieGardenHelperTooltip .gardenTileAge {
   position: absolute;
   z-index: 1;
