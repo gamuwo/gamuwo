@@ -1626,6 +1626,13 @@ class UI {
 #cookieGardenHelper span.labelWithState:not(.active) .labelStateActive,
 #cookieGardenHelper span.labelWithState.active .labelStateNotActive { display: none; }
 
+#cookieGardenHelper .borderLabel {
+  border: solid 1px white;
+  border-radius: 5px;
+  padding: 0 4px;
+  margin: 1px;
+}
+
 #cookieGardenHelperTooltip {
   background: #000 url("img/BGgarden.jpg");
   padding: 10px;
@@ -1843,7 +1850,7 @@ class UI {
           ${this.numberInputDigits('overTileHideTime', 'Hide', 'input over tile hide time(sec)', config.overTileHideTime, 3)}
         </p>
         <p>
-          <span id="cookieGardenHelperPlotMouseOver">Plot</span>
+          <span id="cookieGardenHelperPlotMouseOver" class="borderLabel">Plot</span>
           ${this.numberInputDigits('interval', 'Reload interval', 'input auto reload interval(ms)', config.interval, 4)}
         </p>
       </div>
