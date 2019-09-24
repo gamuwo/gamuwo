@@ -2616,6 +2616,9 @@ class Main {
       Garden.writeLog(3, "lump reload", false, "reset interval:" + Main.timerInterval);
     }
     
+    if(key=="overTile" && !this.config[key]){
+      Garden.hideOverTile();
+    }
     if(key=="autoReload" && this.config[key]){
       Garden.changeButton("autoReload2", false, this.config);
     }
