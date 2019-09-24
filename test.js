@@ -2287,6 +2287,12 @@ class UI {
     result = result + plant.ageTick;
     result = result + `<b> AgeTickR : </b>`;
     result = result + plant.ageTickR;
+    console.log("noContam:" + plant.noContam);
+    console.log("contam:" + plant.contam);
+    result = result + `<b> NoContam : </b>`;
+    result = result + plant.noContam;
+    result = result + `<b> Contam : </b>`;
+    result = result + plant.contam;
     result = result + `</div>`;
     if(parents.length > 0){
       result = result + `<div style="margin:6px 0px;font-size:11px;">`;
