@@ -2287,13 +2287,18 @@ class UI {
     result = result + plant.ageTick;
     result = result + `<b> AgeTickR : </b>`;
     result = result + plant.ageTickR;
-    console.log("noContam:" + plant.noContam);
-    console.log("contam:" + plant.contam);
-    result = result + `<b> NoContam : </b>`;
-    result = result + plant.noContam;
-    result = result + `<b> Contam : </b>`;
-    result = result + plant.contam;
     result = result + `</div>`;
+    if( (plant.noContam !== undefined && plant.noContam) || plant.contam !== undefined ){
+      result = result + `<div style="margin:6px 0px;font-size:11px;">`;
+      if(plant.noContam !== undefined && plant.noContam) `<div class="green"><b>NoContam </b></div>`
+      if(plant.contam !== undefined){
+        result = result + `<div class="red">`;
+        result = result + `<b>Contam : </b>`;
+        result = result + plant.contam;
+        result = result + `</div>`;
+      }
+      result = result + `</div>`;
+    }
     if(parents.length > 0){
       result = result + `<div style="margin:6px 0px;font-size:11px;">`;
       result = result + `<b>Parents : </b>`;
