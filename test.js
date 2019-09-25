@@ -1067,8 +1067,8 @@ class Garden {
             let y = i[1];
             let age = i[2];
             if(age > upperAge) this.displayOverTile(true, x, y, (age + ""), "", config);
-            if(age == upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(135, 206, 250, 0.8)", config);
-            if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(135, 206, 250, 0.8)", config);
+            if(age == upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(0, 191, 255, 0.8)", config);
+            if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(0, 191, 255, 0.8)", config);
             if(play == 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(255, 69, 0, 0.8)", config);
           }
           
