@@ -117,7 +117,7 @@ class Config {
 }
 
 class Garden {
-  const colorRGBA = {
+  static colorRGBA = {
     red: "rgba(255, 69, 0, 0.8)",
     green: "rgba(0, 255, 0, 0.8)",
     blue: "rgba(0, 191, 255, 0.8)",
