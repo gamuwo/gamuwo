@@ -2680,6 +2680,9 @@ class Main {
     if(key=="overTile" && !this.config[key]){
       Garden.hideOverTile();
     }
+    if(key=="overTileAge" && !this.config[key]){
+      Garden.hideOverTile();
+    }
     if(key=="autoReload" && this.config[key]){
       Garden.changeButton("autoReload2", false, this.config);
     }
