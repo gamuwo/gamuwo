@@ -1024,7 +1024,7 @@ class Garden {
           if(isMaxMode){
             this.forEachTile((x, y) => {
               let tileAr = this.getTile(x, y);
-              if(tileAr.seedId == config.autoReloadID.value) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+              if(tileAr.seedId == config.autoReloadID.value && tileAr.age == 0) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
             });
           } else {
             let x = parseInt(config.autoReloadX.value);
