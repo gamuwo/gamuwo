@@ -1067,8 +1067,8 @@ class Garden {
             let y = i[1];
             let age = i[2];
             if(age > upperAge) this.displayOverTile(true, x, y, (age + ""), "", config);
-            if(age == upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(65, 105, 225, 0.8)", config);
-            if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(65, 105, 225, 0.8)", config);
+            if(age == upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(135, 206, 250, 0.8)", config);
+            if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(135, 206, 250, 0.8)", config);
             if(play == 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(255, 69, 0, 0.8)", config);
           }
           
@@ -1486,12 +1486,14 @@ class UI {
   opacity: 0;
   position: absolute;
   z-index: 1;
-  height: calc(100% - 6px);
-  width: calc(100% - 6px);
+  top: -3px;
+  left: -3px;
+  height: 100%;
+  width: 100%;
   margin: 3px;
   box-sizing: border-box;
   border: solid 3px rgba(255, 255, 255, 0.8);
-  border-radius: 20px;
+  border-radius: 25px;
   justify-content: center;
   align-items: center; 
   transition: all 500ms 0s ease;
@@ -1502,8 +1504,8 @@ class UI {
   opacity: 0;
   position: absolute;
   z-index: 2;
-  top: 0;
-  left: 0;
+  top: -3px;
+  left: -3px;
   border-radius: 3px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 2px;
