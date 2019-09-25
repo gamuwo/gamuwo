@@ -545,6 +545,11 @@ class Garden {
     });
   }
   
+  static isOverTile(x, y) {
+    let id = "overTile-" + x + "-" + y;
+    return document.getElementById(id).style.opacity == "1";
+  }
+  
   static compareAge(plot, config) {
     this.forEachTile((x, y) => {
       let isDisplay = false;
@@ -1024,7 +1029,7 @@ class Garden {
           if(isMaxMode){
             this.forEachTile((x, y) => {
               let tileAr = this.getTile(x, y);
-              if(tileAr.seedId == config.autoReloadID.value && tileAr.age == 0) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+              if(isOverTile(x, y) && tileAr.seedId == config.autoReloadID.value) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
             });
           } else {
             let x = parseInt(config.autoReloadX.value);
