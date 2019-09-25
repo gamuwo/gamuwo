@@ -486,9 +486,10 @@ class Garden {
   static displayOverTile(isDisplay, x, y, text, color, config) {
     if(config.overTile){
       let id = "overTile-" + x + "-" + y;
+      let idAge = "overTileAge-" + x + "-" + y;
       if(isDisplay) {
         document.getElementById(id).style.opacity = "1";
-        document.getElementById(id).innerText = text;
+        document.getElementById(idAge).innerText = text;
         if(color == ""){
           if(text == ""){
             document.getElementById(id).style.background = "none";
@@ -500,7 +501,7 @@ class Garden {
         }
       } else {
         document.getElementById(id).style.opacity = "0";
-        document.getElementById(id).innerText = "";
+        document.getElementById(idAge).innerText = "";
         document.getElementById(id).style.background = "none";
       }
     }
@@ -1498,6 +1499,16 @@ class UI {
   transition: all 500ms 0s ease;
   font-size: 1rem;
 }
+#gardenPlot .cookieGardenHelperOverTileAge {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  border-radius: 3px;
+  display: inline-block;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2px;
+}
 
 #logPanel {
   background: #000 url("https://gamuwo.github.io/gamuwo/logback.jpg");
@@ -2186,7 +2197,17 @@ class UI {
       let idSplitted = tile.id.split("-");
       if(idSplitted.length == 3){
         let idNew = "overTile-" + idSplitted[1] + "-" + idSplitted[2];
-        tile.insertAdjacentHTML("beforeend", `<div id="` + idNew + `" class="cookieGardenHelperOverTile"></div>`);
+        let idAge = "overTileAge-" + idSplitted[1] + "-" + idSplitted[2];
+        let html = "";
+        html = html + `<div id="`;
+        html = html + idNew;
+        html = html + `" class="cookieGardenHelperOverTile">`;
+        html = html + `</div>`;
+        html = html + `<div id="`;
+        html = html + idAge;
+        html = html + `" class="cookieGardenHelperOverTileAge">`;
+        html = html + `</div>`;
+        tile.insertAdjacentHTML("beforeend", html);
       }
       
     });
