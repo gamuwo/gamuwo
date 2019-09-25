@@ -121,6 +121,7 @@ class Garden {
     red: "rgba(255, 69, 0, 0.8)",
     green: "rgba(0, 255, 0, 0.8)",
     blue: "rgba(0, 191, 255, 0.8)",
+    orange: "rgba(255, 165, 0, 0.8)",
   }
 
   static get minigame() { return Game.Objects['Farm'].minigame; }
@@ -2214,7 +2215,7 @@ class UI {
             Garden.changeNumber("autoReloadY", y, config);
             Garden.changeButton("autoReloadGetXY", false, config);
             Main.save();
-            Garden.flashOverTile(x, y, "", "", 100, config);
+            Garden.flashOverTile(x, y, "", Garden.colorRGBA.orange, 100, config);
             Garden.writeLog(3, "auto reload", false, "set x/y:" + config.autoReloadX.value + "/" + config.autoReloadY.value);
           }
         }
@@ -2664,7 +2665,7 @@ class Main {
     this.save();
     
     if(key == "autoReloadX" || key == "autoReloadY"){
-      Garden.flashOverTile(this.config.autoReloadX.value, this.config.autoReloadY.value, "", "", 100, this.config);
+      Garden.flashOverTile(this.config.autoReloadX.value, this.config.autoReloadY.value, "", Garden.colorRGBA.orange, 100, this.config);
     }
   }
 
