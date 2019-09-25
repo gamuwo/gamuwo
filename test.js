@@ -2211,6 +2211,7 @@ class UI {
     });
     
     doc.qSelAll('#gardenPlot div.gardenTile').forEach((tile) => {
+      //get xy(interrupt original click event)
       tile.addEventListener("click", function(event) {
         Garden.writeLog(3, "auto reload", false, "click tile:" + tile.id);
         if(config.autoReloadGetXY){
@@ -2228,24 +2229,6 @@ class UI {
           }
         }
       }, true);
-      
-//       tile.onclick = (event) => {
-//         Garden.writeLog(3, "auto reload", false, "click tile:" + tile.id);
-//         if(config.autoReloadGetXY){
-//           let splitted = tile.id.split("-");
-//           if(splitted.length == 3){
-//             let x = splitted[1];
-//             let y = splitted[2];
-//             Garden.changeNumber("autoReloadX", x, config);
-//             Garden.changeNumber("autoReloadY", y, config);
-//             Garden.changeButton("autoReloadGetXY", false, config);
-//             Main.save();
-//             Garden.flashOverTile(x, y, "", Garden.colorRGBA.orange, 100, config);
-//             Garden.writeLog(3, "auto reload", false, "set x/y:" + config.autoReloadX.value + "/" + config.autoReloadY.value);
-//             event.stopImmediatePropagation();
-//           }
-//         }
-//       };
       
       //build div over garden tile
       let idSplitted = tile.id.split("-");
