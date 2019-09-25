@@ -2226,6 +2226,7 @@ class UI {
             Main.save();
             Garden.flashOverTile(x, y, "", Garden.colorRGBA.orange, 100, config);
             Garden.writeLog(3, "auto reload", false, "set x/y:" + config.autoReloadX.value + "/" + config.autoReloadY.value);
+            event.stopImmediatePropagation();
           }
         }
       };
