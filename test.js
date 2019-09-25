@@ -447,7 +447,7 @@ class Garden {
   }
   
   static resetOneTimeFlag(config) {
-    if(this.secondsBeforeNextTick >= 179){
+    if(this.secondsBeforeNextTick >= 178){
       config.playSoundFlag = false;
       config.playSound2Flag = false;
       config.playSoundMatureFlag = false;
@@ -918,7 +918,7 @@ class Garden {
   static handleAutoReload(config) {
     if(config.autoReload){
       //2sec before tick
-      if(this.secondsBeforeNextTick <= 2 && config.autoReloadSaveSecond == 9999){
+      if(this.secondsBeforeNextTick <= 2 && this.secondsBeforeNextTick >= 0 && config.autoReloadSaveSecond == 9999){
         let isMaxMode = (parseInt(config.autoReloadMax.value) > 0);
         //for max mode
         let targetNumber = 0;
@@ -1068,7 +1068,7 @@ class Garden {
   static handleAutoReload2(config) {
     if(config.autoReload2){
       //2sec before tick
-      if(this.secondsBeforeNextTick <= 2 && config.autoReload2SaveSecond == 9999){
+      if(this.secondsBeforeNextTick <= 2 && this.secondsBeforeNextTick >= 0 && config.autoReload2SaveSecond == 9999){
         let targetPlants = [];
         this.forEachTile((x, y) => {
           let tileAr2 = this.getTile(x, y);
