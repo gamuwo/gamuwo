@@ -509,16 +509,14 @@ class Garden {
       let idAge = "overTileAge-" + x + "-" + y;
       if(isDisplay){
         document.getElementById(id).style.opacity = "1";
-        if(text != ""){
-          document.getElementById(idAge).style.opacity = "1";
-          document.getElementById(idAge).innerText = text;
-        }
         document.getElementById(id).style.borderColor = color;
+        document.getElementById(idAge).style.opacity = "1";
+        document.getElementById(idAge).innerText = text;
       } else {
         document.getElementById(id).style.opacity = "";
+        document.getElementById(id).style.borderColor = "";
         document.getElementById(idAge).style.opacity = "";
         document.getElementById(idAge).innerText = "";
-        document.getElementById(id).style.borderColor = "";
       }
     }
   }
