@@ -492,15 +492,13 @@ class Garden {
   }
   
   static displayOverTileAge(isDisplay, x, y, text, config) {
-    if(config.overTileAge){
-      let idAge = "overTileAge-" + x + "-" + y;
-      if(isDisplay){
-        document.getElementById(idAge).style.opacity = "1";
-        document.getElementById(idAge).innerText = text;
-      } else {
-        document.getElementById(idAge).style.opacity = "";
-        document.getElementById(idAge).innerText = "";
-      }
+    let idAge = "overTileAge-" + x + "-" + y;
+    if(isDisplay){
+      document.getElementById(idAge).style.opacity = "1";
+      document.getElementById(idAge).innerText = text;
+    } else {
+      document.getElementById(idAge).style.opacity = "";
+      document.getElementById(idAge).innerText = "";
     }
   }
   
