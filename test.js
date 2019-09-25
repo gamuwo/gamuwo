@@ -117,6 +117,12 @@ class Config {
 }
 
 class Garden {
+  const colorRGBA = {
+    red: "rgba(255, 69, 0, 0.8)",
+    green: "rgba(0, 255, 0, 0.8)",
+    blue: "rgba(0, 191, 255, 0.8)",
+  }
+
   static get minigame() { return Game.Objects['Farm'].minigame; }
   static get isActive() { return this.minigame !== undefined; }
 
@@ -507,7 +513,7 @@ class Garden {
           document.getElementById(idAge).style.opacity = "1";
           document.getElementById(idAge).innerText = text;
         }
-        if(color != "") document.getElementById(id).style.borderColor = color;
+        document.getElementById(id).style.borderColor = color;
       } else {
         document.getElementById(id).style.opacity = "";
         document.getElementById(idAge).style.opacity = "";
@@ -555,11 +561,11 @@ class Garden {
           let growMin = Math.floor(plant.ageTick);
           let growMax = Math.ceil(plant.ageTick + plant.ageTickR);
           if(grow == growMax){
-            this.displayOverTile(true, x, y, (age + ""), "rgba(0, 255, 0, 0.8)", config);
+            this.displayOverTile(true, x, y, age, this.colorRGBA.green, config);
           } else if(grow == growMin){
-            this.displayOverTile(true, x, y, (age + ""), "rgba(255, 69, 0, 0.8)", config);
+            this.displayOverTile(true, x, y, age, this.colorRGBA.red, config);
           } else {
-            this.displayOverTile(true, x, y, (age + ""), "", config);
+            this.displayOverTile(true, x, y, age, "", config);
           }
           isDisplay = true;
         }
@@ -929,7 +935,7 @@ class Garden {
               for(let i of mutations){
                 if(this.getPlant(config.autoReloadID.value).key == i[0]) {
                   isMutation = true;
-                  this.displayOverTile(true, x, y, "", "", config);
+                  this.displayOverTile(true, x, y, "", this.colorRGBA.blue, config);
                   break;
                 }
               }
@@ -943,7 +949,7 @@ class Garden {
             for(let i of mutations){
               if(this.getPlant(config.autoReloadID.value).key == i[0]) {
                 isMutation = true;
-                this.displayOverTile(true, x, y, "", "", config);
+                this.displayOverTile(true, x, y, "", this.colorRGBA.blue, config);
                 break;
               }
             }
@@ -1019,8 +1025,12 @@ class Garden {
           if(isMaxMode){
             this.forEachTile((x, y) => {
               let tileAr = this.getTile(x, y);
-              if(tileAr.seedId != config.autoReloadID.value) this.displayOverTile(false, x, y, "", "", config);
+              if(tileAr.seedId == config.autoReloadID.value) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
             });
+          } else {
+            let x = parseInt(config.autoReloadX.value);
+            let y = parseInt(config.autoReloadY.value);
+            this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
           }
           
           this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
@@ -1080,10 +1090,10 @@ class Garden {
             let x = i[0];
             let y = i[1];
             let age = i[2];
-            if(age > upperAge) this.displayOverTile(true, x, y, (age + ""), "", config);
-            if(age == upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(0, 191, 255, 0.8)", config);
-            if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(0, 191, 255, 0.8)", config);
-            if(play == 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(255, 69, 0, 0.8)", config);
+            if(age > upperAge) this.displayOverTile(true, x, y, age, "", config);
+            if(age == upperAge) this.displayOverTile(true, x, y, age, this.colorRGBA.blue, config);
+            if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, age, this.colorRGBA.blue, config);
+            if(play == 0 && age < upperAge) this.displayOverTile(true, x, y, age, this.colorRGBA.red, config);
           }
           
           //save
@@ -1221,9 +1231,9 @@ class Garden {
             if(parseInt(tile.age) >= (parseInt(age) + parseInt(config.autoReload2Grow.value))) isGrow = true;
             //display over tile
             if(isGrow){
-              this.displayOverTile(true, x, y, (tile.age + ""), "rgba(0, 255, 0, 0.8)", config);
+              this.displayOverTile(true, x, y, tile.age, this.colorRGBA.green, config);
             } else {
-              this.displayOverTile(true, x, y, (tile.age + ""), "", config);
+              this.displayOverTile(true, x, y, tile.age, "", config);
             }
           }
           
