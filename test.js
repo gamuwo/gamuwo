@@ -541,9 +541,9 @@ class Garden {
           let growMin = Math.floor(plant.ageTick);
           let growMax = Math.ceil(plant.ageTick + plant.ageTickR);
           if(grow == growMax){
-            this.displayOverTile(true, x, y, (age + ""), "rgba(34, 139, 34, 0.5)", config);
+            this.displayOverTile(true, x, y, (age + ""), "rgba(0, 255, 0, 0.8)", config);
           } else if(grow == growMin){
-            this.displayOverTile(true, x, y, (age + ""), "rgba(139, 0, 0, 0.5)", config);
+            this.displayOverTile(true, x, y, (age + ""), "rgba(255, 69, 0, 0.8)", config);
           } else {
             this.displayOverTile(true, x, y, (age + ""), "", config);
           }
@@ -1067,9 +1067,9 @@ class Garden {
             let y = i[1];
             let age = i[2];
             if(age > upperAge) this.displayOverTile(true, x, y, (age + ""), "", config);
-            if(age == upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(0, 0, 205, 0.5)", config);
-            if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(0, 0, 205, 0.5)", config);
-            if(play == 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(139, 0, 0, 0.5)", config);
+            if(age == upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(65, 105, 225, 0.8)", config);
+            if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(65, 105, 225, 0.8)", config);
+            if(play == 0 && age < upperAge) this.displayOverTile(true, x, y, (age + ""), "rgba(255, 69, 0, 0.8)", config);
           }
           
           //save
@@ -1207,7 +1207,7 @@ class Garden {
             if(parseInt(tile.age) >= (parseInt(age) + parseInt(config.autoReload2Grow.value))) isGrow = true;
             //display over tile
             if(isGrow){
-              this.displayOverTile(true, x, y, (tile.age + ""), "rgba(34, 139, 34, 0.5)", config);
+              this.displayOverTile(true, x, y, (tile.age + ""), "rgba(0, 255, 0, 0.8)", config);
             } else {
               this.displayOverTile(true, x, y, (tile.age + ""), "", config);
             }
