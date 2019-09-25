@@ -487,7 +487,7 @@ class Garden {
     if(config.overTile){
       let id = "overTile-" + x + "-" + y;
       let idAge = "overTileAge-" + x + "-" + y;
-      if(isDisplay) {
+      if(isDisplay){
         document.getElementById(id).style.opacity = "1";
         if(text != ""){
           document.getElementById(idAge).style.opacity = "1";
@@ -1490,9 +1490,8 @@ class UI {
   width: calc(100% - 6px);
   margin: 3px;
   box-sizing: border-box;
-  border: dotted 3px rgba(255, 255, 255, 0.8);
+  border: solid 3px rgba(255, 255, 255, 0.8);
   border-radius: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
   align-items: center; 
   transition: all 500ms 0s ease;
