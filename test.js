@@ -1326,7 +1326,7 @@ class Garden {
   static handleOverTileAge(config) {
     if(config.overTileAge){
       this.forEachTile((x, y) => {
-        this.displayOverTileAge(true, x, y, this.getTile(x, y).age, config);
+        if( !this.tileIsEmpty(x, y) ) this.displayOverTileAge(true, x, y, this.getTile(x, y).age, config);
       });
     }
   }
