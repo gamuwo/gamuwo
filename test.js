@@ -96,6 +96,7 @@ class Config {
       hideOverTileFlag: false,
       overTile: false,
       overTileHideTime: { value: 170, min: 0 },
+      overTileAge: false,
     };
   }
 
@@ -480,6 +481,19 @@ class Garden {
   static restoreButtonStatus(saveArray, config) {
     for(let i = 0; i < saveArray.length; i++){
       this.changeButton(saveArray[i][0], saveArray[i][1], config);
+    }
+  }
+  
+  static displayOverTileAge(isDisplay, x, y, text, config) {
+    if(config.overTileAge){
+      let idAge = "overTileAge-" + x + "-" + y;
+      if(isDisplay){
+        document.getElementById(idAge).style.opacity = "1";
+        document.getElementById(idAge).innerText = text;
+      } else {
+        document.getElementById(idAge).style.opacity = "";
+        document.getElementById(idAge).innerText = "";
+      }
     }
   }
   
@@ -1309,6 +1323,14 @@ class Garden {
     }
   }
   
+  static handleOverTileAge(config) {
+    if(config.overTileAge){
+      this.forEachTile((x, y) => {
+        this.displayOverTileAge(true, x, y, this.getTile(x, y).age, config);
+      });
+    }
+  }
+  
   static displayRunTime(startTime, endTime, config) {
     document.getElementById("intervalDisp").innerText = Main.timerInterval;
     document.getElementById("runtimeDisp").innerText = (endTime - startTime).toFixed(2);
@@ -1345,6 +1367,8 @@ class Garden {
       this.handlePlaySoundMature(config);
       //hide over tile
       this.handleHideOverTile(config);
+      //for over tile age
+      this.handleOverTileAge(config);
       //for quick load
       this.handleQuickLoadSave(config);
       //auto lump
@@ -1856,7 +1880,7 @@ class UI {
           ${this.numberInputDigits('overTileHideTime', 'Hide', 'input over tile hide time(sec)', config.overTileHideTime, 3)}
         </p>
         <p>
-          <span id="cookieGardenHelperPlotMouseOver" class="borderLabel">Plot</span>
+          ${this.button('overTileAge', 'Age', 'display age on garden tile', true, config.overTileAge)}
           ${this.numberInputDigits('interval', 'Interval', 'input auto reload interval(ms)', config.interval, 4)}
         </p>
       </div>
@@ -2218,15 +2242,6 @@ class UI {
         Main.handleClick(a.name);
       };
     });
-
-    doc.elId('cookieGardenHelperPlotMouseOver').onmouseout = (event) => {
-      Game.tooltip.shouldHide=1;
-    }
-    doc.elId('cookieGardenHelperPlotMouseOver').onmouseover = (event) => {
-      let plot = Garden.clonePlotAll();
-      let content = UI.buildSavedPlot(plot, false);
-      Game.tooltip.draw(this, window.escape(content));
-    }
 
     doc.elId('cookieGardenHelperPlotIsSaved').onmouseout = (event) => {
       Main.handleMouseoutPlotIsSaved(this);
