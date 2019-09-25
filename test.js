@@ -1237,7 +1237,7 @@ class Garden {
             if(isGrow){
               this.displayOverTile(true, x, y, tile.age, this.colorRGBA.green, config);
             } else {
-              this.displayOverTile(true, x, y, tile.age, "", config);
+              this.displayOverTileAge(true, x, y, tile.age, config);
             }
           }
           
