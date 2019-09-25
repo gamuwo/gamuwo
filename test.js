@@ -1486,18 +1486,12 @@ class UI {
   opacity: 0;
   position: absolute;
   z-index: 1;
-  top: -3px;
-  left: -3px;
   height: 100%;
   width: 100%;
-  margin: 3px;
   box-sizing: border-box;
   border: solid 3px rgba(255, 255, 255, 0.8);
   border-radius: 25px;
-  justify-content: center;
-  align-items: center; 
   transition: all 500ms 0s ease;
-  font-size: 1rem;
 }
 #gardenPlot .cookieGardenHelperOverTileAge {
   display: inline-block;
@@ -1509,6 +1503,7 @@ class UI {
   border-radius: 3px;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 2px;
+  transition: all 500ms 0s ease;
 }
 
 #logPanel {
