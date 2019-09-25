@@ -1482,7 +1482,6 @@ class UI {
 #rightBottomLumpReload { display: none }
 
 #gardenPlot .cookieGardenHelperOverTile {
-  display: flex;
   opacity: 0;
   position: absolute;
   z-index: 1;
