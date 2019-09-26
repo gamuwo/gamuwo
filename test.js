@@ -2705,12 +2705,6 @@ class Main {
     if(key=="overTileAge" && !this.config[key]){
       Garden.hideOverTile();
     }
-    if(key=="autoReload" && this.config[key]){
-      Garden.changeButton("autoReload2", false, this.config);
-    }
-    if(key=="autoReload2" && this.config[key]){
-      Garden.changeButton("autoReload", false, this.config);
-    }
     if(key=="autoReload" && !this.config[key] && this.config.autoReloadSaveSecond != 9999){
       //auto reload forced termination
       Main.restart(1000);
