@@ -52,6 +52,8 @@ class Config {
       autoReloadTryHistory: [],
       autoReloadTryAverage: [],
       autoReloadGetXY: false,
+      autoReloadMode:  { value: 0, min: 0 },
+      autoReloadUnlockSeeds: [],
       autoReload2: false,
       autoReload2ID: { value: 1, min: 1 },
       autoReload2Grow: { value: 0, min: 0 },
@@ -2003,8 +2005,6 @@ class UI {
           </p>
           <p>
             ${this.numberInputDigits('lumpReloadNum', 'Num', 'input number', config.lumpReloadNum, 1)}
-          </p>
-          <p>
             ${this.fixedSelect('lumpReloadType', ["normal", "bifurcated", "golden", "meaty", "caramelized"], 0, 'Type', 'select type', config.lumpReloadType, 5)}
           </p>
         </div>
@@ -2017,6 +2017,9 @@ class UI {
           ${this.button('autoReload', '', '', true, config.autoReload)}
         </h2>
         <div class="boxPanel">
+          <p>
+            ${this.fixedSelect('autoReloadMode', ["Max mode", "XY mode", "Lock seed mode"], 0, 'Mode', 'select mode', config.autoReloadMode, 7)}
+          </p>
           <p>
             ${this.fixedSelect('autoReloadID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.autoReloadID, 7)}
           </p>
@@ -2041,13 +2044,11 @@ class UI {
             ${this.fixedSelect('autoReload2ID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.autoReload2ID, 7)}
           </p>
           <p>
-            ${this.numberInputDigits('autoReload2Grow', 'Grow', 'input Grow', config.autoReload2Grow, 2)}
-          </p>
-          <p>
             ${this.numberInputDigits('autoReload2Number', 'Num', 'input Number', config.autoReload2Number, 2)}
             ${this.numberInputDigits('autoReload2Play', 'Play', 'input Play', config.autoReload2Play, 2)}
           </p>
           <p>
+            ${this.numberInputDigits('autoReload2Grow', 'Grow', 'input Grow', config.autoReload2Grow, 2)}
             ${this.button('autoReload2Reset', 'Reset', 'reset history data')}
           </p>
         </div>
