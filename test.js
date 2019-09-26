@@ -1722,6 +1722,7 @@ class UI {
   color: lightgray;
   background-color: gray;
   border-color: gray;
+  user-select: none;
 }
 #cookieGardenHelper div.meterDiv { height: 7px; }
 #cookieGardenHelper meter {
