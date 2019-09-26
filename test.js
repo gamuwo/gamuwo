@@ -1652,8 +1652,8 @@ class UI {
 #cookieGardenHelper input:disabled,
 #logPanel select:disabled,
 #logPanel input:disabled {
-  color: graytext;
-  background-color: darkgray;
+  color: lightgray;
+  background-color: gray;
 }
 #cookieGardenHelper div.meterDiv { height: 7px; }
 #cookieGardenHelper meter {
