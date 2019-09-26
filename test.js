@@ -2686,19 +2686,19 @@ class Main {
   }
   
   static controlAutoReloadElementDisabled() {
-    if(this.config.autoReloadMode == 0){
+    if(this.config.autoReloadMode.value == 0){
       document.getElementById("autoReloadID").disabled = false;
       document.getElementById("autoReloadMax").disabled = false;
       document.getElementById("autoReloadX").disabled = true;
       document.getElementById("autoReloadY").disabled = true;
     }
-    if(this.config.autoReloadMode == 1){
+    if(this.config.autoReloadMode.value == 1){
       document.getElementById("autoReloadID").disabled = false;
       document.getElementById("autoReloadMax").disabled = true;
       document.getElementById("autoReloadX").disabled = false;
       document.getElementById("autoReloadY").disabled = false;
     }
-    if(this.config.autoReloadMode == 2){
+    if(this.config.autoReloadMode.value == 2){
       document.getElementById("autoReloadID").disabled = true;
       document.getElementById("autoReloadMax").disabled = true;
       document.getElementById("autoReloadX").disabled = true;
