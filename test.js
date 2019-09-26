@@ -53,7 +53,7 @@ class Config {
       autoReloadTryAverage: [],
       autoReloadGetXY: false,
       autoReloadMode:  { value: 0, min: 0 },
-      autoReloadUnlockSeeds: [],
+      autoReloadLockSeeds: [],
       autoReload2: false,
       autoReload2ID: { value: 1, min: 1 },
       autoReload2Grow: { value: 0, min: 0 },
@@ -940,6 +940,7 @@ class Garden {
         
         //for possible mutation check
         let isMutation = false;
+        let lockMutationSeeds = [];
         if(mode == 0){
           //max mode
           this.forEachTile((x, y) => {
@@ -970,20 +971,51 @@ class Garden {
             }
           }
         }
+        if(mode == 2){
+          //lock seed mode
+          let lockSeeds = [];
+          for(let key in this.minigame.plants){
+            let plant = this.minigame.plants[key];
+            if(!plant.unlocked) lockSeeds.push(key);
+          }
+          let plantedSeeds = [];
+          this.forEachTile((x, y) => {
+            if(!this.tileIsEmpty(x, y)){
+              let tile = this.getTile(x, y);
+              let plant = this.getPlant(tile.seedId);
+              if(!plantedSeeds.includes(plant.key)) plantedSeeds.push(plant.key);
+            }
+          });
+          this.forEachTile((x, y) => {
+            if(this.tileIsEmpty(x, y)){
+              let mutations = this.getMutsCustom(x, y, false);
+              for(let i of mutations){
+                if(lockSeeds.includes(i[0]) && !plantedSeeds.includes(i[0])) {
+                  isMutation = true;
+                  if(!lockMutationSeeds.includes(i[0])) lockMutationSeeds.push(i[0]);
+                  if(config.overTile) this.displayOverTile(true, x, y, "", this.colorRGBA.blue, config);
+                }
+              }
+            }
+          });
+        }
         
         //check
         let xyModeCheck = (this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value) && isMutation);
         let maxModeCheck = ( (targetNumber < parseInt(config.autoReloadMax.value)) && isMutation );
-        if( (mode == 1 && xyModeCheck) || (mode == 0 && maxModeCheck) ){
+        let lockSeedModeCheck = isMutation;
+        if( (mode == 1 && xyModeCheck) || (mode == 0 && maxModeCheck) || (mode == 2 && lockSeedModeCheck) ){
           //save
           config.autoReloadSave = Game.WriteSave(1);
           config.autoReloadSaveSecond = this.secondsBeforeNextTick;
           if(mode == 0) config.autoReloadNumber = targetNumber;
+          if(mode == 2) config.autoReloadLockSeeds = lockMutationSeeds;
           this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
           this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
           if(mode == 1) this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
           if(mode == 0) this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
           if(mode == 0) this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
+          if(mode == 2) this.writeLog(3, "auto reload", false, "lock seeds:" + config.autoReloadLockSeeds);
         
           //turn off other buttons
           this.saveButtonStatusAndTurnOff(["autoHarvest", "autoPlant", "autoJQB", "autoLump", "autoReload2"], config.autoReloadButtonSave, config);
@@ -1003,12 +1035,26 @@ class Garden {
       //after tick
       if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
         let mode = config.autoReloadMode.value;
-        //for max mode
+        
         let targetNumber = 0;
+        //for max mode
         if(mode == 0){
           this.forEachTile((x, y) => {
             let tileAr = this.getTile(x, y);
             if(tileAr.seedId == config.autoReloadID.value) targetNumber += 1;
+          });
+        }
+        //for lock seed mode
+        if(mode == 2){
+          this.forEachTile((x, y) => {
+            let tile = this.getTile(x, y);
+            let plant = this.getPlant(tile.seedId);
+            for(let key of config.autoReloadLockSeeds){
+              if(plant.key == key){
+                targetNumber += 1;
+                break;
+              }
+            }
           });
         }
         
@@ -1023,7 +1069,8 @@ class Garden {
         //check
         let xyModeCheck = (this.getTile(config.autoReloadX.value, config.autoReloadY.value).seedId == config.autoReloadID.value);
         let maxModeCheck = (targetNumber > parseInt(config.autoReloadNumber));
-        if( (mode == 1 && xyModeCheck) || (mode == 0 && maxModeCheck) ){
+        let lockSeedModeCheck = (targetNumber > 0);
+        if( (mode == 1 && xyModeCheck) || (mode == 0 && maxModeCheck) || (mode == 2 && lockSeedModeCheck) ){
           //grow
           //reset interval
           Main.restart(1000);
@@ -1049,6 +1096,15 @@ class Garden {
               let y = parseInt(config.autoReloadY.value);
               this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
             }
+            if(mode == 2){
+              this.forEachTile((x, y) => {
+                let tile = this.getTile(x, y);
+                let plant = this.getPlant(tile.seedId);
+                for(let key of config.autoReloadLockSeeds){
+                  if(plant.key == key) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+                }
+              });
+            }
           }
           
           this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
@@ -1059,6 +1115,7 @@ class Garden {
           config.autoReloadSaveSecond = 9999;
           config.autoReloadReloads = 0;
           if(mode == 0) config.autoReloadNumber = 0;
+          if(mode == 2) config.autoReloadLockSeeds = [];
           this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
           this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
           this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
