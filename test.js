@@ -1047,12 +1047,14 @@ class Garden {
         //for lock seed mode
         if(mode == 2){
           this.forEachTile((x, y) => {
-            let tile = this.getTile(x, y);
-            let plant = this.getPlant(tile.seedId);
-            for(let i of config.autoReloadLockSeeds){
-              if(plant.key == i){
-                targetNumber += 1;
-                break;
+            if(!this.tileIsEmpty(x, y)){
+              let tile = this.getTile(x, y);
+              let plant = this.getPlant(tile.seedId);
+              for(let i of config.autoReloadLockSeeds){
+                if(plant.key == i){
+                  targetNumber += 1;
+                  break;
+                }
               }
             }
           });
@@ -1098,10 +1100,12 @@ class Garden {
             }
             if(mode == 2){
               this.forEachTile((x, y) => {
-                let tile = this.getTile(x, y);
-                let plant = this.getPlant(tile.seedId);
-                for(let i of config.autoReloadLockSeeds){
-                  if(plant.key == i) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+                if(!this.tileIsEmpty(x, y)){
+                  let tile = this.getTile(x, y);
+                  let plant = this.getPlant(tile.seedId);
+                  for(let i of config.autoReloadLockSeeds){
+                    if(plant.key == i) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+                  }
                 }
               });
             }
