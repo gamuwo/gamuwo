@@ -1049,8 +1049,8 @@ class Garden {
           this.forEachTile((x, y) => {
             let tile = this.getTile(x, y);
             let plant = this.getPlant(tile.seedId);
-            for(let key of config.autoReloadLockSeeds){
-              if(plant.key == key){
+            for(let i of config.autoReloadLockSeeds){
+              if(plant.key == i){
                 targetNumber += 1;
                 break;
               }
