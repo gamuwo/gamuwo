@@ -1107,6 +1107,7 @@ class Garden {
                     if(plant.key == i){
                       this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
                       this.writeLog(2, "auto reload", false, "lock seed grow:" + i + " x:" + x + " y:" + y);
+                      break;
                     }
                   }
                 }
