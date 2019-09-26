@@ -854,6 +854,8 @@ class Garden {
           this.changeNumber("autoReloadMode", 0, config);
           this.changeNumber("autoReloadID", 22, config);
           this.changeNumber("autoReloadMax", 4, config);
+          //control auto reload elements disabled
+          Main.controlAutoReloadElementDisabled();
           
           //change stage
           this.changeNumber("autoJQBStage", 2, config);
