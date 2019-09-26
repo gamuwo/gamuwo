@@ -503,33 +503,29 @@ class Garden {
   }
   
   static displayOverTile(isDisplay, x, y, text, color, config) {
-    if(config.overTile){
-      let id = "overTile-" + x + "-" + y;
-      let idAge = "overTileAge-" + x + "-" + y;
-      if(isDisplay){
-        document.getElementById(id).style.opacity = "1";
-        document.getElementById(id).style.borderColor = color;
-        document.getElementById(idAge).style.opacity = "1";
-        document.getElementById(idAge).innerText = text;
-      } else {
-        document.getElementById(id).style.opacity = "";
-        document.getElementById(id).style.borderColor = "";
-        document.getElementById(idAge).style.opacity = "";
-        document.getElementById(idAge).innerText = "";
-      }
+    let id = "overTile-" + x + "-" + y;
+    let idAge = "overTileAge-" + x + "-" + y;
+    if(isDisplay){
+      document.getElementById(id).style.opacity = "1";
+      document.getElementById(id).style.borderColor = color;
+      document.getElementById(idAge).style.opacity = "1";
+      document.getElementById(idAge).innerText = text;
+    } else {
+      document.getElementById(id).style.opacity = "";
+      document.getElementById(id).style.borderColor = "";
+      document.getElementById(idAge).style.opacity = "";
+      document.getElementById(idAge).innerText = "";
     }
   }
   
   static flashOverTile(x, y, text, color, time, config) {
-    if(config.overTile){
-      let id = "overTile-" + x + "-" + y;
-      document.getElementById(id).style.transition = "none";
-      this.displayOverTile(true, x, y, text, color, config);
-      window.setTimeout(() => {
-        document.getElementById(id).style.transition = "all 500ms 0s ease";
-        this.displayOverTile(false, x, y, text, color, config);
-      }, time);
-    }
+    let id = "overTile-" + x + "-" + y;
+    document.getElementById(id).style.transition = "none";
+    this.displayOverTile(true, x, y, text, color, config);
+    window.setTimeout(() => {
+      document.getElementById(id).style.transition = "all 500ms 0s ease";
+      this.displayOverTile(false, x, y, text, color, config);
+    }, time);
   }
   
   static hideOverTile() {
@@ -937,7 +933,7 @@ class Garden {
               for(let i of mutations){
                 if(this.getPlant(config.autoReloadID.value).key == i[0]) {
                   isMutation = true;
-                  this.displayOverTile(true, x, y, "", this.colorRGBA.blue, config);
+                  if(config.overTile) this.displayOverTile(true, x, y, "", this.colorRGBA.blue, config);
                   break;
                 }
               }
@@ -951,7 +947,7 @@ class Garden {
             for(let i of mutations){
               if(this.getPlant(config.autoReloadID.value).key == i[0]) {
                 isMutation = true;
-                this.displayOverTile(true, x, y, "", this.colorRGBA.blue, config);
+                if(config.overTile) this.displayOverTile(true, x, y, "", this.colorRGBA.blue, config);
                 break;
               }
             }
@@ -1024,15 +1020,17 @@ class Garden {
           this.writeLog(2, "auto reload", false, "try average:" + tryAverage);
           
           //display over tile
-          if(isMaxMode){
-            this.forEachTile((x, y) => {
-              let tileAr = this.getTile(x, y);
-              if(this.isOverTile(x, y) && tileAr.seedId == config.autoReloadID.value) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
-            });
-          } else {
-            let x = parseInt(config.autoReloadX.value);
-            let y = parseInt(config.autoReloadY.value);
-            this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+          if(config.overTile){
+            if(isMaxMode){
+              this.forEachTile((x, y) => {
+                let tileAr = this.getTile(x, y);
+                if(this.isOverTile(x, y) && tileAr.seedId == config.autoReloadID.value) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+              });
+            } else {
+              let x = parseInt(config.autoReloadX.value);
+              let y = parseInt(config.autoReloadY.value);
+              this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+            }
           }
           
           this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
@@ -1080,22 +1078,24 @@ class Garden {
           targetPlants.sort(function(a,b){return(a[2] - b[2]);});
           
           //display over tile
-          let num = parseInt(config.autoReload2Number.value);
-          let play = parseInt(config.autoReload2Play.value);
-          let upperAge = 0;
-          if(num > targetPlants.length){
-            upperAge = targetPlants[targetPlants.length - 1][2];
-          } else {
-            if(num > 0) upperAge = (targetPlants[(num - 1)][2] + play);
-          }
-          for(let i of targetPlants){
-            let x = i[0];
-            let y = i[1];
-            let age = i[2];
-            if(age > upperAge) this.displayOverTile(true, x, y, age, "", config);
-            if(age == upperAge) this.displayOverTile(true, x, y, age, this.colorRGBA.blue, config);
-            if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, age, this.colorRGBA.blue, config);
-            if(play == 0 && age < upperAge) this.displayOverTile(true, x, y, age, this.colorRGBA.red, config);
+          if(config.overTile){
+            let num = parseInt(config.autoReload2Number.value);
+            let play = parseInt(config.autoReload2Play.value);
+            let upperAge = 0;
+            if(num > targetPlants.length){
+              upperAge = targetPlants[targetPlants.length - 1][2];
+            } else {
+              if(num > 0) upperAge = (targetPlants[(num - 1)][2] + play);
+            }
+            for(let i of targetPlants){
+              let x = i[0];
+              let y = i[1];
+              let age = i[2];
+              if(age > upperAge) this.displayOverTile(true, x, y, age, "", config);
+              if(age == upperAge) this.displayOverTile(true, x, y, age, this.colorRGBA.blue, config);
+              if(play != 0 && age < upperAge) this.displayOverTile(true, x, y, age, this.colorRGBA.blue, config);
+              if(play == 0 && age < upperAge) this.displayOverTile(true, x, y, age, this.colorRGBA.red, config);
+            }
           }
           
           //save
@@ -1223,19 +1223,21 @@ class Garden {
           this.writeLog(2, "auto reload2", false, "age:" + ageString);
           
           //for overtile
-          for(let targetPlant of config.autoReload2Plants){
-            let x = targetPlant[0];
-            let y = targetPlant[1];
-            let age = targetPlant[2];
-            let isGrow = false;
-            if(this.tileIsEmpty(x, y)) isGrow = true;
-            let tile = this.getTile(x, y);
-            if(parseInt(tile.age) >= (parseInt(age) + parseInt(config.autoReload2Grow.value))) isGrow = true;
-            //display over tile
-            if(isGrow){
-              this.displayOverTile(true, x, y, tile.age, this.colorRGBA.green, config);
-            } else {
-              this.displayOverTileAge(true, x, y, tile.age, config);
+          if(config.overTile){
+            for(let targetPlant of config.autoReload2Plants){
+              let x = targetPlant[0];
+              let y = targetPlant[1];
+              let age = targetPlant[2];
+              let isGrow = false;
+              if(this.tileIsEmpty(x, y)) isGrow = true;
+              let tile = this.getTile(x, y);
+              if(parseInt(tile.age) >= (parseInt(age) + parseInt(config.autoReload2Grow.value))) isGrow = true;
+              //display over tile
+              if(isGrow){
+                this.displayOverTile(true, x, y, tile.age, this.colorRGBA.green, config);
+              } else {
+                this.displayOverTileAge(true, x, y, tile.age, config);
+              }
             }
           }
           
@@ -2223,7 +2225,7 @@ class UI {
             Garden.changeNumber("autoReloadY", y, config);
             Garden.changeButton("autoReloadGetXY", false, config);
             Main.save();
-            Garden.flashOverTile(x, y, "", Garden.colorRGBA.orange, 100, config);
+            if(config.overTile) Garden.flashOverTile(x, y, "", Garden.colorRGBA.orange, 100, config);
             Garden.writeLog(3, "auto reload", false, "set x/y:" + config.autoReloadX.value + "/" + config.autoReloadY.value);
             event.stopImmediatePropagation();
           }
@@ -2659,9 +2661,11 @@ class Main {
   static handleQuickLoad(save, plot) {
     if(save != "") {
       Game.LoadSave(save);
-      window.setTimeout(() => {
-        Garden.compareAge(plot, this.config);
-      }, parseInt(this.config.interval.value));
+      if(this.config.overTile){
+        window.setTimeout(() => {
+          Garden.compareAge(plot, this.config);
+        }, parseInt(this.config.interval.value));
+      }
     }
   }
 
@@ -2674,7 +2678,7 @@ class Main {
     this.save();
     
     if(key == "autoReloadX" || key == "autoReloadY"){
-      Garden.flashOverTile(this.config.autoReloadX.value, this.config.autoReloadY.value, "", Garden.colorRGBA.orange, 100, this.config);
+      if(this.config.overTile) Garden.flashOverTile(this.config.autoReloadX.value, this.config.autoReloadY.value, "", Garden.colorRGBA.orange, 100, this.config);
     }
   }
 
