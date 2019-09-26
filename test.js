@@ -1015,7 +1015,7 @@ class Garden {
           if(mode == 1) this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
           if(mode == 0) this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
           if(mode == 0) this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
-          if(mode == 2) this.writeLog(3, "auto reload", false, "lock seeds:" + config.autoReloadLockSeeds);
+          if(mode == 2) this.writeLog(2, "auto reload", false, "lock seeds:" + config.autoReloadLockSeeds);
         
           //turn off other buttons
           this.saveButtonStatusAndTurnOff(["autoHarvest", "autoPlant", "autoJQB", "autoLump", "autoReload2"], config.autoReloadButtonSave, config);
@@ -1104,7 +1104,10 @@ class Garden {
                   let tile = this.getTile(x, y);
                   let plant = this.getPlant(tile.seedId);
                   for(let i of config.autoReloadLockSeeds){
-                    if(plant.key == i) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+                    if(plant.key == i){
+                      this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+                      this.writeLog(2, "auto reload", false, "lock seed grow:" + i + " x:" + x + " y:" + y);
+                    }
                   }
                 }
               });
@@ -1722,7 +1725,6 @@ class UI {
   color: lightgray;
   background-color: gray;
   border-color: gray;
-  user-select: none;
 }
 #cookieGardenHelper div.meterDiv { height: 7px; }
 #cookieGardenHelper meter {
