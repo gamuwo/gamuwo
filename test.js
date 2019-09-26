@@ -602,7 +602,17 @@ class Garden {
       if(ifMature){
         return mutationsMature;
       } else {
-        return mutations;
+        let weedMult = this.minigame.plotBoost[y][x][2];
+        if(weedMult > 0){
+          return mutations;
+        } else {
+          let mutationsFinal = [];
+          for(let i of mutations){
+            let plant = this.minigame.plants[i[0]];
+            if(!plant.weed && !plant.fungus) mutationsFinal.push(i);
+          }
+          return mutationsFinal;
+        }
       }
     } else {
       return [];
