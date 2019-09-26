@@ -2350,6 +2350,15 @@ class UI {
     this.hackTileTooltip();
     this.hackSeedTooltip();
     this.hackLumpTooltip();
+    
+    //log invisible set
+    if(config.logInvisibleLevel1) doc.elId('logBoxLevel1').classList.toggle('invisible');
+    if(config.logInvisibleLevel2) doc.elId('logBoxLevel2').classList.toggle('invisible');
+    if(config.logInvisibleLevel3) doc.elId('logBoxLevel3').classList.toggle('invisible');
+    if(config.logInvisibleLevel4) doc.elId('logBoxLevel4').classList.toggle('invisible');
+    
+    //control auto reload elements disabled
+    Main.controlAutoReloadElementDisabled();
   }
 
   static getSeedIconX(seedId, age, isSeed) {
@@ -2626,12 +2635,6 @@ class Main {
     this.timerInterval = 1000;
     this.config = Config.load();
     UI.build(this.config);
-    
-    //log invisible set
-    if(this.config.logInvisibleLevel1) doc.elId('logBoxLevel1').classList.toggle('invisible');
-    if(this.config.logInvisibleLevel2) doc.elId('logBoxLevel2').classList.toggle('invisible');
-    if(this.config.logInvisibleLevel3) doc.elId('logBoxLevel3').classList.toggle('invisible');
-    if(this.config.logInvisibleLevel4) doc.elId('logBoxLevel4').classList.toggle('invisible');
 
     // sacrifice garden
     let oldConvert = Garden.minigame.convert;
@@ -2681,6 +2684,27 @@ class Main {
       }
     }
   }
+  
+  static controlAutoReloadElementDisabled() {
+    if(this.config.autoReloadMode == 0){
+      document.getElementById("autoReloadID").disabled = false;
+      document.getElementById("autoReloadMax").disabled = false;
+      document.getElementById("autoReloadX").disabled = true;
+      document.getElementById("autoReloadY").disabled = true;
+    }
+    if(this.config.autoReloadMode == 1){
+      document.getElementById("autoReloadID").disabled = false;
+      document.getElementById("autoReloadMax").disabled = true;
+      document.getElementById("autoReloadX").disabled = false;
+      document.getElementById("autoReloadY").disabled = false;
+    }
+    if(this.config.autoReloadMode == 2){
+      document.getElementById("autoReloadID").disabled = true;
+      document.getElementById("autoReloadMax").disabled = true;
+      document.getElementById("autoReloadX").disabled = true;
+      document.getElementById("autoReloadY").disabled = true;
+    }
+  }
 
   static handleChange(key, value) {
     if (this.config[key].value !== undefined) {
@@ -2692,6 +2716,9 @@ class Main {
     
     if(key == "autoReloadX" || key == "autoReloadY"){
       if(this.config.overTile) Garden.flashOverTile(this.config.autoReloadX.value, this.config.autoReloadY.value, "", Garden.colorRGBA.orange, 100, this.config);
+    }
+    if(key == "autoReloadMode"){
+      this.controlAutoReloadElementDisabled();
     }
   }
 
