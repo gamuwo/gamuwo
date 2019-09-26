@@ -2004,7 +2004,9 @@ class UI {
             ${this.button('lumpReloadReset', 'Reset', 'reset history data')}
           </p>
           <p>
-            ${this.numberInputDigits('lumpReloadNum', 'Num', 'input number', config.lumpReloadNum, 1)}
+            ${this.numberInputDigits('lumpReloadNum', 'Gain', 'input number', config.lumpReloadNum, 1)}
+          </p>
+          <p>
             ${this.fixedSelect('lumpReloadType', ["normal", "bifurcated", "golden", "meaty", "caramelized"], 0, 'Type', 'select type', config.lumpReloadType, 5)}
           </p>
         </div>
@@ -2018,7 +2020,7 @@ class UI {
         </h2>
         <div class="boxPanel">
           <p>
-            ${this.fixedSelect('autoReloadMode', ["Max mode", "XY mode", "Lock seed mode"], 0, 'Mode', 'select mode', config.autoReloadMode, 7)}
+            ${this.fixedSelect('autoReloadMode', ["Max mode", "XY mode", "Lock seed mode"], 0, 'Mode', 'select mode', config.autoReloadMode, 6.5)}
           </p>
           <p>
             ${this.fixedSelect('autoReloadID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.autoReloadID, 7)}
