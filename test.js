@@ -851,6 +851,7 @@ class Garden {
           this.changeButton("autoReload2", false, config);
           //turn on auto-reload for JQB
           this.changeButton("autoReload", true, config);
+          this.changeNumber("autoReloadMode", 0, config);
           this.changeNumber("autoReloadID", 22, config);
           this.changeNumber("autoReloadMax", 4, config);
           
@@ -925,10 +926,9 @@ class Garden {
     if(config.autoReload){
       //2sec before tick
       if(this.secondsBeforeNextTick <= 2 && this.secondsBeforeNextTick >= 0 && config.autoReloadSaveSecond == 9999){
-        let isMaxMode = (parseInt(config.autoReloadMax.value) > 0);
         //for max mode
         let targetNumber = 0;
-        if(isMaxMode){
+        if(config.autoReloadMode.value == 0){
           this.forEachTile((x, y) => {
             let tileAr = this.getTile(x, y);
             if(tileAr.seedId == config.autoReloadID.value){
@@ -938,7 +938,7 @@ class Garden {
         }
         //for possible mutation check
         let isMutation = false;
-        if(isMaxMode){
+        if(config.autoReloadMode.value == 0){
           this.forEachTile((x, y) => {
             if(this.tileIsEmpty(x, y)){
               let mutations = this.getMutsCustom(x, y, false);
@@ -969,16 +969,16 @@ class Garden {
         //check
         let xyModeCheck = this.tileIsEmpty(config.autoReloadX.value, config.autoReloadY.value);
         let maxModeCheck = (targetNumber < parseInt(config.autoReloadMax.value));
-        if( (!isMaxMode && xyModeCheck && isMutation) || (isMaxMode && maxModeCheck && isMutation) ){
+        if( (config.autoReloadMode.value == 1 && xyModeCheck && isMutation) || (config.autoReloadMode.value == 0 && maxModeCheck && isMutation) ){
           //save
           config.autoReloadSave = Game.WriteSave(1);
           config.autoReloadSaveSecond = this.secondsBeforeNextTick;
-          if(isMaxMode) config.autoReloadNumber = targetNumber;
+          if(config.autoReloadMode.value == 0) config.autoReloadNumber = targetNumber;
           this.writeLog(3, "auto reload", false, "save:" + config.autoReloadSave.substr(0, 15) + "...");
           this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
-          if(!isMaxMode) this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
-          if(isMaxMode) this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
-          if(isMaxMode) this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
+          if(config.autoReloadMode.value == 1) this.writeLog(3, "auto reload", false, "X:" + config.autoReloadX.value + " Y:" + config.autoReloadY.value);
+          if(config.autoReloadMode.value == 0) this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
+          if(config.autoReloadMode.value == 0) this.writeLog(3, "auto reload", false, "max:" + config.autoReloadMax.value);
         
           //turn off other buttons
           this.saveButtonStatusAndTurnOff(["autoHarvest", "autoPlant", "autoJQB", "autoLump", "autoReload2"], config.autoReloadButtonSave, config);
@@ -997,10 +997,9 @@ class Garden {
       
       //after tick
       if(this.secondsBeforeNextTick >= config.autoReloadSaveSecond + 10){
-        let isMaxMode = (parseInt(config.autoReloadMax.value) > 0);
         //for max mode
         let targetNumber = 0;
-        if(isMaxMode){
+        if(config.autoReloadMode.value == 0){
           this.forEachTile((x, y) => {
             let tileAr = this.getTile(x, y);
             if(tileAr.seedId == config.autoReloadID.value) targetNumber += 1;
@@ -1018,7 +1017,7 @@ class Garden {
         //check
         let xyModeCheck = (this.getTile(config.autoReloadX.value, config.autoReloadY.value).seedId == config.autoReloadID.value);
         let maxModeCheck = (targetNumber > parseInt(config.autoReloadNumber));
-        if( (!isMaxMode && xyModeCheck) || (isMaxMode && maxModeCheck) ){
+        if( (config.autoReloadMode.value == 1 && xyModeCheck) || (config.autoReloadMode.value == 0 && maxModeCheck) ){
           //grow
           //reset interval
           Main.restart(1000);
@@ -1033,7 +1032,7 @@ class Garden {
           
           //display over tile
           if(config.overTile){
-            if(isMaxMode){
+            if(config.autoReloadMode.value == 0){
               this.forEachTile((x, y) => {
                 let tileAr = this.getTile(x, y);
                 if(this.isOverTile(x, y) && tileAr.seedId == config.autoReloadID.value) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
@@ -1047,16 +1046,16 @@ class Garden {
           
           this.writeLog(2, "auto reload", false, "grow! reloads:" + config.autoReloadReloads);
           this.writeLog(3, "auto reload", false, "reset interval:" + Main.timerInterval);
-          if(isMaxMode) this.writeLog(3, "auto reload", false, "target:" + targetNumber);
+          if(config.autoReloadMode.value == 0) this.writeLog(3, "auto reload", false, "target:" + targetNumber);
           //reset save
           config.autoReloadSave = "";
           config.autoReloadSaveSecond = 9999;
           config.autoReloadReloads = 0;
-          if(isMaxMode) config.autoReloadNumber = 0;
+          if(config.autoReloadMode.value == 0) config.autoReloadNumber = 0;
           this.writeLog(3, "auto reload", false, "reset:" + config.autoReloadSave);
           this.writeLog(3, "auto reload", false, "second:" + config.autoReloadSaveSecond);
           this.writeLog(3, "auto reload", false, "reloads:" + config.autoReloadReloads);
-          if(isMaxMode) this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
+          if(config.autoReloadMode.value == 0) this.writeLog(3, "auto reload", false, "number:" + config.autoReloadNumber);
         
           //restore other button state
           this.restoreButtonStatus(config.autoReloadButtonSave, config);
@@ -1654,6 +1653,7 @@ class UI {
 #logPanel input:disabled {
   color: lightgray;
   background-color: gray;
+  border-color: gray;
 }
 #cookieGardenHelper div.meterDiv { height: 7px; }
 #cookieGardenHelper meter {
