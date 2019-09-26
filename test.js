@@ -1648,6 +1648,13 @@ class UI {
   border: solid 1px white;
   border-radius: 3px;
 }
+#cookieGardenHelper select:disabled,
+#cookieGardenHelper input:disabled,
+#logPanel select:disabled,
+#logPanel input:disabled {
+  color: graytext;
+  background-color: darkgray;
+}
 #cookieGardenHelper div.meterDiv { height: 7px; }
 #cookieGardenHelper meter {
   width: 120px;
