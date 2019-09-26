@@ -2687,22 +2687,22 @@ class Main {
   
   static controlAutoReloadElementDisabled() {
     if(this.config.autoReloadMode.value == 0){
-      document.getElementById("autoReloadID").disabled = false;
-      document.getElementById("autoReloadMax").disabled = false;
-      document.getElementById("autoReloadX").disabled = true;
-      document.getElementById("autoReloadY").disabled = true;
+      document.getElementById("autoReloadID").disabled = "";
+      document.getElementById("autoReloadMax").disabled = "";
+      document.getElementById("autoReloadX").disabled = "true";
+      document.getElementById("autoReloadY").disabled = "true";
     }
     if(this.config.autoReloadMode.value == 1){
-      document.getElementById("autoReloadID").disabled = false;
-      document.getElementById("autoReloadMax").disabled = true;
-      document.getElementById("autoReloadX").disabled = false;
-      document.getElementById("autoReloadY").disabled = false;
+      document.getElementById("autoReloadID").disabled = "";
+      document.getElementById("autoReloadMax").disabled = "true";
+      document.getElementById("autoReloadX").disabled = "";
+      document.getElementById("autoReloadY").disabled = "";
     }
     if(this.config.autoReloadMode.value == 2){
-      document.getElementById("autoReloadID").disabled = true;
-      document.getElementById("autoReloadMax").disabled = true;
-      document.getElementById("autoReloadX").disabled = true;
-      document.getElementById("autoReloadY").disabled = true;
+      document.getElementById("autoReloadID").disabled = "true";
+      document.getElementById("autoReloadMax").disabled = "true";
+      document.getElementById("autoReloadX").disabled = "true";
+      document.getElementById("autoReloadY").disabled = "true";
     }
   }
 
