@@ -1100,8 +1100,8 @@ class Garden {
               this.forEachTile((x, y) => {
                 let tile = this.getTile(x, y);
                 let plant = this.getPlant(tile.seedId);
-                for(let key of config.autoReloadLockSeeds){
-                  if(plant.key == key) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
+                for(let i of config.autoReloadLockSeeds){
+                  if(plant.key == i) this.displayOverTile(true, x, y, "", this.colorRGBA.green, config);
                 }
               });
             }
@@ -2824,6 +2824,7 @@ class Main {
       this.config.autoReloadSaveSecond = 9999;
       this.config.autoReloadReloads = 0;
       this.config.autoReloadNumber = 0;
+      this.config.autoReloadLockSeeds = [];
       this.config.autoReloadButtonSave = [];
       Garden.writeLog(2, "auto reload", false, "force termination! reset data");
     }
