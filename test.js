@@ -2839,6 +2839,7 @@ class Main {
     if(key=="autoReload" && !this.config[key] && this.config.autoReloadSaveSecond != 9999){
       //auto reload forced termination
       Main.restart(1000);
+      Garden.restoreButtonStatus(this.config.autoReloadButtonSave, this.config);
       this.config.autoReloadSave = "";
       this.config.autoReloadSaveSecond = 9999;
       this.config.autoReloadReloads = 0;
@@ -2850,6 +2851,7 @@ class Main {
     if(key=="autoReload2" && !this.config[key] && this.config.autoReload2SaveSecond != 9999){
       //auto reload2 forced termination
       Main.restart(1000);
+      Garden.restoreButtonStatus(this.config.autoReload2ButtonSave, this.config);
       this.config.autoReload2Save = "";
       this.config.autoReload2SaveSecond = 9999;
       this.config.autoReload2Reloads = 0;
@@ -2860,6 +2862,10 @@ class Main {
     if(key=="lumpReload" && !this.config[key] && this.config.lumpReloadSave != ""){
       //lump reload forced termination
       Main.restart(1000);
+      if(this.config.autoLumpButtonSave.length > 0){
+        Garden.restoreButtonStatus(this.config.autoLumpButtonSave, this.config);
+        this.config.autoLumpButtonSave = [];
+      }
       this.config.lumpReloadSave = "";
       this.config.lumpReloadReloads = 0;
       Garden.writeLog(2, "lump reload", false, "force termination! reset data");
