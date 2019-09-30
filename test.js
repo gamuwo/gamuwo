@@ -1978,19 +1978,18 @@ class UI {
           ${this.button('quickLoad2', 'QL2', 'quick load')}
           ${this.spanMemory('quickLoad2SaveTime', config.quickLoad2SaveTime)}
         </p>
-        <h3>Settings</h3>
+        <h3>Play sound</h3>
         <p>
-          ${this.button('playSound', 'Sound', 'play beep sound before tick', true, config.playSound)}
-          ${this.numberInputDigits('playSoundSecond', 'Sec', 'input second', config.playSoundSecond, 3)}
-        </p>
-        <p>
-          ${this.button('playSound2', 'Sound2', 'play beep sound after tick', true, config.playSound2)}
+          ${this.button('playSound', '1', 'play beep sound before tick', true, config.playSound)}
+          ${this.numberInputDigits('playSoundSecond', 'Sec', 'input second', config.playSoundSecond, 2)}
+          ${this.button('playSound2', '2', 'play beep sound after tick', true, config.playSound2)}
           ${this.numberInputDigits('playSound2Tick', 'Tick', 'input ticks', config.playSound2Tick, 2)}
         </p>
         <p>
-          ${this.button('playSoundMature', 'Sound3', 'play beep sound after target plant is mature', true, config.playSoundMature)}
-          ${this.fixedSelect('playSoundMatureID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.playSoundMatureID, 4)}
+          ${this.button('playSoundMature', '3', 'play beep sound after target plant is mature', true, config.playSoundMature)}
+          ${this.fixedSelect('playSoundMatureID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.playSoundMatureID, 5)}
         </p>
+        <h3>Settings</h3>
         <p>
           ${this.button('overTile', 'Over tile', 'display over tile', true, config.overTile)}
           ${this.numberInputDigits('overTileHideTime', 'Hide', 'input over tile hide time(sec)', config.overTileHideTime, 3)}
