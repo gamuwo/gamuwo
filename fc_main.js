@@ -684,23 +684,10 @@ function autoCast() {
 			
 		// WORK IN PROGRESS
 		//Start SMART FTHOF checks 
-		if (nextSpellName() == "Clot" || nextSpellName() == "Sugar Lump" || nextSpellName() == "Blab" || nextSpellName() == "Cookie Chain" || nextSpellName() == "Cookie Storm (Drop)" || nextSpellName() == "Cookie Storm") {
+		if (nextSpellName() == "Clot" || nextSpellName() == "Sugar Lump" || nextSpellName() == "Blab" || nextSpellName() == "Cookie Chain" || nextSpellName() == "Cookie Storm (Drop)" || nextSpellName() == "Cookie Storm" || nextSpellName() == "Lucky" || nextSpellName() == "Ruin Cookies") {
 			M.castSpell(cheapestSpell);
 			logEvent('AutoSpell', 'Cast cheapest spell');
-		}
-		
-		if (nextSpellName() == "Lucky") {
-			if (cpsBonus() >= 7) {
-				M.castSpell(FTHOF);
-				logEvent('AutoSpell', 'Cast Force the Hand of Fate');
-			}
-		}
-		
-		if (nextSpellName() == "Ruin Cookies") {
-			if(cpsBonus() <= 1) {
-				M.castSpell(FTHOF);
-				logEvent('AutoSpell', 'Cast Force the Hand of Fate');
-			}
+			return;
 		}
 			
 		if (nextSpellName() == "Elder Frenzy") {
