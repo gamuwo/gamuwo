@@ -675,6 +675,7 @@ function autoCast() {
                 return;
             case 2:
                 var FTHOF = M.spellsById[1];
+                var cheapestSpell = M.spellsById[4];
                 if (M.magicM < Math.floor(FTHOF.costMin + FTHOF.costPercent*M.magicM)) return;
                 /*if(cpsBonus() >= FrozenCookies.minCpSMult) {
                     M.castSpell(FTHOF);
@@ -683,9 +684,9 @@ function autoCast() {
 			
 		// WORK IN PROGRESS
 		//Start SMART FTHOF checks 
-		if (nextSpellName() == "Clot" || nextSpellName() == "Sugar Lump" || nextSpellName() == "Blab" || nextSpellName() == "Cookie Chain" || nextSpellName() == "Cookie Storm (Drop)") {
-			M.castSpell(FTHOF);
-			logEvent('AutoSpell', 'Cast Force the Hand of Fate');
+		if (nextSpellName() == "Clot" || nextSpellName() == "Sugar Lump" || nextSpellName() == "Blab" || nextSpellName() == "Cookie Chain" || nextSpellName() == "Cookie Storm (Drop)" || nextSpellName() == "Cookie Storm") {
+			M.castSpell(cheapestSpell);
+			logEvent('AutoSpell', 'Cast cheapest spell');
 		}
 		
 		if (nextSpellName() == "Lucky") {
@@ -746,7 +747,7 @@ function autoCast() {
 			}
 		}
 
-		if (nextSpellName() == "Click Frenzy" || nextSpellName() == "Cookie Storm") {
+		if (nextSpellName() == "Click Frenzy") {
 			if (Game.hasBuff('Frenzy') && BuildingSpecialBuff() == 1) {
 				M.castSpell(FTHOF);
 				logEvent('AutoSpell', 'Cast Force the Hand of Fate');
