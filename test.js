@@ -2197,7 +2197,7 @@ class UI {
     <div>
       <p>
         Interval:<span id="intervalDisp">1000</span>ms
-        Run time:<span id="runtimeDisp">0</span>ms
+        Time:<span id="runtimeDisp">0</span>ms
       </p>
     </div>
   </div>
