@@ -1165,7 +1165,8 @@ class Garden {
         this.forEachTile((x, y) => {
           let tileAr2 = this.getTile(x, y);
           if(tileAr2.seedId == config.autoReload2ID.value){
-            targetPlants.push([x, y, tileAr2.age]);
+            let stage = this.getPlantStage(tileAr2);
+            if(stage == "young") targetPlants.push([x, y, tileAr2.age]);
           }
         });
         
@@ -1255,6 +1256,15 @@ class Garden {
           }
           
           let tileAr2 = this.getTile(targetPlant[0], targetPlant[1]);
+          let stage = this.getPlantStage(tileAr2);
+          
+          if(stage != "young"){
+            //target plant is mature
+            grows += 1;
+            if(isMust) mustGrows += 1;
+            continue;
+          }
+          
           if(parseInt(tileAr2.age) >= (parseInt(targetPlant[2]) + parseInt(config.autoReload2Grow.value))){
             grows += 1;
             if(isMust) mustGrows += 1;
