@@ -99,6 +99,7 @@ class Config {
       overTile: false,
       overTileHideTime: { value: 170, min: 0 },
       overTileAge: false,
+      clickFortune: false,
     };
   }
 
@@ -626,6 +627,16 @@ class Garden {
       this.hideOverTile();
       config.hideOverTileFlag = true;
       this.writeLog(3, "over tile", false, "hide over tile");
+    }
+  }
+  
+  static handleClickFortune(config) {
+    if(config.clickFortune){
+      this.writeLog(4, "click fortune", false, "Game.TickerEffect.type:" + Game.TickerEffect.type);
+      if(Game.TickerEffect.type=='fortune'){
+        Game.tickerL.click();
+        this.writeLog(4, "click fortune", false, "click! Game.TickerEffect.type:" + Game.TickerEffect.type);
+      }
     }
   }
   
@@ -1464,6 +1475,8 @@ class Garden {
       this.resetOneTimeFlag(config);
       //original process
       this.handleAutoHarvestAndPlant(config);
+      //click fortune
+      this.handleClickFortune(config);
       //play sound
       this.handlePlaySound1(config);
       this.handlePlaySound2(config);
@@ -1758,21 +1771,13 @@ class UI {
 #cookieGardenHelper a.btn,
 #logPanel a.toggleBtn,
 #logPanel a.btn {
-  padding-right: 4px;
-  padding-left: 4px;
-  margin: 1px;
+  padding: 3px;
+  margin: 0;
   border-radius: 5px;
   transition: all 100ms 0s ease;
 }
 #cookieGardenHelper span.labelWithState:not(.active) .labelStateActive,
 #cookieGardenHelper span.labelWithState.active .labelStateNotActive { display: none; }
-
-#cookieGardenHelper .borderLabel {
-  border: solid 1px white;
-  border-radius: 5px;
-  padding: 0 4px;
-  margin: 1px;
-}
 
 #cookieGardenHelperTooltip {
   background: #000 url("img/BGgarden.jpg");
@@ -1993,6 +1998,9 @@ class UI {
         <p>
           ${this.button('overTileAge', 'Age', 'display age on garden tile', true, config.overTileAge)}
           ${this.numberInputDigits('interval', 'Interval', 'input auto reload interval(ms)', config.interval, 4)}
+        </p>
+        <p>
+          ${this.button('clickFortune', 'Click fortune', 'click fortune news', true, config.clickFortune)}
         </p>
       </div>
     </div>
