@@ -634,8 +634,8 @@ class Garden {
     if(config.clickFortune){
       this.writeLog(4, "click fortune", false, "Game.TickerEffect.type:" + Game.TickerEffect.type);
       if(Game.TickerEffect.type=='fortune'){
-        Game.tickerL.click();
         this.writeLog(3, "click fortune", false, "click! Game.TickerEffect.type:" + Game.TickerEffect.type);
+        Game.tickerL.click();
       }
     }
   }
