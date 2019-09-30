@@ -1982,12 +1982,14 @@ class UI {
         <p>
           ${this.button('playSound', '1', 'play beep sound before tick', true, config.playSound)}
           ${this.numberInputDigits('playSoundSecond', 'Sec', 'input second', config.playSoundSecond, 2)}
+        </p>
+        <p>
           ${this.button('playSound2', '2', 'play beep sound after tick', true, config.playSound2)}
           ${this.numberInputDigits('playSound2Tick', 'Tick', 'input ticks', config.playSound2Tick, 2)}
         </p>
         <p>
           ${this.button('playSoundMature', '3', 'play beep sound after target plant is mature', true, config.playSoundMature)}
-          ${this.fixedSelect('playSoundMatureID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.playSoundMatureID, 5)}
+          ${this.fixedSelect('playSoundMatureID', this.makeNameArray(Garden.minigame.plantsById), 1, 'ID', 'select ID', config.playSoundMatureID, 6)}
         </p>
         <h3>Settings</h3>
         <p>
