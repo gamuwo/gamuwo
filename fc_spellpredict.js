@@ -4,25 +4,6 @@
 // @match        http://orteil.dashnet.org/cookieclicker/
 // @source       https://www.reddit.com/r/CookieClicker/comments/6v2lz3/predict_next_hands_of_faith/
 
-// (function() {
-//     if(Game.ObjectsById[7].minigameLoaded){
-//         var lookup = setInterval(function() {
-//             if (typeof Game.ready !== 'undefined' && Game.ready) {
-//                 var CastSpell = document.getElementById("grimoireSpell1");
-//                 CastSpell.onmouseover = function(){
-//                     Game.tooltip.dynamic=1;
-//                     Game.tooltip.draw(this, Game.ObjectsById[7].minigame.spellTooltip(1)()
-//                                       + '<div class="line"></div><div class="description">'
-//                                       + '<b>First Spell:</b> ' + nextSpell(0) + '<br />'
-//                                       + '<b>Second Spell:</b> ' + nextSpell(1) + '<br />'
-//                                       + '<b>Third Spell:</b> ' + nextSpell(2) + '<br />'
-//                                       + '<b>Fourth Spell:</b> ' + nextSpell(3) +'</div>','this');
-//                     Game.tooltip.wobble();};
-//                 clearInterval(lookup);
-//             }
-//         }, 1000);
-//     }
-// })();
 (function() {
     if(Game.ObjectsById[7].minigameLoaded){
         var lookup = setInterval(function() {
@@ -36,31 +17,35 @@
                     let str = '';
                     str = str + '<div class="line"></div>';
                     str = str + '<div class="description" style="display: flex;">';
-                    str = str + '<div style="display: inline-box; margin: 3px;">';
+                    str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;">';
+                    str = str + '<small><b></b></small><br />';
                     str = str + '<small><b>1st Spell:</b></small><br />';
                     str = str + '<small><b>2nd Spell:</b></small><br />';
                     str = str + '<small><b>3rd Spell:</b></small><br />';
                     str = str + '<small><b>4th Spell:</b></small>';
                     str = str +'</div>';
-                    str = str + '<div style="display: inline-box; margin: 3px;';
+                    str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
                     if(randomNum == 0) str = str + ' outline: solid orange 2px;';
                     str = str + '">';
+                    str = str + '<small><b>random:0</b></small><br />';
                     str = str + nextSpellAux(0, 0) + '<br />';
                     str = str + nextSpellAux(1, 0) + '<br />';
                     str = str + nextSpellAux(2, 0) + '<br />';
                     str = str + nextSpellAux(3, 0);
                     str = str +'</div>';
-                    str = str + '<div style="display: inline-box; margin: 3px;';
+                    str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
                     if(randomNum == 1) str = str + ' outline: solid orange 2px;';
                     str = str + '">';
+                    str = str + '<small><b>random:1</b></small><br />';
                     str = str + nextSpellAux(0, 1) + '<br />';
                     str = str + nextSpellAux(1, 1) + '<br />';
                     str = str + nextSpellAux(2, 1) + '<br />';
                     str = str + nextSpellAux(3, 1);
                     str = str +'</div>';
-                    str = str + '<div style="display: inline-box; margin: 3px;';
+                    str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
                     if(randomNum == 2) str = str + ' outline: solid orange 2px;';
                     str = str + '">';
+                    str = str + '<small><b>random:2</b></small><br />';
                     str = str + nextSpellAux(0, 2) + '<br />';
                     str = str + nextSpellAux(1, 2) + '<br />';
                     str = str + nextSpellAux(2, 2) + '<br />';
