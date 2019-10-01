@@ -4,6 +4,25 @@
 // @match        http://orteil.dashnet.org/cookieclicker/
 // @source       https://www.reddit.com/r/CookieClicker/comments/6v2lz3/predict_next_hands_of_faith/
 
+// (function() {
+//     if(Game.ObjectsById[7].minigameLoaded){
+//         var lookup = setInterval(function() {
+//             if (typeof Game.ready !== 'undefined' && Game.ready) {
+//                 var CastSpell = document.getElementById("grimoireSpell1");
+//                 CastSpell.onmouseover = function(){
+//                     Game.tooltip.dynamic=1;
+//                     Game.tooltip.draw(this, Game.ObjectsById[7].minigame.spellTooltip(1)()
+//                                       + '<div class="line"></div><div class="description">'
+//                                       + '<b>First Spell:</b> ' + nextSpell(0) + '<br />'
+//                                       + '<b>Second Spell:</b> ' + nextSpell(1) + '<br />'
+//                                       + '<b>Third Spell:</b> ' + nextSpell(2) + '<br />'
+//                                       + '<b>Fourth Spell:</b> ' + nextSpell(3) +'</div>','this');
+//                     Game.tooltip.wobble();};
+//                 clearInterval(lookup);
+//             }
+//         }, 1000);
+//     }
+// })();
 (function() {
     if(Game.ObjectsById[7].minigameLoaded){
         var lookup = setInterval(function() {
@@ -12,11 +31,22 @@
                 CastSpell.onmouseover = function(){
                     Game.tooltip.dynamic=1;
                     Game.tooltip.draw(this, Game.ObjectsById[7].minigame.spellTooltip(1)()
-                                      + '<div class="line"></div><div class="description">'
-                                      + '<b>First Spell:</b> ' + nextSpell(0) + '<br />'
-                                      + '<b>Second Spell:</b> ' + nextSpell(1) + '<br />'
-                                      + '<b>Third Spell:</b> ' + nextSpell(2) + '<br />'
-                                      + '<b>Fourth Spell:</b> ' + nextSpell(3) +'</div>','this');
+                                      + '<div class="line"></div>'
+                                      + '<div class="description" style="display: flex;">'
+                                      + '<div style="display: inline-box;">'
+                                      + '<b>First Spell:</b><br />'
+                                      + '<b>Second Spell:</b><br />'
+                                      + '<b>Third Spell:</b><br />'
+                                      + '<b>Fourth Spell:</b>'
+                                      +'</div>'
+                                      + '<div style="display: inline-box;">'
+                                      + nextSpell(0) + '<br />'
+                                      + nextSpell(1) + '<br />'
+                                      + nextSpell(2) + '<br />'
+                                      + nextSpell(3)
+                                      +'</div>'
+                                      +'</div>'
+                                      ,'this');
                     Game.tooltip.wobble();};
                 clearInterval(lookup);
             }
