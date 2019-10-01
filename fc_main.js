@@ -685,6 +685,10 @@ function autoCast() {
 		// WORK IN PROGRESS
 		//Start SMART FTHOF checks 
 		if (nextSpellName() == "Clot" || nextSpellName() == "Sugar Lump" || nextSpellName() == "Blab" || nextSpellName() == "Cookie Chain" || nextSpellName() == "Cookie Storm (Drop)" || nextSpellName() == "Cookie Storm" || nextSpellName() == "Lucky" || nextSpellName() == "Ruin Cookies" || nextSpellName() == "Frenzy") {
+		  //spell predict(click frenzy) is changing during dragonflight, so do nothing
+		  if(Game.hasBuff('Dragonflight')) return;
+		  
+		  //cast cheapest spell to skip unless effect
 			M.castSpell(cheapestSpell);
 			logEvent('AutoSpell', 'Cast cheapest spell');
 			return;
