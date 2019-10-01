@@ -97,7 +97,7 @@ class Config {
       logInvisibleLevel4: false,
       hideOverTileFlag: false,
       overTile: false,
-      overTileHideTime: { value: 170, min: 0 },
+      overTileHideTime: { value: 10, min: 0 },
       overTileAge: false,
       clickFortune: false,
     };
@@ -450,7 +450,7 @@ class Garden {
   }
   
   static resetOneTimeFlag(config) {
-    if(this.secondsBeforeNextTick >= 178){
+    if( this.secondsBeforeNextTick >= (this.minigame.stepT - 2) ){
       config.playSoundFlag = false;
       config.playSound2Flag = false;
       config.playSoundMatureFlag = false;
@@ -623,7 +623,7 @@ class Garden {
   }
   
   static handleHideOverTile(config) {
-    if(!config.hideOverTileFlag && this.secondsBeforeNextTick <= parseInt(config.overTileHideTime.value) && this.secondsBeforeNextTick >= (parseInt(config.overTileHideTime.value) - 2)){
+    if( !config.hideOverTileFlag && this.secondsBeforeNextTick <= (this.minigame.stepT - parseInt(config.overTileHideTime.value)) && this.secondsBeforeNextTick >= (this.minigame.stepT - parseInt(config.overTileHideTime.value) - 2) ){
       this.hideOverTile();
       config.hideOverTileFlag = true;
       this.writeLog(3, "over tile", false, "hide over tile");
@@ -649,7 +649,7 @@ class Garden {
   }
   
   static handlePlaySound2(config) {
-    if(config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= 178 && this.secondsBeforeNextTick >= 176){
+    if( config.playSound2 && !config.playSound2Flag && this.secondsBeforeNextTick <= (this.minigame.stepT - 2) && this.secondsBeforeNextTick >= (this.minigame.stepT - 4) ){
       if(config.playSound2Tick.value == 0){
         this.playSound2();
         this.writeLog(3, "play sound2", false, "sound!");
@@ -662,7 +662,7 @@ class Garden {
   }
   
   static handlePlaySoundMature(config) {
-    if(config.playSoundMature && !config.playSoundMatureFlag && this.secondsBeforeNextTick <= 176 && this.secondsBeforeNextTick >= 174){
+    if( config.playSoundMature && !config.playSoundMatureFlag && this.secondsBeforeNextTick <= (this.minigame.stepT - 4) && this.secondsBeforeNextTick >= (this.minigame.stepT - 6) ){
       let isMature = false;
       this.forEachTile((x, y) => {
         let tileForSound = this.getTile(x, y);
