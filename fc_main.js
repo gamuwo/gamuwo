@@ -684,10 +684,30 @@ function autoCast() {
 			
 		// WORK IN PROGRESS
 		//Start SMART FTHOF checks 
-		if (nextSpellName() == "Clot" || nextSpellName() == "Sugar Lump" || nextSpellName() == "Blab" || nextSpellName() == "Cookie Chain" || nextSpellName() == "Cookie Storm (Drop)" || nextSpellName() == "Cookie Storm" || nextSpellName() == "Lucky" || nextSpellName() == "Ruin Cookies") {
+		if (nextSpellName() == "Clot" || nextSpellName() == "Sugar Lump" || nextSpellName() == "Blab" || nextSpellName() == "Cookie Chain" || nextSpellName() == "Cookie Storm (Drop)" || nextSpellName() == "Cookie Storm" || nextSpellName() == "Lucky" || nextSpellName() == "Ruin Cookies" || nextSpellName() == "Frenzy") {
 			M.castSpell(cheapestSpell);
 			logEvent('AutoSpell', 'Cast cheapest spell');
 			return;
+		}
+
+		if (nextSpellName() == "Building Special") {
+			if (Game.dragonAura == 10 || Game.dragonAura2 == 10) {
+				if (Game.hasBuff('Frenzy') && Game.hasBuff('Dragonflight')) {
+					M.castSpell(FTHOF);
+					logEvent('AutoSpell', 'Cast Force the Hand of Fate');
+				}
+			}
+			else if (Game.hasBuff('Frenzy') && Game.hasBuff('Click frenzy')) {
+				M.castSpell(FTHOF);
+				logEvent('AutoSpell', 'Cast Force the Hand of Fate');
+			}
+		}
+
+		if (nextSpellName() == "Click Frenzy") {
+			if (Game.hasBuff('Frenzy') && BuildingSpecialBuff() == 1) {
+				M.castSpell(FTHOF);
+				logEvent('AutoSpell', 'Cast Force the Hand of Fate');
+			}
 		}
 			
 		if (nextSpellName() == "Elder Frenzy") {
@@ -718,26 +738,6 @@ function autoCast() {
 						logEvent('AutoSpell', 'Cast Force the Hand of Fate');
 					}
 				}
-			}
-		}
-
-		if (nextSpellName() == "Frenzy" || nextSpellName() == "Building Special") {
-			if (Game.dragonAura == 10 || Game.dragonAura2 == 10) {
-				if (Game.hasBuff('Dragonflight')) {
-					M.castSpell(FTHOF);
-					logEvent('AutoSpell', 'Cast Force the Hand of Fate');
-				}
-			}
-			else if (Game.hasBuff('Click frenzy')) {
-				M.castSpell(FTHOF);
-				logEvent('AutoSpell', 'Cast Force the Hand of Fate');
-			}
-		}
-
-		if (nextSpellName() == "Click Frenzy") {
-			if (Game.hasBuff('Frenzy') && BuildingSpecialBuff() == 1) {
-				M.castSpell(FTHOF);
-				logEvent('AutoSpell', 'Cast Force the Hand of Fate');
 			}
 		}
 				
