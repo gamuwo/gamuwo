@@ -32,14 +32,14 @@
                     Game.tooltip.dynamic=1;
                     Game.tooltip.draw(this, Game.ObjectsById[7].minigame.spellTooltip(1)()
                                       + '<div class="line"></div>'
-                                      + '<div class="description" style="display: flex;">'
-                                      + '<div class="description" style="display: inline-box; margin: 5px;">'
+                                      + '<div class="description" style="display: flex; line-height: 1rem;">'
+                                      + '<div style="display: inline-box; margin: 3px;">'
                                       + '<b>First Spell:</b><br />'
                                       + '<b>Second Spell:</b><br />'
                                       + '<b>Third Spell:</b><br />'
                                       + '<b>Fourth Spell:</b>'
                                       +'</div>'
-                                      + '<div class="description" style="display: inline-box; margin: 5px;">'
+                                      + '<div style="display: inline-box; margin: 3px;">'
                                       + nextSpell(0) + '<br />'
                                       + nextSpell(1) + '<br />'
                                       + nextSpell(2) + '<br />'
