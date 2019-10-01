@@ -1709,10 +1709,12 @@ class UI {
   margin-bottom: 0.2rem;
   margin-top: 0rem;
   text-align: center;
+  min-width: 25rem;
 }
 #cookieGardenHelper h2 {
   font-size: 1.2rem;
   margin: 3px 3px 2px 3px;
+  min-width: 11rem;
 }
 #cookieGardenHelper h3 {
   display: flex;
