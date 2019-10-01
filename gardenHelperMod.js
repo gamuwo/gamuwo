@@ -1832,6 +1832,9 @@ class UI {
   transition: 0.3s;
 }
 #cookieGardenHelper .warning .closeWarning:hover { color: black; }
+
+#support,
+#smallSupport { display: none; }
 `;
   }
   
