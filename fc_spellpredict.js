@@ -18,9 +18,9 @@
                     str = str + '<div class="line"></div>';
                     str = str + '<div class="description" style="display: flex;">';
                     str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;">';
-                    str = str + '<small><b></b></small><br />';
+                    str = str + '<small></small><br />';
                     for(let i=1; i<11; i++){
-                        str = str + '<small><b>' + i + ':</b></small><br />';
+                        str = str + '<small>' + i + ':</small><br />';
                     }
                     str = str.slice(0, -6);
                     str = str +'</div>';
@@ -28,7 +28,7 @@
                         str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
                         if(randomNum == i) str = str + ' outline: solid orange 2px;';
                         str = str + '">';
-                        str = str + '<small><b>' + i + ':</b></small><br />';
+                        str = str + '<small>' + i + ':</small><br />';
                         for(let j=0; j<10; j++){
                             str = str + nextSpellAux(j, i) + '<br />';
                         }
