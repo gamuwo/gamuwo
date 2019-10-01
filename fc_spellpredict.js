@@ -29,24 +29,47 @@
             if (typeof Game.ready !== 'undefined' && Game.ready) {
                 var CastSpell = document.getElementById("grimoireSpell1");
                 CastSpell.onmouseover = function(){
+                    let randomNum = 0;
+                    if (Game.season=='valentines' || Game.season=='easter'){randomNum++;}
+                    if (Game.chimeType==1){randomNum++;}
+                    
+                    let str = '';
+                    str = str + '<div class="line"></div>';
+                    str = str + '<div class="description" style="display: flex;">';
+                    str = str + '<div style="display: inline-box; margin: 3px;">';
+                    str = str + '<small><b>1st Spell:</b></small><br />';
+                    str = str + '<small><b>2nd Spell:</b></small><br />';
+                    str = str + '<small><b>3rd Spell:</b></small><br />';
+                    str = str + '<small><b>4th Spell:</b></small>';
+                    str = str +'</div>';
+                    str = str + '<div style="display: inline-box; margin: 3px;';
+                    if(randomNum == 0) str = str + ' outline: solid orange 2px;';
+                    str = str + '">';
+                    str = str + nextSpellAux(0, 0) + '<br />';
+                    str = str + nextSpellAux(1, 0) + '<br />';
+                    str = str + nextSpellAux(2, 0) + '<br />';
+                    str = str + nextSpellAux(3, 0);
+                    str = str +'</div>';
+                    str = str + '<div style="display: inline-box; margin: 3px;';
+                    if(randomNum == 1) str = str + ' outline: solid orange 2px;';
+                    str = str + '">';
+                    str = str + nextSpellAux(0, 1) + '<br />';
+                    str = str + nextSpellAux(1, 1) + '<br />';
+                    str = str + nextSpellAux(2, 1) + '<br />';
+                    str = str + nextSpellAux(3, 1);
+                    str = str +'</div>';
+                    str = str + '<div style="display: inline-box; margin: 3px;';
+                    if(randomNum == 2) str = str + ' outline: solid orange 2px;';
+                    str = str + '">';
+                    str = str + nextSpellAux(0, 2) + '<br />';
+                    str = str + nextSpellAux(1, 2) + '<br />';
+                    str = str + nextSpellAux(2, 2) + '<br />';
+                    str = str + nextSpellAux(3, 2);
+                    str = str +'</div>';
+                    str = str +'</div>';
+                    
                     Game.tooltip.dynamic=1;
-                    Game.tooltip.draw(this, Game.ObjectsById[7].minigame.spellTooltip(1)()
-                                      + '<div class="line"></div>'
-                                      + '<div class="description" style="display: flex;">'
-                                      + '<div style="display: inline-box; margin: 3px;">'
-                                      + '<small><b>First Spell:</b></small><br />'
-                                      + '<small><b>Second Spell:</b></small><br />'
-                                      + '<small><b>Third Spell:</b></small><br />'
-                                      + '<small><b>Fourth Spell:</b></small>'
-                                      +'</div>'
-                                      + '<div style="display: inline-box; margin: 3px;">'
-                                      + nextSpell(0) + '<br />'
-                                      + nextSpell(1) + '<br />'
-                                      + nextSpell(2) + '<br />'
-                                      + nextSpell(3)
-                                      +'</div>'
-                                      +'</div>'
-                                      ,'this');
+                    Game.tooltip.draw(this, Game.ObjectsById[7].minigame.spellTooltip(1)() + str, 'this');
                     Game.tooltip.wobble();};
                 clearInterval(lookup);
             }
@@ -55,7 +78,7 @@
 })();
 
 
-nextSpell = function(i) {
+nextSpellAux = function(i, randomNum) {
     season=Game.season;
     var obj = obj || {};
     M = Game.ObjectsById[7].minigame;
@@ -69,8 +92,8 @@ nextSpell = function(i) {
     var choices = [];
     if (!spell.fail || Math.random() < (1 - failChance)) {
         Math.random();Math.random();
-        if (Game.season=='valentines' || Game.season=='easter'){Math.random();}
-        if (Game.chimeType==1){Math.random();}
+        if (randomNum == 1){Math.random();}
+        if (randomNum == 2){Math.random();Math.random();}
         choices.push('<b style="color:#FFDE5F">Frenzy', '<b style="color:#FFDE5F">Lucky');
         if (!Game.hasBuff('Dragonflight')) choices.push('<b style="color:#FFD700">Click Frenzy');
         if (Math.random() < 0.1) choices.push('<b style="color:#FFDE5F">Cookie Chain', '<b style="color:#FFDE5F">Cookie Storm', 'Blab');
@@ -79,8 +102,8 @@ nextSpell = function(i) {
         if (Math.random() < 0.0001) choices.push('<b style="color:#5FFFFC">Sugar Lump');
     } else {
         Math.random();Math.random();
-        if (Game.season=='valentines' || Game.season=='easter'){Math.random();}
-        if (Game.chimeType==1){Math.random();}
+        if (randomNum == 1){Math.random();}
+        if (randomNum == 2){Math.random();Math.random();}
         choices.push('<b style="color:#FF3605">Clot', '<b style="color:#FF3605">Ruin Cookies');
         if (Math.random() < 0.1) choices.push('<b style="color:#DAA520">Cursed Finger', '<b style="color:#DAA520">Elder Frenzy');
         if (Math.random() < 0.003) choices.push('<b style="color:#5FFFFC">Sugar Lump');
@@ -89,6 +112,13 @@ nextSpell = function(i) {
     ret = choose(choices);
     Math.seedrandom();
     return '<small>' + ret + '</b></small>';
+}
+
+nextSpell = function(i) {
+    let randomNum = 0;
+    if (Game.season=='valentines' || Game.season=='easter'){randomNum++;}
+    if (Game.chimeType==1){randomNum++;}
+    return nextSpellAux(i, randomNum);
 }
 
 // This converts the nextSpell(i) to a string to be used for checking conditions for auto casting Force The Hand of Fate in fc_main.
