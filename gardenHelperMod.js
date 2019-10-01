@@ -1551,7 +1551,7 @@ class UI {
 .underline { text-decoration: underline; }
 .boxPanel {
   display: inline-block;
-  min-width: 10.5rem;
+  min-width: 11rem;
   border-style: solid;
   border-width: 0 2px 2px 2px;
   padding: 0.1rem 0.4rem 0.3rem 0.4rem;
