@@ -19,16 +19,10 @@
                     str = str + '<div class="description" style="display: flex;">';
                     str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;">';
                     str = str + '<small><b></b></small><br />';
-                    str = str + '<small><b>1st Spell:</b></small><br />';
-                    str = str + '<small><b>2nd Spell:</b></small><br />';
-                    str = str + '<small><b>3rd Spell:</b></small><br />';
-                    str = str + '<small><b>4th Spell:</b></small><br />';
-                    str = str + '<small><b>5th Spell:</b></small><br />';
-                    str = str + '<small><b>6th Spell:</b></small><br />';
-                    str = str + '<small><b>7th Spell:</b></small><br />';
-                    str = str + '<small><b>8th Spell:</b></small><br />';
-                    str = str + '<small><b>9th Spell:</b></small><br />';
-                    str = str + '<small><b>10th Spell:</b></small>';
+                    for(let i=0; i<10; i++){
+                        str = str + '<small><b>' + i + ':</b></small><br />';
+                    }
+                    str = str.slice(0, -6);
                     str = str +'</div>';
                     for(let i=0; i<3; i++){
                         str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
