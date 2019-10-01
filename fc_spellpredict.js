@@ -30,51 +30,17 @@
                     str = str + '<small><b>9th Spell:</b></small><br />';
                     str = str + '<small><b>10th Spell:</b></small>';
                     str = str +'</div>';
-                    str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
-                    if(randomNum == 0) str = str + ' outline: solid orange 2px;';
-                    str = str + '">';
-                    str = str + '<small><b>random:0</b></small><br />';
-                    str = str + nextSpellAux(0, 0) + '<br />';
-                    str = str + nextSpellAux(1, 0) + '<br />';
-                    str = str + nextSpellAux(2, 0) + '<br />';
-                    str = str + nextSpellAux(3, 0) + '<br />';
-                    str = str + nextSpellAux(4, 0) + '<br />';
-                    str = str + nextSpellAux(5, 0) + '<br />';
-                    str = str + nextSpellAux(6, 0) + '<br />';
-                    str = str + nextSpellAux(7, 0) + '<br />';
-                    str = str + nextSpellAux(8, 0) + '<br />';
-                    str = str + nextSpellAux(9, 0);
-                    str = str +'</div>';
-                    str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
-                    if(randomNum == 1) str = str + ' outline: solid orange 2px;';
-                    str = str + '">';
-                    str = str + '<small><b>random:1</b></small><br />';
-                    str = str + nextSpellAux(0, 1) + '<br />';
-                    str = str + nextSpellAux(1, 1) + '<br />';
-                    str = str + nextSpellAux(2, 1) + '<br />';
-                    str = str + nextSpellAux(3, 1) + '<br />';
-                    str = str + nextSpellAux(4, 1) + '<br />';
-                    str = str + nextSpellAux(5, 1) + '<br />';
-                    str = str + nextSpellAux(6, 1) + '<br />';
-                    str = str + nextSpellAux(7, 1) + '<br />';
-                    str = str + nextSpellAux(8, 1) + '<br />';
-                    str = str + nextSpellAux(9, 1);
-                    str = str +'</div>';
-                    str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
-                    if(randomNum == 2) str = str + ' outline: solid orange 2px;';
-                    str = str + '">';
-                    str = str + '<small><b>random:2</b></small><br />';
-                    str = str + nextSpellAux(0, 2) + '<br />';
-                    str = str + nextSpellAux(1, 2) + '<br />';
-                    str = str + nextSpellAux(2, 2) + '<br />';
-                    str = str + nextSpellAux(3, 2) + '<br />';
-                    str = str + nextSpellAux(4, 2) + '<br />';
-                    str = str + nextSpellAux(5, 2) + '<br />';
-                    str = str + nextSpellAux(6, 2) + '<br />';
-                    str = str + nextSpellAux(7, 2) + '<br />';
-                    str = str + nextSpellAux(8, 2) + '<br />';
-                    str = str + nextSpellAux(9, 2);
-                    str = str +'</div>';
+                    for(let i=0; i<3; i++){
+                        str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
+                        if(randomNum == i) str = str + ' outline: solid orange 2px;';
+                        str = str + '">';
+                        str = str + '<small><b>Case ' + i + ':</b></small><br />';
+                        for(let j=0; j<10; j++){
+                            str = str + nextSpellAux(j, i) + '<br />';
+                        }
+                        str = str.slice(0, -6);
+                        str = str +'</div>';
+                    }
                     str = str +'</div>';
                     
                     Game.tooltip.dynamic=1;
