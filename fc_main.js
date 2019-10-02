@@ -139,7 +139,7 @@ function preferenceParse(setting, defaultVal) {
 }
 
 function scientificNotation(value) {
-    if (value === 0 || !Number.isFinite(value) || (Math.abs(value) >= 1 && Math.abs(value) <= 1000000)) {
+    if (value === 0 || !Number.isFinite(value) || (Math.abs(value) >= 0.000001 && Math.abs(value) <= 1000000)) {
         return rawFormatter(value);
     }
     value = parseFloat(value);
