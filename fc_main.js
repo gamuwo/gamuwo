@@ -139,11 +139,11 @@ function preferenceParse(setting, defaultVal) {
 }
 
 function scientificNotation(value) {
-    if (value === 0 || !Number.isFinite(value) || (Math.abs(value) >= 1 && Math.abs(value) <= 1000)) {
+    if (value === 0 || !Number.isFinite(value) || (Math.abs(value) >= 1 && Math.abs(value) <= 1000000)) {
         return rawFormatter(value);
     }
     value = parseFloat(value);
-    value = value.toExponential(2);
+    value = value.toExponential(4);
     value = value.replace('+', '');
     return value;
 }
