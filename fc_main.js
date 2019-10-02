@@ -143,7 +143,7 @@ function scientificNotation(value) {
         return rawFormatter(value);
     }
     value = parseFloat(value);
-    value = value.toExponential(4);
+    value = value.toExponential(3);
     value = value.replace('+', '');
     return value;
 }
