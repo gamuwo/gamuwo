@@ -13,29 +13,32 @@
                     let randomNum = 0;
                     if (Game.season=='valentines' || Game.season=='easter'){randomNum++;}
                     if (Game.chimeType==1){randomNum++;}
+                    let goldenNum = Game.shimmerTypes['golden'].n;
                     
                     let str = '';
                     str = str + '<div class="line"></div>';
-                    str = str + '<div class="description" style="display: flex;">';
-                    str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;">';
-                    str = str + '<small></small><br />';
-                    for(let i=1; i<11; i++){
-                        str = str + '<small>' + i + ':</small><br />';
+                    for(let g=0; g<2; g++){
+                      str = str + '<div class="description" style="display: flex;">';
+                      str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;">';
+                      str = str + '<small></small><br />';
+                      for(let i=1; i<11; i++){
+                          str = str + '<small>' + i + ':</small><br />';
+                      }
+                      str = str.slice(0, -6);
+                      str = str +'</div>';
+                      for(let i=0; i<3; i++){
+                          str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
+                          if(randomNum == i && goldenNum == g) str = str + ' outline: solid orange 2px;';
+                          str = str + '">';
+                          str = str + '<small>' + i + ':</small><br />';
+                          for(let j=0; j<10; j++){
+                              str = str + nextSpellAux(j, i, g) + '<br />';
+                          }
+                          str = str.slice(0, -6);
+                          str = str +'</div>';
+                      }
+                      str = str +'</div>';
                     }
-                    str = str.slice(0, -6);
-                    str = str +'</div>';
-                    for(let i=0; i<3; i++){
-                        str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;';
-                        if(randomNum == i) str = str + ' outline: solid orange 2px;';
-                        str = str + '">';
-                        str = str + '<small>' + i + ':</small><br />';
-                        for(let j=0; j<10; j++){
-                            str = str + nextSpellAux(j, i) + '<br />';
-                        }
-                        str = str.slice(0, -6);
-                        str = str +'</div>';
-                    }
-                    str = str +'</div>';
                     
                     Game.tooltip.dynamic=1;
                     Game.tooltip.draw(this, Game.ObjectsById[7].minigame.spellTooltip(1)() + str, 'this');
@@ -46,13 +49,17 @@
     }
 })();
 
-
-nextSpellAux = function(i, randomNum) {
+nextSpellAux = function(i, randomNum, goldenNum) {
     season=Game.season;
     var obj = obj || {};
     M = Game.ObjectsById[7].minigame;
     spell = M.spellsById[1];
-    var failChance = M.getFailChance(spell);
+    
+    var failChance = 0.15;
+  	if (Game.hasBuff('Magic adept')) failChance *= 0.1;
+  	if (Game.hasBuff('Magic inept')) failChance *= 5;
+  	failChance = failChance + 0.15 * goldenNum;
+  	    
     if (typeof obj.failChanceSet !== 'undefined') failChance = obj.failChanceSet;
     if (typeof obj.failChanceAdd !== 'undefined') failChance += obj.failChanceAdd;
     if (typeof obj.failChanceMult !== 'undefined') failChance *= obj.failChanceMult;
@@ -87,7 +94,8 @@ nextSpell = function(i) {
     let randomNum = 0;
     if (Game.season=='valentines' || Game.season=='easter'){randomNum++;}
     if (Game.chimeType==1){randomNum++;}
-    return nextSpellAux(i, randomNum);
+    let goldenNum = Game.shimmerTypes['golden'].n;
+    return nextSpellAux(i, randomNum, goldenNum);
 }
 
 // This converts the nextSpell(i) to a string to be used for checking conditions for auto casting Force The Hand of Fate in fc_main.
