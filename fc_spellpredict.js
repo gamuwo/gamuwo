@@ -17,7 +17,7 @@
                     
                     let str = '';
                     str = str + '<div class="line"></div>';
-                    for(let g=0; g<2; g++){
+                    for(let g=0; g<3; g++){
                       str = str + '<small>Golden cookie num:' + g + '</small>';
                       str = str + '<div class="description" style="display: flex;">';
                       str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;">';
