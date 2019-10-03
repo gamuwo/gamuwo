@@ -96,6 +96,7 @@ class Config {
       logInvisibleLevel3: false,
       logInvisibleLevel4: false,
       logInvisibleScript: false,
+      logScriptText: "",
       hideOverTileFlag: false,
       overTile: false,
       overTileHideTime: { value: 10, min: 0 },
@@ -1666,6 +1667,7 @@ class UI {
 #logPanel.visible { display: block; }
 #logPanel h2 { font-size: 1.2rem; }
 #logPanel h3 {
+  height: 1.3rem;
   font-size: 1rem;
   margin: 3px;
 }
@@ -1709,12 +1711,13 @@ class UI {
   border: solid 2px;
   padding: 0.4rem;
   margin: 0 0.2rem;
-  user-select: text;
   overflow: auto;
   overflow-wrap: break-word;
   box-sizing: border-box;
   border-radius: 5px;
   background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  resize: none;
 }
 
 #cookieGardenHelperTitle {
@@ -2293,8 +2296,7 @@ class UI {
         Script
         ${this.button('logRunScript', 'Run', 'run script')}
       </h3>
-      <textarea cols="" rows="" id="logScript">
-      </textarea>
+      <textarea cols="" rows="" id="logScript">${config.logScriptText}</textarea>
     </div>
   </div>
 </div>`);
@@ -2315,6 +2317,10 @@ class UI {
       Garden.goBottom("logLevel2");
       Garden.goBottom("logLevel3");
       Garden.goBottom("logLevel4");
+    };
+    doc.elId('logScript').onchange = (event) => {
+      config.logScriptText = doc.elId('logScript').value;
+      Main.save();
     };
 
     doc.qSelAll('#cookieGardenHelper input, #logPanel input').forEach((input) => {
