@@ -2322,6 +2322,10 @@ class UI {
       config.logScriptText = doc.elId('logScript').value;
       Main.save();
     };
+    doc.elId('logScript').addEventListener("keydown", function(event) {
+      //for prevent frozen cookie keybind
+      event.stopImmediatePropagation();
+    }, true);
 
     doc.qSelAll('#cookieGardenHelper input, #logPanel input').forEach((input) => {
       input.onchange = (event) => {
