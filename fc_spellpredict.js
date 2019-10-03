@@ -12,7 +12,7 @@
                 CastSpell.onmouseover = function(){
                     let randomNum = 0;
                     if (Game.season=='valentines' || Game.season=='easter'){randomNum++;}
-                    if (Game.chimeType==1){randomNum++;}
+                    if (!Game.shimmerTypes['golden'].spawned && Game.chimeType==1){randomNum++;}
                     let goldenNum = Game.shimmerTypes['golden'].n;
                     
                     let str = '';
@@ -94,7 +94,7 @@ nextSpellAux = function(i, randomNum, goldenNum) {
 nextSpell = function(i) {
     let randomNum = 0;
     if (Game.season=='valentines' || Game.season=='easter'){randomNum++;}
-    if (Game.chimeType==1){randomNum++;}
+    if (!Game.shimmerTypes['golden'].spawned && Game.chimeType==1){randomNum++;}
     let goldenNum = Game.shimmerTypes['golden'].n;
     return nextSpellAux(i, randomNum, goldenNum);
 }
