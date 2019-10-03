@@ -95,6 +95,7 @@ class Config {
       logInvisibleLevel2: false,
       logInvisibleLevel3: false,
       logInvisibleLevel4: false,
+      logInvisibleScript: false,
       hideOverTileFlag: false,
       overTile: false,
       overTileHideTime: { value: 10, min: 0 },
@@ -1680,7 +1681,8 @@ class UI {
 #logBoxLevel1.invisible,
 #logBoxLevel2.invisible,
 #logBoxLevel3.invisible,
-#logBoxLevel4.invisible { display: none; }
+#logBoxLevel4.invisible,
+#logBoxScript.invisible { display: none; }
 #logPanel .logText {
   width: calc(100% - 0.4rem);
   height: 10rem;
@@ -1701,6 +1703,19 @@ class UI {
 }
 #logPanel .flexItemGrowNormal { flex-grow: 1; }
 #logPanel .flexItemGrowWide { flex-grow: 5; }
+#logScript {
+  width: calc(100% - 0.4rem);
+  height: 10rem;
+  border: solid 2px;
+  padding: 0.4rem;
+  margin: 0 0.2rem;
+  user-select: text;
+  overflow: auto;
+  overflow-wrap: break-word;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
 #cookieGardenHelperTitle {
   color: white;
@@ -2227,6 +2242,7 @@ class UI {
       ${this.button('logToggleLevel2', 'Level2', 'toggle level2 log panel')}
       ${this.button('logToggleLevel3', 'Level3', 'toggle level3 log panel')}
       ${this.button('logToggleLevel4', 'Level4', 'toggle level4 log panel')}
+      ${this.button('logToggleScript', 'Script', 'toggle script panel')}
     </p>
     <p class="flexItemGrowNormal">
       ${this.button('logRefreshButton', 'Refresh', 'refresh, scroll bottom')}
@@ -2271,6 +2287,14 @@ class UI {
       </h3>
       <div class="logText" id="logLevel4">
       </div>
+    </div>
+    <div class="logBox" id="logBoxScript">
+      <h3>
+        Script
+        ${this.button('logRunScript', 'Run', 'run script')}
+      </h3>
+      <textarea cols="" rows="" id="logScript">
+      </textarea>
     </div>
   </div>
 </div>`);
@@ -2461,6 +2485,7 @@ class UI {
     if(config.logInvisibleLevel2) doc.elId('logBoxLevel2').classList.toggle('invisible');
     if(config.logInvisibleLevel3) doc.elId('logBoxLevel3').classList.toggle('invisible');
     if(config.logInvisibleLevel4) doc.elId('logBoxLevel4').classList.toggle('invisible');
+    if(config.logInvisibleScript) doc.elId('logBoxScript').classList.toggle('invisible');
     
     //control auto reload elements disabled
     Main.controlAutoReloadElementDisabled();
@@ -2950,6 +2975,9 @@ class Main {
     } else if (key == 'logToggleLevel4') {
       doc.elId('logBoxLevel4').classList.toggle('invisible');
       this.config.logInvisibleLevel4 = !this.config.logInvisibleLevel4;
+    } else if (key == 'logToggleScript') {
+      doc.elId('logBoxScript').classList.toggle('invisible');
+      this.config.logInvisibleScript = !this.config.logInvisibleScript;
     }
     this.save();
   }
