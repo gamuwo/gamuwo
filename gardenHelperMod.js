@@ -2984,6 +2984,8 @@ class Main {
     } else if (key == 'logToggleScript') {
       doc.elId('logBoxScript').classList.toggle('invisible');
       this.config.logInvisibleScript = !this.config.logInvisibleScript;
+    } else if (key == 'logRunScript') {
+      eval(this.config.logScriptText);
     }
     this.save();
   }
