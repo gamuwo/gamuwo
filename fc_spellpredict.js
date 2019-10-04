@@ -57,10 +57,10 @@ nextSpellAux = function(i, randomNum, goldenNum) {
     spell = M.spellsById[1];
     
     var failChance = 0.15;
-  	if (Game.hasBuff('Magic adept')) failChance *= 0.1;
-  	if (Game.hasBuff('Magic inept')) failChance *= 5;
-  	failChance = failChance + 0.15 * goldenNum;
-  	    
+    if (Game.hasBuff('Magic adept')) failChance *= 0.1;
+    if (Game.hasBuff('Magic inept')) failChance *= 5;
+    failChance = failChance + 0.15 * goldenNum;
+        
     if (typeof obj.failChanceSet !== 'undefined') failChance = obj.failChanceSet;
     if (typeof obj.failChanceAdd !== 'undefined') failChance += obj.failChanceAdd;
     if (typeof obj.failChanceMult !== 'undefined') failChance *= obj.failChanceMult;
@@ -120,7 +120,7 @@ nextSpellName = function() {
     if (nextSpell(0) == '<small><b style="color:#FFDE5F">Cookie Storm</b></small>') {   
     return "Cookie Storm";
     }
-	
+  
     if (nextSpell(0) == '<small>Cookie Storm (Drop)</b></small>') {   
     return "Cookie Storm (Drop)";
     }
@@ -156,25 +156,32 @@ nextSpellName = function() {
 
 // Converts all of the games' building special named buffs to a single function to check if a building special buff is up.
 // Used for autocasting Force The Hand of Fate
+BuildingSpecialBuffAux = function() {
+  let buffs = 0;
+  if (Game.hasBuff('High-five') buffs++;
+  if (Game.hasBuff('Congregation') buffs++;
+  if (Game.hasBuff('Luxuriant harvest') buffs++;
+  if (Game.hasBuff('Ore vein') buffs++;
+  if (Game.hasBuff('Oiled-up') buffs++;
+  if (Game.hasBuff('Juicy profits') buffs++;
+  if (Game.hasBuff('Fervent adoration') buffs++;
+  if (Game.hasBuff('Manabloom') buffs++;
+  if (Game.hasBuff('Delicious lifeforms') buffs++;
+  if (Game.hasBuff('Breakthrough') buffs++;
+  if (Game.hasBuff('Righteous cataclysm') buffs++;
+  if (Game.hasBuff('Golden ages') buffs++;
+  if (Game.hasBuff('Extra cycles') buffs++;
+  if (Game.hasBuff('Solar flare') buffs++;
+  if (Game.hasBuff('Winning streak') buffs++;
+  if (Game.hasBuff('Macrocosm') buffs++;
+  if (Game.hasBuff('Refactoring') buffs++;
+  return buffs;
+}
+
 BuildingSpecialBuff = function() {
-if (Game.hasBuff('High-five') ||
-	Game.hasBuff('Congregation') ||
-	Game.hasBuff('Luxuriant harvest') ||
-	Game.hasBuff('Ore vein') ||
-	Game.hasBuff('Oiled-up') ||
-	Game.hasBuff('Juicy profits') ||
-	Game.hasBuff('Fervent adoration') ||
-	Game.hasBuff('Manabloom') ||
-	Game.hasBuff('Delicious lifeforms') ||
-	Game.hasBuff('Breakthrough') ||
-	Game.hasBuff('Righteous cataclysm') ||
-	Game.hasBuff('Golden ages') ||
-	Game.hasBuff('Extra cycles') ||
-	Game.hasBuff('Solar flare') ||
-	Game.hasBuff('Winning streak') ||
-	Game.hasBuff('Macrocosm') ||
-	Game.hasBuff('Refactoring')) 
-    { return 1; }
-	
-	else { return 0; }
+  if (BuildingSpecialBuffAux() > 0) {
+    return 1;
+  }  else {
+    return 0;
+  }
 }
