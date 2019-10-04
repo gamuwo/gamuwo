@@ -2339,6 +2339,12 @@ class UI {
           Main.handleChange(input.name, input.value);
         }
       };
+      if (input.type == 'text') {
+        input.addEventListener("keydown", function(event) {
+          //for prevent frozen cookie keybind
+          event.stopImmediatePropagation();
+        }, true);
+      }
     });
     
     doc.qSelAll('#cookieGardenHelper select, #logPanel select').forEach((input) => {
