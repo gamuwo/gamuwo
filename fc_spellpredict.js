@@ -158,23 +158,23 @@ nextSpellName = function() {
 // Used for autocasting Force The Hand of Fate
 BuildingSpecialBuffAux = function() {
   let buffs = 0;
-  if (Game.hasBuff('High-five') buffs++;
-  if (Game.hasBuff('Congregation') buffs++;
-  if (Game.hasBuff('Luxuriant harvest') buffs++;
-  if (Game.hasBuff('Ore vein') buffs++;
-  if (Game.hasBuff('Oiled-up') buffs++;
-  if (Game.hasBuff('Juicy profits') buffs++;
-  if (Game.hasBuff('Fervent adoration') buffs++;
-  if (Game.hasBuff('Manabloom') buffs++;
-  if (Game.hasBuff('Delicious lifeforms') buffs++;
-  if (Game.hasBuff('Breakthrough') buffs++;
-  if (Game.hasBuff('Righteous cataclysm') buffs++;
-  if (Game.hasBuff('Golden ages') buffs++;
-  if (Game.hasBuff('Extra cycles') buffs++;
-  if (Game.hasBuff('Solar flare') buffs++;
-  if (Game.hasBuff('Winning streak') buffs++;
-  if (Game.hasBuff('Macrocosm') buffs++;
-  if (Game.hasBuff('Refactoring') buffs++;
+  if (Game.hasBuff('High-five')) buffs++;
+  if (Game.hasBuff('Congregation')) buffs++;
+  if (Game.hasBuff('Luxuriant harvest')) buffs++;
+  if (Game.hasBuff('Ore vein')) buffs++;
+  if (Game.hasBuff('Oiled-up')) buffs++;
+  if (Game.hasBuff('Juicy profits')) buffs++;
+  if (Game.hasBuff('Fervent adoration')) buffs++;
+  if (Game.hasBuff('Manabloom')) buffs++;
+  if (Game.hasBuff('Delicious lifeforms')) buffs++;
+  if (Game.hasBuff('Breakthrough')) buffs++;
+  if (Game.hasBuff('Righteous cataclysm')) buffs++;
+  if (Game.hasBuff('Golden ages')) buffs++;
+  if (Game.hasBuff('Extra cycles')) buffs++;
+  if (Game.hasBuff('Solar flare')) buffs++;
+  if (Game.hasBuff('Winning streak')) buffs++;
+  if (Game.hasBuff('Macrocosm')) buffs++;
+  if (Game.hasBuff('Refactoring')) buffs++;
   return buffs;
 }
 
