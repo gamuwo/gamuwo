@@ -91,67 +91,67 @@ nextSpellAux = function(i, randomNum, goldenNum) {
     return '<small>' + ret + '</b></small>';
 }
 
-nextSpell = function(i) {
+// This converts the nextSpell(i) to a string to be used for checking conditions for auto casting Force The Hand of Fate in fc_main.
+spellName = function(i, randomNum, goldenNum) {
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FFDE5F">Lucky</b></small>') {   
+    return "Lucky";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FFDE5F">Frenzy</b></small>') {   
+    return "Frenzy";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FFD700">Click Frenzy</b></small>') {   
+    return "Click Frenzy";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><small><b style="color:#FFDE5F">Cookie Chain</b></small>') {   
+    return "Cookie Chain";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FFDE5F">Cookie Storm</b></small>') {   
+    return "Cookie Storm";
+    }
+  
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small>Cookie Storm (Drop)</b></small>') {   
+    return "Cookie Storm (Drop)";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#DAA520">Building Special</b></small>') {   
+    return "Building Special";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small>Blab</b></small>') {   
+    return "Blab";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FF3605">Ruin Cookies</b></small>') {   
+    return "Ruin Cookies";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FF3605">Clot</b></small>') {   
+    return "Clot";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#DAA520">Cursed Finger</b></small>') {   
+    return "Cursed Finger";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#DAA520">Elder Frenzy</b></small>') {   
+    return "Elder Frenzy";
+    }
+    
+    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#5FFFFC">Sugar Lump</b></small>') {   
+    return "Sugar Lump";
+    }
+}
+
+nextSpellName = function() {
     let randomNum = 0;
     if (Game.season=='valentines' || Game.season=='easter'){randomNum++;}
     if (!Game.shimmerTypes['golden'].spawned && Game.chimeType==1){randomNum++;}
     let goldenNum = Game.shimmerTypes['golden'].n;
-    return nextSpellAux(i, randomNum, goldenNum);
-}
-
-// This converts the nextSpell(i) to a string to be used for checking conditions for auto casting Force The Hand of Fate in fc_main.
-nextSpellName = function() {   
-    if (nextSpell(0) == '<small><b style="color:#FFDE5F">Lucky</b></small>') {   
-    return "Lucky";
-    }
-    
-    if (nextSpell(0) == '<small><b style="color:#FFDE5F">Frenzy</b></small>') {   
-    return "Frenzy";
-    }
-    
-    if (nextSpell(0) == '<small><b style="color:#FFD700">Click Frenzy</b></small>') {   
-    return "Click Frenzy";
-    }
-    
-    if (nextSpell(0) == '<small><small><b style="color:#FFDE5F">Cookie Chain</b></small>') {   
-    return "Cookie Chain";
-    }
-    
-    if (nextSpell(0) == '<small><b style="color:#FFDE5F">Cookie Storm</b></small>') {   
-    return "Cookie Storm";
-    }
-  
-    if (nextSpell(0) == '<small>Cookie Storm (Drop)</b></small>') {   
-    return "Cookie Storm (Drop)";
-    }
-    
-    if (nextSpell(0) == '<small><b style="color:#DAA520">Building Special</b></small>') {   
-    return "Building Special";
-    }
-    
-    if (nextSpell(0) == '<small>Blab</b></small>') {   
-    return "Blab";
-    }
-    
-    if (nextSpell(0) == '<small><b style="color:#FF3605">Ruin Cookies</b></small>') {   
-    return "Ruin Cookies";
-    }
-    
-    if (nextSpell(0) == '<small><b style="color:#FF3605">Clot</b></small>') {   
-    return "Clot";
-    }
-    
-    if (nextSpell(0) == '<small><b style="color:#DAA520">Cursed Finger</b></small>') {   
-    return "Cursed Finger";
-    }
-    
-    if (nextSpell(0) == '<small><b style="color:#DAA520">Elder Frenzy</b></small>') {   
-    return "Elder Frenzy";
-    }
-    
-    if (nextSpell(0) == '<small><b style="color:#5FFFFC">Sugar Lump</b></small>') {   
-    return "Sugar Lump";
-    }
+    return spellName(0, randomNum, goldenNum);
 }
 
 // Converts all of the games' building special named buffs to a single function to check if a building special buff is up.
