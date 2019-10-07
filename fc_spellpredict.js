@@ -58,10 +58,10 @@
                     str = str +'</div>';
                     str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;">';
                     for(let i=0; i<10; i++){
-                        if(predictFail(i)){
-                          str = str + '<small><b style="color:#FF3605">Fail</b></small>';
+                        if(predictFail(i, Game.ObjectsById[7].minigame.spellsById[2])){
+                          str = str + '<small><b style="color:#FF3605">Fail</b></small><br />';
                         } else {
-                          str = str + '<small><b style="color:#FFDE5F">Win</b></small>';
+                          str = str + '<small><b style="color:#FFDE5F">Win</b></small><br />';
                         }
                     }
                     str = str.slice(0, -6);
@@ -181,7 +181,7 @@ nextSpellName = function() {
     return spellName(0, randomNum, goldenNum);
 }
 
-predictFail = function(i) {
+predictFail = function(i, spell) {
     var obj = obj || {};
     M = Game.ObjectsById[7].minigame;
     
