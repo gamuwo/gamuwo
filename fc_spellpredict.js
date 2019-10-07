@@ -44,6 +44,33 @@
                     Game.tooltip.dynamic=1;
                     Game.tooltip.draw(this, Game.ObjectsById[7].minigame.spellTooltip(1)() + str, 'this');
                     Game.tooltip.wobble();};
+                    
+                var CastST = document.getElementById("grimoireSpell2");
+                CastST.onmouseover = function(){
+                    let str = '';
+                    str = str + '<div class="line"></div>';
+                    str = str + '<div class="description" style="display: flex;">';
+                    str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;">';
+                    for(let i=1; i<11; i++){
+                        str = str + '<small>' + i + ':</small><br />';
+                    }
+                    str = str.slice(0, -6);
+                    str = str +'</div>';
+                    str = str + '<div style="display: inline-box; padding: 3px; margin: 3px;">';
+                    for(let i=0; i<10; i++){
+                        if(predictFail(i)){
+                          str = str + '<small><b style="color:#FF3605">Fail</b></small>';
+                        } else {
+                          str = str + '<small><b style="color:#FFDE5F">Win</b></small>';
+                        }
+                    }
+                    str = str.slice(0, -6);
+                    str = str +'</div>';
+                    str = str +'</div>';
+                    
+                    Game.tooltip.dynamic=1;
+                    Game.tooltip.draw(this, Game.ObjectsById[7].minigame.spellTooltip(2)() + str, 'this');
+                    Game.tooltip.wobble();};
                 clearInterval(lookup);
             }
         }, 1000);
@@ -152,6 +179,29 @@ nextSpellName = function() {
     if (!Game.shimmerTypes['golden'].spawned && Game.chimeType==1){randomNum++;}
     let goldenNum = Game.shimmerTypes['golden'].n;
     return spellName(0, randomNum, goldenNum);
+}
+
+predictFail = function(i) {
+    var obj = obj || {};
+    M = Game.ObjectsById[7].minigame;
+    
+    var failChance = 0.15;
+    if (Game.hasBuff('Magic adept')) failChance *= 0.1;
+    if (Game.hasBuff('Magic inept')) failChance *= 5;
+        
+    if (typeof obj.failChanceSet !== 'undefined') failChance = obj.failChanceSet;
+    if (typeof obj.failChanceAdd !== 'undefined') failChance += obj.failChanceAdd;
+    if (typeof obj.failChanceMult !== 'undefined') failChance *= obj.failChanceMult;
+    if (typeof obj.failChanceMax !== 'undefined') failChance = Math.max(failChance, obj.failChanceMax);
+    Math.seedrandom(Game.seed + '/' + (M.spellsCastTotal + i));
+    let isFail = false;
+    if (!spell.fail || Math.random() < (1 - failChance)) {
+        isFail = false;
+    } else {
+        isFail = true;
+    }
+    Math.seedrandom();
+    return isFail;
 }
 
 // Converts all of the games' building special named buffs to a single function to check if a building special buff is up.
