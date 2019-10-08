@@ -40,9 +40,12 @@
                       }
                       str = str +'</div>';
                     }
+                    let strOriginal = Game.ObjectsById[7].minigame.spellTooltip(1)();
+                    strOriginal = strOriginal.slice('<div style="padding:8px 4px;min-width:350px;">'.length);
+                    strOriginal = '<div style="padding:8px 4px;min-width:400px;">' + strOriginal;
                     
                     Game.tooltip.dynamic=1;
-                    Game.tooltip.draw(this, Game.ObjectsById[7].minigame.spellTooltip(1)() + str, 'this');
+                    Game.tooltip.draw(this, strOriginal + str, 'this');
                     Game.tooltip.wobble();};
                     
                 var CastST = document.getElementById("grimoireSpell2");
