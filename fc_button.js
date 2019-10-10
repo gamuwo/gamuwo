@@ -408,7 +408,7 @@ function updateTimers() {
             display: timeDisplay(buffDuration('Cookie storm')/Game.fps)
         });
     }
-    height = $('#backgroundLeftCanvas').height() - 140;
+    height = $('#backgroundLeftCanvas').height() - 300;
     drawCircles(t_draw, 20, height);
 }
 
