@@ -14,6 +14,7 @@
                     if (Game.season=='valentines' || Game.season=='easter'){randomNum++;}
                     if (!Game.shimmerTypes['golden'].spawned && Game.chimeType==1){randomNum++;}
                     let goldenNum = Game.shimmerTypes['golden'].n;
+                    let isDF = Game.hasBuff('Dragonflight');
                     
                     let str = '';
                     str = str + '<div class="line"></div>';
@@ -33,7 +34,7 @@
                           str = str + '">';
                           str = str + '<small>' + i + ':</small><br />';
                           for(let j=0; j<10; j++){
-                              str = str + nextSpellAux(j, i, g) + '<br />';
+                              str = str + nextSpellAux(j, i, g, isDF) + '<br />';
                           }
                           str = str.slice(0, -6);
                           str = str +'</div>';
@@ -80,7 +81,7 @@
     }
 })();
 
-nextSpellAux = function(i, randomNum, goldenNum) {
+nextSpellAux = function(i, randomNum, goldenNum, isDF) {
     season=Game.season;
     var obj = obj || {};
     M = Game.ObjectsById[7].minigame;
@@ -102,7 +103,7 @@ nextSpellAux = function(i, randomNum, goldenNum) {
         if (randomNum == 1){Math.random();}
         if (randomNum == 2){Math.random();Math.random();}
         choices.push('<b style="color:#FFDE5F">Frenzy', '<b style="color:#FFDE5F">Lucky');
-        if (!Game.hasBuff('Dragonflight')) choices.push('<b style="color:#FFD700">Click Frenzy');
+        if (!isDF) choices.push('<b style="color:#FFD700">Click Frenzy');
         if (Math.random() < 0.1) choices.push('<b style="color:#FFDE5F">Cookie Chain', '<b style="color:#FFDE5F">Cookie Storm', 'Blab');
         if (Game.BuildingsOwned >= 10 && Math.random() < 0.25) choices.push('<b style="color:#DAA520">Building Special');
         if (Math.random() < 0.15) choices = ['Cookie Storm (Drop)'];
@@ -122,56 +123,56 @@ nextSpellAux = function(i, randomNum, goldenNum) {
 }
 
 // This converts the nextSpell(i) to a string to be used for checking conditions for auto casting Force The Hand of Fate in fc_main.
-spellName = function(i, randomNum, goldenNum) {
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FFDE5F">Lucky</b></small>') {   
+spellName = function(i, randomNum, goldenNum, isDF) {
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><b style="color:#FFDE5F">Lucky</b></small>') {   
     return "Lucky";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FFDE5F">Frenzy</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><b style="color:#FFDE5F">Frenzy</b></small>') {   
     return "Frenzy";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FFD700">Click Frenzy</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><b style="color:#FFD700">Click Frenzy</b></small>') {   
     return "Click Frenzy";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><small><b style="color:#FFDE5F">Cookie Chain</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><small><b style="color:#FFDE5F">Cookie Chain</b></small>') {   
     return "Cookie Chain";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FFDE5F">Cookie Storm</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><b style="color:#FFDE5F">Cookie Storm</b></small>') {   
     return "Cookie Storm";
     }
   
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small>Cookie Storm (Drop)</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small>Cookie Storm (Drop)</b></small>') {   
     return "Cookie Storm (Drop)";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#DAA520">Building Special</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><b style="color:#DAA520">Building Special</b></small>') {   
     return "Building Special";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small>Blab</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small>Blab</b></small>') {   
     return "Blab";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FF3605">Ruin Cookies</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><b style="color:#FF3605">Ruin Cookies</b></small>') {   
     return "Ruin Cookies";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#FF3605">Clot</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><b style="color:#FF3605">Clot</b></small>') {   
     return "Clot";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#DAA520">Cursed Finger</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><b style="color:#DAA520">Cursed Finger</b></small>') {   
     return "Cursed Finger";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#DAA520">Elder Frenzy</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><b style="color:#DAA520">Elder Frenzy</b></small>') {   
     return "Elder Frenzy";
     }
     
-    if (nextSpellAux(i, randomNum, goldenNum) == '<small><b style="color:#5FFFFC">Sugar Lump</b></small>') {   
+    if (nextSpellAux(i, randomNum, goldenNum, isDF) == '<small><b style="color:#5FFFFC">Sugar Lump</b></small>') {   
     return "Sugar Lump";
     }
 }
@@ -181,7 +182,8 @@ nextSpellName = function() {
     if (Game.season=='valentines' || Game.season=='easter'){randomNum++;}
     if (!Game.shimmerTypes['golden'].spawned && Game.chimeType==1){randomNum++;}
     let goldenNum = Game.shimmerTypes['golden'].n;
-    return spellName(0, randomNum, goldenNum);
+    let isDF = Game.hasBuff('Dragonflight');
+    return spellName(0, randomNum, goldenNum, isDF);
 }
 
 predictFail = function(i, spell) {
