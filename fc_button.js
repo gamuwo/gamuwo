@@ -171,7 +171,7 @@ function drawCircles(t_d, x, y) {
     c.drawRect({
         fillStyle: 'rgba(153, 153, 153, 0.6)',
         x: x + maxRadius * 2 + maxWidth / 2 + 35, y: y + maxRadius + 5,
-        width: maxWidth + 20, height: maxHeight + 20
+        width: maxWidth + 40, height: maxHeight + 40
     });
 
     t_d.forEach( function(o_draw) {
