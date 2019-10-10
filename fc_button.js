@@ -397,7 +397,7 @@ function updateTimers() {
         t_draw.push({
             f_percent: devastation_delay,
             c1: "rgba(80, 0, 80, 1)",
-            name: "Devastation (x" + Game.buffs['Devastation'].multClick + ") Time",
+            name: "Devastation (x" + Game.buffs['Devastation'].multClick.toFixed(2) + ") Time",
             display: timeDisplay(buffDuration('Devastation')/Game.fps)
         });
     }
