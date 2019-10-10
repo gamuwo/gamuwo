@@ -254,6 +254,7 @@ function updateTimers() {
         click_frenzy_delay = buffDuration('Click frenzy') / maxCookieTime(),
         dragonflight_delay = buffDuration('Dragonflight') / maxCookieTime(),
         cursed_finger_delay = buffDuration('Cursed finger') / maxCookieTime(),
+        devastation_delay = buffDuration('Devastation') / maxCookieTime(),
         building_special_delay = hasBuildingSpecialBuff() / maxCookieTime(),
         cookie_storm_delay = buffDuration('Cookie storm') / maxCookieTime(),
         // useless decimal_HC_complete = (Game.HowMuchPrestige(Game.cookiesEarned + Game.cookiesReset)%1),
@@ -390,6 +391,14 @@ function updateTimers() {
             c1: "rgba(23, 79, 1, 1)",
             name: "Cursed Finger Time",
             display: timeDisplay(buffDuration('Cursed finger')/Game.fps)
+        });
+    }
+    if (devastation_delay > 0) {
+        t_draw.push({
+            f_percent: devastation_delay,
+            c1: "rgba(80, 0, 80, 1)",
+            name: "Devastation (x" + Game.buffs['Devastation'].multClick + ") Time",
+            display: timeDisplay(buffDuration('Devastation')/Game.fps)
         });
     }
     if (building_special_delay > 0) {
